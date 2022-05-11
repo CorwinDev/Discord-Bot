@@ -1,0 +1,69 @@
+{
+    "normal": {
+        "error": "<:error:898486909070876672>",
+        "check": "<:check:898486908907315201>",
+        "music": "<:music:830897792665911306>",
+        "volume": "<:speaker:898486908819226626>",
+        "ball": "<:8ball:898486908798238722>",
+        "christmas": "<:christmas_tree:819983426832302110>",
+        "heart": "<:heart:898486909033148416>",
+        "paper": "<:paper:898486909175726151>",
+        "scissors": "<:scissor:898486909020536842>",
+        "stone": "<:rock:898486908991205377>",
+        "pong": "<:ping_pong:898486909028945950>",
+        "birthday": "<:birthday:898486908932456560>",
+        "clock": "<:clock:898486909158981682>",
+        "gift": "<:present:898486909205106708>",
+        "medal": "<:medal:898486908714373121>",
+        "party": "<:confetti:898486909083476038> ",
+        "info": "<:information:830896670349721611>",
+        "arrowDown": "<:arrow_down:898486909012172820>",
+        "arrowUp": "<:arrow_up:898486909083476018>",
+        "dcredits": "<:dcredits:857336404173127710>",
+        "tv": "<:tv:898486909070868510>",
+        "slash": "<:Bot_icon_slash:902906467835850762>"
+    },
+
+    "Bot": {
+        "add": "<:DBadd:842662619579678741>",
+        "info": "<:DBinfo:842662509797179392>",
+        "min": "<:DBmin:842662541452247090>"
+    },
+
+    "economy": {
+        "pocket": "<:pocket:830896614448037888>",
+        "bank": "<:bank:898493130398105600>",
+        "coins": "<:dcoin:846789240653086841>"
+    },
+
+    "music": {
+        "next": "<:BotNext:929752783903666266>",
+        "pause": "<:BotPause:929752783953985577>",
+        "previous": "<:BotPrevious:929752783916269668>",
+        "stop": "<:BotStop:929752783937208340>",
+        "play": "<:BotPlay:929755513363791912>"
+    },
+
+    "badges": {
+        "bot": "<:BotBots:898483233061232641>",
+        "management": "<:BotManagement:898483234009145344>",
+        "bug": "<:BotBugHunter:898485057986121748>",
+        "developer": "<:BotDeveloper:898485057159852032>",
+        "supporter": "<:BotSupporter:898483233367396362>",
+        "team": "<:TeamBot:898483233497440263>",
+        "booster": "<:BotBooster:898485057122095134>",
+        "partner": "<:BotPartner:898483233522610207>",
+        "voter": "<:BotVoter:898483233119952916>",
+        "support": "<:BotSupport:898483233572917248>",
+        "moderator": "<:BotModerator:898483232885075979>",
+        "designer": "<:BotDesigner:898483232994103306>",
+        "active": "<:BotActive:898483231203164160>",
+        "event": "<:BotEvent:898483233614860338>",
+        "vip": "<:BotVip:898483233614856232>",
+        "marketing": "<:BotMarketing:898483234617319455>"
+    },
+
+    "animated": {
+        "loading": "<a:loading:807539286319693844>"
+    }
+}

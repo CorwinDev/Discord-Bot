@@ -1,0 +1,2 @@
+node . --trace-warnings
+PAUSE

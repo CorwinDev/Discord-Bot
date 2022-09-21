@@ -45,15 +45,14 @@ module.exports = async (client) => {
                     .addComponents(
                         new Discord.MessageButton()
                             .setLabel("Support server")
-                            .setURL(client.config.discord.serverInvite)
+                            .setURL("https://discord.gg/pXRT2FusPb")
                             .setStyle("LINK"),
                     );
 
                 client.embed({
                     title: `❓・Support`,
                     desc: `Make your server even better with Bot!`,
-                    image: "https://cdn.discordapp.com/attachments/843487478881976381/874694194474668052/Bot_banner_invite.jpg",
-                    url: client.config.discord.serverInvite,
+                    url: "https://discord.gg/pXRT2FusPb",
                     components: [row2, row],
                     type: 'edit'
                 }, interaction.message)

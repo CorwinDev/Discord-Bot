@@ -13,7 +13,7 @@ module.exports = async (client, interaction, args) => {
         text: `Announcement has been sent successfully!`,
         fields: [
             {
-                name: `📘┆Channel`,
+                name: `📘 ┆ Channel`,
                 value: `${channel} (${channel.name})`
             }
         ],

@@ -1,13 +1,11 @@
 const Discord = require('discord.js');
 const fs = require('fs');
-
 const { Manager } = require("erela.js");
 const Spotify = require("erela.js-spotify");
 const Facebook = require("erela.js-facebook");
 const Deezer = require("erela.js-deezer");
 const AppleMusic = require("erela.js-apple");
 
-// Discord client
 const client = new Discord.Client({
     allowedMentions: {
         parse: [
@@ -49,8 +47,8 @@ const client = new Discord.Client({
 });
 
 
-const clientID = "";
-const clientSecret = "";
+const clientID = "bf5ee2a72bae40ffadc71a47280e5ff9";
+const clientSecret = "053469ffeb3844079fab734ebf3090c2";
 
 // Lavalink client
 client.player = new Manager({
@@ -67,9 +65,9 @@ client.player = new Manager({
     ],
     nodes: [
         {
-            host: "",
-            port: 2333,
-            password: "",
+            host: "lava.link",
+            port: 80,
+            password: "NitrixEXE OP",
         },
     ],
     send(id, payload) {
@@ -140,9 +138,7 @@ process.on('warning', warn => {
     warnLogs.send({
         username: 'Bot Logs',
         embeds: [embed],
-    }).catch(() => {
-
-    })
+    }).catch(( ) => { })
 });
 
 client.on('shardError', error => {
@@ -157,4 +153,11 @@ client.on('shardError', error => {
     });
 });
 
- 
+
+const express = require('express');
+const app = express();
+const port = 8080;
+app.all('/', (req, res) => {
+  res.send(`Express Activated`);
+  res.end();
+});

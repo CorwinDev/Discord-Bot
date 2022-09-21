@@ -11,12 +11,12 @@ module.exports = async (client, interaction, args) => {
         desc: `See the uptime of Bot`,
         fields: [
             {
-                name: "⌛┇Uptime",
+                name: "<:uo_clock:1015551740281622538> ┇ Uptime",
                 value: `${duration}`,
                 inline: true
             },
             {
-                name: "⏰┇Up Since",
+                name: "<:uo_clock:1015551740281622538> ┇ Up Since",
                 value: `<t:${upvalue}>`,
                 inline: true
             }

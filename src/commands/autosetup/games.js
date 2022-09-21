@@ -13,7 +13,7 @@ module.exports = async (client, interaction, args) => {
             type: "GUILD_TEXT"
         }).then((ch) => {
             client.embed({
-                title: `🔢・Counting`,
+                title: `<:uo_Christmas:1015567779602108438>・Counting`,
                 desc: `This is the start of counting! The first number is **1**`
             }, ch)
 
@@ -26,7 +26,7 @@ module.exports = async (client, interaction, args) => {
             type: "GUILD_TEXT"
         }).then((ch) => {
             client.embed({ 
-                title: `🔢・Guess the number`,
+                title: `<:uo_Christmas:1015567779602108438>・Guess the number`,
                 desc: `Guess the number between **1** and **10.000**!`
             }, ch)
 
@@ -42,11 +42,11 @@ module.exports = async (client, interaction, args) => {
             var shuffled = word.split('').sort(function () { return 0.5 - Math.random() }).join('');
 
             client.embed({ 
-                title: `💬・Guess the word`,
+                title: `<:uo_BotEvent:1015565719330627584>・Guess the word`,
                 desc: `Put the letters in the right position!`,
                 fields: [
                     {
-                        name: `🔀┆Word`,
+                        name: `<:uo_Christmas:1015567779602108438> ┆ Word`,
                         value: `${shuffled.toLowerCase()}`
                     }
                 ],

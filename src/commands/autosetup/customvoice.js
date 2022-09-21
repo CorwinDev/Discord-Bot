@@ -37,7 +37,7 @@ module.exports = async (client, interaction, args) => {
                 text: `Custom voice has been set up successfully!`,
                 fields: [
                     {
-                        name: `📘┆Channel`,
+                        name: `<:uo_BotEvent:1015565719330627584> ┆ Channel`,
                         value: `${ch} (${ch.name})`
                     }
                 ],

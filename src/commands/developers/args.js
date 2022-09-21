@@ -255,11 +255,11 @@ module.exports = async (client, interaction, args) => {
                     },
                     {
                         name: `📨┆How do I invite the bots?`,
-                        value: `You can invite the bots by doing \`/invite\` or by clicking on the links below \n\n**Bot** - [Invite here](https://discord.com/oauth2/authorize?&client_id=798144456528363550&scope=applications.commands+bot&permissions=8) \n**Bot 2** - [Invite here](https://discord.com/oauth2/authorize?&client_id=896842236002713673&scope=applications.commands+bot&permissions=8)`,
+                        value: `You can invite the bots by doing \`/invite\` or by clicking on the links below \n\n**Bot** - [Invite here](https://discord.com/oauth2/authorize?&client_id=960193514656919652&scope=applications.commands+bot&permissions=8) \n**Bot 2** - [Invite here](https://discord.com/oauth2/authorize?&client_id=960193514656919652&scope=applications.commands+bot&permissions=8)`,
                     },
                     {
                         name: `🎫┆How do I get help when needed?`,
-                        value: `You can make a ticket in <#820308164322656327>! We are happy to help you with your questions here and offer support in your server!`,
+                        value: `You can make a ticket in <#Channel_ID>! We are happy to help you with your questions here and offer support in your server!`,
                     }
                 ]
             }, interaction.channel)

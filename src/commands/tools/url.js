@@ -16,7 +16,7 @@ module.exports = async (client, interaction, args) => {
             text: `Your shortened url has been created!`,
             fields: [
                 {
-                    name: `🔗┇Link`,
+                    name: `🔗 ┇ Link`,
                     value: `${res}`,
                     inline: true,
                 }

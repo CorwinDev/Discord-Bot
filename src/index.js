@@ -21,13 +21,13 @@ const manager = new Discord.ShardingManager('./src/bot.js', {
     respawn: true
 });
 
-const { AutoPoster } = require('topgg-autoposter');
-const poster = AutoPoster(process.env.TOPGG_TOKEN, manager);
+// const { AutoPoster } = require('topgg-autoposter');
+// const poster = AutoPoster(process.env.TOPGG_TOKEN, manager);
 
 console.clear();
 console.log(chalk.blue(chalk.bold(`System`)), (chalk.white(`>>`)), (chalk.green(`Starting up`)), (chalk.white(`...`)))
 console.log(`\u001b[0m`)
-console.log(chalk.red(`© CorwinDev | 2021 - ${new Date().getFullYear()}`))
+console.log(chalk.red(`© Uo | 2021 - ${new Date().getFullYear()}`))
 console.log(chalk.red(`All rights reserved`))
 console.log(`\u001b[0m`)
 console.log(`\u001b[0m`)

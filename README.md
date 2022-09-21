@@ -1,23 +1,26 @@
-# Discord-Bot
-*You may not claim this as your own!!*
+# [ALL IN ONΞ™](https://tinyurl.com/3jvb65tv)
+## [YouTube](https://tinyurl.com/3jvb65tv )
+### [Support Server](https://discord.gg/ndfEefv9aw)
 
-Discord Bot with over 400 commands and made for large servers
+# How to setup the bot?
+- Watch YouTube Video: [Click Here](https://youtu.be/ilsrR-uYRoo)
+---
 
+### 💘 Emotes Servers 
 
-**How To Install**
+1.0: https://discord.gg/RjHTDAQHkR
 
-First you need to change the .env.example file to .env
-Then you need to change the config files in /src/config
-```
-npm i 
-```
+2.0: https://discord.gg/g7T8KUrmyt
 
-**How to start**
-```
-node .
-```
+2.1.0: https://discord.gg/fmhTFzruzP
 
+3.0: https://discord.gg/hpwuhE2vVE
 
-Screen help menu ![image](https://user-images.githubusercontent.com/88144943/167872917-f74615a8-0d28-48ab-88d9-6172e9f7270e.png)
+3.1.0: https://discord.gg/M7DWTrYEWZ
 
-All rights go to DotwoodMedia!!
+## ✨ Discord Profile
+<div align="center">
+  <a width="100%" href="https://discord.gg/pXRT2FusPb"  target="_blank">
+    <img align="left" width="100%" style="margin: 0 10px 0 0;" alt=" " src="https://discord.c99.nl/widget/theme-2/784649693363306518.png">
+  </a>
+</div>

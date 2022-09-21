@@ -28,11 +28,6 @@ module.exports = {
         )
         .addSubcommand(subcommand =>
             subcommand
-                .setName('donate')
-                .setDescription('Get the Bot donate link')
-        )
-        .addSubcommand(subcommand =>
-            subcommand
                 .setName('links')
                 .setDescription('Get a message with all the Bot links')
         )
@@ -43,11 +38,6 @@ module.exports = {
         )
         .addSubcommand(subcommand =>
             subcommand
-                .setName('socials')
-                .setDescription('Get the Bot socials')
-        )
-        .addSubcommand(subcommand =>
-            subcommand
                 .setName('support')
                 .setDescription('Get an invite of the support server')
         )
@@ -55,17 +45,6 @@ module.exports = {
             subcommand
                 .setName('uptime')
                 .setDescription('Show the bot uptime')
-        )
-        .addSubcommand(subcommand =>
-            subcommand
-                .setName('vote')
-                .setDescription('See if you have voted')
-        )
-        .addSubcommand(subcommand =>
-            subcommand
-                .setName('feedback')
-                .setDescription('Send your opinion about the bot to the developers')
-                .addStringOption(option => option.setName("feedback").setDescription("Your feedback").setRequired(true))
         ),
 
     /** 

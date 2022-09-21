@@ -74,7 +74,7 @@ module.exports = (client) => {
     });
 
     client.on('ready', async () => {
-        client.startStream(process.env.RADIO);
+        // client.startStream(process.env.RADIO);
         
         Schema.find(async (err, data) => {
             if (data) {

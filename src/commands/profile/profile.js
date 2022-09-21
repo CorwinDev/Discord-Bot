@@ -24,20 +24,30 @@ module.exports = async (client, interaction, args) => {
         VIP: client.emotes.badges.vip
     }
 
-    const flags = {
-        DISCORD_EMPLOYEE: '<:discordstaff:868235527059537960>',
-        DISCORD_PARTNER: '<:serverownerpartner:868235522139619418>',
-        BUGHUNTER_LEVEL_1: '<:bughunter1:868235523167240342>',
-        BUGHUNTER_LEVEL_2: '<:bughunter2:868235521099444374>',
-        HYPESQUAD_EVENTS: '<:hypesquadevents:868235528103944232>',
-        HOUSE_BRAVERY: '<:hypesquadbravery:868235530020716584>',
-        HOUSE_BRILLIANCE: '<:hypesquadbrilliance:868235525834817536>',
-        HOUSE_BALANCE: '<:hypesquadbalance:868235523657965579>',
-        EARLY_SUPPORTER: '<:earlysupporter:868235524882722866>',
-        SYSTEM: 'System',
-        VERIFIED_BOT: '<:verifieBot:868235529039265842>',
-        VERIFIED_DEVELOPER: '<:verifieBotdev:853642406121439273>'
-    }
+const flags = {
+  DISCORD_EMPLOYEE: "<:discordEmployee:992385182273372210>",
+  DISCORD_PARTNER: "<a:discord_Discord_Partner_disc:992385380865294386>",
+  BUGHUNTER_LEVEL_1: "<:bughunter_level_1:992385588328144927> ",
+  BUGHUNTER_LEVEL_2: "<:bughunter_level_2:992385753596305468>",
+  HYPESQUAD_EVENTS: "<:hypesquad_events:992385931703222303>",
+  HOUSE_BRAVERY: "<:house_bravery:992387170943909980>",
+  HOUSE_BRILLIANCE: "<:house_brilliance:992387318012985374>",
+  HOUSE_BALANCE: "<:HOUSE_BALANCE:992439438988812408> ",
+  EARLY_SUPPORTER: "<:early_supporter:992387546246029422>",
+  SYSTEM: "<a:verified_developer:992387826572333056>",
+  VERIFIED_BOT: "Verified Bot <:verified_bot:992387663875297360>",
+  VERIFIED_DEVELOPER: "<a:verified_developer:992387826572333056>",
+  NITRO: "<:Nitro:1006219187825426444>",
+  BOOSTER_1: "<a:ex_booster:1006210639158579371>",
+  BOOSTER_2: "<a:ex_booster:1006210639158579371>",
+  BOOSTER_3: "<a:ex_booster:1006210639158579371>",
+  BOOSTER_4: "<a:ex_booster:1006210639158579371>",
+  BOOSTER_5: "<a:ex_booster:1006210639158579371>",
+  BOOSTER_6: "<a:ex_booster:1006210639158579371>",
+  BOOSTER_7: "<a:ex_booster:1006210639158579371>",
+  BOOSTER_8: "<a:ex_booster:1006210639158579371>",
+  BOOSTER_9: "<a:ex_booster:1006210639158579371>",
+};
 
     const user = interaction.options.getUser('user') || interaction.user;
 

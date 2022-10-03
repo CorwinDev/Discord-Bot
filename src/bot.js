@@ -49,8 +49,8 @@ const client = new Discord.Client({
 });
 
 
-const clientID = "";
-const clientSecret = "";
+const clientID = process.env.SPOTIFY_CLIENT_ID;
+const clientSecret = process.env.SPOTIFY_CLIENT_SECRET;
 
 // Lavalink client
 client.player = new Manager({
@@ -67,9 +67,9 @@ client.player = new Manager({
     ],
     nodes: [
         {
-            host: "",
-            port: 2333,
-            password: "",
+            host: process.env.LAVALINK_HOST,
+            port: parseInt(process.env.LAVALINK_PORT),
+            password: process.env.LAVALINK_PASSWORD,
         },
     ],
     send(id, payload) {

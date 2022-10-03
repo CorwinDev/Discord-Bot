@@ -20,10 +20,10 @@ const manager = new Discord.ShardingManager('./src/bot.js', {
     token: process.env.DISCORD_TOKEN,
     respawn: true
 });
-
-const { AutoPoster } = require('topgg-autoposter');
-const poster = AutoPoster(process.env.TOPGG_TOKEN, manager);
-
+if (process.env.TOPGG_TOKEN) {
+    const { AutoPoster } = require('topgg-autoposter');
+    const poster = AutoPoster(process.env.TOPGG_TOKEN, manager);
+}
 console.clear();
 console.log(chalk.blue(chalk.bold(`System`)), (chalk.white(`>>`)), (chalk.green(`Starting up`)), (chalk.white(`...`)))
 console.log(`\u001b[0m`)
@@ -98,4 +98,3 @@ manager.on('shardCreate', shard => {
 
 manager.spawn();
 
- 

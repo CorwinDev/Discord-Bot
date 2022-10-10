@@ -10,7 +10,7 @@ module.exports = async (client, interaction, args) => {
     const image = await new DIG.Kiss().getImage(avatar, userAvatar);
     let attach = new Discord.MessageAttachment(image, "kiss.png");
 
-    interaction.editreply({ files: [attach] })
+    interaction.editReply({ files: [attach] })
 }
 
  

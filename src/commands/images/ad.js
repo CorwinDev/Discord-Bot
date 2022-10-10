@@ -10,7 +10,7 @@ module.exports = async (client, interaction, args) => {
     const image = await pop.ad(userAvatar);
     let attach = new Discord.MessageAttachment(image, "ad.png");
 
-    interaction.editreply({ files: [attach] })
+    interaction.editReply({ files: [attach] })
 
 }
 

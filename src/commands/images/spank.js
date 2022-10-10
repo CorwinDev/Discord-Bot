@@ -9,7 +9,7 @@ module.exports = async (client, interaction, args) => {
     const image = await new DIG.Spank().getImage(avatar, userAvatar);
     let attach = new Discord.MessageAttachment(image, "spank.png");
 
-    interaction.editreply({ files: [attach] })
+    interaction.editReply({ files: [attach] })
 }
 
  

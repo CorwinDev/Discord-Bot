@@ -10,7 +10,7 @@ module.exports = async (client, interaction, args) => {
     const image = await pop.greyscale(userAvatar);
     let attach = new Discord.MessageAttachment(image, "greyscale.png");
 
-    interaction.editreply({ files: [attach] })
+    interaction.editReply({ files: [attach] })
 }
 
  

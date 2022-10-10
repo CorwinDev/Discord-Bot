@@ -13,7 +13,7 @@ module.exports = async (client, interaction, args) => {
         var img = await new DIG.Podium().getImage(user1Avatar, user2Avatar, user3Avatar, user1.tag, user2.tag, user3.tag);
         var attach = new Discord.MessageAttachment(img, "podium.png");
 
-    interaction.editreply({ files: [attach] })
+    interaction.editReply({ files: [attach] })
 }
 
  

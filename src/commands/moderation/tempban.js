@@ -33,7 +33,7 @@ module.exports = async (client, interaction, args) => {
         inline: true
       }
     ]
-  }, member).then(function () {
+  }, member).then(async function () {
     member.ban({ reason: reason })
     client.succNormal({
       text: "The specified user has been successfully banned and successfully received a notification!",
@@ -61,7 +61,7 @@ module.exports = async (client, interaction, args) => {
       expires,
     }).save();
 
-  }).catch(function () {
+  }).catch(async function () {
     member.ban({ reason: reason })
     client.succNormal({
       text: "The given user has been successfully banned, but has not received a notification!",

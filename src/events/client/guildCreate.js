@@ -23,7 +23,7 @@ module.exports = async (client, guild) => {
         Promise.all(promises)
             .then(async (results) => {
                 const totalGuilds = results[0].reduce((acc, guildCount) => acc + guildCount, 0);
-                const embed = new Discord.MessageEmbed()
+                const embed = new Discord.EmbedBuilder()
                     .setTitle("🟢・Added to a new server!")
                     .addField("Total servers:", `${totalGuilds}`, true)
                     .addField("Server name", `${guild.name}`, true)
@@ -65,11 +65,6 @@ module.exports = async (client, guild) => {
             title: "Thanks for inviting the bot!",
             image: "https://cdn.discordapp.com/attachments/843487478881976381/874694194474668052/Bot_banner_invite.jpg",
             fields: [{
-                name: "📢┆Alert!",
-                value: 'After more than 1 year we decided to stop Bot on April 15th, for more information go to [this server](https://discord.gg/techpoint)',
-                inline: false,
-            },
-            {
                 name: "❓┆How to setup?",
                 value: 'The default prefix = \`/\` \nTo run setups with Bot run \`/setup\`',
                 inline: false,

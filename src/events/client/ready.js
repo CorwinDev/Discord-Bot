@@ -11,7 +11,7 @@ module.exports = async (client) => {
     console.log(chalk.blue(chalk.bold(`System`)), (chalk.white(`>>`)), chalk.red(`Shard #${client.shard.ids[0] + 1}`), chalk.green(`is ready!`))
     console.log(chalk.blue(chalk.bold(`Bot`)), (chalk.white(`>>`)), chalk.green(`Started on`), chalk.red(`${client.guilds.cache.size}`), chalk.green(`servers!`))
 
-    let embed = new Discord.MessageEmbed()
+    let embed = new Discord.EmbedBuilder()
         .setTitle(`🆙・Finishing shard`)
         .setDescription(`A shard just finished`)
         .addField("🆔┆ID", `${client.shard.ids[0] + 1}/${client.options.shardCount}`, true)
@@ -31,7 +31,6 @@ module.exports = async (client) => {
                 const totalGuilds = results[0].reduce((acc, guildCount) => acc + guildCount, 0);
 
                 let statuttext = [
-                    `・🥳┆1 year Bot`,
                     `・❓┆/help`,
                     `・💻┆${totalGuilds} servers`,
                     `・📨┆discord.me/Bot`,
@@ -43,7 +42,7 @@ module.exports = async (client) => {
                 client.user.setPresence({
                     activities: [
                         {
-                            name: "・😥┆Ends on April 15",
+                            name: randomText,
                             type: "STREAMING",
                             url: "https://www.twitch.tv/discord"
                         }

@@ -43,7 +43,7 @@ module.exports = async (client, interaction, args) => {
                 type: 'editreply'
             }, interaction)
 
-            const embed2 = new Discord.MessageEmbed()
+            const embed2 = new Discord.EmbedBuilder()
                 .setTitle(`${interaction.user.tag} used eval command`)
                 .addField("📥┇Input", `\`\`\`${code}\`\`\``)
                 .addField("📤┇Output", outputResponse.substr(0, 1024))
@@ -56,7 +56,7 @@ module.exports = async (client, interaction, args) => {
         }
         else {
             const output = new Discord.MessageAttachment(Buffer.from(outputResponse), 'output.txt');
-            var embed2 = new Discord.MessageEmbed()
+            var embed2 = new Discord.EmbedBuilder()
                 .setAuthor(client.user.username, client.user.avatarURL())
                 .addField("📥┇Input", `\`\`\`${code}\`\`\``)
                 .setColor(client.config.colors.succes)

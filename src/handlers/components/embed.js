@@ -10,7 +10,7 @@ const Schema = require("../../database/models/functions");
 
 module.exports = (client) => {
     client.templateEmbed = function () {
-        return new Discord.MessageEmbed()
+        return new Discord.EmbedBuilder()
             .setAuthor({
                 name: client.user.username,
                 iconURL: client.user.avatarURL({ size: 1024 })
@@ -220,7 +220,7 @@ module.exports = (client) => {
     }, interaction) {
         const functiondata = await Schema.findOne({ Guild: interaction.guild.id })
 
-        let embed = new Discord.MessageEmbed()
+        let embed = new Discord.EmbedBuilder()
             .setColor(client.config.colors.normal)
 
         if (title) embed.setTitle(title);

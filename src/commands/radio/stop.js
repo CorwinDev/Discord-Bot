@@ -31,7 +31,7 @@ module.exports = async (client, interaction, args) => {
         type: 'editreply'
     }, interaction)
 
-    let embed = new Discord.MessageEmbed()
+    let embed = new Discord.EmbedBuilder()
         .setTitle(`📻・Radio stopped`)
         .setDescription(`_______________ \n\nRadio has stopped successfully`)
         .addField('👤┆Stopped by', `${interaction.user} (${interaction.user.tag})`, true)

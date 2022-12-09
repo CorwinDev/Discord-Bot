@@ -8,7 +8,7 @@ const webhookClient = new Discord.WebhookClient({
 module.exports = async (client, interaction, args) => {
     const feedback = interaction.options.getString('feedback');
 
-    const embed = new Discord.MessageEmbed()
+    const embed = new Discord.EmbedBuilder()
         .setTitle(`📝・New feedback!`)
         .addField("User", `${interaction.user} (${interaction.user.tag})`)
         .setDescription(`${feedback}`)

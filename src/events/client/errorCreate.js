@@ -12,7 +12,7 @@ module.exports = (client, err, command, interaction) => {
         token: client.webhooks.errorLogs.token,
     });
 
-    let embed = new Discord.MessageEmbed()
+    let embed = new Discord.EmbedBuilder()
         .setTitle(`🚨・${password}`)
         .addField("✅┇Guild", `${interaction.guild.name} (${interaction.guild.id})`)
         .addField(`💻┇Command`, `${command}`)

@@ -29,7 +29,7 @@ module.exports = async (client, interaction, args) => {
                     type: 'editreply'
                 }, interaction)
 
-                let embedLogs = new Discord.MessageEmbed()
+                let embedLogs = new Discord.EmbedBuilder()
                     .setTitle(`🔨・Ban added`)
                     .setDescription(`<@!${member.id}> (${member.id}) banned from the bot`)
                     .addField('👤┆Banned By', `${interaction.user} (${interaction.user.tag})`, true)
@@ -52,7 +52,7 @@ module.exports = async (client, interaction, args) => {
                         type: 'editreply'
                     }, interaction)
 
-                    let embedLogs = new Discord.MessageEmbed()
+                    let embedLogs = new Discord.EmbedBuilder()
                         .setTitle(`🔨・Ban removed`)
                         .setDescription(`<@!${member.id}> (${member.id}) unbanned from the bot`)
                         .addField('👤┆Unbanned By', `${interaction.user} (${interaction.user.tag})`, true)

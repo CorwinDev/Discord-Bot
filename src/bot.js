@@ -29,21 +29,21 @@ const client = new Discord.Client({
         'GUILD_SCHEDULED_EVENT'
     ],
     intents: [
-        Discord.Intents.FLAGS.GUILDS,
-        Discord.Intents.FLAGS.GUILD_MEMBERS,
-        Discord.Intents.FLAGS.GUILD_BANS,
-        Discord.Intents.FLAGS.GUILD_EMOJIS_AND_STICKERS,
-        Discord.Intents.FLAGS.GUILD_INTEGRATIONS,
-        Discord.Intents.FLAGS.GUILD_WEBHOOKS,
-        Discord.Intents.FLAGS.GUILD_INVITES,
-        Discord.Intents.FLAGS.GUILD_VOICE_STATES,
-        Discord.Intents.FLAGS.GUILD_MESSAGES,
-        Discord.Intents.FLAGS.GUILD_MESSAGE_REACTIONS,
-        Discord.Intents.FLAGS.GUILD_MESSAGE_TYPING,
-        Discord.Intents.FLAGS.DIRECT_MESSAGES,
-        Discord.Intents.FLAGS.DIRECT_MESSAGE_REACTIONS,
-        Discord.Intents.FLAGS.DIRECT_MESSAGE_TYPING,
-        Discord.Intents.FLAGS.GUILD_SCHEDULED_EVENTS,
+        Discord.GatewayIntentBits.Guilds,
+        Discord.GatewayIntentBits.GuildMembers,
+        Discord.GatewayIntentBits.GuildBans,
+        Discord.GatewayIntentBits.GuildEmojisAndStickers,
+        Discord.GatewayIntentBits.GuildIntegrations,
+        Discord.GatewayIntentBits.GuildWebhooks,
+        Discord.GatewayIntentBits.GuildInvites,
+        Discord.GatewayIntentBits.GuildVoiceStates,
+        Discord.GatewayIntentBits.GuildMessages,
+        Discord.GatewayIntentBits.GuildMessageReactions,
+        Discord.GatewayIntentBits.GuildMessageTyping,
+        Discord.GatewayIntentBits.DirectMessages,
+        Discord.GatewayIntentBits.DirectMessageReactions,
+        Discord.GatewayIntentBits.DirectMessageTyping,
+        Discord.GatewayIntentBits.GuildScheduledEvents,
     ],
     restTimeOffset: 0
 });
@@ -119,10 +119,18 @@ fs.readdirSync('./src/handlers').forEach((dir) => {
 client.login(process.env.DISCORD_TOKEN);
 
 process.on('unhandledRejection', error => {
-    const embed = new Discord.MessageEmbed()
+    const embed = new Discord.EmbedBuilder()
         .setTitle(`🚨・Unhandled promise rejection`)
-        .addField(`Error`, `\`\`\`${error}\`\`\``)
-        .addField(`Stack error`, `\`\`\`${error.stack}\`\`\``)
+        .setFields([
+            {
+                name: `Error`,
+                value: `\`\`\`${error}\`\`\``,
+            },
+            {
+                name: `Stack error`,
+                value: `\`\`\`${error.stack}\`\`\``,
+            }
+        ])
         .setColor(client.config.colors.normal)
     consoleLogs.send({
         username: 'Bot Logs',
@@ -133,9 +141,14 @@ process.on('unhandledRejection', error => {
 });
 
 process.on('warning', warn => {
-    const embed = new Discord.MessageEmbed()
+    const embed = new Discord.EmbedBuilder()
         .setTitle(`🚨・New warning found`)
-        .addField(`Warn`, `\`\`\`${warn}\`\`\``)
+        .setFields([
+            {
+                name: `Warn`,
+                value: `\`\`\`${warn}\`\`\``,
+            },
+        ])
         .setColor(client.config.colors.normal)
     warnLogs.send({
         username: 'Bot Logs',
@@ -146,10 +159,18 @@ process.on('warning', warn => {
 });
 
 client.on('shardError', error => {
-    const embed = new Discord.MessageEmbed()
+    const embed = new Discord.EmbedBuilder()
         .setTitle(`🚨・A websocket connection encountered an error`)
-        .addField(`Error`, `\`\`\`${error}\`\`\``)
-        .addField(`Stack error`, `\`\`\`${error.stack}\`\`\``)
+        .setFields([
+            {
+                name: `Error`,
+                value: `\`\`\`${error}\`\`\``,
+            },
+            {
+                name: `Stack error`,
+                value: `\`\`\`${error.stack}\`\`\``,
+            }
+        ])
         .setColor(client.config.colors.normal)
     consoleLogs.send({
         username: 'Bot Logs',

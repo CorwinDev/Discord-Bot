@@ -1,5 +1,5 @@
 const { CommandInteraction, Client } = require('discord.js');
-const { SlashCommandBuilder } = require('@discordjs/builders');
+const { SlashCommandBuilder } = require('discord.js');
 const Discord = require('discord.js');
 
 const webhookClient = new Discord.WebhookClient({
@@ -36,7 +36,7 @@ module.exports = {
         const desc = interaction.options.getString('description');
 
         if (type == "bug") {
-            const embed = new Discord.MessageEmbed()
+            const embed = new Discord.EmbedBuilder()
                 .setTitle(`📣・New bug report!`)
                 .addField("Report category", "Bug", true)
                 .addField("Submitted by", `${interaction.user.tag}`, true)
@@ -53,7 +53,7 @@ module.exports = {
             }, interaction);
         }
         else if (type == "user") {
-            const embed = new Discord.MessageEmbed()
+            const embed = new Discord.EmbedBuilder()
                 .setTitle(`📣・New user report!`)
                 .addField("Report category", "User", true)
                 .addField("Submitted by", `${interaction.user.tag}`, true)

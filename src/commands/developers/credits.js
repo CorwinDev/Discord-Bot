@@ -31,7 +31,7 @@ module.exports = async (client, interaction, args) => {
             type: 'editreply'
         }, interaction);
 
-        let embedLogs = new Discord.MessageEmbed()
+        let embedLogs = new Discord.EmbedBuilder()
             .setTitle(`🪙・Credits added`)
             .setDescription(`Added credits to ${user} (${user.id})`)
             .addField('👤┆Added By', `${interaction.user} (${interaction.user.tag})`, true)
@@ -56,7 +56,7 @@ module.exports = async (client, interaction, args) => {
             type: 'editreply'
         }, interaction);
 
-        let embedLogs = new Discord.MessageEmbed()
+        let embedLogs = new Discord.EmbedBuilder()
             .setTitle(`🪙・Credits removed`)
             .setDescription(`Removed credits from ${user} (${user.id})`)
             .addField('👤┆Removed By', `${interaction.user} (${interaction.user.tag})`, true)

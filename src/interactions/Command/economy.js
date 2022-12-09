@@ -149,8 +149,10 @@ module.exports = {
                     option.setName('type')
                         .setDescription('The leaderboard type that you want')
                         .setRequired(true)
-                        .addChoice('Money', 'money')
-                        .addChoice('Bank', 'bank')
+                        .addChoices(
+                            {name: 'Money', value: 'money'},
+                            {name: 'Bank', value: 'bank'}
+                        )
                 )
         )
     ,

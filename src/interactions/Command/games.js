@@ -41,9 +41,11 @@ module.exports = {
                     option.setName('option')
                         .setDescription('Choose what you want')
                         .setRequired(true)
-                        .addChoice('🪨 Rock', 'rock')
-                        .addChoice('📃 Paper', 'paper')
-                        .addChoice('✂️ Scissors', 'scissors')
+                        .addChoices(
+                            { name: '🪨 Rock', value: 'rock' },
+                            { name: '📃 Paper', value: 'paper' },
+                            { name: '✂️ Scissors', value: 'scissors' }
+                        )
                 )
         )
         .addSubcommand(subcommand =>

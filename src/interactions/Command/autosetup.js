@@ -19,9 +19,11 @@ module.exports = {
                     option.setName('setup')
                         .setDescription('The setup that you want')
                         .setRequired(true)
-                        .addChoice('Server logs', 'serverLogs')
-                        .addChoice('Level logs', 'levelLogs')
-                        .addChoice('Boost logs', 'boostLogs')
+                        .addChoices(
+                            { name: 'Server logs', value: 'serverLogs' },
+                            { name: 'Level logs', value: 'levelLogs' },
+                            { name: 'Boost logs', value: 'boostLogs' }
+                        )
                 )
         )
         .addSubcommand(subcommand =>
@@ -32,11 +34,13 @@ module.exports = {
                     option.setName('setup')
                         .setDescription('The setup that you want')
                         .setRequired(true)
-                        .addChoice('Birthdays', 'birthdays')
-                        .addChoice('Chatbot', 'chatbot')
-                        .addChoice('Reviews', 'reviews')
-                        .addChoice('Suggestions', 'suggestions')
-                        .addChoice('Starboard', 'starboard')
+                        .addChoices(
+                            { name: 'Birthdays', value: 'birthdays' },
+                            { name: 'Chatbot', value: 'chatbot' },
+                            { name: 'Reviews', value: 'reviews' },
+                            { name: 'Suggestions', value: 'suggestions' },
+                            { name: 'Starboard', value: 'starboard' }
+                        )
                 )
         )
         .addSubcommand(subcommand =>
@@ -47,10 +51,12 @@ module.exports = {
                     option.setName('setup')
                         .setDescription('The setup that you want')
                         .setRequired(true)
-                        .addChoice('Counting', 'counting')
-                        .addChoice('Guess the number', 'gtn')
-                        .addChoice('Guess the word', 'gtw')
-                        .addChoice('Word snake', 'wordsnake')
+                        .addChoices(
+                            { name: 'Counting', value: 'counting' },
+                            { name: 'Guess the number', value: 'gtn' },
+                            { name: 'Guess the word', value: 'gtw' },
+                            { name: 'Word snake', value: 'wordsnake' }
+                        )
                 )
         )
         .addSubcommand(subcommand =>
@@ -61,9 +67,11 @@ module.exports = {
                     option.setName('setup')
                         .setDescription('The setup that you want')
                         .setRequired(true)
-                        .addChoice('Welcome channel', 'welcomechannel')
-                        .addChoice('Welcome role', 'welcomerole')
-                        .addChoice('Leave channnel', 'leavechannel')
+                        .addChoices(
+                            { name: 'Welcome channel', value: 'welcomechannel' },
+                            { name: 'Welcome role', value: 'welcomerole' },
+                            { name: 'Leave channnel', value: 'leavechannel' }
+                        )
                 )
         )
         .addSubcommand(subcommand =>

@@ -19,10 +19,12 @@ module.exports = {
                     option.setName('level')
                         .setDescription('The level of the bassboost')
                         .setRequired(true)
-                        .addChoice('0', '0')
-                        .addChoice('1', '1')
-                        .addChoice('2', '2')
-                        .addChoice('3', '3')
+                        .addChoices(
+                            { name: '0', value: '0' },
+                            { name: '1', value: '1' },
+                            { name: '2', value: '2' },
+                            { name: '3', value: '3' }
+                        )
                 )
         )
         .addSubcommand(subcommand =>

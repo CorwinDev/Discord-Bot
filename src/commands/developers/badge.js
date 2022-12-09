@@ -74,8 +74,10 @@ module.exports = async (client, interaction, args) => {
         let embedLogs = new Discord.EmbedBuilder()
             .setTitle(`📛・Badge added`)
             .setDescription(`Added a new badge to ${member} (${member.id})`)
-            .addField('👤┆Added By', `${interaction.user} (${interaction.user.tag})`, true)
-            .addField(`📛┆Badge`, `${badgeFlags[badge.toUpperCase()]} (${badge.toUpperCase()})`, true)
+            .addFields(
+                { name: "👤┆Added By", value: `${interaction.user} (${interaction.user.tag})`, inline: true },
+                { name: `📛┆Badge`, value: `${badgeFlags[badge.toUpperCase()]} (${badge.toUpperCase()})`, inline: true },
+            )
             .setColor(client.config.colors.normal)
             .setFooter(client.config.discord.footer)
             .setTimestamp();
@@ -126,8 +128,10 @@ module.exports = async (client, interaction, args) => {
         let embedLogs = new Discord.EmbedBuilder()
             .setTitle(`📛・Badge removed`)
             .setDescription(`Removed a badge from ${member} (${member.id})`)
-            .addField('👤┆Removed By', `${interaction.user} (${interaction.user.tag})`, true)
-            .addField(`📛┆Badge`, `${badgeFlags[badge.toUpperCase()]} (${badge.toUpperCase()})`, true)
+            .addFields(
+                { name: "👤┆Removed By", value: `${interaction.user} (${interaction.user.tag})`, inline: true },
+                { name: `📛┆Badge`, value: `${badgeFlags[badge.toUpperCase()]} (${badge.toUpperCase()})`, inline: true },
+            )
             .setColor(client.config.colors.normal)
             .setFooter(client.config.discord.footer)
             .setTimestamp();

@@ -1,6 +1,6 @@
 const { CommandInteraction, Client } = require('discord.js');
 const { SlashCommandBuilder } = require('discord.js');
-const { ChannelType } = require('discord.js/v9');
+const { ChannelType } = require('discord.js');
 const Discord = require('discord.js');
 
 module.exports = {
@@ -16,16 +16,16 @@ module.exports = {
             subcommand
                 .setName('tickets')
                 .setDescription('Setup the tickets')
-                .addChannelOption(option => option.setName('category').setDescription('Select a category where the tickets should come in').setRequired(true).addChannelType(ChannelType.GuildCategory))
+                .addChannelOption(option => option.setName('category').setDescription('Select a category where the tickets should come in').setRequired(true).addChannelTypes(ChannelType.GuildCategory))
                 .addRoleOption(option => option.setName('role').setDescription('Select the support role').setRequired(true))
-                .addChannelOption(option => option.setName('channel').setDescription('The channel for the ticket panel').setRequired(true).addChannelType(ChannelType.GuildText))
-                .addChannelOption(option => option.setName('logs').setDescription('The channel for the ticket logs').setRequired(true).addChannelType(ChannelType.GuildText))
+                .addChannelOption(option => option.setName('channel').setDescription('The channel for the ticket panel').setRequired(true).addChannelTypes(ChannelType.GuildText))
+                .addChannelOption(option => option.setName('logs').setDescription('The channel for the ticket logs').setRequired(true).addChannelTypes(ChannelType.GuildText))
         )
         .addSubcommand(subcommand =>
             subcommand
                 .setName('customvoice')
                 .setDescription('Setup the custom voice channels')
-                .addChannelOption(option => option.setName('category').setDescription('Select a category where the channels come in').setRequired(true).addChannelType(ChannelType.GuildCategory))
+                .addChannelOption(option => option.setName('category').setDescription('Select a category where the channels come in').setRequired(true).addChannelTypes(ChannelType.GuildCategory))
                 .addStringOption(option => option.setName('channelname').setDescription('The template for the channel names').setRequired(true))
         )
         .addSubcommand(subcommand =>
@@ -36,11 +36,13 @@ module.exports = {
                     option.setName('setup')
                         .setDescription('The setup that you want')
                         .setRequired(true)
-                        .addChoice('Server logs', 'serverLogs')
-                        .addChoice('Level logs', 'levelLogs')
-                        .addChoice('Boost logs', 'boostLogs')
+                        .addChoices(
+                            { name: 'Server logs', value: 'serverLogs' },
+                            { name: 'Level logs', value: 'levelLogs' },
+                            { name: 'Boost logs', value: 'boostLogs' }
+                        )
                 )
-                .addChannelOption(option => option.setName('channel').setDescription('The channel for the logs').setRequired(true).addChannelType(ChannelType.GuildText))
+                .addChannelOption(option => option.setName('channel').setDescription('The channel for the logs').setRequired(true).addChannelTypes(ChannelType.GuildText))
         )
         .addSubcommand(subcommand =>
             subcommand
@@ -50,13 +52,15 @@ module.exports = {
                     option.setName('setup')
                         .setDescription('The setup that you want')
                         .setRequired(true)
-                        .addChoice('Birthdays', 'birthdays')
-                        .addChoice('Chatbot', 'chatbot')
-                        .addChoice('Reviews', 'reviews')
-                        .addChoice('Suggestions', 'suggestions')
-                        .addChoice('Starboard', 'starboard')
+                        .addChoices(
+                            { name: 'Birthdays', value: 'birthdays' },
+                            { name: 'Chatbot', value: 'chatbot' },
+                            { name: 'Reviews', value: 'reviews' },
+                            { name: 'Suggestions', value: 'suggestions' },
+                            { name: 'Starboard', value: 'starboard' }
+                        )
                 )
-                .addChannelOption(option => option.setName('channel').setDescription('The channel for the fun').setRequired(true).addChannelType(ChannelType.GuildText))
+                .addChannelOption(option => option.setName('channel').setDescription('The channel for the fun').setRequired(true).addChannelTypes(ChannelType.GuildText))
         )
         .addSubcommand(subcommand =>
             subcommand
@@ -66,12 +70,14 @@ module.exports = {
                     option.setName('setup')
                         .setDescription('The setup that you want')
                         .setRequired(true)
-                        .addChoice('Counting', 'counting')
-                        .addChoice('Guess the number', 'gtn')
-                        .addChoice('Guess the word', 'gtw')
-                        .addChoice('Word snake', 'wordsnake')
+                        .addChoices(
+                            { name: 'Counting', value: 'counting' },
+                            { name: 'Guess the number', value: 'gtn' },
+                            { name: 'Guess the word', value: 'gtw' },
+                            { name: 'Word snake', value: 'wordsnake' }
+                        )
                 )
-                .addChannelOption(option => option.setName('channel').setDescription('The channel for the game').setRequired(true).addChannelType(ChannelType.GuildText))
+                .addChannelOption(option => option.setName('channel').setDescription('The channel for the game').setRequired(true).addChannelTypes(ChannelType.GuildText))
         )
         .addSubcommand(subcommand =>
             subcommand
@@ -81,10 +87,12 @@ module.exports = {
                     option.setName('setup')
                         .setDescription('The setup that you want')
                         .setRequired(true)
-                        .addChoice('Welcome channel', 'welcomechannel')
-                        .addChoice('Leave channnel', 'leavechannel')
+                        .addChoices(
+                            { name: 'Welcome channel', value: 'welcomechannel' },
+                            { name: 'Leave channnel', value: 'leavechannel' }
+                        )
                 )
-                .addChannelOption(option => option.setName('channel').setDescription('The channel that you want').setRequired(true).addChannelType(ChannelType.GuildText))
+                .addChannelOption(option => option.setName('channel').setDescription('The channel that you want').setRequired(true).addChannelTypes(ChannelType.GuildText))
         )
         .addSubcommand(subcommand =>
             subcommand
@@ -107,22 +115,24 @@ module.exports = {
                     option.setName('setup')
                         .setDescription('The setup that you want')
                         .setRequired(true)
-                        .addChoice('Tickets', 'tickets')
-                        .addChoice('Custom voice', 'customvoice')
-                        .addChoice('Server logs', 'serverlogs')
-                        .addChoice('Level logs', 'levellogs')
-                        .addChoice('Boost logs', 'boostlogs')
-                        .addChoice('Birthdays', 'birthdays')
-                        .addChoice('Chatbot', 'chatbot')
-                        .addChoice('Reviews', 'reviews')
-                        .addChoice('Suggestions', 'suggestions')
-                        .addChoice('Counting', 'counting')
-                        .addChoice('Guess the number', 'gtn')
-                        .addChoice('Guess the word', 'gtw')
-                        .addChoice('Welcome channel', 'welcomechannel')
-                        .addChoice('Leave channel', 'leavechannel')
-                        .addChoice('Welcome role', 'welcomerole')
-                        .addChoice('Word snake', 'wordsnake')
+                        .addChoices(
+                            { name: 'Tickets', value: 'tickets' },
+                            { name: 'Custom voice', value: 'customvoice' },
+                            { name: 'Server logs', value: 'serverlogs' },
+                            { name: 'Level logs', value: 'levellogs' },
+                            { name: 'Boost logs', value: 'boostlogs' },
+                            { name: 'Birthdays', value: 'birthdays' },
+                            { name: 'Chatbot', value: 'chatbot' },
+                            { name: 'Reviews', value: 'reviews' },
+                            { name: 'Suggestions', value: 'suggestions' },
+                            { name: 'Counting', value: 'counting' },
+                            { name: 'Guess the number', value: 'gtn' },
+                            { name: 'Guess the word', value: 'gtw' },
+                            { name: 'Welcome channel', value: 'welcomechannel' },
+                            { name: 'Leave channel', value: 'leavechannel' },
+                            { name: 'Welcome role', value: 'welcomerole' },
+                            { name: 'Word snake', value: 'wordsnake' }
+                        )
                 )
         )
     ,

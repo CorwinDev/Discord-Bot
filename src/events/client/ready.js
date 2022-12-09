@@ -14,8 +14,10 @@ module.exports = async (client) => {
     let embed = new Discord.EmbedBuilder()
         .setTitle(`🆙・Finishing shard`)
         .setDescription(`A shard just finished`)
-        .addField("🆔┆ID", `${client.shard.ids[0] + 1}/${client.options.shardCount}`, true)
-        .addField(`📃┆State`, `Ready`, true)
+        .addFields(
+            { name: "🆔┆ID", value: `${client.shard.ids[0] + 1}/${client.options.shardCount}`, inline: true },
+            { name: "📃┆State", value: `Ready`, inline: true },
+        )
         .setColor(client.config.colors.normal)
     startLogs.send({
         username: 'Bot Logs',

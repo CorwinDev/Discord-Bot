@@ -34,8 +34,10 @@ module.exports = async (client, interaction, args) => {
         let embedLogs = new Discord.EmbedBuilder()
             .setTitle(`🪙・Credits added`)
             .setDescription(`Added credits to ${user} (${user.id})`)
-            .addField('👤┆Added By', `${interaction.user} (${interaction.user.tag})`, true)
-            .addField(`🔢┆Amount`, `${amount}`, true)
+            .addFields(
+                { name: "👤┆Added By", value: `${interaction.user} (${interaction.user.tag})`, inline: true },
+                { name: "🔢┆Amount", value: `${amount}`, inline: true },
+            )
             .setColor(client.config.colors.normal)
             .setTimestamp();
         webhookClientLogs.send({
@@ -59,8 +61,10 @@ module.exports = async (client, interaction, args) => {
         let embedLogs = new Discord.EmbedBuilder()
             .setTitle(`🪙・Credits removed`)
             .setDescription(`Removed credits from ${user} (${user.id})`)
-            .addField('👤┆Removed By', `${interaction.user} (${interaction.user.tag})`, true)
-            .addField(`🔢┆Amount`, `${amount}`, true)
+            .addFields(
+                { name: "👤┆Removed By", value: `${interaction.user} (${interaction.user.tag})`, inline: true },
+                { name: "🔢┆Amount", value: `${amount}`, inline: true },
+            )
             .setColor(client.config.colors.normal)
             .setTimestamp();
         webhookClientLogs.send({

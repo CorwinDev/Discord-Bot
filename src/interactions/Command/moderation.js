@@ -1,6 +1,6 @@
 const { CommandInteraction, Client } = require('discord.js');
 const { SlashCommandBuilder } = require('discord.js');
-const { ChannelType } = require('discord.js/v9');
+const { ChannelType } = require('discord.js');
 const Discord = require('discord.js');
 
 module.exports = {
@@ -48,7 +48,7 @@ module.exports = {
             subcommand
                 .setName('lock')
                 .setDescription('Lock a channel')
-                .addChannelOption(option => option.setName('channel').setDescription('Select a channel').addChannelType(ChannelType.GuildText))
+                .addChannelOption(option => option.setName('channel').setDescription('Select a channel').addChannelTypes(ChannelType.GuildText))
         )
         .addSubcommand(subcommand =>
             subcommand
@@ -87,7 +87,7 @@ module.exports = {
             subcommand
                 .setName('unlock')
                 .setDescription('Unlock a channel')
-                .addChannelOption(option => option.setName('channel').setDescription('Select a channel').addChannelType(ChannelType.GuildText))
+                .addChannelOption(option => option.setName('channel').setDescription('Select a channel').addChannelTypes(ChannelType.GuildText))
         )
         .addSubcommand(subcommand =>
             subcommand

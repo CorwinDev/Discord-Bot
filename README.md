@@ -2,6 +2,8 @@
 Discord bot with over 400 commands.
 This contains: Moderation, Music, Economy and much more!
 
+Discord: https://discord.gg/qHXxpQKC2H
+
 | Category | 
 | ------------- | 
 | AFK | 

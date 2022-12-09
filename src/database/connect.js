@@ -2,6 +2,7 @@ const mongoose = require('mongoose');
 const chalk = require('chalk');
 
 async function connect() {
+    mongoose.set('strictQuery', false);
     mongoose.connect(process.env.MONGO_TOKEN, {
         useNewUrlParser: true,
         useUnifiedTopology: true,

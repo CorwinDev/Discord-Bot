@@ -113,7 +113,7 @@ module.exports = async (client, interaction) => {
     }
 
     // Reaction roles select
-    if (interaction.isSelectMenu()) {
+    if (interaction.isStringSelectMenu()) {
         if (interaction.customId == "reaction_select") {
             reactionSchema.findOne(
                 { Message: interaction.message.id },

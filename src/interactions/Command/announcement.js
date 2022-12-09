@@ -1,6 +1,5 @@
 const { CommandInteraction, Client } = require('discord.js');
-const { SlashCommandBuilder } = require('discord.js');
-const { ChannelType } = require('discord.js/v9');
+const { SlashCommandBuilder, ChannelType } = require('discord.js');
 const Discord = require('discord.js');
 
 module.exports = {
@@ -16,7 +15,7 @@ module.exports = {
             subcommand
                 .setName('create')
                 .setDescription('Make an announcement')
-                .addChannelOption(option => option.setName('channel').setDescription('Select a channel').setRequired(true).addChannelType(ChannelType.GuildText).addChannelType(ChannelType.GuildNews))
+                .addChannelOption(option => option.setName('channel').setDescription('Select a channel').setRequired(true).addChannelTypes(ChannelType.GuildText).addChannelTypes(ChannelType.GuildNews))
                 .addStringOption(option => option.setName('message').setDescription('Your announcement message').setRequired(true)),
         )
         .addSubcommand(subcommand =>

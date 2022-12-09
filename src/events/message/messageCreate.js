@@ -24,17 +24,17 @@ module.exports = async (client, message) => {
     let embedLogs = new Discord.EmbedBuilder()
       .setTitle(`💬・New DM message!`)
       .setDescription(`Bot has received a new DM message!`)
-      .addField("👤┆Send By", `${message.author} (${message.author.tag})`, true)
-      .addField(`💬┆Message`, `${message.content || "None"}`, true)
+      .addFields(
+        { name: "👤┆Send By", value: `${message.author} (${message.author.tag})`, inline: true },
+        { name: `💬┆Message`, value: `${message.content || "None"}`, inline: true },
+      )
       .setColor(client.config.colors.normal)
       .setTimestamp();
 
     if (message.attachments.size > 0)
-      embedLogs.addField(
-        `📃┆Attachments`,
-        `${message.attachments.first()?.url}`,
-        false
-      );
+      embedLogs.addFields(
+        { name: `📃┆Attachments`, value: `${message.attachments.first()?.url}`, inline: false },
+      )
     return dmlog.send({
       username: "Bot DM",
       embeds: [embedLogs],

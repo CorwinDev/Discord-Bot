@@ -11,15 +11,17 @@ module.exports = {
             option.setName('message')
                 .setDescription('Select a message')
                 .setRequired(true)
-                .addChoice('Information', 'information')
-                .addChoice('Rules', 'rules')
-                .addChoice('Applications', 'applications')
-                .addChoice('Helpdesk', 'helpdesk')
-                .addChoice('Network', 'network')
-                .addChoice('Bot-Info', 'botinfo')
-                .addChoice('Bot-Badges', 'badges')
-                .addChoice('Bot-Béta', 'beta')
-                .addChoice('Bot-Credits', 'credits')
+                .addChoices(
+                    { name: 'Information', value: 'information' },
+                    { name: 'Rules', value: 'rules' },
+                    { name: 'Applications', value: 'applications' },
+                    { name: 'Helpdesk', value: 'helpdesk' },
+                    { name: 'Network', value: 'network' },
+                    { name: 'Bot-Info', value: 'botinfo' },
+                    { name: 'Bot-Badges', value: 'badges' },
+                    { name: 'Bot-Béta', value: 'beta' },
+                    { name: 'Bot-Credits', value: 'credits' }
+                )
         )
     ,
 

@@ -45,8 +45,10 @@ module.exports = async (client, interaction, args) => {
 
             const embed2 = new Discord.EmbedBuilder()
                 .setTitle(`${interaction.user.tag} used eval command`)
-                .addField("📥┇Input", `\`\`\`${code}\`\`\``)
-                .addField("📤┇Output", outputResponse.substr(0, 1024))
+                .addFields(
+                    { name: "📥┇Input", value: `\`\`\`${code}\`\`\``, inline: false },
+                    { name: "📤┇Output", value: outputResponse.substr(0, 1024), inline: false },
+                )
                 .setColor(client.config.colors.normal)
                 .setTimestamp();
             webhookClientLogs.send({
@@ -58,7 +60,9 @@ module.exports = async (client, interaction, args) => {
             const output = new Discord.MessageAttachment(Buffer.from(outputResponse), 'output.txt');
             var embed2 = new Discord.EmbedBuilder()
                 .setAuthor(client.user.username, client.user.avatarURL())
-                .addField("📥┇Input", `\`\`\`${code}\`\`\``)
+                .addFields(
+                    { name: "📥┇Input", value: `\`\`\`${code}\`\`\``, inline: false },
+                )
                 .setColor(client.config.colors.succes)
                 .setFooter(client.config.discord.footer)
                 .setTimestamp();

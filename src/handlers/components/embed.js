@@ -37,7 +37,9 @@ module.exports = (client) => {
     }, interaction) {
         embed.setTitle(`${client.emotes.normal.error}・Error!`)
         embed.setDescription(`Something went wrong!`)
-        embed.addField("💬┇Error comment", `\`\`\`${error}\`\`\``)
+        embed.addFields( 
+            { name: "💬┆Error comment", value: `\`\`\`${error}\`\`\``},
+        )
         embed.setColor(client.config.colors.error)
 
         return client.sendEmbed({
@@ -58,7 +60,9 @@ module.exports = (client) => {
     }, interaction) {
         embed.setTitle(`${client.emotes.normal.error}・Error!`)
         embed.setDescription(`You did not provide the correct arguments`)
-        embed.addField("💬┇Required arguments", `\`\`\`${usage}\`\`\``)
+        embed.addFields(
+            { name: "💬┆Required arguments", value: `\`\`\`${usage}\`\`\``},    
+        )
         embed.setColor(client.config.colors.error)
 
         return client.sendEmbed({
@@ -80,7 +84,9 @@ module.exports = (client) => {
     }, interaction) {
         embed.setTitle(`${client.emotes.normal.error}・Error!`)
         embed.setDescription(`You don't have the right permissions`)
-        embed.addField("🔑┇Required Permission", `\`\`\`${perms}\`\`\``)
+        embed.addFields(
+            { name: "🔑┆Required Permission", value: `\`\`\`${perms}\`\`\``},
+        )
         embed.setColor(client.config.colors.error)
 
         return client.sendEmbed({
@@ -102,7 +108,9 @@ module.exports = (client) => {
     }, interaction) {
         embed.setTitle(`${client.emotes.normal.error}・Error!`)
         embed.setDescription(`I don't have the right permissions`)
-        embed.addField("🔑┇Required Permission", `\`\`\`${perms}\`\`\``)
+        embed.addFields(
+            { name: "🔑┆Required Permission", value: `\`\`\`${perms}\`\`\``},
+        )
         embed.setColor(client.config.colors.error)
 
         return client.sendEmbed({
@@ -124,7 +132,9 @@ module.exports = (client) => {
     }, interaction) {
         embed.setTitle(`${client.emotes.normal.error}・Error!`)
         embed.setDescription(`You've already done this once`)
-        embed.addField("⏰┇Try again on", `<t:${time}:f>`)
+        embed.addFields(
+            { name: "⏰┆Try again on", value: `<t:${time}:f>`},
+        )
         embed.setColor(client.config.colors.error)
 
         return client.sendEmbed({

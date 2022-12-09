@@ -1,6 +1,6 @@
 const { CommandInteraction, Client } = require("discord.js");
 const { SlashCommandBuilder } = require("discord.js");
-const { ChannelType } = require("discord.js/v9");
+const { ChannelType } = require("discord.js");
 const Discord = require("discord.js");
 
 module.exports = {
@@ -12,7 +12,7 @@ module.exports = {
         .setName("channel")
         .setDescription("Channel where the embed should be")
         .setRequired(true)
-        .addChannelType(ChannelType.GuildText)
+        .addChannelTypes(ChannelType.GuildText)
     ),
   /**
    * @param {Client} client

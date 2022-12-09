@@ -1,6 +1,6 @@
 const { CommandInteraction, Client } = require('discord.js');
 const { SlashCommandBuilder } = require('discord.js');
-const { ChannelType } = require('discord.js/v9');
+const { ChannelType } = require('discord.js');
 const Discord = require('discord.js');
 
 module.exports = {
@@ -36,14 +36,14 @@ module.exports = {
                 .setName('button')
                 .setDescription('Show all reaction roles with buttons')
                 .addStringOption(option => option.setName('category').setDescription('Category name for your reaction roles group').setRequired(true))
-                .addChannelOption(option => option.setName('channel').setDescription('Channel where the reaction roles should come').addChannelType(ChannelType.GuildText))
+                .addChannelOption(option => option.setName('channel').setDescription('Channel where the reaction roles should come').addChannelTypes(ChannelType.GuildText))
         )
         .addSubcommand(subcommand =>
             subcommand
                 .setName('menu')
                 .setDescription('Show all reaction roles in a menu')
                 .addStringOption(option => option.setName('category').setDescription('Category name for your reaction roles group').setRequired(true))
-                .addChannelOption(option => option.setName('channel').setDescription('Channel where the reaction roles should come').addChannelType(ChannelType.GuildText))
+                .addChannelOption(option => option.setName('channel').setDescription('Channel where the reaction roles should come').addChannelTypes(ChannelType.GuildText))
         )
     ,
 

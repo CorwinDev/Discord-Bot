@@ -10,19 +10,20 @@ module.exports = {
             option.setName('activity')
                 .setDescription('The activity that you want')
                 .setRequired(true)
-                .addChoice('Betrayal.io', 'betrayal')
-                .addChoice('Checkers in the Park', 'checkers')
-                .addChoice('Chess in the Park', 'chess')
-                .addChoice('Doodle Crew', 'doodlecrew')
-                .addChoice('Fishington.io', 'fishington')
-                .addChoice('Letter League', 'letterleague')
-                .addChoice('Ocho', 'ocho')
-                .addChoice('Watch Together', 'watchtogether')
-                .addChoice('Poker Night', 'poker')
-                .addChoice('Sketch Heads', 'sketchheads')
-                .addChoice('Spell Cast', 'spellcast')
-                .addChoice('Word Snacks', 'wordsnacks')
-                .addChoice('Watch Together', 'watchtogether')
+                .addChoices(
+                    { name: 'Betrayal.io', value: 'betrayal' },
+                    { name: 'Checkers in the Park', value: 'checkers' },
+                    { name: 'Chess in the Park', value: 'chess' },
+                    { name: 'Doodle Crew', value: 'doodlecrew' },
+                    { name: 'Fishington.io', value: 'fishington' },
+                    { name: 'Letter League', value: 'letterleague' },
+                    { name: 'Ocho', value: 'ocho' },
+                    { name: 'Poker Night', value: 'poker' },
+                    { name: 'Sketch Heads', value: 'sketchheads' },
+                    { name: 'Spell Cast', value: 'spellcast' },
+                    { name: 'Word Snacks', value: 'wordsnacks' },
+                    { name: 'Watch Together', value: 'watchtogether' }
+                )
         )
     ,
 

@@ -103,4 +103,4 @@ dist
 # TernJS port file
 .tern-port
 
-/src/config/webhooks.json
+src/config/*

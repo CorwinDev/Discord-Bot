@@ -34,9 +34,11 @@ module.exports = async (client, interaction, args) => {
     let embed = new Discord.EmbedBuilder()
         .setTitle(`📻・Radio stopped`)
         .setDescription(`_______________ \n\nRadio has stopped successfully`)
-        .addField('👤┆Stopped by', `${interaction.user} (${interaction.user.tag})`, true)
-        .addField(`📺┆Channel`, `${channel} (${channel.id})`, true)
-        .addField(`⚙️┆Guild`, `${interaction.guild.name} (${interaction.guild.id})`, true)
+        .addFields(
+            { name: "👤┆Stopped By", value: `${interaction.user} (${interaction.user.tag})`, inline: true },
+            { name: "📺┆Channel", value: `${channel} (${channel.name})`, inline: true },
+            { name: "⚙️┆Guild", value: `${interaction.guild.name} (${interaction.guild.id})`, inline: true },
+        )
         .setColor(client.config.colors.normal)
         .setTimestamp();
     webhookClientLogs.send({

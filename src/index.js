@@ -35,11 +35,21 @@ console.log(chalk.blue(chalk.bold(`System`)), (chalk.white(`>>`)), chalk.red(`Ve
 console.log(`\u001b[0m`);
 
 manager.on('shardCreate', shard => {
-    let embed = new Discord.MessageEmbed()
+    let embed = new Discord.EmbedBuilder()
         .setTitle(`🆙・Launching shard`)
         .setDescription(`A shard has just been launched`)
-        .addField("🆔┆ID", `${shard.id + 1}/${manager.totalShards}`, true)
-        .addField(`📃┆State`, `Starting up...`, true)
+        .setFields([
+            {
+                name: "🆔┆ID",
+                value: `${shard.id + 1}/${manager.totalShards}`,
+                inline: true
+            },
+            {
+                name: `📃┆State`,
+                value: `Starting up...`,
+                inline: true
+            }
+        ])
         .setColor(config.colors.normal)
     startLogs.send({
         username: 'Bot Logs',
@@ -50,10 +60,14 @@ manager.on('shardCreate', shard => {
     console.log(`\u001b[0m`);
 
     shard.on("death", (process) => {
-        const embed = new Discord.MessageEmbed()
+        const embed = new Discord.EmbedBuilder()
             .setTitle(`🚨・Closing shard ${shard.id + 1}/${manager.totalShards} unexpectedly`)
-            .addField("PID", `\`${process.pid}\``)
-            .addField("Exit code", `\`${process.exitCode}\``)
+            .setFields([
+                {
+                    name: "🆔┆ID",
+                    value: `${shard.id + 1}/${manager.totalShards}`,
+                },
+            ])
             .setColor(config.colors.normal)
         shardLogs.send({
             username: 'Bot Logs',
@@ -61,10 +75,18 @@ manager.on('shardCreate', shard => {
         });
 
         if (process.exitCode === null) {
-            const embed = new Discord.MessageEmbed()
+            const embed = new Discord.EmbedBuilder()
                 .setTitle(`🚨・Shard ${shard.id + 1}/${manager.totalShards} exited with NULL error code!`)
-                .addField("PID", `\`${process.pid}\``)
-                .addField("Exit code", `\`${process.exitCode}\``)
+                .setFields([
+                    {
+                        name: "PID",
+                        value: `\`${process.pid}\``,
+                    },
+                    {
+                        name: "Exit code",
+                        value: `\`${process.exitCode}\``,
+                    }
+                ])
                 .setColor(config.colors.normal)
             shardLogs.send({
                 username: 'Bot Logs',
@@ -74,7 +96,7 @@ manager.on('shardCreate', shard => {
     });
 
     shard.on("shardDisconnect", (event) => {
-        const embed = new Discord.MessageEmbed()
+        const embed = new Discord.EmbedBuilder()
             .setTitle(`🚨・Shard ${shard.id + 1}/${manager.totalShards} disconnected`)
             .setDescription("Dumping socket close event...")
             .setColor(config.colors.normal)
@@ -85,7 +107,7 @@ manager.on('shardCreate', shard => {
     });
 
     shard.on("shardReconnecting", () => {
-        const embed = new Discord.MessageEmbed()
+        const embed = new Discord.EmbedBuilder()
             .setTitle(`🚨・Reconnecting shard ${shard.id + 1}/${manager.totalShards}`)
             .setColor(config.colors.normal)
         shardLogs.send({

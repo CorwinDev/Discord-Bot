@@ -71,7 +71,7 @@ module.exports = async (client, interaction, args) => {
             }, interaction)
         }
 
-        let embedLogs = new Discord.MessageEmbed()
+        let embedLogs = new Discord.EmbedBuilder()
             .setTitle(`📛・Badge added`)
             .setDescription(`Added a new badge to ${member} (${member.id})`)
             .addField('👤┆Added By', `${interaction.user} (${interaction.user.tag})`, true)
@@ -123,7 +123,7 @@ module.exports = async (client, interaction, args) => {
             }, interaction);
         }
 
-        let embedLogs = new Discord.MessageEmbed()
+        let embedLogs = new Discord.EmbedBuilder()
             .setTitle(`📛・Badge removed`)
             .setDescription(`Removed a badge from ${member} (${member.id})`)
             .addField('👤┆Removed By', `${interaction.user} (${interaction.user.tag})`, true)

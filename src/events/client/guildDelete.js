@@ -53,7 +53,7 @@ module.exports = async (client, guild) => {
         .then(async (results) => {
             const totalGuilds = results[0].reduce((acc, guildCount) => acc + guildCount, 0);
 
-            const embed = new discord.MessageEmbed()
+            const embed = new discord.EmbedBuilder()
                 .setTitle("🔴・Removed from a server!")
                 .addField("Total servers:", `${totalGuilds}`, true)
                 .addField("Server name", `${guild.name}`, true)

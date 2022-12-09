@@ -97,7 +97,7 @@ module.exports = (client) => {
                                 }
 
                                 newMessage.delete();
-                                let error = new Discord.MessageEmbed()
+                                let error = new Discord.EmbedBuilder()
                                     .setTitle(`${client.emotes.normal.error}・Moderator`)
                                     .setAuthor(client.user.username, client.user.avatarURL())
                                     .setDescription(`Discord links are not allowed in this server!`)
@@ -108,7 +108,7 @@ module.exports = (client) => {
                             }
                             else {
                                 newMessage.delete();
-                                let error = new Discord.MessageEmbed()
+                                let error = new Discord.EmbedBuilder()
                                     .setTitle(`${client.emotes.normal.error}・Moderator`)
                                     .setAuthor(client.user.username, client.user.avatarURL())
                                     .setDescription(`Discord links are not allowed in this server!`)
@@ -131,7 +131,7 @@ module.exports = (client) => {
                                 }
 
                                 newMessage.delete();
-                                var error = new Discord.MessageEmbed()
+                                var error = new Discord.EmbedBuilder()
                                     .setTitle(`${client.emotes.normal.error}・Moderator`)
                                     .setAuthor(client.user.username, client.user.avatarURL())
                                     .setDescription(`Links are not allowed in this server!`)
@@ -142,7 +142,7 @@ module.exports = (client) => {
                             }
                             else {
                                 newMessage.delete();
-                                var error = new Discord.MessageEmbed()
+                                var error = new Discord.EmbedBuilder()
                                     .setTitle(`${client.emotes.normal.error}・Moderator`)
                                     .setAuthor(client.user.username, client.user.avatarURL())
                                     .setDescription(`Links are not allowed in this server!`)

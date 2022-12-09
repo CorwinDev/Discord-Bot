@@ -10,7 +10,7 @@ module.exports = (client, error) => {
         token: client.webhooks.voiceErrorLogs.token,
     });
 
-    let embed = new Discord.MessageEmbed()
+    let embed = new Discord.EmbedBuilder()
         .setTitle(`🚨・Voice error`)
         .addField(`Error`, `\`\`\`${error.message}\`\`\``)
         .addField(`Stack error`, `\`\`\`${error.stack}\`\`\``)

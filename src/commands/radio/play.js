@@ -47,7 +47,7 @@ module.exports = async (client, interaction, args) => {
         type: 'editreply'
     }, interaction)
 
-    let embed = new Discord.MessageEmbed()
+    let embed = new Discord.EmbedBuilder()
         .setTitle(`📻・Started radio`)
         .setDescription(`_______________ \n\nRadio has started successfully`)
         .addField('👤┆Started by', `${interaction.user} (${interaction.user.tag})`, true)

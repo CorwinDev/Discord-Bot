@@ -1,5 +1,5 @@
 const { CommandInteraction, Client } = require('discord.js');
-const { ContextMenuCommandBuilder } = require('@discordjs/builders');
+const { ContextMenuCommandBuilder } = require('discord.js');
 const Discord = require('discord.js');
 
 const model = require('../../database/models/badge');

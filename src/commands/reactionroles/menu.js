@@ -22,7 +22,7 @@ module.exports = async (client, interaction, args) => {
                 return `${data.Roles[value][1].raw} | ${role}`;
             }).join("\n");
 
-        const menu = new Discord.MessageSelectMenu()
+        const menu = new Discord.StringSelectMenuBuilder()
             .setCustomId('reaction_select')
             .setPlaceholder('❌┇Nothing selected')
             .setMinValues(1)
@@ -44,7 +44,7 @@ module.exports = async (client, interaction, args) => {
 
         await menu.addOptions(labels);
 
-        const row = new Discord.MessageActionRow()
+        const row = new Discord.ActionRowBuilder()
             .addComponents(menu)
 
         client.embed({

@@ -128,18 +128,18 @@ module.exports = async (client) => {
         interaction.editReply({ embeds: [await client.generateEmbed(0, 0, lb, title, interaction)], fetchReply: true }).then(async msg => {
             if (lb.length <= 10) return;
 
-            let button1 = new Discord.MessageButton()
+            let button1 = new Discord.ButtonBuilder()
                 .setCustomId('back_button')
                 .setEmoji('⬅️')
-                .setStyle('PRIMARY')
+                .setStyle(Discord.ButtonStyle.Primary)
                 .setDisabled(true);
 
-            let button2 = new Discord.MessageButton()
+            let button2 = new Discord.ButtonBuilder()
                 .setCustomId('forward_button')
                 .setEmoji('➡️')
-                .setStyle('PRIMARY');
+                .setStyle(Discord.ButtonStyle.Primary);
 
-            let row = new Discord.MessageActionRow()
+            let row = new Discord.ActionRowBuilder()
                 .addComponents(button1, button2);
 
             msg.edit({ embeds: [await client.generateEmbed(0, 0, lb, title, interaction)], components: [row] })
@@ -151,22 +151,22 @@ module.exports = async (client) => {
                 if (btn.user.id == interaction.user.id && btn.message.id == msg.id) {
                     btn.customId === "back_button" ? currentIndex -= 10 : currentIndex += 10;
 
-                    let btn1 = new Discord.MessageButton()
+                    let btn1 = new Discord.ButtonBuilder()
                         .setCustomId('back_button')
                         .setEmoji('⬅️')
-                        .setStyle('PRIMARY')
+                        .setStyle(Discord.ButtonStyle.Primary)
                         .setDisabled(true);
 
-                    let btn2 = new Discord.MessageButton()
+                    let btn2 = new Discord.ButtonBuilder()
                         .setCustomId('forward_button')
                         .setEmoji('➡️')
-                        .setStyle('PRIMARY')
+                        .setStyle(Discord.ButtonStyle.Primary)
                         .setDisabled(true);
 
                     if (currentIndex !== 0) btn1.setDisabled(false);
                     if (currentIndex + 10 < lb.length) btn2.setDisabled(false);
 
-                    let row2 = new Discord.MessageActionRow()
+                    let row2 = new Discord.ActionRowBuilder()
                         .addComponents(btn1, btn2);
 
                     msg.edit({ embeds: [await client.generateEmbed(currentIndex, currentIndex, lb, title, interaction)], components: [row2] });
@@ -175,19 +175,19 @@ module.exports = async (client) => {
             })
 
             collector.on('end', async (btn) => {
-                let btn1Disable = new Discord.MessageButton()
+                let btn1Disable = new Discord.ButtonBuilder()
                     .setCustomId('back_button')
                     .setEmoji('⬅️')
-                    .setStyle('PRIMARY')
+                    .setStyle(Discord.ButtonStyle.Primary)
                     .setDisabled(true);
 
-                let btn2Disable = new Discord.MessageButton()
+                let btn2Disable = new Discord.ButtonBuilder()
                     .setCustomId('forward_button')
                     .setEmoji('➡️')
-                    .setStyle('PRIMARY')
+                    .setStyle(Discord.ButtonStyle.Primary)
                     .setDisabled(true);
 
-                let rowDisable = new Discord.MessageActionRow()
+                let rowDisable = new Discord.ActionRowBuilder()
                     .addComponents(btn1Disable, btn2Disable);
 
                 msg.edit({ embeds: [await client.generateEmbed(currentIndex, currentIndex, lb, title, interaction)], components: [rowDisable] });
@@ -217,12 +217,12 @@ module.exports = async (client) => {
                     type: 'editreply'
                 }, interaction);
 
-                const row = new Discord.MessageActionRow()
+                const row = new Discord.ActionRowBuilder()
                     .addComponents(
-                        new Discord.MessageButton()
+                        new Discord.ButtonBuilder()
                             .setLabel("Start activity")
                             .setURL(`https://discord.gg/${invite.code}`)
-                            .setStyle("LINK"),
+                            .setStyle(Discord.ButtonStyle.Link),
                     );
 
                 client.embed({

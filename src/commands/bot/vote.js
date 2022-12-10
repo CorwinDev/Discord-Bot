@@ -6,12 +6,12 @@ require("moment-duration-format");
 module.exports = async (client, interaction, args) => {
     let dbl = new Topgg.Api(process.env.TOPGG_TOKEN)
 
-    let row = new Discord.MessageActionRow()
+    let row = new Discord.ActionRowBuilder()
         .addComponents(
-            new Discord.MessageButton()
+            new Discord.ButtonBuilder()
                 .setLabel("Vote for me")
                 .setURL("https://top.gg/bot/798144456528363550/vote")
-                .setStyle("LINK"),
+                .setStyle(Discord.ButtonStyle.Link),
         );
 
     dbl.hasVoted(interaction.user.id).then(voted => {

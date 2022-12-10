@@ -117,27 +117,27 @@ module.exports = async (client, interaction, args) => {
         winningID = id4;
     }
 
-    let btn = new Discord.MessageButton()
-        .setStyle('PRIMARY')
+    let btn = new Discord.ButtonBuilder()
+        .setStyle(Discord.ButtonStyle.Primary)
         .setLabel("1️⃣")
         .setCustomId(id1);
 
-    let btn2 = new Discord.MessageButton()
-        .setStyle('PRIMARY')
+    let btn2 = new Discord.ButtonBuilder()
+        .setStyle(Discord.ButtonStyle.Primary)
         .setLabel("2️⃣")
         .setCustomId(id2);
 
-    let btn3 = new Discord.MessageButton()
-        .setStyle('PRIMARY')
+    let btn3 = new Discord.ButtonBuilder()
+        .setStyle(Discord.ButtonStyle.Primary)
         .setLabel("3️⃣")
         .setCustomId(id3);
 
-    let btn4 = new Discord.MessageButton()
-        .setStyle('PRIMARY')
+    let btn4 = new Discord.ButtonBuilder()
+        .setStyle(Discord.ButtonStyle.Primary)
         .setLabel("4️⃣")
         .setCustomId(id4);
 
-    let row = new Discord.MessageActionRow()
+    let row = new Discord.ActionRowBuilder()
         .addComponents(btn, btn2, btn3, btn4);
 
     let opt = '';
@@ -166,23 +166,23 @@ module.exports = async (client, interaction, args) => {
             trivia.deferUpdate();
 
             if (trivia.customId === winningID) {
-                let fbtn1 = new Discord.MessageButton()
-                    .setStyle('PRIMARY')
+                let fbtn1 = new Discord.ButtonBuilder()
+                    .setStyle(Discord.ButtonStyle.Primary)
                     .setLabel("1️⃣")
                     .setCustomId(id1)
                     .setDisabled(true);
-                let fbtn2 = new Discord.MessageButton()
-                    .setStyle('PRIMARY')
+                let fbtn2 = new Discord.ButtonBuilder()
+                    .setStyle(Discord.ButtonStyle.Primary)
                     .setLabel("2️⃣")
                     .setCustomId(id2)
                     .setDisabled(true);
-                let fbtn3 = new Discord.MessageButton()
-                    .setStyle('PRIMARY')
+                let fbtn3 = new Discord.ButtonBuilder()
+                    .setStyle(Discord.ButtonStyle.Primary)
                     .setLabel("3️⃣")
                     .setCustomId(id3)
                     .setDisabled(true);
-                let fbtn4 = new Discord.MessageButton()
-                    .setStyle('PRIMARY')
+                let fbtn4 = new Discord.ButtonBuilder()
+                    .setStyle(Discord.ButtonStyle.Primary)
                     .setLabel("4️⃣")
                     .setCustomId(id4)
                     .setDisabled(true);
@@ -190,25 +190,25 @@ module.exports = async (client, interaction, args) => {
                 collector.stop();
 
                 if (winningID === id1) {
-                    fbtn1.setStyle('SUCCESS');
-                    fbtn2.setStyle('DANGER');
-                    fbtn3.setStyle('DANGER');
-                    fbtn4.setStyle('DANGER');
+                    fbtn1.setStyle(Discord.ButtonStyle.Success);
+                    fbtn2.setStyle(Discord.ButtonStyle.Danger);
+                    fbtn3.setStyle(Discord.ButtonStyle.Danger);
+                    fbtn4.setStyle(Discord.ButtonStyle.Danger);
                 } else if (winningID === id2) {
-                    fbtn1.setStyle('DANGER');
-                    fbtn2.setStyle('SUCCESS');
-                    fbtn3.setStyle('DANGER');
-                    fbtn4.setStyle('DANGER');
+                    fbtn1.setStyle(Discord.ButtonStyle.Danger);
+                    fbtn2.setStyle(Discord.ButtonStyle.Success);
+                    fbtn3.setStyle(Discord.ButtonStyle.Danger);
+                    fbtn4.setStyle(Discord.ButtonStyle.Danger);
                 } else if (winningID === id3) {
-                    fbtn1.setStyle('DANGER');
-                    fbtn2.setStyle('DANGER');
-                    fbtn3.setStyle('SUCCESS');
-                    fbtn4.setStyle('DANGER');
+                    fbtn1.setStyle(Discord.ButtonStyle.Danger);
+                    fbtn2.setStyle(Discord.ButtonStyle.Danger);
+                    fbtn3.setStyle(Discord.ButtonStyle.Success);
+                    fbtn4.setStyle(Discord.ButtonStyle.Danger);
                 } else if (winningID === id4) {
-                    fbtn1.setStyle('DANGER');
-                    fbtn2.setStyle('DANGER');
-                    fbtn3.setStyle('DANGER');
-                    fbtn4.setStyle('SUCCESS');
+                    fbtn1.setStyle(Discord.ButtonStyle.Danger);
+                    fbtn2.setStyle(Discord.ButtonStyle.Danger);
+                    fbtn3.setStyle(Discord.ButtonStyle.Danger);
+                    fbtn4.setStyle(Discord.ButtonStyle.Success);
                 }
 
                 const time = convertTime(Date.now() - gameCreatedAt);
@@ -220,23 +220,23 @@ module.exports = async (client, interaction, args) => {
                     type: 'editreply'
                 }, interaction)
             } else {
-                let fbtn1 = new Discord.MessageButton()
-                    .setStyle('PRIMARY')
+                let fbtn1 = new Discord.ButtonBuilder()
+                    .setStyle(Discord.ButtonStyle.Primary)
                     .setLabel("1️⃣")
                     .setCustomId(id1)
                     .setDisabled(true);
-                let fbtn2 = new Discord.MessageButton()
-                    .setStyle('PRIMARY')
+                let fbtn2 = new Discord.ButtonBuilder()
+                    .setStyle(Discord.ButtonStyle.Primary)
                     .setLabel("2️⃣")
                     .setCustomId(id2)
                     .setDisabled(true);
-                let fbtn3 = new Discord.MessageButton()
-                    .setStyle('PRIMARY')
+                let fbtn3 = new Discord.ButtonBuilder()
+                    .setStyle(Discord.ButtonStyle.Primary)
                     .setLabel("3️⃣")
                     .setCustomId(id3)
                     .setDisabled(true);
-                let fbtn4 = new Discord.MessageButton()
-                    .setStyle('PRIMARY')
+                let fbtn4 = new Discord.ButtonBuilder()
+                    .setStyle(Discord.ButtonStyle.Primary)
                     .setLabel("4️⃣")
                     .setCustomId(id4)
                     .setDisabled(true);
@@ -244,64 +244,64 @@ module.exports = async (client, interaction, args) => {
                 collector.stop();
 
                 if (winningID === id1) {
-                    fbtn1.setStyle('SUCCESS');
+                    fbtn1.setStyle(Discord.ButtonStyle.Success);
                     if (trivia.customId === id2) {
-                        fbtn2.setStyle('DANGER');
-                        fbtn3.setStyle('SECONDARY');
-                        fbtn4.setStyle('SECONDARY');
+                        fbtn2.setStyle(Discord.ButtonStyle.Danger);
+                        fbtn3.setStyle(Discord.ButtonStyle.Secondary);
+                        fbtn4.setStyle(Discord.ButtonStyle.Secondary);
                     } else if (trivia.customId === id3) {
-                        fbtn2.setStyle('SECONDARY');
-                        fbtn3.setStyle('DANGER');
-                        fbtn4.setStyle('SECONDARY');
+                        fbtn2.setStyle(Discord.ButtonStyle.Secondary);
+                        fbtn3.setStyle(Discord.ButtonStyle.Danger);
+                        fbtn4.setStyle(Discord.ButtonStyle.Secondary);
                     } else if (trivia.customId === id4) {
-                        fbtn2.setStyle('SECONDARY');
-                        fbtn3.setStyle('SECONDARY');
-                        fbtn4.setStyle('DANGER');
+                        fbtn2.setStyle(Discord.ButtonStyle.Secondary);
+                        fbtn3.setStyle(Discord.ButtonStyle.Secondary);
+                        fbtn4.setStyle(Discord.ButtonStyle.Danger);
                     }
                 } else if (winningID === id2) {
-                    fbtn2.setStyle('SUCCESS');
+                    fbtn2.setStyle(Discord.ButtonStyle.Success);
                     if (trivia.customId === id1) {
-                        fbtn1.setStyle('DANGER');
-                        fbtn3.setStyle('SECONDARY');
-                        fbtn4.setStyle('SECONDARY');
+                        fbtn1.setStyle(Discord.ButtonStyle.Danger);
+                        fbtn3.setStyle(Discord.ButtonStyle.Secondary);
+                        fbtn4.setStyle(Discord.ButtonStyle.Secondary);
                     } else if (trivia.customId === id3) {
-                        fbtn1.setStyle('SECONDARY');
-                        fbtn3.setStyle('DANGER');
-                        fbtn4.setStyle('SECONDARY');
+                        fbtn1.setStyle(Discord.ButtonStyle.Secondary);
+                        fbtn3.setStyle(Discord.ButtonStyle.Danger);
+                        fbtn4.setStyle(Discord.ButtonStyle.Secondary);
                     } else if (trivia.customId === id4) {
-                        fbtn1.setStyle('SECONDARY');
-                        fbtn3.setStyle('SECONDARY');
-                        fbtn4.setStyle('DANGER');
+                        fbtn1.setStyle(Discord.ButtonStyle.Secondary);
+                        fbtn3.setStyle(Discord.ButtonStyle.Secondary);
+                        fbtn4.setStyle(Discord.ButtonStyle.Danger);
                     }
                 } else if (winningID === id3) {
-                    fbtn3.setStyle('SUCCESS');
+                    fbtn3.setStyle(Discord.ButtonStyle.Success);
                     if (trivia.customId === id1) {
-                        fbtn1.setStyle('DANGER');
-                        fbtn2.setStyle('SECONDARY');
-                        fbtn4.setStyle('SECONDARY');
+                        fbtn1.setStyle(Discord.ButtonStyle.Danger);
+                        fbtn2.setStyle(Discord.ButtonStyle.Secondary);
+                        fbtn4.setStyle(Discord.ButtonStyle.Secondary);
                     } else if (trivia.customId === id2) {
-                        fbtn1.setStyle('SECONDARY');
-                        fbtn2.setStyle('DANGER');
-                        fbtn4.setStyle('SECONDARY');
+                        fbtn1.setStyle(Discord.ButtonStyle.Secondary);
+                        fbtn2.setStyle(Discord.ButtonStyle.Danger);
+                        fbtn4.setStyle(Discord.ButtonStyle.Secondary);
                     } else if (trivia.customId === id4) {
-                        fbtn1.setStyle('SECONDARY');
-                        fbtn2.setStyle('SECONDARY');
-                        fbtn4.setStyle('DANGER');
+                        fbtn1.setStyle(Discord.ButtonStyle.Secondary);
+                        fbtn2.setStyle(Discord.ButtonStyle.Secondary);
+                        fbtn4.setStyle(Discord.ButtonStyle.Danger);
                     }
                 } else if (winningID === id4) {
-                    fbtn4.setStyle('SUCCESS');
+                    fbtn4.setStyle(Discord.ButtonStyle.Success);
                     if (trivia.customId === id1) {
-                        fbtn1.setStyle('DANGER');
-                        fbtn2.setStyle('SECONDARY');
-                        fbtn3.setStyle('SECONDARY');
+                        fbtn1.setStyle(Discord.ButtonStyle.Danger);
+                        fbtn2.setStyle(Discord.ButtonStyle.Secondary);
+                        fbtn3.setStyle(Discord.ButtonStyle.Secondary);
                     } else if (trivia.customId === id2) {
-                        fbtn1.setStyle('SECONDARY');
-                        fbtn2.setStyle('DANGER');
-                        fbtn3.setStyle('SECONDARY');
+                        fbtn1.setStyle(Discord.ButtonStyle.Secondary);
+                        fbtn2.setStyle(Discord.ButtonStyle.Danger);
+                        fbtn3.setStyle(Discord.ButtonStyle.Secondary);
                     } else if (trivia.customId === id3) {
-                        fbtn1.setStyle('SECONDARY');
-                        fbtn2.setStyle('SECONDARY');
-                        fbtn3.setStyle('DANGER');
+                        fbtn1.setStyle(Discord.ButtonStyle.Secondary);
+                        fbtn2.setStyle(Discord.ButtonStyle.Secondary);
+                        fbtn3.setStyle(Discord.ButtonStyle.Danger);
                     }
                 }
 
@@ -316,43 +316,43 @@ module.exports = async (client, interaction, args) => {
 
         collector.on('end', (trivia, reason) => {
             if (reason === 'time') {
-                let fbtn1 = new Discord.MessageButton()
+                let fbtn1 = new Discord.ButtonBuilder()
                     .setLabel("1️⃣")
                     .setCustomId(id1)
                     .setDisabled(true);
-                let fbtn2 = new Discord.MessageButton()
+                let fbtn2 = new Discord.ButtonBuilder()
                     .setLabel("2️⃣")
                     .setCustomId(id2)
                     .setDisabled(true);
-                let fbtn3 = new Discord.MessageButton()
+                let fbtn3 = new Discord.ButtonBuilder()
                     .setLabel("3️⃣")
                     .setCustomId(id3)
                     .setDisabled(true);
-                let fbtn4 = new Discord.MessageButton()
+                let fbtn4 = new Discord.ButtonBuilder()
                     .setLabel("4️⃣")
                     .setCustomId(id4)
                     .setDisabled(true);
 
                 if (winningID === id1) {
-                    fbtn1.setStyle('SUCCESS');
-                    fbtn2.setStyle('SECONDARY');
-                    fbtn3.setStyle('SECONDARY');
-                    fbtn4.setStyle('SECONDARY');
+                    fbtn1.setStyle(Discord.ButtonStyle.Success);
+                    fbtn2.setStyle(Discord.ButtonStyle.Secondary);
+                    fbtn3.setStyle(Discord.ButtonStyle.Secondary);
+                    fbtn4.setStyle(Discord.ButtonStyle.Secondary);
                 } else if (winningID === id2) {
-                    fbtn1.setStyle('SECONDARY');
-                    fbtn2.setStyle('SUCCESS');
-                    fbtn3.setStyle('SECONDARY');
-                    fbtn4.setStyle('SECONDARY');
+                    fbtn1.setStyle(Discord.ButtonStyle.Secondary);
+                    fbtn2.setStyle(Discord.ButtonStyle.Success);
+                    fbtn3.setStyle(Discord.ButtonStyle.Secondary);
+                    fbtn4.setStyle(Discord.ButtonStyle.Secondary);
                 } else if (winningID === id3) {
-                    fbtn1.setStyle('SECONDARY');
-                    fbtn2.setStyle('SECONDARY');
-                    fbtn3.setStyle('SUCCESS');
-                    fbtn4.setStyle('SECONDARY');
+                    fbtn1.setStyle(Discord.ButtonStyle.Secondary);
+                    fbtn2.setStyle(Discord.ButtonStyle.Secondary);
+                    fbtn3.setStyle(Discord.ButtonStyle.Success);
+                    fbtn4.setStyle(Discord.ButtonStyle.Secondary);
                 } else if (winningID === id4) {
-                    fbtn1.setStyle('SECONDARY');
-                    fbtn2.setStyle('SECONDARY');
-                    fbtn3.setStyle('SECONDARY');
-                    fbtn4.setStyle('SUCCESS');
+                    fbtn1.setStyle(Discord.ButtonStyle.Secondary);
+                    fbtn2.setStyle(Discord.ButtonStyle.Secondary);
+                    fbtn3.setStyle(Discord.ButtonStyle.Secondary);
+                    fbtn4.setStyle(Discord.ButtonStyle.Success);
                 }
 
                 client.embed({

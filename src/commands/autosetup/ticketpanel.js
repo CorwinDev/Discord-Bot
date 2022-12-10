@@ -6,13 +6,13 @@ module.exports = async (client, interaction, args) => {
     ticketSchema.findOne({ Guild: interaction.guild.id }, async (err, ticketData) => {
         if (ticketData) {
             const channel = interaction.guild.channels.cache.get(ticketData.Channel);
-            const button = new Discord.MessageButton()
+            const button = new Discord.ButtonBuilder()
                 .setCustomId('Bot_openticket')
                 .setLabel("Tickets")
-                .setStyle('PRIMARY')
+                .setStyle(Discord.ButtonStyle.Primary)
                 .setEmoji('🎫')
 
-            const row = new Discord.MessageActionRow()
+            const row = new Discord.ActionRowBuilder()
                 .addComponents(button)
 
             client.embed({

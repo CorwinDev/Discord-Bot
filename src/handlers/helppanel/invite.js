@@ -8,21 +8,21 @@ module.exports = async (client) => {
             if (interaction.values == "invite-Bothelp") {
                 interaction.deferUpdate();
 
-                const row2 = new Discord.MessageActionRow()
+                const row2 = new Discord.ActionRowBuilder()
                     .addComponents( 
-                        new Discord.MessageSelectMenu()
+                        new Discord.StringSelectMenuBuilder()
                             .setCustomId('Bot-helppanel')
                             .setPlaceholder('❌┆Nothing selected')
                             .addOptions([
                                 {
                                     label: `Commands`,
-                                    description: `Show the commands of Bot!`,
+                                    description: `Show the commands of ${client.user.username}!`,
                                     emoji: "💻",
                                     value: "commands-Bothelp",
                                 },
                                 {
                                     label: `Invite`,
-                                    description: `Invite Bot to your server`,
+                                    description: `Invite ${client.user.username} to your server`,
                                     emoji: "📨",
                                     value: "invite-Bothelp",
                                 },
@@ -34,30 +34,30 @@ module.exports = async (client) => {
                                 },
                                 {
                                     label: `Changelogs`,
-                                    description: `Show the bot changelogs`,
+                                    description: `Show the ${client.user.username} bot changelogs`,
                                     emoji: "📃",
                                     value: "changelogs-Bothelp",
                                 },
                             ]),
                     );
 
-                let row = new Discord.MessageActionRow()
+                let row = new Discord.ActionRowBuilder()
                     .addComponents(
-                        new Discord.MessageButton()
+                        new Discord.ButtonBuilder()
                             .setLabel("Invite")
                             .setURL(client.config.discord.botInvite)
-                            .setStyle("LINK"),
+                            .setStyle(Discord.ButtonStyle.Link),
 
-                        new Discord.MessageButton()
+                        new Discord.ButtonBuilder()
                             .setLabel("Support server")
                             .setURL(client.config.discord.serverInvite)
-                            .setStyle("LINK"),
+                            .setStyle(Discord.ButtonStyle.Link),
                     );
 
                 client.embed({
                     title: `📨・Invite`,
-                    desc: `Make your server even better with Bot!`,
-                    image: "https://cdn.discordapp.com/attachments/843487478881976381/874694194474668052/Bot_banner_invite.jpg",
+                    desc: `Make your server even better with the ${client.user.username} bot!`,
+                    image: "https://cdn.discordapp.com/attachments/843487478881976381/874694194474668052/dbot_banner_invite.jpg",
                     url: client.config.discord.botInvite,
                     components: [row2, row],
                     type: 'edit'

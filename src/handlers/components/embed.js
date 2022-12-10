@@ -206,7 +206,6 @@ module.exports = (client) => {
         if (footer) embed.setFooter(footer);
         if (color) embed.setColor(color);
         if (functiondata && functiondata.Color && !color) embed.setColor(functiondata.Color)
-
         return client.sendEmbed({
             embeds: [embed],
             content: content,

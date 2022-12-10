@@ -62,16 +62,16 @@ module.exports = async (client, interaction, args) => {
             },
         };
 
-        let btn = new Discord.MessageButton()
-            .setStyle('PRIMARY')
+        let btn = new Discord.ButtonBuilder()
+            .setStyle(Discord.ButtonStyle.Primary)
             .setLabel("Option A")
             .setCustomId(id1);
-        let btn2 = new Discord.MessageButton()
-            .setStyle('PRIMARY')
+        let btn2 = new Discord.ButtonBuilder()
+            .setStyle(Discord.ButtonStyle.Primary)
             .setLabel("Option B")
             .setCustomId(id2);
 
-        let row = new Discord.MessageActionRow()
+        let row = new Discord.ActionRowBuilder()
             .addComponents(btn, btn2);
 
         client.embed({
@@ -87,13 +87,13 @@ module.exports = async (client, interaction, args) => {
 
                 btn.deferUpdate();
                 if (btn.customId === id1) {
-                    btn = new Discord.MessageButton()
-                        .setStyle('PRIMARY')
+                    btn = new Discord.ButtonBuilder()
+                        .setStyle(Discord.ButtonStyle.Primary)
                         .setLabel(`Option A (${res.percentage['1']})`)
                         .setCustomId(id1)
                         .setDisabled(true);
-                    btn2 = new Discord.MessageButton()
-                        .setStyle('SECONDARY')
+                    btn2 = new Discord.ButtonBuilder()
+                        .setStyle(Discord.ButtonStyle.Secondary)
                         .setLabel(`Option B (${res.percentage['2']})`)
                         .setCustomId(id2)
                         .setDisabled(true);
@@ -106,13 +106,13 @@ module.exports = async (client, interaction, args) => {
                         type: 'editreply'
                     }, interaction)
                 } else if (btn.customId === id2) {
-                    btn = new Discord.MessageButton()
-                        .setStyle('SECONDARY')
+                    btn = new Discord.ButtonBuilder()
+                        .setStyle(Discord.ButtonStyle.Secondary)
                         .setLabel(`Option A (${res.percentage['1']})`)
                         .setCustomId(id1)
                         .setDisabled(true);
-                    btn2 = new Discord.MessageButton()
-                        .setStyle('PRIMARY')
+                    btn2 = new Discord.ButtonBuilder()
+                        .setStyle(Discord.ButtonStyle.Primary)
                         .setLabel(`Option B (${res.percentage['2']})`)
                         .setCustomId(id2)
                         .setDisabled(true);

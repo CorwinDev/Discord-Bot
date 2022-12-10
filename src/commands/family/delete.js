@@ -4,17 +4,17 @@ const Schema = require("../../database/models/family");
 
 module.exports = async (client, interaction, args) => {
 
-    const row = new Discord.MessageActionRow()
+    const row = new Discord.ActionRowBuilder()
         .addComponents(
-            new Discord.MessageButton()
+            new Discord.ButtonBuilder()
                 .setCustomId('family_delete')
                 .setEmoji('✅')
-                .setStyle('SUCCESS'),
+                .setStyle(Discord.ButtonStyle.Success),
 
-            new Discord.MessageButton()
+            new Discord.ButtonBuilder()
                 .setCustomId('family_stop')
                 .setEmoji('❌')
-                .setStyle('DANGER'),
+                .setStyle(Discord.ButtonStyle.Danger),
         );
 
     client.embed({

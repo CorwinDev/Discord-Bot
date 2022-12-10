@@ -119,41 +119,41 @@ module.exports = async (client, interaction, args) => {
             let max = 5, collected, filter = (i) => i.user.id === interaction.user.id;
             if (res.tracks.length < max) max = res.tracks.length;
 
-            let row = new Discord.MessageActionRow()
+            let row = new Discord.ActionRowBuilder()
                 .addComponents(
-                    new Discord.MessageButton()
+                    new Discord.ButtonBuilder()
                         .setEmoji("1️⃣")
                         .setCustomId("1")
                         .setStyle("SECONDARY"),
 
-                    new Discord.MessageButton()
+                    new Discord.ButtonBuilder()
                         .setEmoji("2️⃣")
                         .setCustomId("2")
                         .setStyle("SECONDARY"),
 
-                    new Discord.MessageButton()
+                    new Discord.ButtonBuilder()
                         .setEmoji("3️⃣")
                         .setCustomId("3")
                         .setStyle("SECONDARY"),
 
-                    new Discord.MessageButton()
+                    new Discord.ButtonBuilder()
                         .setEmoji("4️⃣")
                         .setCustomId("4")
                         .setStyle("SECONDARY"),
 
-                    new Discord.MessageButton()
+                    new Discord.ButtonBuilder()
                         .setEmoji("5️⃣")
                         .setCustomId("5")
                         .setStyle("SECONDARY"),
                 );
 
-            let row2 = new Discord.MessageActionRow()
+            let row2 = new Discord.ActionRowBuilder()
                 .addComponents(
-                    new Discord.MessageButton()
+                    new Discord.ButtonBuilder()
                         .setEmoji("🛑")
                         .setLabel("Cancel")
                         .setCustomId("cancel")
-                        .setStyle("DANGER"),
+                        .setStyle(Discord.ButtonStyle.Danger),
                 );
 
             const results = res.tracks

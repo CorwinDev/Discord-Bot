@@ -110,22 +110,22 @@ module.exports = async (client, interaction, args) => {
                     type: type
                 }, interaction)
 
-                const row = new Discord.MessageActionRow()
+                const row = new Discord.ActionRowBuilder()
                     .addComponents(
-                        new Discord.MessageButton()
+                        new Discord.ButtonBuilder()
                             .setCustomId('Bot_transcriptTicket')
                             .setEmoji('📝')
-                            .setStyle('PRIMARY'),
+                            .setStyle(Discord.ButtonStyle.Primary),
 
-                        new Discord.MessageButton()
+                        new Discord.ButtonBuilder()
                             .setCustomId('Bot_openTicket')
                             .setEmoji('🔓')
-                            .setStyle('PRIMARY'),
+                            .setStyle(Discord.ButtonStyle.Primary),
 
-                        new Discord.MessageButton()
+                        new Discord.ButtonBuilder()
                             .setCustomId('Bot_deleteTicket')
                             .setEmoji('⛔')
-                            .setStyle('DANGER'),
+                            .setStyle(Discord.ButtonStyle.Danger),
                     );
 
                 client.embed({

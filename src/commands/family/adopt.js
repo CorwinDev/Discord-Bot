@@ -36,17 +36,17 @@ module.exports = async (client, interaction, args) => {
         }, interaction);
     }
 
-    const row = new Discord.MessageActionRow()
+    const row = new Discord.ActionRowBuilder()
         .addComponents(
-            new Discord.MessageButton()
+            new Discord.ButtonBuilder()
                 .setCustomId('adopt_yes')
                 .setEmoji('✅')
-                .setStyle('SUCCESS'),
+                .setStyle(Discord.ButtonStyle.Success),
 
-            new Discord.MessageButton()
+            new Discord.ButtonBuilder()
                 .setCustomId('adopt_deny')
                 .setEmoji('❌')
-                .setStyle('DANGER'),
+                .setStyle(Discord.ButtonStyle.Danger),
         );
 
     client.embed({

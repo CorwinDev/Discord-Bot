@@ -31,11 +31,11 @@ module.exports = async (client, interaction, args) => {
             if (interaction.guild.channels.cache.find(c => c.id === ticketCategory.id)) {
                 client.users.fetch(ticketData.creator).then(async usr => {
                     interaction.channel.permissionOverwrites.edit(usr, {
-                        VIEW_CHANNEL: false,
-                        SEND_MESSAGES: false,
-                        ATTACH_FILES: false,
-                        READ_MESSAGE_HISTORY: false,
-                        ADD_REACTIONS: false
+                        ViewChannel: false,
+                        SendMessages: false,
+                        AttachFiles: false,
+                        ReadMessageHistory: false,
+                        AddReactions: false
                     });
 
                     try {

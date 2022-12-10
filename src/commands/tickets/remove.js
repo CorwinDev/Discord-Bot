@@ -32,7 +32,7 @@ module.exports = async (client, interaction, args) => {
                 }, interaction)
             }
 
-            interaction.channel.permissionOverwrites.edit(user.id, { VIEW_CHANNEL: false, SEND_MESSAGES: false });
+            interaction.channel.permissionOverwrites.edit(user.id, { ViewChannel: false, SendMessages: false });
 
             return client.simpleEmbed({
                 desc: `Removed ${user}`,

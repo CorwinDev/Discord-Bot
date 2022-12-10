@@ -11,7 +11,7 @@ module.exports = async (client, interaction, args) => {
     const channel = interaction.options.getChannel('channel') || interaction.channel;
 
     await channel.permissionOverwrites.edit(interaction.guild.roles.cache.find(x => x.name === '@everyone'), {
-        SEND_MESSAGES: true,
+        SendMessages: true,
     });
 
     client.succNormal({

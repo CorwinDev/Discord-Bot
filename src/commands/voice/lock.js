@@ -31,7 +31,7 @@ module.exports = async (client, interaction, args) => {
     }, interaction);
 
     channel.permissionOverwrites.edit(interaction.guild.roles.cache.find(x => x.name === '@everyone'), {
-        CONNECT: false
+        Connect: false
     });
 }
 

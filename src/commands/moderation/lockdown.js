@@ -9,9 +9,9 @@ module.exports = async (client, interaction, args) => {
     if (perms == false) return;
 
     interaction.guild.channels.cache.forEach(ch => {
-        if (ch.type == "text") {
-            ch.permissionOverwrites.edit(interaction.guild.roles.cache.find(x => x.name === '@everyone'), {
-                SEND_MESSAGES: false,
+        if (ch.type == Discord.ChannelType.GuildText) {
+            ch.permissionOverwrites.edit(interaction.guild.id, {
+                SendMessages: false,
             });
         }
     })

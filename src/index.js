@@ -8,6 +8,8 @@ axios.get('https://api.github.com/repos/CorwinDev/Discord-Bot/releases/latest').
     if (res.data.tag_name !== version) {
         console.log(chalk.red.bgYellow(`Your bot is not up to date! Please update to the latest version!`, version + ' -> ' + res.data.tag_name));
     }
+}).catch(err => {
+    console.log(chalk.red.bgYellow(`Failed to check if bot is up to date!`));
 });
 
 

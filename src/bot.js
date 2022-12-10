@@ -163,6 +163,7 @@ fs.readdirSync('./src/handlers').forEach((dir) => {
 client.login(process.env.DISCORD_TOKEN);
 
 process.on('unhandledRejection', error => {
+    console.log(error)
     if(error) if (error.length > 950) error = error.slice(0, 950) + '... view console for details';
     if(error.stack) if (error.stack.length > 950) error.stack = error.stack.slice(0, 950) + '... view console for details';
     const embed = new Discord.EmbedBuilder()

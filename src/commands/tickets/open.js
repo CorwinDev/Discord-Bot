@@ -35,11 +35,11 @@ module.exports = async (client, interaction, args) => {
                     if (interaction.channel.parentId == ticketCategory.id) {
                         client.users.fetch(ticketData.creator).then(usr => {
                             interaction.channel.permissionOverwrites.edit(usr, {
-                                VIEW_CHANNEL: true,
-                                SEND_MESSAGES: true,
-                                ATTACH_FILES: true,
-                                READ_MESSAGE_HISTORY: true,
-                                ADD_REACTIONS: true
+                                ViewChannel: true,
+                                SendMessages: true,
+                                AttachFiles: true,
+                                ReadMessageHistory: true,
+                                AddReactions: true
                             });
 
                             var ticketid = String(ticketData.TicketID).padStart(4, 0);

@@ -27,11 +27,11 @@ module.exports = async (client, interaction, args) => {
 
                 try {
                     interaction.channel.permissionOverwrites.edit(ticketRole, {
-                        VIEW_CHANNEL: false,
-                        SEND_MESSAGES: false,
-                        ATTACH_FILES: false,
-                        READ_MESSAGE_HISTORY: false,
-                        ADD_REACTIONS: false
+                        ViewChannel: false,
+                        SendMessages: false,
+                        AttachFiles: false,
+                        ReadMessageHistory: false,
+                        AddReactions: false
                     });
 
                     return client.simpleEmbed({

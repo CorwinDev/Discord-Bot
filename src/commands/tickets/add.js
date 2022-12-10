@@ -6,7 +6,7 @@ module.exports = async (client, interaction, args) => {
     const data = await ticketSchema.findOne({ Guild: interaction.guild.id });
 
     const perms = await client.checkUserPerms({
-        flags: [Discord.Permissions.FLAGS.MANAGE_MESSAGES],
+        flags: [Discord.PermissionsBitField.Flags.MANAGE_MESSAGES],
         perms: ["MANAGE_MESSAGES"]
     }, interaction)
 

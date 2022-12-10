@@ -88,19 +88,20 @@ module.exports = async (client, interaction, args) => {
                                 let category = interaction.guild.channels.cache.find(c => c.id === ticketCategory.id);
 
                                 let permsToHave = [
-                                    'VIEW_CHANNEL',
-                                    'SEND_MESSAGES',
-                                    'ATTACH_FILES',
-                                    'READ_MESSAGE_HISTORY',
-                                    'ADD_REACTIONS'
+                                    Discord.PermissionsBitField.Flags.AddReactions,
+                                    Discord.PermissionsBitField.Flags.SendMessages,
+                                    Discord.PermissionsBitField.Flags.ViewChannel,
+                                    Discord.PermissionsBitField.Flags.AttachFiles,
+                                    Discord.PermissionsBitField.Flags.ReadMessageHistory,
                                 ]
 
                                 var ticketid = String(TicketData.TicketCount).padStart(4, 0);;
 
-                                interaction.guild.channels.create(`ticket-${ticketid}`, {
+                                interaction.guild.channels.create({
+                                    name: `ticket-${ticketid}`,
                                     permissionOverwrites: [
                                         {
-                                            deny: 'VIEW_CHANNEL',
+                                            deny: [Discord.PermissionsBitField.Flags.ViewChannel],
                                             id: interaction.guild.id
                                         },
                                         {

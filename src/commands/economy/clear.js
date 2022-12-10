@@ -7,7 +7,7 @@ const store = require("../../database/models/economyStore");
 module.exports = async (client, interaction, args) => {
 
     client.checkPerms({
-        flags: [Discord.Permissions.FLAGS.ADMINISTRATOR],
+        flags: [Discord.PermissionsBitField.Flags.ADMINISTRATOR],
         perms: ["ADMINISTRATOR"]
     }, interaction)
 

@@ -6,12 +6,13 @@ module.exports = async (client, interaction, args) => {
     const category = interaction.options.getChannel('category');
     const ChannelName = interaction.options.getString('channelname');
 
-    interaction.guild.channels.create(ChannelName, {
+    interaction.guild.channels.create({
+        name: ChannelName,
         type: "GUILD_VOICE",
         parent: category.id,
         permissionOverwrites: [
             {
-                deny: 'SPEAK',
+                deny: [Discord.PermissionsBitField.Flags.Speak],
                 id: interaction.guild.id
             },
         ],

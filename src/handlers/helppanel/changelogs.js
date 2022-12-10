@@ -2,7 +2,6 @@ const Discord = require('discord.js');
 
 module.exports = async (client) => {
     client.on('interactionCreate', async (interaction) => {
-        console.log(interaction)
         if (!interaction.isStringSelectMenu()) return;
 
         if (interaction.customId == "Bot-helppanel") {

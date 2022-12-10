@@ -145,7 +145,7 @@ module.exports = {
 
     run: async (client, interaction, args) => {
         const perms = await client.checkUserPerms({
-            flags: [Discord.Permissions.FLAGS.ADMINISTRATOR],
+            flags: [Discord.PermissionsBitField.Flags.ADMINISTRATOR],
             perms: ["ADMINISTRATOR"]
         }, interaction)
 

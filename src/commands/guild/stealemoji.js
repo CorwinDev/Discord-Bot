@@ -2,7 +2,7 @@ const Discord = require('discord.js');
 
 module.exports = async (client, interaction, args) => {
   const perms = await client.checkPerms({
-    flags: [Discord.Permissions.FLAGS.MANAGE_EMOJIS],
+    flags: [Discord.PermissionsBitField.Flags.MANAGE_EMOJIS],
     perms: ["MANAGE_EMOJIS"]
   }, interaction)
   

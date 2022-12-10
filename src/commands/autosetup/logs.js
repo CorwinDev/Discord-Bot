@@ -8,21 +8,23 @@ module.exports = async (client, interaction, args) => {
     const choice = interaction.options.getString('setup');
 
     if (choice == "serverLogs") {
-        interaction.guild.channels.create("server-logs", {
+        interaction.guild.channels.create({
+            name: "server-logs",
             permissionOverwrites: [
                 {
-                    deny: 'VIEW_CHANNEL',
+                    deny: [Discord.PermissionsBitField.Flags.ViewChannel],
                     id: interaction.guild.id
                 },
             ],
-            type: "GUILD_TEXT"
+            type: Discord.ChannelType.GuildText
         }).then((ch) => {
             client.createChannelSetup(logs, ch, interaction)
         })
     }
 
     if (choice == "levelLogs") {
-        interaction.guild.channels.create("level-logs", {
+        interaction.guild.channels.create({
+            name: "level-logs",
             type: "GUILD_TEXT"
         }).then((ch) => {
             client.createChannelSetup(levelLogs, ch, interaction)
@@ -30,7 +32,8 @@ module.exports = async (client, interaction, args) => {
     }
 
     if (choice == "boostLogs") {
-        interaction.guild.channels.create("boosts", {
+        interaction.guild.channels.create({
+            name: "boosts",
             type: "GUILD_TEXT"
         }).then((ch) => {
             client.createChannelSetup(boostLogs, ch, interaction)
@@ -38,4 +41,3 @@ module.exports = async (client, interaction, args) => {
     }
 }
 
- 

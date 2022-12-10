@@ -7,10 +7,9 @@ module.exports = async (client, interaction, args) => {
     const splitArgs2 = interaction.options.getString('text2');
 
     const image = await pop.pooh(splitArgs1, splitArgs2);
-    let attach = new Discord.MessageAttachment(image, "pooh.png");
+    let attach = new Discord.AttachmentBuilder(image, { name: "pooh.png" });
 
     interaction.editReply({ files: [attach] })
 
 }
 
- 

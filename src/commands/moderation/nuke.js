@@ -2,7 +2,7 @@ const Discord = require('discord.js');
 
 module.exports = async (client, interaction, args) => {
     const perms = await client.checkPerms({
-        flags: [Discord.Permissions.FLAGS.MANAGE_CHANNELS],
+        flags: [Discord.PermissionsBitField.Flags.MANAGE_CHANNELS],
         perms: ["MANAGE_CHANNELS"]
     }, interaction);
 

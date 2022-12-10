@@ -14,10 +14,11 @@ module.exports = async (client, interaction, args) => {
     channelName = channelName.replace(`{emoji}`, "🥇")
     channelName = channelName.replace(`{name}`, `Tier: ${tier[interaction.guild.premiumTier] || '0'}`)
 
-    await interaction.guild.channels.create(channelName, {
+    await interaction.guild.channels.create({
+        name: channelName,
         type: 'GUILD_VOICE', permissionOverwrites: [
             {
-                deny: 'CONNECT',
+                deny: [Discord.PermissionsBitField.Flags.Connect],
                 id: interaction.guild.id
             },
         ],

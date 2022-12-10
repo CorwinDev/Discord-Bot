@@ -443,7 +443,7 @@ module.exports = async (client) => {
             transcript.appendChild(messageGroup);
         }
 
-        const fileTrans = new discord.MessageAttachment(Buffer.from(dom.serialize()), `${interaction.channel.id}.html`);
+        const fileTrans = new discord.AttachmentBuilder(Buffer.from(dom.serialize()), { name: `${interaction.channel.id}.html` });
         channel.send({ files: [fileTrans] });
     }
 

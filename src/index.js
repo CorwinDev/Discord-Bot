@@ -1,10 +1,9 @@
 const Discord = require('discord.js');
 const chalk = require('chalk');
-require('dotenv').config();
+require('dotenv').config('./.env');
 
 const webhook = require("./config/webhooks.json");
 const config = require("./config/bot.js");
-// Check if .env webhook_id and webhook_token are set
 if (process.env.WEBHOOK_ID && process.env.WEBHOOK_TOKEN) {
     webhook.startLogs.id = process.env.WEBHOOK_ID;
     webhook.startLogs.token = process.env.WEBHOOK_TOKEN;

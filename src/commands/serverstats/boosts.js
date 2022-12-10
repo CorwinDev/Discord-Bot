@@ -7,10 +7,11 @@ module.exports = async (client, interaction, args) => {
     channelName = channelName.replace(`{emoji}`, "💎")
     channelName = channelName.replace(`{name}`, `Boosts: ${interaction.guild.premiumSubscriptionCount || '0'}`)
 
-    interaction.guild.channels.create(channelName, {
+    interaction.guild.channels.create({
+        name: channelName,
         type: 'GUILD_VOICE', permissionOverwrites: [
             {
-                deny: 'CONNECT',
+                deny: [Discord.PermissionsBitField.Flags.Connect],
                 id: interaction.guild.id
             },
         ],
@@ -42,4 +43,3 @@ module.exports = async (client, interaction, args) => {
 
 }
 
- 

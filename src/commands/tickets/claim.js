@@ -13,7 +13,7 @@ module.exports = async (client, interaction, args) => {
     if (ticketData) {
         if (interaction.user.id !== ticketData.creator) {
             const perms = await client.checkUserPerms({
-                flags: [Discord.Permissions.FLAGS.MANAGE_MESSAGES],
+                flags: [Discord.PermissionsBitField.Flags.MANAGE_MESSAGES],
                 perms: ["MANAGE_MESSAGES"]
             }, interaction)
 

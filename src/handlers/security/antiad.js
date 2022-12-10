@@ -16,7 +16,7 @@ module.exports = (client) => {
                     if (code) {
                         Schema2.findOne({ Guild: message.guild.id }, async (err, data2) => {
                             if (data2) {
-                                if (data2.Channels.includes(message.channel.id) || message.member.permissions.has(Discord.Permissions.FLAGS.MANAGE_MESSAGES)) {
+                                if (data2.Channels.includes(message.channel.id) || message.member.permissions.has(Discord.PermissionsBitField.Flags.MANAGE_MESSAGES)) {
                                     return;
                                 }
 
@@ -48,7 +48,7 @@ module.exports = (client) => {
                     if (content.includes('http://') || content.includes('https://') || content.includes('www.')) {
                         Schema2.findOne({ Guild: message.guild.id }, async (err, data2) => {
                             if (data2) {
-                                if (data2.Channels.includes(message.channel.id) || message.member.permissions.has(Discord.Permissions.FLAGS.MANAGE_MESSAGES)) {
+                                if (data2.Channels.includes(message.channel.id) || message.member.permissions.has(Discord.PermissionsBitField.Flags.MANAGE_MESSAGES)) {
                                     return;
                                 }
 
@@ -92,7 +92,7 @@ module.exports = (client) => {
                     if (code) {
                         Schema2.findOne({ Guild: newMessage.guild.id }, async (err, data2) => {
                             if (data2) {
-                                if (data2.Channels.includes(newMessage.channel.id) || newMessage.member.permissions.has(Discord.Permissions.FLAGS.MANAGE_MESSAGES)) {
+                                if (data2.Channels.includes(newMessage.channel.id) || newMessage.member.permissions.has(Discord.PermissionsBitField.Flags.MANAGE_MESSAGES)) {
                                     return;
                                 }
 
@@ -126,7 +126,7 @@ module.exports = (client) => {
                     if (content.includes('http://') || content.includes('https://') || content.includes('www.')) {
                         Schema2.findOne({ Guild: newMessage.guild.id }, async (err, data2) => {
                             if (data2) {
-                                if (data2.Channels.includes(newMessage.channel.id) || newMessage.member.permissions.has(Discord.Permissions.FLAGS.MANAGE_MESSAGES)) {
+                                if (data2.Channels.includes(newMessage.channel.id) || newMessage.member.permissions.has(Discord.PermissionsBitField.Flags.MANAGE_MESSAGES)) {
                                     return;
                                 }
 

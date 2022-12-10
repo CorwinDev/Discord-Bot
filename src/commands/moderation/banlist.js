@@ -2,7 +2,7 @@ const Discord = require('discord.js');
 
 module.exports = async (client, interaction, args) => {
   const perms = await client.checkPerms({
-    flags: [Discord.Permissions.FLAGS.BAN_MEMBERS],
+    flags: [Discord.PermissionsBitField.Flags.BAN_MEMBERS],
     perms: ["BAN_MEMBERS"]
   }, interaction)
 

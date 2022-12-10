@@ -2,7 +2,7 @@ const Discord = require('discord.js');
 
 module.exports = async (client, interaction, args) => {
   const perms = await client.checkPerms({
-    flags: [Discord.Permissions.FLAGS.BAN_MEMBERS],
+    flags: [Discord.PermissionsBitField.Flags.BAN_MEMBERS],
     perms: ["BAN_MEMBERS"]
   }, interaction)
 
@@ -11,7 +11,7 @@ module.exports = async (client, interaction, args) => {
   const member = await interaction.guild.members.fetch(interaction.options.getUser('user').id);
   const reason = interaction.options.getString('reason') || 'Not given';
 
-  if (member.permissions.has(Discord.Permissions.FLAGS.BAN_MEMBERS) || member.permissions.has(Discord.Permissions.FLAGS.BAN_MEMBERS)) return client.errNormal({
+  if (member.permissions.has(Discord.PermissionsBitField.Flags.BAN_MEMBERS) || member.permissions.has(Discord.PermissionsBitField.Flags.BAN_MEMBERS)) return client.errNormal({
     error: "You can't ban a moderator",
     type: 'editreply'
   }, interaction);

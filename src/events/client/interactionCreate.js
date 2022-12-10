@@ -43,7 +43,7 @@ module.exports = async (client, interaction) => {
             let captcha = new Captcha();
 
             try {
-                var image = new Discord.MessageAttachment(captcha.JPEGStream, "captcha.jpeg");
+                var image = new Discord.AttachmentBuilder(captcha.JPEGStream, {name:"captcha.jpeg"});
 
                 interaction.reply({ files: [image], fetchReply: true }).then(function (msg) {
                     const filter = s => s.author.id == interaction.user.id;

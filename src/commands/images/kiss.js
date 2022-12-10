@@ -8,9 +8,8 @@ module.exports = async (client, interaction, args) => {
     let avatar = interaction.user.displayAvatarURL({ dynamic: false, size: 1024, format: 'png' });
     const userAvatar = member.displayAvatarURL({ dynamic: false, size: 1024, format: 'png' });
     const image = await new DIG.Kiss().getImage(avatar, userAvatar);
-    let attach = new Discord.MessageAttachment(image, "kiss.png");
+    let attach = new Discord.AttachmentBuilder(image, { name: "kiss.png" });
 
     interaction.editReply({ files: [attach] })
 }
 
- 

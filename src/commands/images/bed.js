@@ -9,8 +9,7 @@ module.exports = async (client, interaction, args) => {
 
     const img = await Canvas.bed(interaction.user.avatarURL({ size: 1024, format: 'png' }), userAvatar);
 
-    let attach = new Discord.MessageAttachment(img, "bed.png");;
+    let attach = new Discord.AttachmentBuilder(img, { name: "bed.png" });
     interaction.editReply({ files: [attach] })
 }
 
- 

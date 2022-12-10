@@ -4,7 +4,7 @@ const Schema = require("../../database/models/stats");
 
 module.exports = async (client, interaction, args) => {
     const perms = await client.checkUserPerms({
-        flags: [Discord.Permissions.FLAGS.MANAGE_CHANNELS],
+        flags: [Discord.PermissionsBitField.Flags.MANAGE_CHANNELS],
         perms: ["MANAGE_CHANNELS"]
     }, interaction)
 

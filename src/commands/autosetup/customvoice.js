@@ -3,15 +3,17 @@ const Discord = require('discord.js');
 const voiceSchema = require("../../database/models/voice");
 
 module.exports = async (client, interaction, args) => {
-    interaction.guild.channels.create("Custom voice", {
+    interaction.guild.channels.create({
+        name: "Custom voice",
         type: "GUILD_CATEGORY"
     }).then((cat) => {
-        interaction.guild.channels.create("➕ Create Voice", {
+        interaction.guild.channels.create({
+            name: "➕ Create Voice",
             type: "GUILD_VOICE",
             parent: cat.id,
             permissionOverwrites: [
                 {
-                    deny: 'SPEAK',
+                    deny: [Discord.PermissionsBitField.Flags.Speak],
                     id: interaction.guild.id
                 },
             ],
@@ -47,4 +49,3 @@ module.exports = async (client, interaction, args) => {
     })
 }
 
- 

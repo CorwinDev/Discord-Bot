@@ -57,7 +57,7 @@ module.exports = async (client, interaction, args) => {
             });
         }
         else {
-            const output = new Discord.MessageAttachment(Buffer.from(outputResponse), 'output.txt');
+            const output = new Discord.AttachmentBuilder(Buffer.from(outputResponse), { name: 'output.txt' });
             var embed2 = new Discord.EmbedBuilder()
                 .setAuthor(client.user.username, client.user.avatarURL())
                 .addFields(

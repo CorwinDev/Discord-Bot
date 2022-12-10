@@ -10,7 +10,8 @@ module.exports = async (client, interaction, args) => {
     const choice = interaction.options.getString('setup');
 
     if (choice == "birthdays") {
-        interaction.guild.channels.create("birthdays", {
+        interaction.guild.channels.create({
+            name: "birthdays",
             type: "GUILD_TEXT"
         }).then((ch) => {
             client.createChannelSetup(Birthdays, ch, interaction)
@@ -18,7 +19,8 @@ module.exports = async (client, interaction, args) => {
     }
 
     if (choice == "chatbot") {
-        interaction.guild.channels.create("chatbot", {
+        interaction.guild.channels.create({
+            name: "chatbot",
             type: "GUILD_TEXT"
         }).then((ch) => {
             client.createChannelSetup(Chatbot, ch, interaction)
@@ -26,7 +28,8 @@ module.exports = async (client, interaction, args) => {
     }
 
     if (choice == "reviews") {
-        interaction.guild.channels.create("reviews", {
+        interaction.guild.channels.create({
+            name: "reviews",
             type: "GUILD_TEXT"
         }).then((ch) => {
             client.createChannelSetup(Review, ch, interaction)
@@ -34,7 +37,8 @@ module.exports = async (client, interaction, args) => {
     }
 
     if (choice == "suggestions") {
-        interaction.guild.channels.create("suggestions", {
+        interaction.guild.channels.create({
+            name: "suggestions",
             type: "GUILD_TEXT"
         }).then((ch) => {
             client.createChannelSetup(Suggestion, ch, interaction)
@@ -42,7 +46,8 @@ module.exports = async (client, interaction, args) => {
     }
 
     if (choice == "starboard") {
-        interaction.guild.channels.create("starboard", {
+        interaction.guild.channels.create({
+            name: "starboard",
             type: "GUILD_TEXT"
         }).then((ch) => {
             client.createChannelSetup(StarBoard, ch, interaction)
@@ -50,4 +55,3 @@ module.exports = async (client, interaction, args) => {
     }
 }
 
- 

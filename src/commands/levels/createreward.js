@@ -7,7 +7,7 @@ module.exports = async (client, interaction, args) => {
     let role = interaction.options.getRole('role');
 
     const perms = await client.checkUserPerms({
-        flags: [Discord.Permissions.FLAGS.MANAGE_MESSAGES],
+        flags: [Discord.PermissionsBitField.Flags.MANAGE_MESSAGES],
         perms: ["MANAGE_MESSAGES"]
     }, interaction)
 

@@ -93,6 +93,49 @@ client.config = require('./config/bot');
 client.changelogs = require('./config/changelogs');
 client.emotes = require("./config/emojis.json");
 client.webhooks = require("./config/webhooks.json");
+if (process.env.WEBHOOK_ID && process.env.WEBHOOK_TOKEN) {
+    client.webhooks.startLogs.id = process.env.WEBHOOK_ID;
+    client.webhooks.startLogs.token = process.env.WEBHOOK_TOKEN;
+
+    client.webhooks.shardLogs.id = process.env.WEBHOOK_ID;
+    client.webhooks.shardLogs.token = process.env.WEBHOOK_TOKEN;
+
+    client.webhooks.errorLogs.id = process.env.WEBHOOK_ID;
+    client.webhooks.errorLogs.token = process.env.WEBHOOK_TOKEN;
+
+    client.webhooks.dmLogs.id = process.env.WEBHOOK_ID;
+    client.webhooks.dmLogs.token = process.env.WEBHOOK_TOKEN;
+
+    client.webhooks.voiceLogs.id = process.env.WEBHOOK_ID;
+    client.webhooks.voiceLogs.token = process.env.WEBHOOK_TOKEN;
+
+    client.webhooks.serverLogs.id = process.env.WEBHOOK_ID;
+    client.webhooks.serverLogs.token = process.env.WEBHOOK_TOKEN;
+
+    client.webhooks.serverLogs2.id = process.env.WEBHOOK_ID;
+    client.webhooks.serverLogs2.token = process.env.WEBHOOK_TOKEN;
+
+    client.webhooks.commandLogs.id = process.env.WEBHOOK_ID;
+    client.webhooks.commandLogs.token = process.env.WEBHOOK_TOKEN;
+
+    client.webhooks.consoleLogs.id = process.env.WEBHOOK_ID;
+    client.webhooks.consoleLogs.token = process.env.WEBHOOK_TOKEN;
+
+    client.webhooks.warnLogs.id = process.env.WEBHOOK_ID;
+    client.webhooks.warnLogs.token = process.env.WEBHOOK_TOKEN;
+
+    client.webhooks.voiceErrorLogs.id = process.env.WEBHOOK_ID;
+    client.webhooks.voiceErrorLogs.token = process.env.WEBHOOK_TOKEN;
+
+    client.webhooks.creditLogs.id = process.env.WEBHOOK_ID;
+    client.webhooks.creditLogs.token = process.env.WEBHOOK_TOKEN;
+
+    client.webhooks.evalLogs.id = process.env.WEBHOOK_ID;
+    client.webhooks.evalLogs.token = process.env.WEBHOOK_TOKEN;
+
+    client.webhooks.interactionLogs.id = process.env.WEBHOOK_ID;
+    client.webhooks.interactionLogs.token = process.env.WEBHOOK_TOKEN;
+}
 client.commands = new Discord.Collection();
 client.playerManager = new Map();
 client.triviaManager = new Map();
@@ -119,16 +162,19 @@ fs.readdirSync('./src/handlers').forEach((dir) => {
 client.login(process.env.DISCORD_TOKEN);
 
 process.on('unhandledRejection', error => {
+    console.error('Unhandled promise rejection:', error);
+    if (error.length > 1000) error = error.slice(0, 950) + '... view console for details';
+    if (error.stack.length > 1000) error.stack = error.stack.slice(0, 950) + '... view console for details';
     const embed = new Discord.EmbedBuilder()
         .setTitle(`🚨・Unhandled promise rejection`)
-        .setFields([
+        .addFields([
             {
-                name: `Error`,
-                value: `\`\`\`${error}\`\`\``,
+                name: "Error",
+                value: error ? Discord.codeBlock(error) : "No error",
             },
             {
-                name: `Stack error`,
-                value: `\`\`\`${error.stack}\`\`\``,
+                name: "Stack error",
+                value: error.stack ? Discord.codeBlock(error.stack) : "No stack error",
             }
         ])
         .setColor(client.config.colors.normal)
@@ -143,7 +189,7 @@ process.on('unhandledRejection', error => {
 process.on('warning', warn => {
     const embed = new Discord.EmbedBuilder()
         .setTitle(`🚨・New warning found`)
-        .setFields([
+        .addFields([
             {
                 name: `Warn`,
                 value: `\`\`\`${warn}\`\`\``,
@@ -161,7 +207,7 @@ process.on('warning', warn => {
 client.on('shardError', error => {
     const embed = new Discord.EmbedBuilder()
         .setTitle(`🚨・A websocket connection encountered an error`)
-        .setFields([
+        .addFields([
             {
                 name: `Error`,
                 value: `\`\`\`${error}\`\`\``,
@@ -178,4 +224,3 @@ client.on('shardError', error => {
     });
 });
 
- 

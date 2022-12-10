@@ -6,8 +6,8 @@ module.exports = async (client, interaction, args) => {
     let level = interaction.options.getNumber('level');
 
     const perms = await client.checkUserPerms({
-        flags: [Discord.PermissionsBitField.Flags.MANAGE_MESSAGES],
-        perms: ["MANAGE_MESSAGES"]
+        flags: [Discord.PermissionsBitField.Flags.ManageMessages],
+        perms: [Discord.PermissionsBitField.Flags.ManageMessages]
     }, interaction)
 
     if (perms == false) return;

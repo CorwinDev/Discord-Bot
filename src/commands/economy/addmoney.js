@@ -4,8 +4,8 @@ const Schema = require("../../database/models/economy");
 
 module.exports = async (client, interaction, args) => {
     const perms = await client.checkUserPerms({
-        flags: [Discord.PermissionsBitField.Flags.ADMINISTRATOR],
-        perms: ["ADMINISTRATOR"]
+        flags: [Discord.PermissionsBitField.Flags.Administrator],
+        perms: [Discord.PermissionsBitField.Flags.Administrator]
     }, interaction)
 
     if (perms == false) return;

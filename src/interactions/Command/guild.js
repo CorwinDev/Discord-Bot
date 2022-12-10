@@ -43,6 +43,7 @@ module.exports = {
                 .setName('stealemoji')
                 .setDescription('Steal an emoji')
                 .addStringOption(option => option.setName('emoji').setDescription('Enter an emoji to steal').setRequired(true))
+                .addRoleOption(option => option.setName('role').setDescription('Select a role').setRequired(false))
         )
         .addSubcommand(subcommand =>
             subcommand

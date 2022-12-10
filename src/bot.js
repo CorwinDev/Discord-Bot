@@ -21,12 +21,12 @@ const client = new Discord.Client({
         "TYPING_START"
     ],
     partials: [
-        'USER',
-        'CHANNEL',
-        'GUILD_MEMBER',
-        'MESSAGE',
-        'REACTION',
-        'GUILD_SCHEDULED_EVENT'
+        Discord.Partials.Channel,
+        Discord.Partials.GuildMember,
+        Discord.Partials.Message,
+        Discord.Partials.Reaction,
+        Discord.Partials.User,
+        Discord.Partials.GuildScheduledEvent
     ],
     intents: [
         Discord.GatewayIntentBits.Guilds,
@@ -44,6 +44,7 @@ const client = new Discord.Client({
         Discord.GatewayIntentBits.DirectMessageReactions,
         Discord.GatewayIntentBits.DirectMessageTyping,
         Discord.GatewayIntentBits.GuildScheduledEvents,
+        Discord.GatewayIntentBits.MessageContent
     ],
     restTimeOffset: 0
 });
@@ -162,9 +163,8 @@ fs.readdirSync('./src/handlers').forEach((dir) => {
 client.login(process.env.DISCORD_TOKEN);
 
 process.on('unhandledRejection', error => {
-    console.error('Unhandled promise rejection:', error);
-    if (error.length > 1000) error = error.slice(0, 950) + '... view console for details';
-    if (error.stack.length > 1000) error.stack = error.stack.slice(0, 950) + '... view console for details';
+    if(error) if (error.length > 950) error = error.slice(0, 950) + '... view console for details';
+    if(error.stack) if (error.stack.length > 950) error.stack = error.stack.slice(0, 950) + '... view console for details';
     const embed = new Discord.EmbedBuilder()
         .setTitle(`🚨・Unhandled promise rejection`)
         .addFields([

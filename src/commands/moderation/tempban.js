@@ -4,8 +4,8 @@ const TempSchema = require("../../database/models/tempban");
 
 module.exports = async (client, interaction, args) => {
   const perms = await client.checkPerms({
-    flags: [Discord.PermissionsBitField.Flags.BAN_MEMBERS],
-    perms: ["BAN_MEMBERS"]
+    flags: [Discord.PermissionsBitField.Flags.BanMembers],
+    perms: [Discord.PermissionsBitField.Flags.BanMembers]
   }, interaction)
 
   if (perms == false) return;
@@ -13,7 +13,7 @@ module.exports = async (client, interaction, args) => {
   const member = await interaction.guild.members.fetch(interaction.options.getUser('user').id);
   const reason = interaction.options.getString('reason') || 'Not given';
 
-  if (member.permissions.has(Discord.PermissionsBitField.Flags.BAN_MEMBERS) || member.permissions.has(Discord.PermissionsBitField.Flags.BAN_MEMBERS)) return client.errNormal({
+  if (member.permissions.has(Discord.PermissionsBitField.Flags.BanMembers) || member.permissions.has(Discord.PermissionsBitField.Flags.BanMembers)) return client.errNormal({
     error: "You can't ban a moderator",
     type: 'editreply'
   }, interaction);

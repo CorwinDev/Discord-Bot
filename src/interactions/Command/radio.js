@@ -37,8 +37,8 @@ module.exports = {
 
     run: async (client, interaction, args) => {
         client.checkBotPerms({
-            flags: [Discord.PermissionsBitField.Flags.CONNECT, Discord.PermissionsBitField.Flags.SPEAK],
-            perms: ["CONNECT", "SPEAK"]
+            flags: [Discord.PermissionsBitField.Flags.Connect, Discord.PermissionsBitField.Flags.Speak],
+            perms: [Discord.PermissionsBitField.Flags.Connect, Discord.PermissionsBitField.Flags.Speak]
         }, interaction)
 
         if (!interaction.member.voice.channel) return client.errNormal({ 

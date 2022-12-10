@@ -43,16 +43,16 @@ module.exports = async (client, interaction, args) => {
             },
         };
 
-        let btn = new Discord.MessageButton()
-            .setStyle('SUCCESS')
+        let btn = new Discord.ButtonBuilder()
+            .setStyle(Discord.ButtonStyle.Success)
             .setLabel("Yes")
             .setCustomId(id1);
-        let btn2 = new Discord.MessageButton()
-            .setStyle('DANGER')
+        let btn2 = new Discord.ButtonBuilder()
+            .setStyle(Discord.ButtonStyle.Danger)
             .setLabel("No")
             .setCustomId(id2);
 
-        let row = new Discord.MessageActionRow()
+        let row = new Discord.ActionRowBuilder()
             .addComponents(btn, btn2);
 
         client.embed({
@@ -68,13 +68,13 @@ module.exports = async (client, interaction, args) => {
 
                 btn.deferUpdate();
                 if (btn.customId === id1) {
-                    btn = new Discord.MessageButton()
-                        .setStyle('SUCCESS')
+                    btn = new Discord.ButtonBuilder()
+                        .setStyle(Discord.ButtonStyle.Success)
                         .setLabel(`Yes (${res.percentage['1']})`)
                         .setCustomId(id1)
                         .setDisabled(true);
-                    btn2 = new Discord.MessageButton()
-                        .setStyle('DANGER')
+                    btn2 = new Discord.ButtonBuilder()
+                        .setStyle(Discord.ButtonStyle.Danger)
                         .setLabel(`No (${res.percentage['2']})`)
                         .setCustomId(id2)
                         .setDisabled(true);
@@ -87,13 +87,13 @@ module.exports = async (client, interaction, args) => {
                         type: 'editreply'
                     }, interaction)
                 } else if (btn.customId === id2) {
-                    btn = new Discord.MessageButton()
-                        .setStyle('DANGER')
+                    btn = new Discord.ButtonBuilder()
+                        .setStyle(Discord.ButtonStyle.Danger)
                         .setLabel(`Yes (${res.percentage['1']})`)
                         .setCustomId(id1)
                         .setDisabled(true);
-                    btn2 = new Discord.MessageButton()
-                        .setStyle('SUCCESS')
+                    btn2 = new Discord.ButtonBuilder()
+                        .setStyle(Discord.ButtonStyle.Success)
                         .setLabel(`No (${res.percentage['2']})`)
                         .setCustomId(id2)
                         .setDisabled(true);

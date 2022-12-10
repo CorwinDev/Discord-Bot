@@ -10,9 +10,9 @@ module.exports = async (client, interaction, args) => {
             client.errNormal({ error: "This command name is already added in guild custom commands!", type: 'editreply' }, interaction);
         }
         else {
-            const row = new Discord.MessageActionRow()
+            const row = new Discord.ActionRowBuilder()
                 .addComponents(
-                    new Discord.MessageSelectMenu()
+                    new Discord.StringSelectMenuBuilder()
                         .setCustomId('customSelect')
                         .setPlaceholder('❌┆Nothing selected')
                         .addOptions(

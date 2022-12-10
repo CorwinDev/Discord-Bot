@@ -3,11 +3,11 @@ const math = require('mathjs');
 
 module.exports = async (client, interaction, args) => {
     const createButton = (label, disabled, getRandomString) => {
-        let style = 'SECONDARY';
+        let style = Discord.ButtonStyle.Secondary;
         if (label === 'AC' || label === 'DC' || label === '⌫') {
-            style = 'DANGER';
+            style = Discord.ButtonStyle.Danger;
         } else if (label === '=') {
-            style = 'SUCCESS';
+            style = Discord.ButtonStyle.Success;
         } else if (
             label === '(' ||
             label === ')' ||
@@ -19,10 +19,10 @@ module.exports = async (client, interaction, args) => {
             label === '+' ||
             label === '.'
         ) {
-            style = 'PRIMARY';
+            style = Discord.ButtonStyle.Primary;
         }
         if (disabled) {
-            const btn = new Discord.MessageButton()
+            const btn = new Discord.ButtonBuilder()
                 .setLabel(label)
                 .setStyle(style)
                 .setDisabled();
@@ -33,7 +33,7 @@ module.exports = async (client, interaction, args) => {
             }
             return btn;
         } else {
-            const btn = new Discord.MessageButton().setLabel(label).setStyle(style);
+            const btn = new Discord.ButtonBuilder().setLabel(label).setStyle(style);
             if (label === '\u200b') {
                 btn.setDisabled();
                 btn.setCustomId(`${getRandomString(10)}`);
@@ -45,7 +45,7 @@ module.exports = async (client, interaction, args) => {
     };
 
     const addRow = (btns) => {
-        const row = new Discord.MessageActionRow();
+        const row = new Discord.ActionRowBuilder();
         for (const btn of btns) {
             row.addComponents(btn);
         }

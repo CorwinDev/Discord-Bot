@@ -46,12 +46,12 @@ module.exports = async (client, interaction, args) => {
             type: 'editreply'
         }, interaction);
 
-        const row = new Discord.MessageActionRow()
+        const row = new Discord.ActionRowBuilder()
             .addComponents(
-                new Discord.MessageButton()
+                new Discord.ButtonBuilder()
                     .setCustomId('Bot_verify')
                     .setEmoji('✅')
-                    .setStyle('SUCCESS'),
+                    .setStyle(Discord.ButtonStyle.Success),
             );
 
         client.embed({

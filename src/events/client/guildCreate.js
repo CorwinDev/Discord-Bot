@@ -50,17 +50,17 @@ module.exports = async (client, guild) => {
             }
         })
 
-        let row = new Discord.MessageActionRow()
+        let row = new Discord.ActionRowBuilder()
             .addComponents(
-                new Discord.MessageButton()
+                new Discord.ButtonBuilder()
                     .setLabel("Invite")
                     .setURL(client.config.discord.botInvite)
-                    .setStyle("LINK"),
+                    .setStyle(Discord.ButtonStyle.Link),
 
-                new Discord.MessageButton()
+                new Discord.ButtonBuilder()
                     .setLabel("Support server")
                     .setURL(client.config.discord.serverInvite)
-                    .setStyle("LINK"),
+                    .setStyle(Discord.ButtonStyle.Link),
             );
 
         client.embed({

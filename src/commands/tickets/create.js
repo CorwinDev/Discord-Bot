@@ -39,27 +39,27 @@ module.exports = async (client, interaction, args) => {
                             openTicket = ticketMessageData.openTicket;
                         }
 
-                        const row = new Discord.MessageActionRow()
+                        const row = new Discord.ActionRowBuilder()
                             .addComponents(
-                                new Discord.MessageButton()
+                                new Discord.ButtonBuilder()
                                     .setCustomId('Bot_closeticket')
                                     .setEmoji('🔒')
-                                    .setStyle('PRIMARY'),
+                                    .setStyle(Discord.ButtonStyle.Primary),
 
-                                new Discord.MessageButton()
+                                new Discord.ButtonBuilder()
                                     .setCustomId('Bot_claimTicket')
                                     .setEmoji('✋')
-                                    .setStyle('PRIMARY'),
+                                    .setStyle(Discord.ButtonStyle.Primary),
 
-                                new Discord.MessageButton()
+                                new Discord.ButtonBuilder()
                                     .setCustomId('Bot_transcriptTicket')
                                     .setEmoji('📝')
-                                    .setStyle('PRIMARY'),
+                                    .setStyle(Discord.ButtonStyle.Primary),
 
-                                new Discord.MessageButton()
+                                new Discord.ButtonBuilder()
                                     .setCustomId('Bot_noticeTicket')
                                     .setEmoji('🔔')
-                                    .setStyle('PRIMARY'),
+                                    .setStyle(Discord.ButtonStyle.Primary),
                             );
 
                         client.embed({

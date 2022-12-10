@@ -8,9 +8,9 @@ module.exports = async (client) => {
             if (interaction.values == "invite-linkspanel") {
                 interaction.deferUpdate();
 
-                const row2 = new Discord.MessageActionRow()
+                const row2 = new Discord.ActionRowBuilder()
                     .addComponents(
-                        new Discord.MessageSelectMenu()
+                        new Discord.StringSelectMenuBuilder()
                             .setCustomId('Bot-linkspanel')
                             .setPlaceholder('❌┆Nothing selected')
                             .addOptions([
@@ -47,12 +47,12 @@ module.exports = async (client) => {
                             ]),
                     );
 
-                let row = new Discord.MessageActionRow()
+                let row = new Discord.ActionRowBuilder()
                     .addComponents(
-                        new Discord.MessageButton()
+                        new Discord.ButtonBuilder()
                             .setLabel("Bot Invite")
                             .setURL(client.config.discord.botInvite)
-                            .setStyle("LINK"),
+                            .setStyle(Discord.ButtonStyle.Link),
                     );
 
                 client.embed({

@@ -4,6 +4,51 @@ require('dotenv').config();
 
 const webhook = require("./config/webhooks.json");
 const config = require("./config/bot.js");
+// Check if .env webhook_id and webhook_token are set
+if (process.env.WEBHOOK_ID && process.env.WEBHOOK_TOKEN) {
+    webhook.startLogs.id = process.env.WEBHOOK_ID;
+    webhook.startLogs.token = process.env.WEBHOOK_TOKEN;
+
+    webhook.shardLogs.id = process.env.WEBHOOK_ID;
+    webhook.shardLogs.token = process.env.WEBHOOK_TOKEN;
+
+    webhook.errorLogs.id = process.env.WEBHOOK_ID;
+    webhook.errorLogs.token = process.env.WEBHOOK_TOKEN;
+
+    webhook.dmLogs.id = process.env.WEBHOOK_ID;
+    webhook.dmLogs.token = process.env.WEBHOOK_TOKEN;
+
+    webhook.voiceLogs.id = process.env.WEBHOOK_ID;
+    webhook.voiceLogs.token = process.env.WEBHOOK_TOKEN;
+
+    webhook.serverLogs.id = process.env.WEBHOOK_ID;
+    webhook.serverLogs.token = process.env.WEBHOOK_TOKEN;
+
+    webhook.serverLogs2.id = process.env.WEBHOOK_ID;
+    webhook.serverLogs2.token = process.env.WEBHOOK_TOKEN;
+
+    webhook.commandLogs.id = process.env.WEBHOOK_ID;
+    webhook.commandLogs.token = process.env.WEBHOOK_TOKEN;
+
+    webhook.consoleLogs.id = process.env.WEBHOOK_ID;
+    webhook.consoleLogs.token = process.env.WEBHOOK_TOKEN;
+
+    webhook.warnLogs.id = process.env.WEBHOOK_ID;
+    webhook.warnLogs.token = process.env.WEBHOOK_TOKEN;
+
+    webhook.voiceErrorLogs.id = process.env.WEBHOOK_ID;
+    webhook.voiceErrorLogs.token = process.env.WEBHOOK_TOKEN;
+
+    webhook.creditLogs.id = process.env.WEBHOOK_ID;
+    webhook.creditLogs.token = process.env.WEBHOOK_TOKEN;
+
+    webhook.evalLogs.id = process.env.WEBHOOK_ID;
+    webhook.evalLogs.token = process.env.WEBHOOK_TOKEN;
+
+    webhook.interactionLogs.id = process.env.WEBHOOK_ID;
+    webhook.interactionLogs.token = process.env.WEBHOOK_TOKEN;
+}
+
 
 const startLogs = new Discord.WebhookClient({
     id: webhook.startLogs.id,
@@ -22,7 +67,7 @@ const manager = new Discord.ShardingManager('./src/bot.js', {
 });
 if (process.env.TOPGG_TOKEN) {
     const { AutoPoster } = require('topgg-autoposter');
-    const poster = AutoPoster(process.env.TOPGG_TOKEN, manager);
+    AutoPoster(process.env.TOPGG_TOKEN, manager);
 }
 console.clear();
 console.log(chalk.blue(chalk.bold(`System`)), (chalk.white(`>>`)), (chalk.green(`Starting up`)), (chalk.white(`...`)))

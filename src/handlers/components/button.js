@@ -6,15 +6,15 @@ module.exports = (client) => {
         var sendComponents = [];
 
         reactions.map((emoji) => {
-            let btn = new Discord.MessageButton()
-                .setStyle('PRIMARY')
+            let btn = new Discord.ButtonBuilder()
+                .setStyle(Discord.ButtonStyle.Primary)
                 .setEmoji(`${emoji}`)
                 .setCustomId(`reaction_button-${emoji}`);
             return labels.push(btn);
         })
 
         if (labels.length < 5 || labels.length == 5) {
-            const row = new Discord.MessageActionRow()
+            const row = new Discord.ActionRowBuilder()
 
             row.addComponents(labels.slice(0, 5))
 
@@ -22,8 +22,8 @@ module.exports = (client) => {
         }
 
         if (labels.length < 10 && labels.length > 5 || labels.length == 10) {
-            const row = new Discord.MessageActionRow()
-            const row2 = new Discord.MessageActionRow()
+            const row = new Discord.ActionRowBuilder()
+            const row2 = new Discord.ActionRowBuilder()
 
             row.addComponents(labels.slice(0, 5))
             row2.addComponents(labels.slice(5, 10))
@@ -32,9 +32,9 @@ module.exports = (client) => {
         }
 
         if (labels.length < 15 && labels.length > 10 || labels.length == 15) {
-            const row = new Discord.MessageActionRow()
-            const row2 = new Discord.MessageActionRow()
-            const row3 = new Discord.MessageActionRow()
+            const row = new Discord.ActionRowBuilder()
+            const row2 = new Discord.ActionRowBuilder()
+            const row3 = new Discord.ActionRowBuilder()
 
             row.addComponents(labels.slice(0, 5))
             row2.addComponents(labels.slice(5, 10))
@@ -44,10 +44,10 @@ module.exports = (client) => {
         }
 
         if (labels.length < 20 && labels.length > 15 || labels.length == 20) {
-            const row = new Discord.MessageActionRow()
-            const row2 = new Discord.MessageActionRow()
-            const row3 = new Discord.MessageActionRow()
-            const row4 = new Discord.MessageActionRow()
+            const row = new Discord.ActionRowBuilder()
+            const row2 = new Discord.ActionRowBuilder()
+            const row3 = new Discord.ActionRowBuilder()
+            const row4 = new Discord.ActionRowBuilder()
 
             row.addComponents(labels.slice(0, 5))
             row2.addComponents(labels.slice(5, 10))
@@ -58,11 +58,11 @@ module.exports = (client) => {
         }
 
         if (labels.length < 25 && labels.length > 20 || labels.length == 25) {
-            const row = new Discord.MessageActionRow()
-            const row2 = new Discord.MessageActionRow()
-            const row3 = new Discord.MessageActionRow()
-            const row4 = new Discord.MessageActionRow()
-            const row5 = new Discord.MessageActionRow()
+            const row = new Discord.ActionRowBuilder()
+            const row2 = new Discord.ActionRowBuilder()
+            const row3 = new Discord.ActionRowBuilder()
+            const row4 = new Discord.ActionRowBuilder()
+            const row5 = new Discord.ActionRowBuilder()
 
             row.addComponents(labels.slice(0, 5))
             row2.addComponents(labels.slice(5, 10))

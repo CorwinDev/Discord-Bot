@@ -26,22 +26,22 @@ module.exports = async (client, interaction, args) => {
                 win = true;
             }
 
-            const row = new Discord.MessageActionRow()
+            const row = new Discord.ActionRowBuilder()
                 .addComponents(
-                    new Discord.MessageButton()
+                    new Discord.ButtonBuilder()
                         .setCustomId('slots_1')
                         .setLabel(`${slotItems[number[0]]}`)
-                        .setStyle('PRIMARY'),
+                        .setStyle(Discord.ButtonStyle.Primary),
 
-                    new Discord.MessageButton()
+                    new Discord.ButtonBuilder()
                         .setCustomId('slots_2')
                         .setLabel(`${slotItems[number[1]]}`)
-                        .setStyle('PRIMARY'),
+                        .setStyle(Discord.ButtonStyle.Primary),
 
-                    new Discord.MessageButton()
+                    new Discord.ButtonBuilder()
                         .setCustomId('slots_3')
                         .setLabel(`${slotItems[number[2]]}`)
-                        .setStyle('PRIMARY'),
+                        .setStyle(Discord.ButtonStyle.Primary),
                 );
             if (win) {
 

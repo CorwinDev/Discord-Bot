@@ -21,27 +21,27 @@ module.exports = async (client, interaction, args) => {
 
     const track = player.queue.previous;
 
-    let row = new Discord.MessageActionRow()
+    let row = new Discord.ActionRowBuilder()
         .addComponents(
-            new Discord.MessageButton()
+            new Discord.ButtonBuilder()
                 .setEmoji("⏮️")
                 .setCustomId("Bot-musicprev")
-                .setStyle("PRIMARY"),
+                .setStyle(Discord.ButtonStyle.Primary),
 
-            new Discord.MessageButton()
+            new Discord.ButtonBuilder()
                 .setEmoji("⏸️")
                 .setCustomId("Bot-musicpause")
-                .setStyle("PRIMARY"),
+                .setStyle(Discord.ButtonStyle.Primary),
 
-            new Discord.MessageButton()
+            new Discord.ButtonBuilder()
                 .setEmoji("⏹️")
                 .setCustomId("Bot-musicstop")
-                .setStyle("PRIMARY"),
+                .setStyle(Discord.ButtonStyle.Primary),
 
-            new Discord.MessageButton()
+            new Discord.ButtonBuilder()
                 .setEmoji("⏭️")
                 .setCustomId("Bot-musicnext")
-                .setStyle("PRIMARY"),
+                .setStyle(Discord.ButtonStyle.Primary),
         );
 
     client.embed({

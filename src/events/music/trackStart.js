@@ -1,24 +1,24 @@
 const Discord = require('discord.js');
 
 module.exports = (client, player, track) => {
-    let row = new Discord.MessageActionRow()
+    let row = new Discord.ActionRowBuilder()
         .addComponents(
-            new Discord.MessageButton()
+            new Discord.ButtonBuilder()
                 .setEmoji(client.emotes.music.previous)
                 .setCustomId("Bot-musicprev")
                 .setStyle("SECONDARY"),
 
-            new Discord.MessageButton()
+            new Discord.ButtonBuilder()
                 .setEmoji(client.emotes.music.pause)
                 .setCustomId("Bot-musicpause")
                 .setStyle("SECONDARY"),
 
-            new Discord.MessageButton()
+            new Discord.ButtonBuilder()
                 .setEmoji(client.emotes.music.stop)
                 .setCustomId("Bot-musicstop")
                 .setStyle("SECONDARY"),
 
-            new Discord.MessageButton()
+            new Discord.ButtonBuilder()
                 .setEmoji(client.emotes.music.next)
                 .setCustomId("Bot-musicnext")
                 .setStyle("SECONDARY"),

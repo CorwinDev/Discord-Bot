@@ -317,18 +317,18 @@ module.exports = async (client, message) => {
     message.mentions.users.first().id == client.user.id &&
     command.length === 0
   ) {
-    let row = new Discord.MessageActionRow().addComponents(
-      new Discord.MessageButton()
+    let row = new Discord.ActionRowBuilder().addComponents(
+      new Discord.ButtonBuilder()
         .setLabel("Invite")
         .setURL(
           "https://discord.com/oauth2/authorize?&client_id=798144456528363550&scope=applications.commands+bot&permissions=8"
         )
-        .setStyle("LINK"),
+        .setStyle(Discord.ButtonStyle.Link),
 
-      new Discord.MessageButton()
+      new Discord.ButtonBuilder()
         .setLabel("Support server")
         .setURL("https://discord.gg/56FZySQaY7")
-        .setStyle("LINK")
+        .setStyle(Discord.ButtonStyle.Link)
     );
 
     client
@@ -402,18 +402,18 @@ module.exports = async (client, message) => {
   }
 
   if (command) {
-    let row = new Discord.MessageActionRow().addComponents(
-      new Discord.MessageButton()
+    let row = new Discord.ActionRowBuilder().addComponents(
+      new Discord.ButtonBuilder()
         .setLabel("Invite")
         .setURL(
           "https://discord.com/oauth2/authorize?&client_id=798144456528363550&scope=applications.commands+bot&permissions=8"
         )
-        .setStyle("LINK"),
+        .setStyle(Discord.ButtonStyle.Link),
 
-      new Discord.MessageButton()
+      new Discord.ButtonBuilder()
         .setLabel("Support server")
         .setURL("https://discord.gg/56FZySQaY7")
-        .setStyle("LINK")
+        .setStyle(Discord.ButtonStyle.Link)
     );
 
     client.embed(

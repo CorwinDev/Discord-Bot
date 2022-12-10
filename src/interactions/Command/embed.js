@@ -31,8 +31,8 @@ module.exports = {
 
     if (perms == false) return;
 
-    let row = new Discord.MessageActionRow().addComponents(
-      new Discord.MessageSelectMenu()
+    let row = new Discord.ActionRowBuilder().addComponents(
+      new Discord.StringSelectMenuBuilder()
         .setCustomId("embedSelect")
         .setPlaceholder("Nothing selected")
         .addOptions([
@@ -93,12 +93,12 @@ module.exports = {
         ])
     );
 
-    let row2 = new Discord.MessageActionRow().addComponents(
-      new Discord.MessageButton()
+    let row2 = new Discord.ActionRowBuilder().addComponents(
+      new Discord.ButtonBuilder()
         .setCustomId("send_embed")
         .setEmoji("✅")
         .setLabel("Send embed")
-        .setStyle("SUCCESS")
+        .setStyle(Discord.ButtonStyle.Success)
     );
 
     let embed = new Discord.EmbedBuilder().setDescription(

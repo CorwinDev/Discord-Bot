@@ -7,12 +7,12 @@ module.exports = async (client, interaction, args) => {
 
     if (text.length > 50) return client.errNormal({ error: "Your button text cannot be longer than 50 characters", type: 'editreply' }, interaction);
 
-    let button = new Discord.MessageButton()
+    let button = new Discord.ButtonBuilder()
         .setLabel(`${text}`)
         .setURL(`${url}`)
-        .setStyle("LINK");
+        .setStyle(Discord.ButtonStyle.Link);
 
-    let row = new Discord.MessageActionRow()
+    let row = new Discord.ActionRowBuilder()
         .addComponents(button)
 
     client.embed({

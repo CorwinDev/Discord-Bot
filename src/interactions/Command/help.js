@@ -16,9 +16,9 @@ module.exports = {
      */
 
     run: async (client, interaction, args) => {
-        const row = new Discord.MessageActionRow()
+        const row = new Discord.ActionRowBuilder()
             .addComponents(
-                new Discord.MessageSelectMenu()
+                new Discord.StringSelectMenuBuilder()
                     .setCustomId('Bot-helppanel')
                     .setPlaceholder('❌┆Nothing selected')
                     .addOptions([

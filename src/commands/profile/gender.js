@@ -5,7 +5,7 @@ module.exports = async (client, interaction, args) => {
 
     Schema.findOne({ User: interaction.user.id }, async (err, data) => {
         if (data) {
-            const menu = new Discord.MessageSelectMenu()
+            const menu = new Discord.StringSelectMenuBuilder()
                 .setCustomId('gender-setup')
                 .setPlaceholder('❌┆Nothing selected')
                 .addOptions(
@@ -26,7 +26,7 @@ module.exports = async (client, interaction, args) => {
                     }
                 );
 
-            const row = new Discord.MessageActionRow()
+            const row = new Discord.ActionRowBuilder()
                 .addComponents(menu)
 
             client.embed({

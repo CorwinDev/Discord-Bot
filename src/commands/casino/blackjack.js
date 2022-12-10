@@ -132,17 +132,17 @@ module.exports = async (client, interaction, args) => {
                     dealerMsg += " > " + dealer.score.toString();
                 }
 
-                const row = new Discord.MessageActionRow()
+                const row = new Discord.ActionRowBuilder()
                     .addComponents(
-                        new Discord.MessageButton()
+                        new Discord.ButtonBuilder()
                             .setCustomId('blackjack_hit')
                             .setLabel(`Hit`)
-                            .setStyle('PRIMARY'),
+                            .setStyle(Discord.ButtonStyle.Primary),
 
-                        new Discord.MessageButton()
+                        new Discord.ButtonBuilder()
                             .setCustomId('blackjack_stand')
                             .setLabel(`Stand`)
-                            .setStyle('PRIMARY'),
+                            .setStyle(Discord.ButtonStyle.Primary),
                     )
 
                 if (cl) {

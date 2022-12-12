@@ -101,8 +101,8 @@ module.exports = {
         model.findOne({ User: interaction.user.id }, async (err, data) => {
             if (data && data.FLAGS.includes("DEVELOPER")) {
                 client.loadSubcommands(client, interaction, args);
-            }
-            else {
+            } else {
+                console.log(`[ERROR] >> Only Bot developers are allowed to do this`);
                 client.errNormal({ 
                     error: "Only Bot developers are allowed to do this", 
                     type: 'reply' 

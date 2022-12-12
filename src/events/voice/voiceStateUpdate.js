@@ -1,4 +1,4 @@
-const discord = require('discord.js');
+const Discord = require('discord.js');
 const voiceSchema = require("../../database/models/voice");
 const channelSchema = require("../../database/models/voiceChannels");
 

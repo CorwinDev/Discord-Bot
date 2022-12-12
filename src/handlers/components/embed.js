@@ -203,7 +203,7 @@ module.exports = (client) => {
         if (fields) embed.addFields(fields);
         if (author) embed.setAuthor(author);
         if (url) embed.setURL(url);
-        if (footer) embed.setFooter(footer);
+        if (footer) embed.setFooter({ text: footer });
         if (color) embed.setColor(color);
         if (functiondata && functiondata.Color && !color) embed.setColor(functiondata.Color)
         return client.sendEmbed({

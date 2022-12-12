@@ -37,7 +37,7 @@ module.exports = async (client, interaction, args) => {
         return i.user.id === interaction.user.id;
     };
 
-    interaction.channel.awaitMessageComponent({ filter, componentType: 'SELECT_MENU', time: 60000 }).then(async i => {
+    interaction.channel.awaitMessageComponent({ filter, componentType: Discord.ComponentType.StringSelect, time: 60000 }).then(async i => {
         const role = i.values[0];
         const buyPerson = i.guild.members.cache.get(i.user.id);
 
@@ -50,8 +50,14 @@ module.exports = async (client, interaction, args) => {
         }, i);
 
         client.removeMoney(i, i.user, parseInt(checkStore.Amount));
-
-        buyPerson.roles.add(role);
+        try {
+            await buyPerson.roles.add(role);
+        } catch (e) {
+            return client.errNormal({
+                error: `I can't add <@&${role}> to you!`,
+                type: 'editreply'
+            }, i);
+        }
 
         client.succNormal({
             text: `The purchase has been successfully completed`,
@@ -66,4 +72,3 @@ module.exports = async (client, interaction, args) => {
     })
 }
 
- 

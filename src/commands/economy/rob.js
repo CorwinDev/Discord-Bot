@@ -29,9 +29,9 @@ module.exports = async (client, interaction, args) => {
 
                         Schema.findOne({ Guild: interaction.guild.id, User: user.id }, async (err, targetData) => {
                             if (targetData) {
-                                console.log(targetData.Money)
+                                var targetMoney = targetData.Money;
                                 if (targetData = undefined || !targetData || targetData.Money == 0 || targetData.Money < 0) {
-                                    return client.errNormal({ error: `${user.user.username} does not have anything you can rob!`, type: 'editreply' }, interaction);
+                                    return client.errNormal({ error: `${user.username} does not have anything you can rob!`, type: 'editreply' }, interaction);
                                 }
 
                                 if (dataTime) {
@@ -46,15 +46,14 @@ module.exports = async (client, interaction, args) => {
                                     }).save();
                                 }
 
-                                random = Math.floor(Math.random() * 100) + 1;
+                                var random = Math.floor(Math.random() * 100) + 1;
+                                if (targetMoney < random) {
+                                    random = targetMoney;
 
-                                if (targetData.Money < random) {
-                                    random = targetData.Money;
-
-                                    authorData.Money += targetData.Money;
+                                    authorData.Money += targetMoney;
                                     authorData.save();
 
-                                    client.removeMoney(interaction, user, targetData.Money);
+                                    client.removeMoney(interaction, user, targetMoney);
                                 }
                                 else {
                                     authorData.Money += random;

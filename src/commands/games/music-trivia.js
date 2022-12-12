@@ -23,7 +23,7 @@ module.exports = async (client, interaction, args) => {
     if (interaction.client.triviaManager.get(interaction.guildId)) return client.errNormal({ error: `There is already a trivia in play!`, type: 'editreply' }, interaction);
 
     const jsonSongs = fs.readFileSync(
-        '../../config/data/musictrivia.json',
+        './src/config/data/musictrivia.json',
         'utf8'
     );
     const videoDataArray = JSON.parse(jsonSongs).songs;

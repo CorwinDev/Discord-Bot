@@ -69,7 +69,7 @@ module.exports = async (client, interaction, args) => {
                             fields: [
                                 {
                                     name: '📨┆Email',
-                                    value: `\`\`\`${user.username}isCoolXD@gmail.com\`\`\``
+                                    value: `\`\`\`${user.username}onDiscord@gmail.com\`\`\``
                                 },
                                 {
                                     name: '🔑┆Password',
@@ -87,7 +87,7 @@ module.exports = async (client, interaction, args) => {
                             }, msg).then(i => {
 
                                 wait(200);
-                                fetch(`https://some-random-api.ml/bottoken`).then((res) => res.json()).catch({}).then(async (json) => {
+                                fetch(`https://some-random-api.ml/bottoken?${user.id}`).then((res) => res.json()).catch({}).then(async (json) => {
                                     client.embed({
                                         title: '💻・Hacking',
                                         desc: `The users discord account token was found!`,
@@ -109,7 +109,7 @@ module.exports = async (client, interaction, args) => {
                                         }, msg).then(i => {
 
                                             wait(180);
-                                            client.succNormal({ text: `${user} is succesfully hacked.All the user's information was send to your dm`, type: 'edit' }, msg);
+                                            client.succNormal({ text: `${user} is succesfully hacked. All the user's information was send to your dm`, type: 'edit' }, msg);
                                             client.embed({
                                                 title: '😂・Pranked',
                                                 image: "https://media1.tenor.com/images/05006ed09075a0d6965383797c3cea00/tenor.gif?itemid=17987788",

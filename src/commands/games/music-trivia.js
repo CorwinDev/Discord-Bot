@@ -16,7 +16,7 @@ module.exports = async (client, interaction, args) => {
     const channel = interaction.member.voice.channel;
     if (!channel) return client.errNormal({ error: `You're not in a voice channel!`, type: 'editreply' }, interaction);
 
-    if (interaction.guild.me.voice.channel && interaction.member.voice.channel.id !== interaction.guild.me.voice.channel.id) return client.errNormal({ error: `You are not in the same voice channel!`, type: 'editreply' }, interaction);
+    if (interaction.guild.members.me.voice.channel && interaction.member.voice.channel.id !== interaction.guild.members.me.voice.channel.id) return client.errNormal({ error: `You are not in the same voice channel!`, type: 'editreply' }, interaction);
 
     if (interaction.client.playerManager.get(interaction.guild.id)) return client.errNormal({ error: `You can't use this while a track is playing!`, type: 'editreply' }, interaction);
 

@@ -1,13 +1,6 @@
 hidden = [".config"]
 run = "npm run start"
 
-[env]
-DISCORD_TOKEN = "fillin"
-MONGO_TOKEN = "fillin"
-GIPHY_TOKEN = "fillin"
-WEBHOOK_ID = "fillin"
-WEBHOOK_TOKEN = "fillin"
-
 [[hints]]
 regex = "Error \\[ERR_REQUIRE_ESM\\]"
 message = "We see that you are using require(...) inside your code. We currently do not support this syntax. Please use 'import' instead when using external modules. (https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/import)"

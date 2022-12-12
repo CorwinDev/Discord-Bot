@@ -39,27 +39,27 @@ module.exports = async (client, interaction, args) => {
                             openTicket = ticketMessageData.openTicket;
                         }
 
-                        const row = new Discord.MessageActionRow()
+                        const row = new Discord.ActionRowBuilder()
                             .addComponents(
-                                new Discord.MessageButton()
+                                new Discord.ButtonBuilder()
                                     .setCustomId('Bot_closeticket')
                                     .setEmoji('🔒')
-                                    .setStyle('PRIMARY'),
+                                    .setStyle(Discord.ButtonStyle.Primary),
 
-                                new Discord.MessageButton()
+                                new Discord.ButtonBuilder()
                                     .setCustomId('Bot_claimTicket')
                                     .setEmoji('✋')
-                                    .setStyle('PRIMARY'),
+                                    .setStyle(Discord.ButtonStyle.Primary),
 
-                                new Discord.MessageButton()
+                                new Discord.ButtonBuilder()
                                     .setCustomId('Bot_transcriptTicket')
                                     .setEmoji('📝')
-                                    .setStyle('PRIMARY'),
+                                    .setStyle(Discord.ButtonStyle.Primary),
 
-                                new Discord.MessageButton()
+                                new Discord.ButtonBuilder()
                                     .setCustomId('Bot_noticeTicket')
                                     .setEmoji('🔔')
-                                    .setStyle('PRIMARY'),
+                                    .setStyle(Discord.ButtonStyle.Primary),
                             );
 
                         client.embed({
@@ -88,19 +88,20 @@ module.exports = async (client, interaction, args) => {
                                 let category = interaction.guild.channels.cache.find(c => c.id === ticketCategory.id);
 
                                 let permsToHave = [
-                                    'VIEW_CHANNEL',
-                                    'SEND_MESSAGES',
-                                    'ATTACH_FILES',
-                                    'READ_MESSAGE_HISTORY',
-                                    'ADD_REACTIONS'
+                                    Discord.PermissionsBitField.Flags.AddReactions,
+                                    Discord.PermissionsBitField.Flags.SendMessages,
+                                    Discord.PermissionsBitField.Flags.ViewChannel,
+                                    Discord.PermissionsBitField.Flags.AttachFiles,
+                                    Discord.PermissionsBitField.Flags.ReadMessageHistory,
                                 ]
 
                                 var ticketid = String(TicketData.TicketCount).padStart(4, 0);;
 
-                                interaction.guild.channels.create(`ticket-${ticketid}`, {
+                                interaction.guild.channels.create({
+                                    name: `ticket-${ticketid}`,
                                     permissionOverwrites: [
                                         {
-                                            deny: 'VIEW_CHANNEL',
+                                            deny: [Discord.PermissionsBitField.Flags.ViewChannel],
                                             id: interaction.guild.id
                                         },
                                         {

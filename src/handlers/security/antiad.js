@@ -6,7 +6,6 @@ const Schema2 = require("../../database/models/channelList");
 module.exports = (client) => {
     client.on('messageCreate', async (message) => {
         if (message.channel.type === 'DM') return;
-
         Schema.findOne({ Guild: message.guild.id }, async (err, data) => {
             if (data) {
                 if (data.AntiInvite == true) {
@@ -16,7 +15,7 @@ module.exports = (client) => {
                     if (code) {
                         Schema2.findOne({ Guild: message.guild.id }, async (err, data2) => {
                             if (data2) {
-                                if (data2.Channels.includes(message.channel.id) || message.member.permissions.has(Discord.Permissions.FLAGS.MANAGE_MESSAGES)) {
+                                if (data2.Channels.includes(message.channel.id) || message.member.permissions.has(Discord.PermissionsBitField.Flags.ManageMessages)) {
                                     return;
                                 }
 
@@ -30,6 +29,7 @@ module.exports = (client) => {
                                 }, message.channel)
                             }
                             else {
+                                if (message.member.permissions.has(Discord.PermissionsBitField.Flags.ManageMessages)) return;
                                 message.delete();
 
                                 client.embed({
@@ -48,7 +48,7 @@ module.exports = (client) => {
                     if (content.includes('http://') || content.includes('https://') || content.includes('www.')) {
                         Schema2.findOne({ Guild: message.guild.id }, async (err, data2) => {
                             if (data2) {
-                                if (data2.Channels.includes(message.channel.id) || message.member.permissions.has(Discord.Permissions.FLAGS.MANAGE_MESSAGES)) {
+                                if (data2.Channels.includes(message.channel.id) || message.member.permissions.has(Discord.PermissionsBitField.Flags.ManageMessages)) {
                                     return;
                                 }
 
@@ -62,6 +62,7 @@ module.exports = (client) => {
                                 }, message.channel)
                             }
                             else {
+                                if (message.member.permissions.has(Discord.PermissionsBitField.Flags.ManageMessages)) return;
                                 message.delete();
                                
                                 client.embed({
@@ -92,12 +93,12 @@ module.exports = (client) => {
                     if (code) {
                         Schema2.findOne({ Guild: newMessage.guild.id }, async (err, data2) => {
                             if (data2) {
-                                if (data2.Channels.includes(newMessage.channel.id) || newMessage.member.permissions.has(Discord.Permissions.FLAGS.MANAGE_MESSAGES)) {
+                                if (data2.Channels.includes(newMessage.channel.id) || newMessage.member.permissions.has(Discord.PermissionsBitField.Flags.ManageMessages)) {
                                     return;
                                 }
 
                                 newMessage.delete();
-                                let error = new Discord.MessageEmbed()
+                                let error = new Discord.EmbedBuilder()
                                     .setTitle(`${client.emotes.normal.error}・Moderator`)
                                     .setAuthor(client.user.username, client.user.avatarURL())
                                     .setDescription(`Discord links are not allowed in this server!`)
@@ -107,8 +108,9 @@ module.exports = (client) => {
                                 newMessage.channel.send({ content: `${newMessage.author}`, embeds: [error] })
                             }
                             else {
+                                if (newMessage.member.permissions.has(Discord.PermissionsBitField.Flags.ManageMessages)) return;
                                 newMessage.delete();
-                                let error = new Discord.MessageEmbed()
+                                let error = new Discord.EmbedBuilder()
                                     .setTitle(`${client.emotes.normal.error}・Moderator`)
                                     .setAuthor(client.user.username, client.user.avatarURL())
                                     .setDescription(`Discord links are not allowed in this server!`)
@@ -126,12 +128,12 @@ module.exports = (client) => {
                     if (content.includes('http://') || content.includes('https://') || content.includes('www.')) {
                         Schema2.findOne({ Guild: newMessage.guild.id }, async (err, data2) => {
                             if (data2) {
-                                if (data2.Channels.includes(newMessage.channel.id) || newMessage.member.permissions.has(Discord.Permissions.FLAGS.MANAGE_MESSAGES)) {
+                                if (data2.Channels.includes(newMessage.channel.id) || newMessage.member.permissions.has(Discord.PermissionsBitField.Flags.ManageMessages)) {
                                     return;
                                 }
 
                                 newMessage.delete();
-                                var error = new Discord.MessageEmbed()
+                                var error = new Discord.EmbedBuilder()
                                     .setTitle(`${client.emotes.normal.error}・Moderator`)
                                     .setAuthor(client.user.username, client.user.avatarURL())
                                     .setDescription(`Links are not allowed in this server!`)
@@ -141,8 +143,9 @@ module.exports = (client) => {
                                 newMessage.channel.send({ content: `${newMessage.author}`, embeds: [error] })
                             }
                             else {
+                                if (newMessage.member.permissions.has(Discord.PermissionsBitField.Flags.ManageMessages)) return;
                                 newMessage.delete();
-                                var error = new Discord.MessageEmbed()
+                                var error = new Discord.EmbedBuilder()
                                     .setTitle(`${client.emotes.normal.error}・Moderator`)
                                     .setAuthor(client.user.username, client.user.avatarURL())
                                     .setDescription(`Links are not allowed in this server!`)

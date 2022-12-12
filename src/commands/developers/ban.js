@@ -29,10 +29,12 @@ module.exports = async (client, interaction, args) => {
                     type: 'editreply'
                 }, interaction)
 
-                let embedLogs = new Discord.MessageEmbed()
+                let embedLogs = new Discord.EmbedBuilder()
                     .setTitle(`🔨・Ban added`)
                     .setDescription(`<@!${member.id}> (${member.id}) banned from the bot`)
-                    .addField('👤┆Banned By', `${interaction.user} (${interaction.user.tag})`, true)
+                    .addFields(
+                        { name: "👤┆Banned By", value: `${interaction.user} (${interaction.user.tag})`, inline: true },
+                    )
                     .setColor(client.config.colors.normal)
                     .setFooter(client.config.discord.footer)
                     .setTimestamp();
@@ -52,10 +54,12 @@ module.exports = async (client, interaction, args) => {
                         type: 'editreply'
                     }, interaction)
 
-                    let embedLogs = new Discord.MessageEmbed()
+                    let embedLogs = new Discord.EmbedBuilder()
                         .setTitle(`🔨・Ban removed`)
                         .setDescription(`<@!${member.id}> (${member.id}) unbanned from the bot`)
-                        .addField('👤┆Unbanned By', `${interaction.user} (${interaction.user.tag})`, true)
+                        .addFields(
+                            { name: "👤┆Unbanned By", value: `${interaction.user} (${interaction.user.tag})`, inline: true },
+                        )
                         .setColor(client.config.colors.normal)
                         .setFooter(client.config.discord.footer)
                         .setTimestamp();

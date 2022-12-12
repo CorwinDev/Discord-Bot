@@ -53,17 +53,17 @@ module.exports = async (client, interaction, args) => {
     })
 
     function propose() {
-        const row = new Discord.MessageActionRow()
+        const row = new Discord.ActionRowBuilder()
             .addComponents(
-                new Discord.MessageButton()
+                new Discord.ButtonBuilder()
                     .setCustomId('propose_accept')
                     .setEmoji('✅')
-                    .setStyle('SUCCESS'),
+                    .setStyle(Discord.ButtonStyle.Success),
 
-                new Discord.MessageButton()
+                new Discord.ButtonBuilder()
                     .setCustomId('propose_deny')
                     .setEmoji('❌')
-                    .setStyle('DANGER'),
+                    .setStyle(Discord.ButtonStyle.Danger),
             );
 
         client.embed({
@@ -76,7 +76,7 @@ module.exports = async (client, interaction, args) => {
 
         const filter = i => i.user.id === target.id;
 
-        interaction.channel.awaitMessageComponent({ filter, componentType: 'BUTTON', time: 60000 }).then(async i => {
+        interaction.channel.awaitMessageComponent({ filter, componentType: Discord.ComponentType.Button, time: 60000 }).then(async i => {
             if (i.customId == "propose_accept") {
 
                 Schema.findOne({ Guild: interaction.guild.id, User: author.id }, async (err, data) => {

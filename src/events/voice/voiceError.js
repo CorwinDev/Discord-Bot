@@ -10,10 +10,12 @@ module.exports = (client, error) => {
         token: client.webhooks.voiceErrorLogs.token,
     });
 
-    let embed = new Discord.MessageEmbed()
+    let embed = new Discord.EmbedBuilder()
         .setTitle(`🚨・Voice error`)
-        .addField(`Error`, `\`\`\`${error.message}\`\`\``)
-        .addField(`Stack error`, `\`\`\`${error.stack}\`\`\``)
+        .addFields(
+            { name: "Error", value: `\`\`\`${error.message}\`\`\``},
+            { name: `Stack error`, value: `\`\`\`${error.stack.substr(0, 1018)}\`\`\``},
+        )
         .setColor(client.config.colors.normal)
     errorlog.send({
         username: `Bot errors`,

@@ -8,8 +8,8 @@ module.exports = async (client, interaction, args) => {
     const ticketData = await ticketChannels.findOne({ Guild: interaction.guild.id, channelID: interaction.channel.id });
 
     const perms = await client.checkUserPerms({
-        flags: [Discord.Permissions.FLAGS.MANAGE_MESSAGES],
-        perms: ["MANAGE_MESSAGES"]
+        flags: [Discord.PermissionsBitField.Flags.ManageMessages],
+        perms: [Discord.PermissionsBitField.Flags.ManageMessages]
     }, interaction)
 
     if (perms == false) return;
@@ -32,7 +32,7 @@ module.exports = async (client, interaction, args) => {
                 }, interaction)
             }
 
-            interaction.channel.permissionOverwrites.edit(user.id, { VIEW_CHANNEL: false, SEND_MESSAGES: false });
+            interaction.channel.permissionOverwrites.edit(user.id, { ViewChannel: false, SendMessages: false });
 
             return client.simpleEmbed({
                 desc: `Removed ${user}`,

@@ -4,8 +4,8 @@ const store = require("../../database/models/economyStore");
 
 module.exports = async (client, interaction, args) => {
     const perms = await client.checkUserPerms({
-        flags: [Discord.Permissions.FLAGS.MANAGE_MESSAGES],
-        perms: ["MANAGE_MESSAGES"]
+        flags: [Discord.PermissionsBitField.Flags.ManageMessages],
+        perms: [Discord.PermissionsBitField.Flags.ManageMessages]
     }, interaction)
 
     if (perms == false) return;
@@ -16,6 +16,8 @@ module.exports = async (client, interaction, args) => {
     if (!role || !amount) return client.errUsage({ usage: "additem [role] [amount]", type: 'editreply' }, interaction);
 
     if (isNaN(amount)) return client.errNormal({ error: "Enter a valid number!", type: 'editreply' }, interaction);
+
+    if(role == interaction.guild.roles.everyone) return client.errNormal({ error: "You cannot add the everyone role to the store!", type: 'editreply' }, interaction);
 
     store.findOne({ Guild: interaction.guild.id, Role: role.id }, async (err, storeData) => {
         if (storeData) {

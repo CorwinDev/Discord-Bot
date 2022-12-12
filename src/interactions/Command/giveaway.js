@@ -1,6 +1,6 @@
 const { CommandInteraction, Client } = require('discord.js');
-const { SlashCommandBuilder } = require('@discordjs/builders');
-const { ChannelType } = require('discord-api-types/v9');
+const { SlashCommandBuilder } = require('discord.js');
+const { ChannelType } = require('discord.js');
 const Discord = require('discord.js');
 const ms = require('ms');
 
@@ -17,7 +17,7 @@ module.exports = {
             subcommand
                 .setName('start')
                 .setDescription('Start a giveaway')
-                .addChannelOption(option => option.setName('channel').setDescription('Channel where the giveaway should be').setRequired(true).addChannelType(ChannelType.GuildText))
+                .addChannelOption(option => option.setName('channel').setDescription('Channel where the giveaway should be').setRequired(true).addChannelTypes(ChannelType.GuildText))
                 .addStringOption(option => option.setName('duration').setDescription('Duration of the giveaway').setRequired(true))
                 .addNumberOption(option => option.setName('winners').setDescription('The number of giveaway winners').setRequired(true))
                 .addStringOption(option => option.setName('prize').setDescription('The giveaway prize').setRequired(true)),
@@ -26,7 +26,7 @@ module.exports = {
             subcommand
                 .setName('drop')
                 .setDescription('Start a drop giveaway')
-                .addChannelOption(option => option.setName('channel').setDescription('Channel where the giveaway should be').setRequired(true).addChannelType(ChannelType.GuildText))
+                .addChannelOption(option => option.setName('channel').setDescription('Channel where the giveaway should be').setRequired(true).addChannelTypes(ChannelType.GuildText))
                 .addStringOption(option => option.setName('duration').setDescription('Duration of the giveaway').setRequired(true))
                 .addNumberOption(option => option.setName('winners').setDescription('The number of giveaway winners').setRequired(true))
                 .addStringOption(option => option.setName('prize').setDescription('The giveaway prize').setRequired(true)),
@@ -76,8 +76,8 @@ module.exports = {
 
     run: async (client, interaction, args) => {
         const perms = await client.checkUserPerms({
-            flags: [Discord.Permissions.FLAGS.MANAGE_MESSAGES],
-            perms: ["MANAGE_MESSAGES"]
+            flags: [Discord.PermissionsBitField.Flags.ManageMessages],
+            perms: [Discord.PermissionsBitField.Flags.ManageMessages]
         }, interaction)
 
         if (perms == false) return;

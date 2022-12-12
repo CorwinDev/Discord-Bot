@@ -13,20 +13,20 @@ module.exports = async (client, interaction, args) => {
 
                 if (money > data.Money) return client.errNormal({ error: `You are betting more than you have!`, type: 'editreply' }, interaction);
 
-                const row = new Discord.MessageActionRow()
+                const row = new Discord.ActionRowBuilder()
                     .addComponents(
-                        new Discord.MessageButton()
+                        new Discord.ButtonBuilder()
                             .setCustomId('crash_stop')
                             .setEmoji("🛑")
-                            .setStyle('DANGER'),
+                            .setStyle(Discord.ButtonStyle.Danger),
                     )
 
-                const disableRow = new Discord.MessageActionRow()
+                const disableRow = new Discord.ActionRowBuilder()
                     .addComponents(
-                        new Discord.MessageButton()
+                        new Discord.ButtonBuilder()
                             .setCustomId('crash_stop')
                             .setEmoji("🛑")
-                            .setStyle('DANGER')
+                            .setStyle(Discord.ButtonStyle.Danger)
                             .setDisabled(true),
                     )
 

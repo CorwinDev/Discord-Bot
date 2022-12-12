@@ -34,8 +34,8 @@ module.exports = async (client, interaction, args) => {
         player.connect()
 
         setTimeout(() => {
-            if (channel.type == "GUILD_STAGE_VOICE") {
-                interaction.guild.me.voice.setSuppressed(false);
+            if (channel.type == Discord.ChannelType.GuildStageVoice) {
+                interaction.guild.members.me.voice.setSuppressed(false);
             }
         }, 500)
     }
@@ -119,41 +119,41 @@ module.exports = async (client, interaction, args) => {
             let max = 5, collected, filter = (i) => i.user.id === interaction.user.id;
             if (res.tracks.length < max) max = res.tracks.length;
 
-            let row = new Discord.MessageActionRow()
+            let row = new Discord.ActionRowBuilder()
                 .addComponents(
-                    new Discord.MessageButton()
+                    new Discord.ButtonBuilder()
                         .setEmoji("1️⃣")
                         .setCustomId("1")
-                        .setStyle("SECONDARY"),
+                        .setStyle(Discord.ButtonStyle.Secondary),
 
-                    new Discord.MessageButton()
+                    new Discord.ButtonBuilder()
                         .setEmoji("2️⃣")
                         .setCustomId("2")
-                        .setStyle("SECONDARY"),
+                        .setStyle(Discord.ButtonStyle.Secondary),
 
-                    new Discord.MessageButton()
+                    new Discord.ButtonBuilder()
                         .setEmoji("3️⃣")
                         .setCustomId("3")
-                        .setStyle("SECONDARY"),
+                        .setStyle(Discord.ButtonStyle.Secondary),
 
-                    new Discord.MessageButton()
+                    new Discord.ButtonBuilder()
                         .setEmoji("4️⃣")
                         .setCustomId("4")
-                        .setStyle("SECONDARY"),
+                        .setStyle(Discord.ButtonStyle.Secondary),
 
-                    new Discord.MessageButton()
+                    new Discord.ButtonBuilder()
                         .setEmoji("5️⃣")
                         .setCustomId("5")
-                        .setStyle("SECONDARY"),
+                        .setStyle(Discord.ButtonStyle.Secondary),
                 );
 
-            let row2 = new Discord.MessageActionRow()
+            let row2 = new Discord.ActionRowBuilder()
                 .addComponents(
-                    new Discord.MessageButton()
+                    new Discord.ButtonBuilder()
                         .setEmoji("🛑")
                         .setLabel("Cancel")
                         .setCustomId("cancel")
-                        .setStyle("DANGER"),
+                        .setStyle(Discord.ButtonStyle.Danger),
                 );
 
             const results = res.tracks
@@ -176,7 +176,7 @@ module.exports = async (client, interaction, args) => {
             }, interaction)
 
             try {
-                i = await interaction.channel.awaitMessageComponent({ filter, max: 1, time: 30e3, componentType: 'BUTTON', errors: ['time'] });
+                i = await interaction.channel.awaitMessageComponent({ filter, max: 1, time: 30e3, componentType: Discord.ComponentType.Button, errors: ['time'] });
             } catch (e) {
                 if (!player.queue.current) player.destroy();
                 return client.errNormal({

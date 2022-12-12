@@ -14,27 +14,27 @@ module.exports = (client) => {
 
                 const embedData = interaction.message.embeds[0];
 
-                let row = new Discord.MessageActionRow()
+                let row = new Discord.ActionRowBuilder()
                     .addComponents(
-                        new Discord.MessageButton()
+                        new Discord.ButtonBuilder()
                             .setEmoji(client.emotes.music.previous)
                             .setCustomId("Bot-musicprev")
-                            .setStyle("SECONDARY"),
+                            .setStyle(Discord.ButtonStyle.Secondary),
 
-                        new Discord.MessageButton()
+                        new Discord.ButtonBuilder()
                             .setEmoji(client.emotes.music.play)
                             .setCustomId("Bot-musicstart")
-                            .setStyle("SECONDARY"),
+                            .setStyle(Discord.ButtonStyle.Secondary),
 
-                        new Discord.MessageButton()
+                        new Discord.ButtonBuilder()
                             .setEmoji(client.emotes.music.stop)
                             .setCustomId("Bot-musicstop")
-                            .setStyle("SECONDARY"),
+                            .setStyle(Discord.ButtonStyle.Secondary),
 
-                        new Discord.MessageButton()
+                        new Discord.ButtonBuilder()
                             .setEmoji(client.emotes.music.next)
                             .setCustomId("Bot-musicnext")
-                            .setStyle("SECONDARY"),
+                            .setStyle(Discord.ButtonStyle.Secondary),
                     );
 
                 client.embed({
@@ -59,27 +59,27 @@ module.exports = (client) => {
 
                 const embedData = interaction.message.embeds[0];
 
-                let row = new Discord.MessageActionRow()
+                let row = new Discord.ActionRowBuilder()
                     .addComponents(
-                        new Discord.MessageButton()
+                        new Discord.ButtonBuilder()
                             .setEmoji(client.emotes.music.previous)
                             .setCustomId("Bot-musicprev")
-                            .setStyle("SECONDARY"),
+                            .setStyle(Discord.ButtonStyle.Secondary),
 
-                        new Discord.MessageButton()
+                        new Discord.ButtonBuilder()
                             .setEmoji(client.emotes.music.pause)
                             .setCustomId("Bot-musicpause")
-                            .setStyle("SECONDARY"),
+                            .setStyle(Discord.ButtonStyle.Secondary),
 
-                        new Discord.MessageButton()
+                        new Discord.ButtonBuilder()
                             .setEmoji(client.emotes.music.stop)
                             .setCustomId("Bot-musicstop")
-                            .setStyle("SECONDARY"),
+                            .setStyle(Discord.ButtonStyle.Secondary),
 
-                        new Discord.MessageButton()
+                        new Discord.ButtonBuilder()
                             .setEmoji(client.emotes.music.next)
                             .setCustomId("Bot-musicnext")
-                            .setStyle("SECONDARY"),
+                            .setStyle(Discord.ButtonStyle.Secondary),
                     );
 
                 client.embed({
@@ -119,27 +119,27 @@ module.exports = (client) => {
 
                 const track = player.queue.current;
 
-                let row = new Discord.MessageActionRow()
+                let row = new Discord.ActionRowBuilder()
                     .addComponents(
-                        new Discord.MessageButton()
+                        new Discord.ButtonBuilder()
                             .setEmoji("⏮️")
                             .setCustomId("Bot-musicprev")
-                            .setStyle("PRIMARY"),
+                            .setStyle(Discord.ButtonStyle.Primary),
 
-                        new Discord.MessageButton()
+                        new Discord.ButtonBuilder()
                             .setEmoji("⏸️")
                             .setCustomId("Bot-musicpause")
-                            .setStyle("PRIMARY"),
+                            .setStyle(Discord.ButtonStyle.Primary),
 
-                        new Discord.MessageButton()
+                        new Discord.ButtonBuilder()
                             .setEmoji("⏹️")
                             .setCustomId("Bot-musicstop")
-                            .setStyle("PRIMARY"),
+                            .setStyle(Discord.ButtonStyle.Primary),
 
-                        new Discord.MessageButton()
+                        new Discord.ButtonBuilder()
                             .setEmoji("⏭️")
                             .setCustomId("Bot-musicnext")
-                            .setStyle("PRIMARY"),
+                            .setStyle(Discord.ButtonStyle.Primary),
                     );
 
                 client.embed({
@@ -177,27 +177,27 @@ module.exports = (client) => {
 
                 const track = player.queue.previous;
 
-                let row = new Discord.MessageActionRow()
+                let row = new Discord.ActionRowBuilder()
                     .addComponents(
-                        new Discord.MessageButton()
+                        new Discord.ButtonBuilder()
                             .setEmoji("⏮️")
                             .setCustomId("Bot-musicprev")
-                            .setStyle("PRIMARY"),
+                            .setStyle(Discord.ButtonStyle.Primary),
 
-                        new Discord.MessageButton()
+                        new Discord.ButtonBuilder()
                             .setEmoji("⏸️")
                             .setCustomId("Bot-musicpause")
-                            .setStyle("PRIMARY"),
+                            .setStyle(Discord.ButtonStyle.Primary),
 
-                        new Discord.MessageButton()
+                        new Discord.ButtonBuilder()
                             .setEmoji("⏹️")
                             .setCustomId("Bot-musicstop")
-                            .setStyle("PRIMARY"),
+                            .setStyle(Discord.ButtonStyle.Primary),
 
-                        new Discord.MessageButton()
+                        new Discord.ButtonBuilder()
                             .setEmoji("⏭️")
                             .setCustomId("Bot-musicnext")
-                            .setStyle("PRIMARY"),
+                            .setStyle(Discord.ButtonStyle.Primary),
                     );
 
                 client.embed({

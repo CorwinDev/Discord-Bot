@@ -1,6 +1,5 @@
 const { CommandInteraction, Client } = require('discord.js');
-const { SlashCommandBuilder } = require('@discordjs/builders');
-const { ChannelType } = require('discord-api-types/v9');
+const { SlashCommandBuilder, ChannelType } = require('discord.js');
 const Discord = require('discord.js');
 
 module.exports = {
@@ -16,7 +15,7 @@ module.exports = {
             subcommand
                 .setName('create')
                 .setDescription('Make an announcement')
-                .addChannelOption(option => option.setName('channel').setDescription('Select a channel').setRequired(true).addChannelType(ChannelType.GuildText).addChannelType(ChannelType.GuildNews))
+                .addChannelOption(option => option.setName('channel').setDescription('Select a channel').setRequired(true).addChannelTypes(ChannelType.GuildText).addChannelTypes(ChannelType.GuildNews))
                 .addStringOption(option => option.setName('message').setDescription('Your announcement message').setRequired(true)),
         )
         .addSubcommand(subcommand =>
@@ -36,8 +35,8 @@ module.exports = {
 
     run: async (client, interaction, args) => {
         const perms = await client.checkUserPerms({
-            flags: [Discord.Permissions.FLAGS.MANAGE_MESSAGES],
-            perms: ["MANAGE_MESSAGES"]
+            flags: [Discord.PermissionsBitField.Flags.ManageMessages],
+            perms: [Discord.PermissionsBitField.Flags.ManageMessages]
         }, interaction)
 
         if (perms == false) return;

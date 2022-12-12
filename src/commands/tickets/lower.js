@@ -5,8 +5,8 @@ const ticketChannels = require("../../database/models/ticketChannels");
 
 module.exports = async (client, interaction, args) => {
     const perms = await client.checkUserPerms({
-        flags: [Discord.Permissions.FLAGS.MANAGE_MESSAGES],
-        perms: ["MANAGE_MESSAGES"]
+        flags: [Discord.PermissionsBitField.Flags.ManageMessages],
+        perms: [Discord.PermissionsBitField.Flags.ManageMessages]
     }, interaction)
 
     if (perms == false) return;
@@ -27,11 +27,11 @@ module.exports = async (client, interaction, args) => {
 
                 try {
                     interaction.channel.permissionOverwrites.edit(ticketRole, {
-                        VIEW_CHANNEL: true,
-                        SEND_MESSAGES: true,
-                        ATTACH_FILES: true,
-                        READ_MESSAGE_HISTORY: true,
-                        ADD_REACTIONS: true
+                        ViewChannel: true,
+                        SendMessages: true,
+                        AttachFiles: true,
+                        ReadMessageHistory: true,
+                        AddReactions: true
                     });
 
                     return client.simpleEmbed({

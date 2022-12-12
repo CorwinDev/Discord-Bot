@@ -249,8 +249,17 @@ class TriviaPlayer {
             });
             this.audioPlayer.play(resource);
         } catch (err) {
-            console.error(err);
-            return this.process(queue);
+            console.log(err.message)
+            if (err.message === 'FFmpeg/avconv not found!') {
+                this.textChannel.client.embed({
+                    title: `🎶・Music Quiz`,
+                    desc: `FFmpg/avconv not found!`,
+                    edit: true
+                }, this.textChannel)
+                return this.stop();
+            } else {
+                return this.process(queue);
+            }
         }
     }
 }

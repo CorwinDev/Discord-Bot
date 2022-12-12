@@ -26,7 +26,7 @@ module.exports = async (client, interaction, args) => {
 
         rankCard.build()
             .then(data => {
-                const attachment = new Discord.MessageAttachment(data, "RankCard.png");
+                const attachment = new Discord.AttachmentBuilder(data, { name: "RankCard.png" });
                 interaction.editReply({ files: [attachment] });
             });
     }
@@ -38,4 +38,3 @@ module.exports = async (client, interaction, args) => {
     }
 }
 
- 

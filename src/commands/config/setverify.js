@@ -4,8 +4,8 @@ const Schema = require("../../database/models/verify");
 
 module.exports = async (client, interaction, args) => {
     const perms = await client.checkUserPerms({
-        flags: [Discord.Permissions.FLAGS.MANAGE_MESSAGES],
-        perms: ["MANAGE_MESSAGES"]
+        flags: [Discord.PermissionsBitField.Flags.ManageMessages],
+        perms: [Discord.PermissionsBitField.Flags.ManageMessages]
     }, interaction)
 
     if (perms == false) return;
@@ -46,12 +46,12 @@ module.exports = async (client, interaction, args) => {
             type: 'editreply'
         }, interaction);
 
-        const row = new Discord.MessageActionRow()
+        const row = new Discord.ActionRowBuilder()
             .addComponents(
-                new Discord.MessageButton()
+                new Discord.ButtonBuilder()
                     .setCustomId('Bot_verify')
                     .setEmoji('✅')
-                    .setStyle('SUCCESS'),
+                    .setStyle(Discord.ButtonStyle.Success),
             );
 
         client.embed({

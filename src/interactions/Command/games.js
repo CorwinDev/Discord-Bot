@@ -1,5 +1,5 @@
 const { CommandInteraction, Client } = require('discord.js');
-const { SlashCommandBuilder } = require('@discordjs/builders');
+const { SlashCommandBuilder } = require('discord.js');
 const Discord = require('discord.js');
 
 module.exports = {
@@ -41,9 +41,11 @@ module.exports = {
                     option.setName('option')
                         .setDescription('Choose what you want')
                         .setRequired(true)
-                        .addChoice('🪨 Rock', 'rock')
-                        .addChoice('📃 Paper', 'paper')
-                        .addChoice('✂️ Scissors', 'scissors')
+                        .addChoices(
+                            { name: '🪨 Rock', value: 'rock' },
+                            { name: '📃 Paper', value: 'paper' },
+                            { name: '✂️ Scissors', value: 'scissors' }
+                        )
                 )
         )
         .addSubcommand(subcommand =>

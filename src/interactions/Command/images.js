@@ -1,6 +1,6 @@
 const { CommandInteraction, Client } = require('discord.js');
-const { SlashCommandBuilder } = require('@discordjs/builders');
-const { ChannelType } = require('discord-api-types/v9');
+const { SlashCommandBuilder } = require('discord.js');
+const { ChannelType } = require('discord.js');
 
 module.exports = {
 
@@ -256,7 +256,7 @@ module.exports = {
                 )
                 .addSubcommand((subcommand) =>
                     subcommand.setName('image').setDescription('Show a image in an embed')
-                        .addChannelOption(option => option.setName('channel').setDescription('Channel where the embed should be').setRequired(true).addChannelType(ChannelType.GuildText))
+                        .addChannelOption(option => option.setName('channel').setDescription('Channel where the embed should be').setRequired(true).addChannelTypes(ChannelType.GuildText))
                         .addStringOption(option => option.setName('image-url').setDescription('Enter a image url').setRequired(true))
                 )
                 .addSubcommand((subcommand) =>

@@ -1,5 +1,5 @@
 const { CommandInteraction, Client } = require('discord.js');
-const { SlashCommandBuilder } = require('@discordjs/builders');
+const { SlashCommandBuilder } = require('discord.js');
 const Discord = require('discord.js');
 const moment = require("moment");
 require("moment-duration-format");
@@ -16,9 +16,9 @@ module.exports = {
      */
 
     run: async (client, interaction, args) => {
-        const row = new Discord.MessageActionRow()
+        const row = new Discord.ActionRowBuilder()
             .addComponents(
-                new Discord.MessageSelectMenu()
+                new Discord.StringSelectMenuBuilder()
                     .setCustomId('Bot-helppanel')
                     .setPlaceholder('❌┆Nothing selected')
                     .addOptions([

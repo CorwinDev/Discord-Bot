@@ -1,5 +1,5 @@
 const { CommandInteraction, Client } = require('discord.js');
-const { SlashCommandBuilder } = require('@discordjs/builders');
+const { SlashCommandBuilder } = require('discord.js');
 const Discord = require('discord.js');
 
 const Schema = require("../../database/models/music");
@@ -37,8 +37,8 @@ module.exports = {
 
     run: async (client, interaction, args) => {
         client.checkBotPerms({
-            flags: [Discord.Permissions.FLAGS.CONNECT, Discord.Permissions.FLAGS.SPEAK],
-            perms: ["CONNECT", "SPEAK"]
+            flags: [Discord.PermissionsBitField.Flags.Connect, Discord.PermissionsBitField.Flags.Speak],
+            perms: [Discord.PermissionsBitField.Flags.Connect, Discord.PermissionsBitField.Flags.Speak]
         }, interaction)
 
         if (!interaction.member.voice.channel) return client.errNormal({ 

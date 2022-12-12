@@ -21,20 +21,20 @@ module.exports = async (client, message) => {
   if (message.author.bot) return;
 
   if (message.channel.type === "DM") {
-    let embedLogs = new Discord.MessageEmbed()
+    let embedLogs = new Discord.EmbedBuilder()
       .setTitle(`💬・New DM message!`)
       .setDescription(`Bot has received a new DM message!`)
-      .addField("👤┆Send By", `${message.author} (${message.author.tag})`, true)
-      .addField(`💬┆Message`, `${message.content || "None"}`, true)
+      .addFields(
+        { name: "👤┆Send By", value: `${message.author} (${message.author.tag})`, inline: true },
+        { name: `💬┆Message`, value: `${message.content || "None"}`, inline: true },
+      )
       .setColor(client.config.colors.normal)
       .setTimestamp();
 
     if (message.attachments.size > 0)
-      embedLogs.addField(
-        `📃┆Attachments`,
-        `${message.attachments.first()?.url}`,
-        false
-      );
+      embedLogs.addFields(
+        { name: `📃┆Attachments`, value: `${message.attachments.first()?.url}`, inline: false },
+      )
     return dmlog.send({
       username: "Bot DM",
       embeds: [embedLogs],
@@ -317,18 +317,18 @@ module.exports = async (client, message) => {
     message.mentions.users.first().id == client.user.id &&
     command.length === 0
   ) {
-    let row = new Discord.MessageActionRow().addComponents(
-      new Discord.MessageButton()
+    let row = new Discord.ActionRowBuilder().addComponents(
+      new Discord.ButtonBuilder()
         .setLabel("Invite")
         .setURL(
           "https://discord.com/oauth2/authorize?&client_id=798144456528363550&scope=applications.commands+bot&permissions=8"
         )
-        .setStyle("LINK"),
+        .setStyle(Discord.ButtonStyle.Link),
 
-      new Discord.MessageButton()
+      new Discord.ButtonBuilder()
         .setLabel("Support server")
         .setURL("https://discord.gg/56FZySQaY7")
-        .setStyle("LINK")
+        .setStyle(Discord.ButtonStyle.Link)
     );
 
     client
@@ -402,18 +402,18 @@ module.exports = async (client, message) => {
   }
 
   if (command) {
-    let row = new Discord.MessageActionRow().addComponents(
-      new Discord.MessageButton()
+    let row = new Discord.ActionRowBuilder().addComponents(
+      new Discord.ButtonBuilder()
         .setLabel("Invite")
         .setURL(
           "https://discord.com/oauth2/authorize?&client_id=798144456528363550&scope=applications.commands+bot&permissions=8"
         )
-        .setStyle("LINK"),
+        .setStyle(Discord.ButtonStyle.Link),
 
-      new Discord.MessageButton()
+      new Discord.ButtonBuilder()
         .setLabel("Support server")
         .setURL("https://discord.gg/56FZySQaY7")
-        .setStyle("LINK")
+        .setStyle(Discord.ButtonStyle.Link)
     );
 
     client.embed(

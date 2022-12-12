@@ -190,39 +190,39 @@ module.exports = async (client) => {
     ];
 
     client.on('interactionCreate', async (interaction) => {
-        if (!interaction.isSelectMenu()) return;
+        if (!interaction.isStringSelectMenu()) return;
 
         if (interaction.customId == "Bot-helppanel") {
             if (interaction.values == "commands-Bothelp") {
                 interaction.deferUpdate();
                 let page = 1;
 
-                const row = new Discord.MessageActionRow()
+                const row = new Discord.ActionRowBuilder()
                     .addComponents(
-                        new Discord.MessageButton()
+                        new Discord.ButtonBuilder()
                             .setCustomId('helpPrev')
                             .setEmoji('⬅️')
-                            .setStyle('SECONDARY'),
+                            .setStyle(Discord.ButtonStyle.Secondary),
 
-                        new Discord.MessageButton()
+                        new Discord.ButtonBuilder()
                             .setCustomId('helpNext')
                             .setEmoji('➡️')
-                            .setStyle('SECONDARY'),
+                            .setStyle(Discord.ButtonStyle.Secondary),
 
-                        new Discord.MessageButton()
+                        new Discord.ButtonBuilder()
                             .setLabel("Invite")
-                            .setURL("https://discord.com/oauth2/authorize?&client_id=798144456528363550&scope=applications.commands+bot&permissions=8")
-                            .setStyle("LINK"),
+                            .setURL(client.config.discord.botInvite)
+                            .setStyle(Discord.ButtonStyle.Link),
 
-                        new Discord.MessageButton()
+                        new Discord.ButtonBuilder()
                             .setLabel("Support server")
-                            .setURL("https://discord.gg/56FZySQaY7")
-                            .setStyle("LINK"),
+                            .setURL(client.config.discord.serverInvite)
+                            .setStyle(Discord.ButtonStyle.Link),
                     );
 
-                const row2 = new Discord.MessageActionRow()
+                const row2 = new Discord.ActionRowBuilder()
                     .addComponents(
-                        new Discord.MessageSelectMenu()
+                        new Discord.StringSelectMenuBuilder()
                             .setCustomId('Bot-helppanel')
                             .setPlaceholder('❌┆Nothing selected')
                             .addOptions([

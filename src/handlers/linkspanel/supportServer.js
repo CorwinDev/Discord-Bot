@@ -2,15 +2,15 @@ const Discord = require('discord.js');
 
 module.exports = async (client) => {
     client.on('interactionCreate', async (interaction) => {
-        if (!interaction.isSelectMenu()) return;
+        if (!interaction.isStringSelectMenu()) return;
 
         if (interaction.customId == "Bot-linkspanel") {
             if (interaction.values == "support-linkspanel") {
                 interaction.deferUpdate();
 
-                const row2 = new Discord.MessageActionRow()
+                const row2 = new Discord.ActionRowBuilder()
                     .addComponents(
-                        new Discord.MessageSelectMenu()
+                        new Discord.StringSelectMenuBuilder()
                             .setCustomId('Bot-linkspanel')
                             .setPlaceholder('❌┆Nothing selected')
                             .addOptions([
@@ -47,12 +47,12 @@ module.exports = async (client) => {
                             ]),
                     );
 
-                let row = new Discord.MessageActionRow()
+                let row = new Discord.ActionRowBuilder()
                     .addComponents(
-                        new Discord.MessageButton()
+                        new Discord.ButtonBuilder()
                             .setLabel("Support Server")
                             .setURL(client.config.discord.serverInvite)
-                            .setStyle("LINK"),
+                            .setStyle(Discord.ButtonStyle.Link),
                     );
 
                 client.embed({

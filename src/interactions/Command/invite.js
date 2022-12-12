@@ -1,5 +1,5 @@
 const { CommandInteraction, Client } = require('discord.js');
-const { SlashCommandBuilder } = require('@discordjs/builders');
+const { SlashCommandBuilder } = require('discord.js');
 const Discord = require('discord.js');
 
 module.exports = {
@@ -14,17 +14,17 @@ module.exports = {
      */
 
     run: async (client, interaction, args) => {
-        let row = new Discord.MessageActionRow()
+        let row = new Discord.ActionRowBuilder()
             .addComponents(
-                new Discord.MessageButton()
+                new Discord.ButtonBuilder()
                     .setLabel("Invite")
                     .setURL(client.config.discord.botInvite)
-                    .setStyle("LINK"),
+                    .setStyle(Discord.ButtonStyle.Link),
 
-                new Discord.MessageButton()
+                new Discord.ButtonBuilder()
                     .setLabel("Support server")
                     .setURL(client.config.discord.serverInvite)
-                    .setStyle("LINK"),
+                    .setStyle(Discord.ButtonStyle.Link),
             );
 
         client.embed({

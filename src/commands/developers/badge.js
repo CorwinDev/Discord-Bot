@@ -71,11 +71,13 @@ module.exports = async (client, interaction, args) => {
             }, interaction)
         }
 
-        let embedLogs = new Discord.MessageEmbed()
+        let embedLogs = new Discord.EmbedBuilder()
             .setTitle(`📛・Badge added`)
             .setDescription(`Added a new badge to ${member} (${member.id})`)
-            .addField('👤┆Added By', `${interaction.user} (${interaction.user.tag})`, true)
-            .addField(`📛┆Badge`, `${badgeFlags[badge.toUpperCase()]} (${badge.toUpperCase()})`, true)
+            .addFields(
+                { name: "👤┆Added By", value: `${interaction.user} (${interaction.user.tag})`, inline: true },
+                { name: `📛┆Badge`, value: `${badgeFlags[badge.toUpperCase()]} (${badge.toUpperCase()})`, inline: true },
+            )
             .setColor(client.config.colors.normal)
             .setFooter(client.config.discord.footer)
             .setTimestamp();
@@ -86,7 +88,7 @@ module.exports = async (client, interaction, args) => {
     }
     else if (boolean == false) {
         if (!Badges.FLAGS.includes(badge.toUpperCase())) return client.errNormal({
-            error: `The user does not have this badge`,
+            error: `The user doesn't have that badge`,
             type: `editreply`
         }, interaction);
 
@@ -104,7 +106,7 @@ module.exports = async (client, interaction, args) => {
         if (!array[0]) {
             let deleted = await model.deleteMany({ User: member.id });
             client.succNormal({
-                text: `Removed the ${badgeFlags[badge.toUpperCase()]} (${badge.toUpperCase()}) badge, the user is now removed of the badge system, it has no badges left!`,
+                text: `Removed the ${badgeFlags[badge.toUpperCase()]} (${badge.toUpperCase()}) badge, the user have been removed from the badge system, he has no badges left!`,
                 type: 'editreply'
             }, interaction);
 
@@ -123,11 +125,13 @@ module.exports = async (client, interaction, args) => {
             }, interaction);
         }
 
-        let embedLogs = new Discord.MessageEmbed()
+        let embedLogs = new Discord.EmbedBuilder()
             .setTitle(`📛・Badge removed`)
             .setDescription(`Removed a badge from ${member} (${member.id})`)
-            .addField('👤┆Removed By', `${interaction.user} (${interaction.user.tag})`, true)
-            .addField(`📛┆Badge`, `${badgeFlags[badge.toUpperCase()]} (${badge.toUpperCase()})`, true)
+            .addFields(
+                { name: "👤┆Removed By", value: `${interaction.user} (${interaction.user.tag})`, inline: true },
+                { name: `📛┆Badge`, value: `${badgeFlags[badge.toUpperCase()]} (${badge.toUpperCase()})`, inline: true },
+            )
             .setColor(client.config.colors.normal)
             .setFooter(client.config.discord.footer)
             .setTimestamp();

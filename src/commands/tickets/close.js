@@ -31,11 +31,11 @@ module.exports = async (client, interaction, args) => {
             if (interaction.guild.channels.cache.find(c => c.id === ticketCategory.id)) {
                 client.users.fetch(ticketData.creator).then(async usr => {
                     interaction.channel.permissionOverwrites.edit(usr, {
-                        VIEW_CHANNEL: false,
-                        SEND_MESSAGES: false,
-                        ATTACH_FILES: false,
-                        READ_MESSAGE_HISTORY: false,
-                        ADD_REACTIONS: false
+                        ViewChannel: false,
+                        SendMessages: false,
+                        AttachFiles: false,
+                        ReadMessageHistory: false,
+                        AddReactions: false
                     });
 
                     try {
@@ -110,22 +110,22 @@ module.exports = async (client, interaction, args) => {
                     type: type
                 }, interaction)
 
-                const row = new Discord.MessageActionRow()
+                const row = new Discord.ActionRowBuilder()
                     .addComponents(
-                        new Discord.MessageButton()
+                        new Discord.ButtonBuilder()
                             .setCustomId('Bot_transcriptTicket')
                             .setEmoji('📝')
-                            .setStyle('PRIMARY'),
+                            .setStyle(Discord.ButtonStyle.Primary),
 
-                        new Discord.MessageButton()
+                        new Discord.ButtonBuilder()
                             .setCustomId('Bot_openTicket')
                             .setEmoji('🔓')
-                            .setStyle('PRIMARY'),
+                            .setStyle(Discord.ButtonStyle.Primary),
 
-                        new Discord.MessageButton()
+                        new Discord.ButtonBuilder()
                             .setCustomId('Bot_deleteTicket')
                             .setEmoji('⛔')
-                            .setStyle('DANGER'),
+                            .setStyle(Discord.ButtonStyle.Danger),
                     );
 
                 client.embed({

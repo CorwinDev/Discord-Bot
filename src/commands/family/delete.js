@@ -4,17 +4,17 @@ const Schema = require("../../database/models/family");
 
 module.exports = async (client, interaction, args) => {
 
-    const row = new Discord.MessageActionRow()
+    const row = new Discord.ActionRowBuilder()
         .addComponents(
-            new Discord.MessageButton()
+            new Discord.ButtonBuilder()
                 .setCustomId('family_delete')
                 .setEmoji('✅')
-                .setStyle('SUCCESS'),
+                .setStyle(Discord.ButtonStyle.Success),
 
-            new Discord.MessageButton()
+            new Discord.ButtonBuilder()
                 .setCustomId('family_stop')
                 .setEmoji('❌')
-                .setStyle('DANGER'),
+                .setStyle(Discord.ButtonStyle.Danger),
         );
 
     client.embed({
@@ -31,9 +31,9 @@ module.exports = async (client, interaction, args) => {
             if (i.customId == "family_delete") {
                 i.message.delete();
 
-                var remove = await Schema.findOneAndDelete({ Guild: interaction.guild.id, User: interaction.author.id });
-                const parent = await Schema.findOne({ Guild: interaction.guild.id, Parent: interaction.author.id });
-                const partner = await Schema.findOne({ Guild: interaction.guild.id, Partner: interaction.author.id });
+                var remove = await Schema.findOneAndDelete({ Guild: interaction.guild.id, User: interaction.user.id });
+                const parent = await Schema.findOne({ Guild: interaction.guild.id, Parent: interaction.user.id });
+                const partner = await Schema.findOne({ Guild: interaction.guild.id, Partner: interaction.user.id });
 
                 if (parent) {
                     parent.Parent = " ";

@@ -5,8 +5,8 @@ const ticketChannels = require("../../database/models/ticketChannels");
 
 module.exports = async (client, interaction, args) => {
     const perms = await client.checkUserPerms({
-        flags: [Discord.Permissions.FLAGS.MANAGE_MESSAGES],
-        perms: ["MANAGE_MESSAGES"]
+        flags: [Discord.PermissionsBitField.Flags.ManageMessages],
+        perms: [Discord.PermissionsBitField.Flags.ManageMessages]
     }, interaction)
 
     if (perms == false) return;
@@ -35,11 +35,11 @@ module.exports = async (client, interaction, args) => {
                     if (interaction.channel.parentId == ticketCategory.id) {
                         client.users.fetch(ticketData.creator).then(usr => {
                             interaction.channel.permissionOverwrites.edit(usr, {
-                                VIEW_CHANNEL: true,
-                                SEND_MESSAGES: true,
-                                ATTACH_FILES: true,
-                                READ_MESSAGE_HISTORY: true,
-                                ADD_REACTIONS: true
+                                ViewChannel: true,
+                                SendMessages: true,
+                                AttachFiles: true,
+                                ReadMessageHistory: true,
+                                AddReactions: true
                             });
 
                             var ticketid = String(ticketData.TicketID).padStart(4, 0);

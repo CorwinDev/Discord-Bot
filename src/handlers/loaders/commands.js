@@ -1,6 +1,6 @@
 const Discord = require('discord.js');
-const { REST } = require('@discordjs/rest');
-const { Routes } = require('discord-api-types/v9');
+const { REST } = require('discord.js');
+const { Routes } = require('discord.js');
 const chalk = require('chalk');
 const fs = require('fs');
 
@@ -31,7 +31,7 @@ module.exports = (client) => {
 
     (async () => {
         try {
-            const embed = new Discord.MessageEmbed()
+            const embed = new Discord.EmbedBuilder()
                 .setDescription(`Started refreshing application (/) commands.`)
                 .setColor(client.config.colors.normal)
             interactionLogs.send({
@@ -44,7 +44,7 @@ module.exports = (client) => {
                 { body: commands },
             )
 
-            const embedFinal = new Discord.MessageEmbed()
+            const embedFinal = new Discord.EmbedBuilder()
                 .setDescription(`Successfully reloaded ${commands.length} application (/) commands.`)
                 .setColor(client.config.colors.normal)
             interactionLogs.send({

@@ -1,5 +1,5 @@
 const { CommandInteraction, Client } = require('discord.js');
-const { SlashCommandBuilder } = require('@discordjs/builders');
+const { SlashCommandBuilder } = require('discord.js');
 const Discord = require('discord.js');
 
 module.exports = {
@@ -43,6 +43,7 @@ module.exports = {
                 .setName('stealemoji')
                 .setDescription('Steal an emoji')
                 .addStringOption(option => option.setName('emoji').setDescription('Enter an emoji to steal').setRequired(true))
+                .addRoleOption(option => option.setName('role').setDescription('Select a role').setRequired(false))
         )
         .addSubcommand(subcommand =>
             subcommand

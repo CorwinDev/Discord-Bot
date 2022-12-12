@@ -7,7 +7,7 @@ module.exports = async (client, interaction, args) => {
     let avatar = interaction.user.displayAvatarURL({ dynamic: false, size: 1024, format: 'png' });
     const userAvatar = user.displayAvatarURL({ dynamic: false, size: 1024, format: 'png' });
     const image = await new DIG.Spank().getImage(avatar, userAvatar);
-    let attach = new Discord.MessageAttachment(image, "spank.png");
+    let attach = new Discord.AttachmentBuilder(image, {name: "spank.png"});
 
     interaction.editReply({ files: [attach] })
 }

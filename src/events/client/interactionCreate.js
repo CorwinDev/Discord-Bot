@@ -4,10 +4,11 @@ const Captcha = require("@haileybot/captcha-generator");
 const reactionSchema = require("../../database/models/reactionRoles");
 const banSchema = require("../../database/models/userBans");
 const verify = require("../../database/models/verify");
-
+const Commands = require("../../database/models/customCommand");
+const CommandsSchema = require("../../database/models/customCommandAdvanced");
 module.exports = async (client, interaction) => {
     // Commands
-    if (interaction.isCommand() || interaction.isContextMenu()) {
+    if (interaction.isCommand() || interaction.isUserContextMenuCommand()) {
         await interaction.deferReply({ fetchReply: true });
 
         banSchema.findOne({ User: interaction.user.id }, async (err, data) => {
@@ -19,6 +20,44 @@ module.exports = async (client, interaction) => {
             }
             else {
                 const cmd = client.commands.get(interaction.commandName);
+                if (!cmd){
+                    const cmdd = await Commands.findOne({
+                        Guild: interaction.guild.id,
+                        Name: interaction.commandName,
+                    });
+                    if (cmdd) {
+                        return interaction.channel.send({ content: cmdd.Responce });
+                    }
+
+                    const cmdx = await CommandsSchema.findOne({
+                        Guild: interaction.guild.id,
+                        Name: interaction.commandName,
+                    });
+                    if (cmdx) {
+                        // Remove interaction
+                        if (cmdx.Action == "Normal") {
+                            return interaction.reply({ content: cmdx.Responce });
+                        } else if (cmdx.Action == "Embed") {
+                            return client.simpleEmbed(
+                                {
+                                    desc: `${cmdx.Responce}`,
+                                    type: 'editreply'
+                                },
+                                interaction,
+                            );
+                        } else if (cmdx.Action == "DM") {
+                            interaction.deleteReply();
+                            return interaction.user.send({ content: cmdx.Responce }).catch((e) => {
+                                client.errNormal(
+                                    {
+                                        error: "I can't DM you, maybe you have DM turned off!",
+                                    },
+                                    interaction
+                                );
+                            });
+                        }
+                    }
+                }
                 if (interaction.options._subcommand !== null && interaction.options.getSubcommand() == "help") {
                     const commands = interaction.client.commands.filter(x => x.data.name == interaction.commandName).map((x) => x.data.options.map((c) => '`' + c.name + '` - ' + c.description).join("\n"));
 
@@ -29,7 +68,7 @@ module.exports = async (client, interaction) => {
                     }, interaction)
                 }
 
-                cmd.run(client, interaction, interaction.options._hoistedOptions).catch(err => {
+                if(cmd) cmd.run(client, interaction, interaction.options._hoistedOptions).catch(err => {
                     client.emit("errorCreate", err, interaction.commandName, interaction)
                 })
             }
@@ -43,7 +82,7 @@ module.exports = async (client, interaction) => {
             let captcha = new Captcha();
 
             try {
-                var image = new Discord.MessageAttachment(captcha.JPEGStream, "captcha.jpeg");
+                var image = new Discord.AttachmentBuilder(captcha.JPEGStream, {name:"captcha.jpeg"});
 
                 interaction.reply({ files: [image], fetchReply: true }).then(function (msg) {
                     const filter = s => s.author.id == interaction.user.id;
@@ -113,7 +152,7 @@ module.exports = async (client, interaction) => {
     }
 
     // Reaction roles select
-    if (interaction.isSelectMenu()) {
+    if (interaction.isStringSelectMenu()) {
         if (interaction.customId == "reaction_select") {
             reactionSchema.findOne(
                 { Message: interaction.message.id },
@@ -150,7 +189,6 @@ module.exports = async (client, interaction) => {
             );
         }
     }
-
     // Tickets
     if (interaction.customId == "Bot_openticket") {
         return require(`${process.cwd()}/src/commands/tickets/create.js`)(client, interaction);

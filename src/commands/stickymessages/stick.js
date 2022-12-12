@@ -6,7 +6,7 @@ module.exports = async (client, interaction, args) => {
     const channel = interaction.options.getChannel('channel');
     const content = interaction.options.getString('message');
 
-    const embed = new Discord.MessageEmbed()
+    const embed = new Discord.EmbedBuilder()
         .setDescription(`${content}`)
         .setColor(client.config.colors.normal);
     channel.send({ embeds: [embed] }).then(msg => {

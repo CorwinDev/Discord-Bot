@@ -42,6 +42,7 @@ module.exports = async (client, interaction, args) => {
 
             interaction.channel.awaitMessageComponent({ filter, max: 1 }).then(async i => {
                 if (i.customId == 'customSelect') {
+                    await i.deferUpdate();
                     if (i.values[0] === "command-embed") {
                         new Schema({
                             Guild: interaction.guild.id,
@@ -57,6 +58,7 @@ module.exports = async (client, interaction, args) => {
                                 value: `\`\`\`${cmdname.toLowerCase()}\`\`\``,
                                 inline: true,
                             }],
+                            components: [],
                             type: 'editreply'
                         }, i);
                     }
@@ -76,6 +78,7 @@ module.exports = async (client, interaction, args) => {
                                 value: `\`\`\`${cmdname.toLowerCase()}\`\`\``,
                                 inline: true,
                             }],
+                            components: [],
                             type: 'editreply'
                         }, i);
                     }
@@ -95,6 +98,7 @@ module.exports = async (client, interaction, args) => {
                                 value: `\`\`\`${cmdname.toLowerCase()}\`\`\``,
                                 inline: true,
                             }],
+                            components: [],
                             type: 'editreply'
                         }, i);
                     }

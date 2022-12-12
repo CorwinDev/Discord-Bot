@@ -1,5 +1,6 @@
 const Discord = require('discord.js');
 const chalk = require('chalk');
+const { random } = require('mathjs');
 
 module.exports = async (client) => {
     const startLogs = new Discord.WebhookClient({
@@ -31,29 +32,24 @@ module.exports = async (client) => {
         return Promise.all(promises)
             .then(results => {
                 const totalGuilds = results[0].reduce((acc, guildCount) => acc + guildCount, 0);
-
-                let statuttext = [
-                    `・❓┆/help`,
-                    `・💻┆${totalGuilds} servers`,
-                    `・📨┆discord.me/Bot`,
-                    `・🎉┆400+ commands`,
-                    `・🏷️┆Version ${require(`${process.cwd()}/package.json`).version}`
-                ];
+                let statuttext;
+                if (process.env.DISCORD_STATUS) {
+                    statuttext = process.env.DISCORD_STATUS.split(', ');
+                } else {
+                    statuttext = [
+                        `・❓┆/help`,
+                        `・💻┆${totalGuilds} servers`,
+                        `・📨┆discord.me/corwindev`,
+                        `・🎉┆400+ commands`,
+                        `・🏷️┆Version ${require(`${process.cwd()}/package.json`).version}`
+                    ];
+                }
                 const randomText = statuttext[Math.floor(Math.random() * statuttext.length)];
-
-                client.user.setPresence({
-                    activities: [
-                        {
-                            name: randomText,
-                            type: "STREAMING",
-                            url: "https://www.twitch.tv/discord"
-                        }
-                    ]
-                });
+                client.user.setActivity('activity', { type: Discord.ActivityType.Streaming });
+                client.user.setPresence({ activities: [{ name: randomText }], status: 'online' });
             })
     }, 50000)
 
     client.player.init(client.user.id);
 }
 
- 

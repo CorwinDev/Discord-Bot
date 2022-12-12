@@ -34,23 +34,25 @@ module.exports = async (client, interaction) => {
                         Name: interaction.commandName,
                     });
                     if (cmdx) {
+                        // Remove interaction
                         if (cmdx.Action == "Normal") {
-                            return interaction.channel.send({ content: cmdx.Responce });
+                            return interaction.reply({ content: cmdx.Responce });
                         } else if (cmdx.Action == "Embed") {
                             return client.simpleEmbed(
                                 {
                                     desc: `${cmdx.Responce}`,
                                     type: 'editreply'
                                 },
-                                interaction.channel,
+                                interaction,
                             );
                         } else if (cmdx.Action == "DM") {
-                            return interaction.author.send({ content: cmdx.Responce }).catch((e) => {
+                            interaction.deleteReply();
+                            return interaction.user.send({ content: cmdx.Responce }).catch((e) => {
                                 client.errNormal(
                                     {
                                         error: "I can't DM you, maybe you have DM turned off!",
                                     },
-                                    interaction.channel
+                                    interaction
                                 );
                             });
                         }

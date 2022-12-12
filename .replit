@@ -1,0 +1,9 @@
+language = "nodejs"
+run = "npm start"
+
+[env]
+DISCORD_TOKEN = "fillin"
+MONGO_TOKEN = "fillin"
+GIPHY_TOKEN = "fillin"
+WEBHOOK_ID = "fillin"
+WEBHOOK_TOKEN = "fillin"

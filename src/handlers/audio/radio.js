@@ -64,17 +64,17 @@ module.exports = (client) => {
 
     player.on('stateChange', (oldState, newState) => {
         if (newState.status === Voice.AudioPlayerStatus.Idle) {
-            client.startStream(process.env.RADIO)
+            client.startStream(process.env.RADIO || "https://playerservices.streamtheworld.com/api/livestream-redirect/RADIO538")
         }
     });
 
     player.on('error', error => {
         client.emit("voiceError", error);
-        client.startStream(process.env.RADIO);
+        client.startStream(process.env.RADIO || "https://playerservices.streamtheworld.com/api/livestream-redirect/RADIO538");
     });
 
     client.on('ready', async () => {
-        client.startStream(process.env.RADIO);
+        client.startStream(process.env.RADIO || "https://playerservices.streamtheworld.com/api/livestream-redirect/RADIO538");
         
         Schema.find(async (err, data) => {
             if (data) {

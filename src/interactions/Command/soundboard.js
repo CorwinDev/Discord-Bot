@@ -9,8 +9,13 @@ module.exports = {
         .setName('soundboard')
         .setDescription('Play all the sounds in Bot')
 
+        .addSubcommand((subcommand) =>
+            subcommand
+                .setName('help')
+                .setDescription('Get information about the soundboard category commands')
+        )
+        
         // Windows Sounds
-
         .addSubcommandGroup((group) =>
             group
                 .setName('windows')

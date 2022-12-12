@@ -91,7 +91,7 @@ module.exports = (client, oldState, newState) => {
 
                     const channel = await newState.guild.channels.create({
                         name: "⌛",
-                        type: "GUILD_VOICE",
+                        type:  Discord.ChannelType.GuildVoice,
                         parent: data.Category,
                     });
 

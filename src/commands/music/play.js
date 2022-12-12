@@ -34,8 +34,8 @@ module.exports = async (client, interaction, args) => {
         player.connect()
 
         setTimeout(() => {
-            if (channel.type == "GUILD_STAGE_VOICE") {
-                interaction.guild.me.voice.setSuppressed(false);
+            if (channel.type == Discord.ChannelType.GuildStageVoice) {
+                interaction.guild.members.me.voice.setSuppressed(false);
             }
         }, 500)
     }
@@ -124,27 +124,27 @@ module.exports = async (client, interaction, args) => {
                     new Discord.ButtonBuilder()
                         .setEmoji("1️⃣")
                         .setCustomId("1")
-                        .setStyle("SECONDARY"),
+                        .setStyle(Discord.ButtonStyle.Secondary),
 
                     new Discord.ButtonBuilder()
                         .setEmoji("2️⃣")
                         .setCustomId("2")
-                        .setStyle("SECONDARY"),
+                        .setStyle(Discord.ButtonStyle.Secondary),
 
                     new Discord.ButtonBuilder()
                         .setEmoji("3️⃣")
                         .setCustomId("3")
-                        .setStyle("SECONDARY"),
+                        .setStyle(Discord.ButtonStyle.Secondary),
 
                     new Discord.ButtonBuilder()
                         .setEmoji("4️⃣")
                         .setCustomId("4")
-                        .setStyle("SECONDARY"),
+                        .setStyle(Discord.ButtonStyle.Secondary),
 
                     new Discord.ButtonBuilder()
                         .setEmoji("5️⃣")
                         .setCustomId("5")
-                        .setStyle("SECONDARY"),
+                        .setStyle(Discord.ButtonStyle.Secondary),
                 );
 
             let row2 = new Discord.ActionRowBuilder()

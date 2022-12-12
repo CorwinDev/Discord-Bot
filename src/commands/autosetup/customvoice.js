@@ -9,7 +9,7 @@ module.exports = async (client, interaction, args) => {
     }).then((cat) => {
         interaction.guild.channels.create({
             name: "➕ Create Voice",
-            type: "GUILD_VOICE",
+            type:  Discord.ChannelType.GuildVoice,
             parent: cat.id,
             permissionOverwrites: [
                 {

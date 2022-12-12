@@ -6,22 +6,22 @@ module.exports = (client, player, track) => {
             new Discord.ButtonBuilder()
                 .setEmoji(client.emotes.music.previous)
                 .setCustomId("Bot-musicprev")
-                .setStyle("SECONDARY"),
+                .setStyle(Discord.ButtonStyle.Secondary),
 
             new Discord.ButtonBuilder()
                 .setEmoji(client.emotes.music.pause)
                 .setCustomId("Bot-musicpause")
-                .setStyle("SECONDARY"),
+                .setStyle(Discord.ButtonStyle.Secondary),
 
             new Discord.ButtonBuilder()
                 .setEmoji(client.emotes.music.stop)
                 .setCustomId("Bot-musicstop")
-                .setStyle("SECONDARY"),
+                .setStyle(Discord.ButtonStyle.Secondary),
 
             new Discord.ButtonBuilder()
                 .setEmoji(client.emotes.music.next)
                 .setCustomId("Bot-musicnext")
-                .setStyle("SECONDARY"),
+                .setStyle(Discord.ButtonStyle.Secondary),
         );
 
     const channel = client.channels.cache.get(player.textChannel);

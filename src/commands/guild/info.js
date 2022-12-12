@@ -89,22 +89,22 @@ module.exports = async (client, interaction, args) => {
       },
       {
         name: "Text Channels: ",
-        value: `${interaction.guild.channels.cache.filter(channel => channel.type === 'GUILD_TEXT').size} channels!`,
+        value: `${interaction.guild.channels.cache.filter(channel => channel.type === Discord.ChannelType.GuildText).size} channels!`,
         inline: true
       },
       {
         name: "Voice Channels:",
-        value: `${interaction.guild.channels.cache.filter(channel => channel.type === 'GUILD_VOICE').size} channels!`,
+        value: `${interaction.guild.channels.cache.filter(channel => channel.type ===  Discord.ChannelType.GuildVoice).size} channels!`,
         inline: true
       },
       {
         name: "Stage Channels:",
-        value: `${interaction.guild.channels.cache.filter(channel => channel.type === 'GUILD_STAGE_VOICE').size} channels!`,
+        value: `${interaction.guild.channels.cache.filter(channel => channel.type ===  Discord.ChannelType.GuildStageVoice).size} channels!`,
         inline: true
       },
       {
         name: "News Channels:",
-        value: `${interaction.guild.channels.cache.filter(channel => channel.type === 'GUILD_NEWS').size} channels!`,
+        value: `${interaction.guild.channels.cache.filter(channel => channel.type ===  Discord.ChannelType.GuildAnnouncement).size} channels!`,
         inline: true
       },
       {

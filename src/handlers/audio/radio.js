@@ -29,7 +29,7 @@ module.exports = (client) => {
         });
 
         setTimeout(() => {
-            if (channel.type == "GUILD_STAGE_VOICE") {
+            if (channel.type ==  Discord.ChannelType.GuildStageVoice) {
                 channel.guild.me.voice.setSuppressed(false).catch(() => { });
             }
         }, 500)

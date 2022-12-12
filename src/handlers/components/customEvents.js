@@ -71,7 +71,7 @@ module.exports = async (client) => {
     })
 
     client.on('channelUpdate', (oldChannel, newChannel) => {
-        if (oldChannel.type === 'GUILD_TEXT' && oldChannel.topic !== newChannel.topic) {
+        if (oldChannel.type === Discord.ChannelType.GuildText && oldChannel.topic !== newChannel.topic) {
             client.emit('channelTopicUpdate', newChannel, oldChannel.topic, newChannel.topic);
         }
 

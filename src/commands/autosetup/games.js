@@ -11,7 +11,7 @@ module.exports = async (client, interaction, args) => {
     if (choice == "counting") {
         interaction.guild.channels.create({
             name: "counting",
-            type: "GUILD_TEXT"
+            type: Discord.ChannelType.GuildText
         }).then((ch) => {
             client.embed({
                 title: `🔢・Counting`,
@@ -25,7 +25,7 @@ module.exports = async (client, interaction, args) => {
     if (choice == "gtn") {
         interaction.guild.channels.create({
             name:"guess-the-number",
-            type: "GUILD_TEXT"
+            type: Discord.ChannelType.GuildText
         }).then((ch) => {
             client.embed({
                 title: `🔢・Guess the number`,
@@ -39,7 +39,7 @@ module.exports = async (client, interaction, args) => {
     if (choice == "gtw") {
         interaction.guild.channels.create({
             name: "guess-the-word",
-            type: "GUILD_TEXT"
+            type: Discord.ChannelType.GuildText
         }).then((ch) => {
             var word = "start";
             var shuffled = word.split('').sort(function () { return 0.5 - Math.random() }).join('');
@@ -62,7 +62,7 @@ module.exports = async (client, interaction, args) => {
     if (choice == "wordsnake") {
         interaction.guild.channels.create({
             name: "word-snake",
-            type: "GUILD_TEXT"
+            type: Discord.ChannelType.GuildText
         }).then((ch) => {
             client.createChannelSetup(WordSnake, ch, interaction)
         })

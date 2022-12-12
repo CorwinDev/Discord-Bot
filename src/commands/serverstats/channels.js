@@ -9,7 +9,7 @@ module.exports = async (client, interaction, args) => {
 
     await interaction.guild.channels.create({
         name: channelName,
-        type: 'GUILD_VOICE', permissionOverwrites: [
+        type:  Discord.ChannelType.GuildVoice, permissionOverwrites: [
             {
                 deny: [Discord.PermissionsBitField.Flags.Connect],
                 id: interaction.guild.id

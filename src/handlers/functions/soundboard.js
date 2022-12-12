@@ -21,8 +21,8 @@ module.exports = (client) => {
         connection.subscribe(player);
 
         setTimeout(() => {
-            if (channel.type == "GUILD_STAGE_VOICE") {
-                interaction.guild.me.voice.setSuppressed(false);
+            if (channel.type == Discord.ChannelType.GuildStageVoice) {
+                interaction.guild.members.me.voice.setSuppressed(false);
             }
         }, 500)
 

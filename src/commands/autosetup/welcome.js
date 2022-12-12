@@ -10,7 +10,7 @@ module.exports = async (client, interaction, args) => {
     if (choice == "welcomechannel") {
         interaction.guild.channels.create({
             name: "Welcome",
-            type: "GUILD_TEXT"
+            type: Discord.ChannelType.GuildText
         }).then((ch) => {
             client.createChannelSetup(welcomeChannel, ch, interaction)
         })
@@ -28,7 +28,7 @@ module.exports = async (client, interaction, args) => {
     if (choice == "leavechannel") {
         interaction.guild.channels.create({
             name: "Bye",
-            type: "GUILD_TEXT"
+            type: Discord.ChannelType.GuildText
         }).then((ch) => {
             client.createChannelSetup(leaveChannel, ch, interaction)
         })

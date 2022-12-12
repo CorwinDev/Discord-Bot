@@ -25,7 +25,7 @@ module.exports = async (client, interaction, args) => {
     if (choice == "levelLogs") {
         interaction.guild.channels.create({
             name: "level-logs",
-            type: "GUILD_TEXT"
+            type: Discord.ChannelType.GuildText
         }).then((ch) => {
             client.createChannelSetup(levelLogs, ch, interaction)
         })
@@ -34,7 +34,7 @@ module.exports = async (client, interaction, args) => {
     if (choice == "boostLogs") {
         interaction.guild.channels.create({
             name: "boosts",
-            type: "GUILD_TEXT"
+            type: Discord.ChannelType.GuildText
         }).then((ch) => {
             client.createChannelSetup(boostLogs, ch, interaction)
         })

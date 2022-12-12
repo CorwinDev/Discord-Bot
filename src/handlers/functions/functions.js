@@ -38,7 +38,7 @@ module.exports = async (client) => {
         perms: perms
     }, interaction) {
         for (let i = 0; i < flags.length; i++) {
-             if (!interaction.guild.me.permissions.has(flags[i])) {
+             if (!interaction.guild.members.me.permissions.has(flags[i])) {
                 client.errNoPerms({
                     perms: perms[i],
                     type: 'editreply'

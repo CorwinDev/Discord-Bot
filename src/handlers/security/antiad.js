@@ -6,7 +6,6 @@ const Schema2 = require("../../database/models/channelList");
 module.exports = (client) => {
     client.on('messageCreate', async (message) => {
         if (message.channel.type === 'DM') return;
-
         Schema.findOne({ Guild: message.guild.id }, async (err, data) => {
             if (data) {
                 if (data.AntiInvite == true) {

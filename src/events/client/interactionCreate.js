@@ -8,7 +8,7 @@ const Commands = require("../../database/models/customCommand");
 const CommandsSchema = require("../../database/models/customCommandAdvanced");
 module.exports = async (client, interaction) => {
     // Commands
-    if (interaction.isCommand() || interaction.isContextMenu()) {
+    if (interaction.isCommand() || interaction.isUserContextMenuCommand()) {
         await interaction.deferReply({ fetchReply: true });
 
         banSchema.findOne({ User: interaction.user.id }, async (err, data) => {
@@ -187,7 +187,6 @@ module.exports = async (client, interaction) => {
             );
         }
     }
-
     // Tickets
     if (interaction.customId == "Bot_openticket") {
         return require(`${process.cwd()}/src/commands/tickets/create.js`)(client, interaction);

@@ -88,7 +88,7 @@ module.exports = async (client, interaction, args) => {
     }
     else if (boolean == false) {
         if (!Badges.FLAGS.includes(badge.toUpperCase())) return client.errNormal({
-            error: `The user does not have this badge`,
+            error: `The user doesn't have that badge`,
             type: `editreply`
         }, interaction);
 
@@ -106,7 +106,7 @@ module.exports = async (client, interaction, args) => {
         if (!array[0]) {
             let deleted = await model.deleteMany({ User: member.id });
             client.succNormal({
-                text: `Removed the ${badgeFlags[badge.toUpperCase()]} (${badge.toUpperCase()}) badge, the user is now removed of the badge system, it has no badges left!`,
+                text: `Removed the ${badgeFlags[badge.toUpperCase()]} (${badge.toUpperCase()}) badge, the user have been removed from the badge system, he has no badges left!`,
                 type: 'editreply'
             }, interaction);
 

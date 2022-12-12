@@ -24,7 +24,7 @@ module.exports = async (client, interaction, args) => {
             }
 
             client.succNormal({ 
-                text: `Your AFK has been set up succesfully`,
+                text: `Your AFK has been set up successfully`,
                 type: 'ephemeraledit'
             }, interaction);
 

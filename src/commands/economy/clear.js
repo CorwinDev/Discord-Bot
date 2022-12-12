@@ -34,7 +34,7 @@ module.exports = async (client, interaction, args) => {
 
     const filter = i => i.user.id === interaction.user.id;
 
-    interaction.channel.awaitMessageComponent({ filter, componentType: 'BUTTON', time: 60000 }).then(async i => {
+    interaction.channel.awaitMessageComponent({ filter, componentType: Discord.ComponentType.Button, time: 60000 }).then(async i => {
         if (i.customId == "eco_go") {
             var remove = await Schema.deleteMany({ Guild: interaction.guild.id });
             var remove2 = await Schema2.deleteMany({ Guild: interaction.guild.id });

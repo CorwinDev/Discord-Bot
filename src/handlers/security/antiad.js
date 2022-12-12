@@ -29,6 +29,7 @@ module.exports = (client) => {
                                 }, message.channel)
                             }
                             else {
+                                if (message.member.permissions.has(Discord.PermissionsBitField.Flags.ManageMessages)) return;
                                 message.delete();
 
                                 client.embed({
@@ -61,6 +62,7 @@ module.exports = (client) => {
                                 }, message.channel)
                             }
                             else {
+                                if (message.member.permissions.has(Discord.PermissionsBitField.Flags.ManageMessages)) return;
                                 message.delete();
                                
                                 client.embed({
@@ -106,6 +108,7 @@ module.exports = (client) => {
                                 newMessage.channel.send({ content: `${newMessage.author}`, embeds: [error] })
                             }
                             else {
+                                if (newMessage.member.permissions.has(Discord.PermissionsBitField.Flags.ManageMessages)) return;
                                 newMessage.delete();
                                 let error = new Discord.EmbedBuilder()
                                     .setTitle(`${client.emotes.normal.error}・Moderator`)
@@ -140,6 +143,7 @@ module.exports = (client) => {
                                 newMessage.channel.send({ content: `${newMessage.author}`, embeds: [error] })
                             }
                             else {
+                                if (newMessage.member.permissions.has(Discord.PermissionsBitField.Flags.ManageMessages)) return;
                                 newMessage.delete();
                                 var error = new Discord.EmbedBuilder()
                                     .setTitle(`${client.emotes.normal.error}・Moderator`)

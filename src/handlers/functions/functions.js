@@ -144,7 +144,7 @@ module.exports = async (client) => {
             msg.edit({ embeds: [await client.generateEmbed(0, 0, lb, title, interaction)], components: [row] })
 
             let currentIndex = 0;
-            const collector = interaction.channel.createMessageComponentCollector({ componentType: 'BUTTON', time: 60000 });
+            const collector = interaction.channel.createMessageComponentCollector({ componentType: Discord.ComponentType.Button, time: 60000 });
 
             collector.on('collect', async (btn) => {
                 if (btn.user.id == interaction.user.id && btn.message.id == msg.id) {

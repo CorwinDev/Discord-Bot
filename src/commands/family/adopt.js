@@ -59,7 +59,7 @@ module.exports = async (client, interaction, args) => {
 
     const filter = i => i.user.id === target.id;
 
-    interaction.channel.awaitMessageComponent({ filter, componentType: 'BUTTON', time: 60000 }).then(async i => {
+    interaction.channel.awaitMessageComponent({ filter, componentType: Discord.ComponentType.Button, time: 60000 }).then(async i => {
         if (i.customId == "adopt_yes") {
 
             Schema.findOne({ Guild: interaction.guild.id, User: author.id }, async (err, data) => {

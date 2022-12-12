@@ -176,7 +176,7 @@ module.exports = async (client, interaction, args) => {
             }, interaction)
 
             try {
-                i = await interaction.channel.awaitMessageComponent({ filter, max: 1, time: 30e3, componentType: 'BUTTON', errors: ['time'] });
+                i = await interaction.channel.awaitMessageComponent({ filter, max: 1, time: 30e3, componentType: Discord.ComponentType.Button, errors: ['time'] });
             } catch (e) {
                 if (!player.queue.current) player.destroy();
                 return client.errNormal({

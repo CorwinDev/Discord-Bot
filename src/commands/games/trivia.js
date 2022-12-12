@@ -158,7 +158,7 @@ module.exports = async (client, interaction, args) => {
     }, interaction).then(async (m) => {
         const gameCreatedAt = Date.now();
 
-        const collector = interaction.channel.createMessageComponentCollector({ componentType: 'BUTTON', time: 60000 });
+        const collector = interaction.channel.createMessageComponentCollector({ componentType: Discord.ComponentType.Button, time: 60000 });
 
         collector.on('collect', async (trivia) => {
             if (trivia.user.id !== interaction.user.id) return;

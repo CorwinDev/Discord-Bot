@@ -147,7 +147,7 @@ module.exports = async (client, interaction, args) => {
             }, interaction)
         }
 
-        const calc = interaction.channel.createMessageComponentCollector({ componentType: 'BUTTON' });
+        const calc = interaction.channel.createMessageComponentCollector({ componentType: Discord.ComponentType.Button });
 
         calc.on('collect', async (btn) => {
             if (btn.user.id !== interaction.user.id) return;

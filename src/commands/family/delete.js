@@ -31,9 +31,9 @@ module.exports = async (client, interaction, args) => {
             if (i.customId == "family_delete") {
                 i.message.delete();
 
-                var remove = await Schema.findOneAndDelete({ Guild: interaction.guild.id, User: interaction.author.id });
-                const parent = await Schema.findOne({ Guild: interaction.guild.id, Parent: interaction.author.id });
-                const partner = await Schema.findOne({ Guild: interaction.guild.id, Partner: interaction.author.id });
+                var remove = await Schema.findOneAndDelete({ Guild: interaction.guild.id, User: interaction.user.id });
+                const parent = await Schema.findOne({ Guild: interaction.guild.id, Parent: interaction.user.id });
+                const partner = await Schema.findOne({ Guild: interaction.guild.id, Partner: interaction.user.id });
 
                 if (parent) {
                     parent.Parent = " ";

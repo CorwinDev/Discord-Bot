@@ -416,11 +416,6 @@ module.exports = async (client, message) => {
         title: "👋・Hi, i'm Bot",
         desc: `Bot is now completely in ${client.emotes.normal.slash} commands. The current message commands have expired! Try our new improved commands and make your server better with Bot!`,
         fields: [
-           {
-                name: "📢┇Alert!",
-                value: 'After more than 1 year we decided to stop Bot on April 15th, for more information go to [this server](https://discord.gg/techpoint)',
-                inline: false,
-            },
             {
             name: "❓┇I don't see any slash commands",
             value:

@@ -22,10 +22,7 @@ module.exports = async (client, interaction, args) => {
                 title: `ℹ・Bot information`,
                 desc: `____________________________`,
                 thumbnail: client.user.avatarURL({ size: 1024 }),
-                fields: [{
-                name: "📢┆Alert!",
-                inline: false,
-               },
+                fields: [
                {
                     name: "ℹ️┆Information",
                     value: `Bot is a bot with which you can run your entire server! With no less than 350+ commands, we have a large bot with many options to improve your server!`,

@@ -58,7 +58,7 @@ module.exports = async (client, interaction, args) => {
                 },
                 {
                     name: "🔧┆Bot developer",
-                    value: `<@!755297485328482356>`,
+                    value: `<@!755297485328482356> <@!884553151666061372>`,
                     inline: true,
                 },
                 {

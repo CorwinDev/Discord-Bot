@@ -74,21 +74,6 @@ module.exports = {
                 .setName('servers')
                 .setDescription('See all servers from this shard')
         )
-        .addSubcommand(subcommand =>
-            subcommand
-                .setName('whitelist')
-                .setDescription('Manage the bot whitelist')
-                .addStringOption(option =>
-                    option.setName('type')
-                        .setDescription('The type of whitelist')
-                        .setRequired(true)
-                        .addChoices(
-                            { name: 'Add', value: 'add' },
-                            { name: 'Remove', value: 'remove' }
-                        )
-                )
-                .addStringOption(option => option.setName('guild').setDescription('The ID of a guild').setRequired(true))
-        )
     ,
 
     /** 
@@ -102,11 +87,10 @@ module.exports = {
             if (data && data.FLAGS.includes("DEVELOPER")) {
                 client.loadSubcommands(client, interaction, args);
             } else {
-                console.log(`[ERROR] >> Only Bot developers are allowed to do this`);
-                client.errNormal({ 
-                    error: "Only Bot developers are allowed to do this", 
-                    type: 'reply' 
-                }, interaction);
+                return client.errNormal({
+                    error: 'Only Bot developers are allowed to do this',
+                    type: 'editreply'
+                }, interaction)
             }
         })
     },

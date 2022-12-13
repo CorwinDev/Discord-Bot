@@ -308,7 +308,7 @@ module.exports = (client) => {
             }).catch(e => { });
         }
         else {
-            return await interaction.send({
+            return await interaction.channel.send({
                 embeds: embeds,
                 content: content,
                 components: components,

@@ -2,21 +2,21 @@ const discord = require('discord.js');
 
 module.exports = async (client, channel) => {
     let types = {
-        GUILD_TEXT: "Text Channel",
-        GUILD_VOICE: "Voice Channel",
-        GUILD_CATEGORY: "Category",
-        UNKNOWN: "No Type",
-        GUILD_NEWS: "News Channel",
-        GUILD_STAGE_VOICE: "Stage Channel",
-        GUILD_STORE: "Store Channel",
-        GUILD_NEWS_THREAD: "News Thread",
-        GUILD_PUBLIC_THREAD: "Public Thread",
-        GUILD_PRIVATE_THREAD: "Private Thread",
+        0: "Text Channel",
+        2: "Voice Channel",
+        4: "Category",
+        5: "News Channel",
+        10: "News Thread",
+        11: "Public Thread",
+        12: "Private Thread",
+        13: "Stage Channel",
+        14: "Category",
     }
 
     const logsChannel = await client.getLogs(channel.guild.id);
     if (!logsChannel) return;
 
+    console.log(channel.type)
     client.embed({
         title: `🔧・Channel created`,
         desc: `A channel has been created`,

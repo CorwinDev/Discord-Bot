@@ -24,7 +24,6 @@ module.exports = async (client, interaction, args) => {
                 thumbnail: client.user.avatarURL({ size: 1024 }),
                 fields: [{
                 name: "📢┆Alert!",
-                value: 'After more than 1 year we decided to stop Bot on April 15th, for more information go to [this server](https://discord.gg/techpoint)',
                 inline: false,
                },
                {
@@ -54,12 +53,12 @@ module.exports = async (client, interaction, args) => {
                 },
                 {
                     name: "🔧┆Bot owner",
-                    value: `<@!534398298002292739> `,
+                    value: `<@!755297485328482356> `,
                     inline: true,
                 },
                 {
                     name: "🔧┆Bot developer",
-                    value: `<@!402893517749354516>`,
+                    value: `<@!755297485328482356>`,
                     inline: true,
                 },
                 {

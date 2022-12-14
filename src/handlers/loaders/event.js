@@ -1,5 +1,6 @@
 const chalk = require('chalk');
 const fs = require('fs');
+const Discord = require('discord.js');
 
 module.exports = (client) => {
 
@@ -14,7 +15,9 @@ module.exports = (client) => {
 
         for (const file of events) {
             const event = require(`../../events/${dirs}/${file}`);
-            client.on(file.split(".")[0], event.bind(null, client)).setMaxListeners(0);
+            const eventName = file.split(".")[0];
+            const eventUpperCase = eventName.charAt(0).toUpperCase() + eventName.slice(1);
+            client.on(Discord.Events[eventUpperCase], event.bind(null, client));
         };
     });
 }

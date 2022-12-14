@@ -4,7 +4,7 @@ const BlackList = require("../../database/models/blacklist");
 const { blacklistedWords } = require("../../Collection");
 
 module.exports = async (client) => {
-    client.on('messageCreate', async (message) => {
+    client.on(Discord.Events.MessageCreate, async (message) => {
         if (message.channel.type === 'DM') return;
 
         try {
@@ -31,7 +31,7 @@ module.exports = async (client) => {
         catch { }
     }).setMaxListeners(0);
 
-    client.on('messageUpdate', async (oldMessage, newMessage) => {
+    client.on(Discord.Events.MessageUpdate, async (oldMessage, newMessage) => {
         if (oldMessage.content === newMessage.content) {
             return;
         }

@@ -2,7 +2,7 @@ const Discord = require('discord.js');
 const Voice = require('@discordjs/voice');
 
 module.exports = (client) => {
-    client.on('interactionCreate', async (interaction) => {
+    client.on(Discord.Events.InteractionCreate, async (interaction) => {
         if (interaction.isButton()) {
             if (interaction.customId == "Bot-musicpause") {
                 interaction.deferUpdate();

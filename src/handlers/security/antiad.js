@@ -4,7 +4,7 @@ const Schema = require("../../database/models/functions");
 const Schema2 = require("../../database/models/channelList");
 
 module.exports = (client) => {
-    client.on('messageCreate', async (message) => {
+    client.on(Discord.Events.MessageCreate, async (message) => {
         if (message.channel.type === 'DM') return;
         Schema.findOne({ Guild: message.guild.id }, async (err, data) => {
             if (data) {

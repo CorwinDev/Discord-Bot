@@ -13,7 +13,7 @@ module.exports = async (client) => {
         }
     }
 
-    client.on('guildMemberUpdate', (oldMember, newMember) => {
+    client.on(Discord.Events.GuildMemberUpdate, (oldMember, newMember) => {
         if (!oldMember.premiumSince && newMember.premiumSince) {
             client.emit('guildMemberBoost', newMember);
         }
@@ -23,7 +23,7 @@ module.exports = async (client) => {
         }
     })
 
-    client.on('guildUpdate', (oldGuild, newGuild) => {
+    client.on(Discord.Events.GuildUpdate, (oldGuild, newGuild) => {
         if (oldGuild.premiumTier < newGuild.premiumTier) {
             client.emit('guildBoostLevelUp', newGuild, oldGuild.premiumTier, newGuild.premiumTier);
         }
@@ -53,7 +53,7 @@ module.exports = async (client) => {
         }
     })
 
-    client.on('roleUpdate', (oldRole, newRole) => {
+    client.on(Discord.Events.RoleUpdate, (oldRole, newRole) => {
         if (oldRole.rawPosition !== newRole.rawPosition) {
             client.emit('rolePositionUpdate', newRole, oldRole.rawPosition, newRole.rawPosition);
         }
@@ -71,7 +71,7 @@ module.exports = async (client) => {
         }
     })
 
-    client.on('channelUpdate', (oldChannel, newChannel) => {
+    client.on(Discord.Events.ChannelUpdate, (oldChannel, newChannel) => {
         if (oldChannel.type === Discord.ChannelType.GuildText && oldChannel.topic !== newChannel.topic) {
             client.emit('channelTopicUpdate', newChannel, oldChannel.topic, newChannel.topic);
         }

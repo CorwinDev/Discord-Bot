@@ -3,7 +3,7 @@ const Discord = require("discord.js");
 module.exports = async (client) => {
     const guildInvites = new Map();
 
-    client.on('inviteCreate', async invite => {
+    client.on(Discord.Events.InviteCreate, async invite => {
         try {
             const invites = await invite.guild.invites.fetch().catch(() => { });
 
@@ -15,7 +15,7 @@ module.exports = async (client) => {
         catch { }
     })
 
-    client.once('ready', async () => {
+    client.once(Discord.Events.ClientReady, async () => {
         try {
             const Guilds = client.guilds.cache.map(guild => guild.id);
             let i = 0;
@@ -37,7 +37,7 @@ module.exports = async (client) => {
         } catch (e) { }
     });
 
-    client.on('guildMemberAdd', async member => {
+    client.on(Discord.Events.GuildMemberAdd, async member => {
         try {
             const cachedInvites = guildInvites.get(member.guild.id)
             const newInvites = await member.guild.invites.fetch().catch(() => { });

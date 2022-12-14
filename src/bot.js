@@ -227,7 +227,7 @@ process.on('warning', warn => {
     })
 });
 
-client.on('shardError', error => {
+client.on(Discord.ShardEvents.Error, error => {
     const embed = new Discord.EmbedBuilder()
         .setTitle(`🚨・A websocket connection encountered an error`)
         .addFields([

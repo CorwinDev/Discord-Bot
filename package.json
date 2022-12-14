@@ -70,8 +70,5 @@
     "util": "^0.12.5",
     "weather-js": "^2.0.0",
     "ytdl-core": "^4.11.2"
-  },
-  "devDependencies": {
-    "node": "^17.4.0"
   }
 }

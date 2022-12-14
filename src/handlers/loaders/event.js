@@ -17,7 +17,7 @@ module.exports = (client) => {
             const event = require(`../../events/${dirs}/${file}`);
             const eventName = file.split(".")[0];
             const eventUpperCase = eventName.charAt(0).toUpperCase() + eventName.slice(1);
-            client.on(Discord.Events[eventUpperCase], event.bind(null, client));
+            client.on(Discord.Events[eventUpperCase], event.bind(null, client)).setMaxListeners(0);
         };
     });
 }

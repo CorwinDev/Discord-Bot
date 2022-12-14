@@ -53,7 +53,7 @@ module.exports = async (client) => {
         }
     })
 
-    client.on(Discord.Events.RoleUpdate, (oldRole, newRole) => {
+    client.on(Discord.Events.GuildRoleUpdate, (oldRole, newRole) => {
         if (oldRole.rawPosition !== newRole.rawPosition) {
             client.emit('rolePositionUpdate', newRole, oldRole.rawPosition, newRole.rawPosition);
         }

@@ -116,7 +116,7 @@ module.exports = async (client, interaction) => {
                 })
             }
             catch (error) {
-                throw error;
+                console.log(error)
             }
         }
         else {

@@ -56,7 +56,7 @@ module.exports = async (client, interaction, args) => {
     title: `👤・User information`,
     desc: `Information about ${member.user.username}`,
     thumbnail: member.user.displayAvatarURL({ dynamic: true, size: 1024 }),
-    image: member.user.bannerURL({ dynamic: true, size: 1024 });,
+    image: member.user.bannerURL({ dynamic: true, size: 1024 }),
     fields: [
       {
         name: "Username",

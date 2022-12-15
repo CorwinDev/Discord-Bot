@@ -2,7 +2,7 @@ const Discord = require('discord.js');
 
 const Schema = require("../../database/models/economy");
 const store = require("../../database/models/economyStore");
-
+const items = require("../../database/models/economyItems");
 module.exports = async (client, interaction, args) => {
     const storeData = await store.find({ Guild: interaction.guild.id });
     if (storeData.length == 0) return client.errNormal({
@@ -22,6 +22,10 @@ module.exports = async (client, interaction, args) => {
 
         return labels.push(generated);
     });
+    labels.push({
+        label: `Fishingrod`,
+        value: `fishingrod`,
+    })
 
     const select = await client.generateSelect(`economyBuy`, labels);
 
@@ -33,7 +37,6 @@ module.exports = async (client, interaction, args) => {
     }, interaction)
 
     const filter = i => {
-        i.deferUpdate();
         return i.user.id === interaction.user.id;
     };
 
@@ -42,11 +45,46 @@ module.exports = async (client, interaction, args) => {
         const buyPerson = i.guild.members.cache.get(i.user.id);
 
         const data = await Schema.findOne({ Guild: i.guild.id, User: i.user.id });
+        if(i.values[0] == 'fishingrod') {
+            console.log(data)
+            if (parseInt(100) > parseInt(data.Money)) return client.errNormal({
+                error: `You don't have enough money to buy this!`,
+                type: 'update',
+                components: []
+            }, i);
+
+            client.removeMoney(i, i.user, parseInt(100));
+            items.findOne({ Guild: i.guild.id, User: i.user.id }, async (err, data) => {
+                if (data) {
+                    data.FishingRod = true;
+                    data.save();
+                } else {
+                    new items({
+                        Guild: i.guild.id,
+                        User: i.user.id,
+                        FishingRod: true,
+                    }).save();
+                }
+            })
+            return client.succNormal({
+                text: `The purchase has been successfully completed`,
+                fields: [
+                    {
+                        name: `📘┆Item`,
+                        value: `Fishingrod`
+                    }
+                ],
+                type: 'update',
+                components: []
+            }, i);
+
+        } 
         const checkStore = await store.findOne({ Guild: i.guild.id, Role: role });
 
         if (parseInt(checkStore.Amount) > parseInt(data.Money)) return client.errNormal({
             error: `You don't have enough money to buy this!`,
-            type: 'editreply'
+            type: 'update',
+            components: []
         }, i);
 
         client.removeMoney(i, i.user, parseInt(checkStore.Amount));
@@ -55,7 +93,8 @@ module.exports = async (client, interaction, args) => {
         } catch (e) {
             return client.errNormal({
                 error: `I can't add <@&${role}> to you!`,
-                type: 'editreply'
+                type: 'update',
+                components: []
             }, i);
         }
 
@@ -67,7 +106,8 @@ module.exports = async (client, interaction, args) => {
                     value: `<@&${role}>`
                 }
             ],
-            type: 'editreply'
+            type: 'update',
+            components: []
         }, i);
     })
 }

@@ -157,6 +157,9 @@ if (process.env.WEBHOOK_ID && process.env.WEBHOOK_TOKEN) {
 
     client.webhooks.interactionLogs.id = process.env.WEBHOOK_ID;
     client.webhooks.interactionLogs.token = process.env.WEBHOOK_TOKEN;
+    
+    client.webhooks.bugReportLogs.id = process.env.WEBHOOK_ID;
+    client.webhooks.bugReportLogs.token = process.env.WEBHOOK_TOKEN;
 }
 client.commands = new Discord.Collection();
 client.playerManager = new Map();

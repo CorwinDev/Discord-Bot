@@ -2,11 +2,6 @@ const { CommandInteraction, Client } = require('discord.js');
 const { SlashCommandBuilder } = require('discord.js');
 const Discord = require('discord.js');
 
-const webhookClient = new Discord.WebhookClient({
-    id: "",
-    token: "",
-});
-
 module.exports = {
     data: new SlashCommandBuilder()
         .setName('report')
@@ -34,6 +29,11 @@ module.exports = {
      */
 
     run: async (client, interaction, args) => {
+        const webhookClient = new Discord.WebhookClient({
+            id: client.webhooks.bugReportLogs.id,
+            token: client.webhooks.bugReportLogs.token
+        });
+
         const type = interaction.options.getString('type');
         const desc = interaction.options.getString('description');
 

@@ -10,7 +10,10 @@ module.exports = async (client, interaction, args) => {
     if (data && data.Levels == true) {
         const target = interaction.options.getUser('user') || interaction.user;
         const user = await client.fetchLevels(target.id, interaction.guild.id);
-
+        if(!user || !user.xp) return client.errNormal({
+            error: "This user has no levels!",
+            type: 'editreply'
+        }, interaction);
         let xpRequired = client.xpFor(user.level + 1);
 
         const rankCard = new Canvacord.Rank()

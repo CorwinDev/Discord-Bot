@@ -4,8 +4,11 @@ const axios = require("axios");
 const model = require('../../database/models/badge');
 
 module.exports = async (client, interaction, args) => {
-  const member = interaction.guild.members.cache.get(interaction.options.getUser('user').id);
-
+  const member = await interaction.guild.members.fetch(interaction.options.getUser('user').id);
+  if(!member) return client.errNormal({
+    error: "This user is not in this guild!",
+    type: 'editreply'
+  }, interaction);
   const badgeFlags = {
     DEVELOPER: client.emotes.badges.developer,
     BUGS: client.emotes.badges.bug,
@@ -23,18 +26,22 @@ module.exports = async (client, interaction, args) => {
   }
 
   const flags = {
-    DISCORD_EMPLOYEE: '<:discordstaff:868235527059537960>',
-    DISCORD_PARTNER: '<:serverownerpartner:868235522139619418>',
-    BUGHUNTER_LEVEL_1: '<:bughunter1:868235523167240342>',
-    BUGHUNTER_LEVEL_2: '<:bughunter2:868235521099444374>',
-    HYPESQUAD_EVENTS: '<:hypesquadevents:868235528103944232>',
-    HOUSE_BRAVERY: '<:hypesquadbravery:868235530020716584>',
-    HOUSE_BRILLIANCE: '<:hypesquadbrilliance:868235525834817536>',
-    HOUSE_BALANCE: '<:hypesquadbalance:868235523657965579>',
-    EARLY_SUPPORTER: '<:earlysupporter:868235524882722866>',
-    SYSTEM: 'System',
-    VERIFIED_BOT: '<:verifieBot:868235529039265842>',
-    VERIFIED_DEVELOPER: '<:verifieBotdev:853642406121439273>'
+    ActiveDeveloper: "👨‍💻・Active Developer",
+    BugHunterLevel1: "🐛・Discord Bug Hunter",
+    BugHunterLevel2: "🐛・Discord Bug Hunter",
+    CertifiedModerator: "👮‍♂️・Certified Moderator",
+    HypeSquadOnlineHouse1: "🏠・House Bravery Member",
+    HypeSquadOnlineHouse2: "🏠・House Brilliance Member",
+    HypeSquadOnlineHouse3: "🏠・House Balance Member",
+    HypeSquadEvents: "🏠・HypeSquad Events",
+    PremiumEarlySupporter: "👑・Early Supporter",
+    Partner: "👑・Partner",
+    Quarantined: "🔒・Quarantined", // Not sure if this is still a thing
+    Spammer: "🔒・Spammer", // Not sure if this one works
+    Staff: "👨‍💼・Discord Staff",
+    TeamPseudoUser: "👨‍💼・Discord Team",
+    VerifiedBot: "🤖・Verified Bot",
+    VerifiedDeveloper: "👨‍💻・(early)Verified Bot Developer",
   }
 
   let Badges = await model.findOne({ User: member.user.id });
@@ -45,27 +52,11 @@ module.exports = async (client, interaction, args) => {
     .slice(0, -1);
   const userFlags = member.user.flags ? member.user.flags.toArray() : [];
 
-  const userBanner = await axios.get(`https://discord.com/api/users/${member.id}`, {
-    headers: {
-      Authorization: `Bot ${client.token}`,
-    },
-  })
-
-  var nickName = member.nickname;
-
-  const { banner } = userBanner.data;
-  let url = "";
-
-  if (banner) {
-    const extension = banner.startsWith("a_") ? ".gif" : ".png";
-    url = `https://cdn.discordapp.com/banners/${member.id}/${banner}${extension}?size=1024`;
-  }
-
   return client.embed({
     title: `👤・User information`,
     desc: `Information about ${member.user.username}`,
     thumbnail: member.user.displayAvatarURL({ dynamic: true, size: 1024 }),
-    image: url,
+    image: member.user.bannerURL({ dynamic: true, size: 1024 });,
     fields: [
       {
         name: "Username",
@@ -79,11 +70,11 @@ module.exports = async (client, interaction, args) => {
       },
       {
         name: "Nickname",
-        value: `${nickName || 'No nickname'}`,
+        value: `${member.nickname || 'No nickname'}`,
         inline: true,
       },
       {
-        name: "id",
+        name: "Id",
         value: `${member.user.id}`,
         inline: true,
       },
@@ -109,7 +100,7 @@ module.exports = async (client, interaction, args) => {
       },
       {
         name: `Roles [${roles.length}]`,
-        value: `${roles.join(', ')}`,
+        value: `${roles.length ? roles.join(', ') : 'None'}`,
         inline: false,
       }
     ],

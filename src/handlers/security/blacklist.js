@@ -5,7 +5,7 @@ const { blacklistedWords } = require("../../Collection");
 
 module.exports = async (client) => {
     client.on(Discord.Events.MessageCreate, async (message) => {
-        if (message.channel.type === 'DM') return;
+        if (message.channel.type === Discord.ChannelType.DM) return;
 
         try {
             BlackList.findOne({ Guild: message.guild.id }, async (err, data) => {

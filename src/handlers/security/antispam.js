@@ -9,7 +9,7 @@ const DIFF = 3000;
 
 module.exports = async (client) => {
     client.on(Discord.Events.MessageCreate, async (message) => {
-        if (message.author.bot || message.channel.type === 'DM') return;
+        if (message.author.bot || message.channel.type === Discord.ChannelType.DM) return;
 
         Schema.findOne({ Guild: message.guild.id }, async (err, data) => {
             if (data) {

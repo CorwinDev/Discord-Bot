@@ -5,7 +5,8 @@ const Schema2 = require("../../database/models/channelList");
 
 module.exports = (client) => {
     client.on(Discord.Events.MessageCreate, async (message) => {
-        if (message.channel.type === 'DM') return;
+        if (message.channel.type === Discord.ChannelType.DM) return;
+        if (message.author.bot) return;
         Schema.findOne({ Guild: message.guild.id }, async (err, data) => {
             if (data) {
                 if (data.AntiInvite == true) {

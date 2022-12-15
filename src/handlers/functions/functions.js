@@ -96,13 +96,12 @@ module.exports = async (client) => {
     }
 
     client.checkVoice = async function (guild, channel) {
-        const data = VoiceSchema.findOne({ Guild: guild.id, Channel: channel.id });
-
+        const data = await VoiceSchema.findOne({ Guild: guild.id, Channel: channel.id });
         if (data) {
-            return false;
+            return true;
         }
         else {
-            return true;
+            return false;
         }
     }
 

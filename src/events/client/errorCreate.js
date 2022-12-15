@@ -71,7 +71,7 @@ module.exports = (client, err, command, interaction) => {
                 }
             ],
             components: [row],
-            type: 'reply'
+            type: 'editreply'
         }, interaction)
     })
 };

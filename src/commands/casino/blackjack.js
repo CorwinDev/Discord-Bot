@@ -191,7 +191,7 @@ module.exports = async (client, interaction, args) => {
                 if (player.score === 21) {
                     bet("win");
                     gameOver = true;
-                    await endMsg(
+                    endMsg(
                         `Win! You got 21!`,
                         `Bot had ${dealer.score.toString()}`,
                         `GREEN`
@@ -200,7 +200,7 @@ module.exports = async (client, interaction, args) => {
                 if (player.score > 21) {
                     bet("lose");
                     gameOver = true;
-                    await endMsg(
+                    endMsg(
                         `Lost! You reached over 21!`,
                         `Bot had ${dealer.score.toString()}`,
                         `RED`
@@ -209,7 +209,7 @@ module.exports = async (client, interaction, args) => {
                 if (dealer.score === 21) {
                     bet("lose");
                     gameOver = true;
-                    await endMsg(
+                    endMsg(
                         `Lost! The dealer got 21!`,
                         `Bot had ${dealer.score.toString()}`,
                         `RED`
@@ -218,7 +218,7 @@ module.exports = async (client, interaction, args) => {
                 if (dealer.score > 21) {
                     bet("win");
                     gameOver = true;
-                    await endMsg(
+                    endMsg(
                         `Win! Bot reached over 21!`,
                         `Bot had ${dealer.score.toString()}`,
                         `GREEN`
@@ -231,7 +231,7 @@ module.exports = async (client, interaction, args) => {
                 ) {
                     bet("win");
                     gameOver = true;
-                    await endMsg(
+                    endMsg(
                         `Win! You defeated Bot!`,
                         `Bot had ${dealer.score.toString()}`,
                         `GREEN`
@@ -244,7 +244,7 @@ module.exports = async (client, interaction, args) => {
                 ) {
                     bet("lose");
                     gameOver = true;
-                    await endMsg(
+                    endMsg(
                         `Lost! Bot won!`,
                         `Bot had ${dealer.score.toString()}`,
                         `RED`
@@ -256,7 +256,7 @@ module.exports = async (client, interaction, args) => {
                     dealer.score < 21
                 ) {
                     gameOver = true;
-                    await endMsg(`Tie!`, `Bot had ${dealer.score.toString()}`, `RED`);
+                    endMsg(`Tie!`, `Bot had ${dealer.score.toString()}`, `RED`);
                 }
             }
 

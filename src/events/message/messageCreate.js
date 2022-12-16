@@ -11,6 +11,7 @@ const levelRewards = require("../../database/models/levelRewards");
 const levelLogs = require("../../database/models/levelChannels");
 const Commands = require("../../database/models/customCommand");
 const CommandsSchema = require("../../database/models/customCommandAdvanced");
+const fetch = require("node-fetch");
 
 module.exports = async (client, message) => {
   const dmlog = new Discord.WebhookClient({
@@ -92,7 +93,7 @@ module.exports = async (client, message) => {
                 await client.channels.cache
                   .get(levelData.Channel)
                   .send({ content: levelMessage })
-                  .catch(() => {});
+                  .catch(() => { });
               } else {
                 await message.channel.send({ content: levelMessage });
               }
@@ -107,7 +108,7 @@ module.exports = async (client, message) => {
                   .send({
                     content: `**GG** <@!${message.author.id}>, you are now level **${user.level}**`,
                   })
-                  .catch(() => {});
+                  .catch(() => { });
               } else {
                 message.channel.send({
                   content: `**GG** <@!${message.author.id}>, you are now level **${user.level}**`,
@@ -127,7 +128,7 @@ module.exports = async (client, message) => {
                 message.guild.members.cache
                   .get(message.author.id)
                   .roles.add(data.Role)
-                  .catch((e) => {});
+                  .catch((e) => { });
               }
             }
           );
@@ -152,7 +153,7 @@ module.exports = async (client, message) => {
                 message.guild.members.cache
                   .get(message.author.id)
                   .roles.add(data.Role);
-              } catch {}
+              } catch { }
             }
           }
         );
@@ -191,7 +192,7 @@ module.exports = async (client, message) => {
 
         if (message.member.displayName.startsWith(`[AFK] `)) {
           let name = message.member.displayName.replace(`[AFK] `, ``);
-          message.member.setNickname(name).catch((e) => {});
+          message.member.setNickname(name).catch((e) => { });
         }
       }
     }
@@ -220,35 +221,65 @@ module.exports = async (client, message) => {
   chatBotSchema.findOne({ Guild: message.guild.id }, async (err, data) => {
     if (!data) return;
     if (message.channel.id !== data.Channel) return;
-
-    try {
-      const input = message;
-      try {
-        fetch(
-          `https://api.monkedev.com/fun/chat?msg=${encodeURIComponent(input)}`
-        )
-          .catch(() => {})
-          .then((res) => res.json())
-          .catch(() => {})
-          .then(async (json) => {
-            if (json) {
-              if (
-                json.response !== " " ||
-                json.response !== undefined ||
-                json.response !== "" ||
-                json.response !== null
-              ) {
-                try {
-                  return message
-                    .reply({ content: json.response })
-                    .catch(() => {});
-                } catch {}
-              }
-            }
+    if (process.env.OPENAI) {
+      fetch(
+        `https://api.openai.com/v1/completions`,
+        {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+            'Authorization': 'Bearer ' + process.env.OPENAI,
+          },
+          // body: '{\n  "model": "text-davinci-003",\n  "prompt": "What is your name?",\n  "max_tokens": 4000,\n  "temperature": 0\n}',
+          body: JSON.stringify({
+            'model': 'text-davinci-003',
+            'prompt': message.content,
+            'temperature': 0,
+            'max_tokens': 256,
+            'top_p': 1,
+            'frequency_penalty': 0,
+            'presence_penalty': 0,
           })
-          .catch(() => {});
-      } catch {}
-    } catch {}
+        }
+      )
+        .catch(() => {
+        })
+        .then((res) => {
+          res.json().then((data) => {
+            message.channel.send({ content: data.choices[0].text });
+          });
+        });
+    } else {
+      try {
+        const input = message;
+        try {
+          fetch(
+            `https://api.coreware.nl/fun/chat?msg=${encodeURIComponent(input)}`
+          )
+            .catch(() => { console.log })
+            .then((res) => res.json())
+            .catch(() => { console.log})
+            .then(async (json) => {
+              console.log(json);
+              if (json) {
+                if (
+                  json.response !== " " ||
+                  json.response !== undefined ||
+                  json.response !== "" ||
+                  json.response !== null
+                ) {
+                  try {
+                    return message
+                      .reply({ content: json.response })
+                      .catch(() => { });
+                  } catch { }
+                }
+              }
+            })
+            .catch(() => { });
+        } catch { }
+      } catch { }
+    }
   });
 
   // Sticky messages
@@ -260,7 +291,7 @@ module.exports = async (client, message) => {
 
         const lastStickyMessage = await message.channel.messages
           .fetch(data.LastMessage)
-          .catch(() => {});
+          .catch(() => { });
         if (!lastStickyMessage) return;
         await lastStickyMessage.delete({ timeout: 1000 });
 
@@ -273,7 +304,7 @@ module.exports = async (client, message) => {
         data.save();
       }
     );
-  } catch {}
+  } catch { }
 
   // Prefix
   var guildSettings = await Functions.findOne({ Guild: message.guild.id });
@@ -359,7 +390,7 @@ module.exports = async (client, message) => {
         },
         message.channel
       )
-      .catch(() => {});
+      .catch(() => { });
   }
 
   const cmd = await Commands.findOne({
@@ -399,7 +430,7 @@ module.exports = async (client, message) => {
   if (command) {
     let row = new Discord.ActionRowBuilder().addComponents(
       new Discord.ButtonBuilder()
-      .setLabel("Invite")
+        .setLabel("Invite")
         .setURL(
           client.config.discord.botInvite
         )
@@ -416,11 +447,11 @@ module.exports = async (client, message) => {
         title: "👋・Hi, i'm Bot",
         desc: `Bot is now completely in ${client.emotes.normal.slash} commands. The current message commands have expired! Try our new improved commands and make your server better with Bot!`,
         fields: [
-            {
+          {
             name: "❓┇I don't see any slash commands",
             value:
               "The bot may not have permissions for this. Open the invite link again and select your server. The bot then gets the correct permissions",
-           },
+          },
         ],
         components: [row],
       },
@@ -429,4 +460,4 @@ module.exports = async (client, message) => {
   }
 };
 
- 
+

@@ -38,8 +38,6 @@ module.exports = async (client, reaction, user) => {
       const foundStar = stars.embeds[0];
       const image = reaction.message.attachments.size > 0 ? await extension(reaction, reaction.message.attachments.first()?.url) : "";
       const starMsg = await starboardChannel.messages.fetch(stars.id);
-      starMsg.delete();
-
       client.embed({
         title: `⭐・Starboard`,
         desc: foundStar.description,
@@ -62,7 +60,8 @@ module.exports = async (client, reaction, user) => {
           }
         ],
         footer: `${client.config.discord.footer} | ${reaction.message.id}`,
-      }, starboardChannel)
+        type: 'edit'
+      }, starMsg)
     }
     if (!stars) {
       const image = reaction.message.attachments.size > 0 ? await extension(reaction, reaction.message.attachments.first()?.url) : "";

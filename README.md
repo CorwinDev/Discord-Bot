@@ -21,4 +21,4 @@ Don't wanna host it yourself? [Use our public bot!](https://discord.com/api/oaut
 
 *You may not claim this as your own!!*
 
-**Copyright to DotwoodMedia and CorwinDev**
+**Copyright to DotwoodMedia, Graphix Development and CorwinDev**

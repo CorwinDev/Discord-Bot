@@ -123,7 +123,7 @@ module.exports = (client) => {
                                     .setAuthor(client.user.username, client.user.avatarURL())
                                     .setDescription(`Discord links are not allowed in this server!`)
                                     .setColor(client.config.colors.error)
-                                    .setFooter(client.config.discord.footer)
+                                    .setFooter({ text: client.config.discord.footer })
                                     .setTimestamp();
                                 var msg = newMessage.channel.send({ content: `${newMessage.author}`, embeds: [error] })
                                 setTimeout(() => {
@@ -153,7 +153,7 @@ module.exports = (client) => {
                                     .setAuthor(client.user.username, client.user.avatarURL())
                                     .setDescription(`Links are not allowed in this server!`)
                                     .setColor(client.config.colors.error)
-                                    .setFooter(client.config.discord.footer)
+                                    .setFooter({ text: client.config.discord.footer })
                                     .setTimestamp();
                                 var msg = newMessage.channel.send({ content: `${newMessage.author}`, embeds: [error] })
                                 setTimeout(() => {
@@ -172,7 +172,7 @@ module.exports = (client) => {
                                     .setAuthor(client.user.username, client.user.avatarURL())
                                     .setDescription(`Links are not allowed in this server!`)
                                     .setColor(client.config.colors.error)
-                                    .setFooter(client.config.discord.footer)
+                                    .setFooter({ text: client.config.discord.footer })
                                     .setTimestamp();
                                 var msg = newMessage.channel.send({ content: `${newMessage.author}`, embeds: [error] })
                                 setTimeout(() => {

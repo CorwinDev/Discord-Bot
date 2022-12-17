@@ -17,9 +17,12 @@ module.exports = {
      */
 
     run: async (client, interaction, args) => {
-        await interaction.deferReply({ fetchReply: true });
-        const member = interaction.guild.members.cache.get(interaction.targetId);
-
+        await interaction.deferReply({ ephemeral: false });
+        const member = await interaction.guild.members.fetch(interaction.options.getUser('user').id);
+        if (!member) return client.errNormal({
+            error: "This user is not in this guild!",
+            type: 'editreply'
+        }, interaction);
         const badgeFlags = {
             DEVELOPER: client.emotes.badges.developer,
             BUGS: client.emotes.badges.bug,
@@ -55,7 +58,6 @@ module.exports = {
             VerifiedDeveloper: "👨‍💻・(early)Verified Bot Developer",
         }
 
-
         let Badges = await model.findOne({ User: member.user.id });
         if (!Badges) Badges = { User: member.user.id }
         const roles = member.roles.cache
@@ -64,27 +66,11 @@ module.exports = {
             .slice(0, -1);
         const userFlags = member.user.flags ? member.user.flags.toArray() : [];
 
-        const userBanner = await axios.get(`https://discord.com/api/users/${member.id}`, {
-            headers: {
-                Authorization: `Bot ${client.token}`,
-            },
-        })
-
-        var nickName = member.nickname;
-
-        const { banner } = userBanner.data;
-        let url = "";
-
-        if (banner) {
-            const extension = banner.startsWith("a_") ? ".gif" : ".png";
-            url = `https://cdn.discordapp.com/banners/${member.id}/${banner}${extension}?size=1024`;
-        }
-
         return client.embed({
             title: `👤・User information`,
             desc: `Information about ${member.user.username}`,
             thumbnail: member.user.displayAvatarURL({ dynamic: true, size: 1024 }),
-            image: url,
+            image: member.user.bannerURL({ dynamic: true, size: 1024 }),
             fields: [
                 {
                     name: "Username",
@@ -98,11 +84,11 @@ module.exports = {
                 },
                 {
                     name: "Nickname",
-                    value: `${nickName || 'No nickname'}`,
+                    value: `${member.nickname || 'No nickname'}`,
                     inline: true,
                 },
                 {
-                    name: "id",
+                    name: "Id",
                     value: `${member.user.id}`,
                     inline: true,
                 },
@@ -128,7 +114,7 @@ module.exports = {
                 },
                 {
                     name: `Roles [${roles.length}]`,
-                    value: `${roles.join(', ')}`,
+                    value: `${roles.length ? roles.join(', ') : 'None'}`,
                     inline: false,
                 }
             ],

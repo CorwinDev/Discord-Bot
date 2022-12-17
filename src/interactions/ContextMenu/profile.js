@@ -18,6 +18,7 @@ module.exports = {
      */
 
     run: async (client, interaction, args) => {
+        await interaction.deferReply({ fetchReply: true });
         const badgeFlags = {
             DEVELOPER: client.emotes.badges.developer,
             EVENT: client.emotes.badges.event,
@@ -39,19 +40,24 @@ module.exports = {
         }
 
         const flags = {
-            DISCORD_EMPLOYEE: '<:discordstaff:868235527059537960>',
-            DISCORD_PARTNER: '<:serverownerpartner:868235522139619418>',
-            BUGHUNTER_LEVEL_1: '<:bughunter1:868235523167240342>',
-            BUGHUNTER_LEVEL_2: '<:bughunter2:868235521099444374>',
-            HYPESQUAD_EVENTS: '<:hypesquadevents:868235528103944232>',
-            HOUSE_BRAVERY: '<:hypesquadbravery:868235530020716584>',
-            HOUSE_BRILLIANCE: '<:hypesquadbrilliance:868235525834817536>',
-            HOUSE_BALANCE: '<:hypesquadbalance:868235523657965579>',
-            EARLY_SUPPORTER: '<:earlysupporter:868235524882722866>',
-            SYSTEM: 'System',
-            VERIFIED_BOT: '<:verifieBot:868235529039265842>',
-            VERIFIED_DEVELOPER: '<:verifieBotdev:853642406121439273>'
+            ActiveDeveloper: "👨‍💻・Active Developer",
+            BugHunterLevel1: "🐛・Discord Bug Hunter",
+            BugHunterLevel2: "🐛・Discord Bug Hunter",
+            CertifiedModerator: "👮‍♂️・Certified Moderator",
+            HypeSquadOnlineHouse1: "🏠・House Bravery Member",
+            HypeSquadOnlineHouse2: "🏠・House Brilliance Member",
+            HypeSquadOnlineHouse3: "🏠・House Balance Member",
+            HypeSquadEvents: "🏠・HypeSquad Events",
+            PremiumEarlySupporter: "👑・Early Supporter",
+            Partner: "👑・Partner",
+            Quarantined: "🔒・Quarantined", // Not sure if this is still a thing
+            Spammer: "🔒・Spammer", // Not sure if this one works
+            Staff: "👨‍💼・Discord Staff",
+            TeamPseudoUser: "👨‍💼・Discord Team",
+            VerifiedBot: "🤖・Verified Bot",
+            VerifiedDeveloper: "👨‍💻・(early)Verified Bot Developer",
         }
+
 
         const user = interaction.guild.members.cache.get(interaction.targetId);
 
@@ -180,7 +186,7 @@ module.exports = {
                 }, interaction);
             }
             else {
-                return client.errNormal({ error: "No profile found! Open a profile with createprofile", type: 'editreply' }, interaction);
+                return client.errNormal({ error: "No profile found! Open a profile with /profile create", type: 'editreply' }, interaction);
             }
         })
     },

@@ -36,7 +36,7 @@ module.exports = async (client, interaction, args) => {
                         { name: "👤┆Banned By", value: `${interaction.user} (${interaction.user.tag})`, inline: true },
                     )
                     .setColor(client.config.colors.normal)
-                    .setFooter(client.config.discord.footer)
+                    .setFooter({ text: client.config.discord.footer })
                     .setTimestamp();
                 webhookClientLogs.send({
                     username: 'Bot Bans',
@@ -61,7 +61,7 @@ module.exports = async (client, interaction, args) => {
                             { name: "👤┆Unbanned By", value: `${interaction.user} (${interaction.user.tag})`, inline: true },
                         )
                         .setColor(client.config.colors.normal)
-                        .setFooter(client.config.discord.footer)
+                        .setFooter({ text: client.config.discord.footer })
                         .setTimestamp();
                     webhookClientLogs.send({
                         username: 'Bot Bans',

@@ -21,7 +21,7 @@ module.exports = async (client, message) => {
 
   if (message.author.bot) return;
 
-  if (message.channel.type === "DM") {
+  if (message.channel.type === Discord.ChannelType.DM) {
     let embedLogs = new Discord.EmbedBuilder()
       .setTitle(`💬・New DM message!`)
       .setDescription(`Bot has received a new DM message!`)

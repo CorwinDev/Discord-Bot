@@ -9,13 +9,11 @@ const CommandsSchema = require("../../database/models/customCommandAdvanced");
 module.exports = async (client, interaction) => {
     // Commands
     if (interaction.isCommand() || interaction.isUserContextMenuCommand()) {
-        await interaction.deferReply({ fetchReply: true });
-
         banSchema.findOne({ User: interaction.user.id }, async (err, data) => {
             if (data) {
                 return client.errNormal({
                     error: "You have been banned by the developers of this bot",
-                    type: 'ephemeraledit'
+                    type: 'ephemeral'
                 }, interaction);
             }
             else {
@@ -41,18 +39,20 @@ module.exports = async (client, interaction) => {
                             return client.simpleEmbed(
                                 {
                                     desc: `${cmdx.Responce}`,
-                                    type: 'editreply'
+                                    type: 'reply'
                                 },
                                 interaction,
                             );
                         } else if (cmdx.Action == "DM") {
-                            interaction.deleteReply();
+                            await interaction.deferReply({ ephemeral: true });
+                            interaction.editReply({ content: "I have sent you something in your DMs" });
                             return interaction.user.send({ content: cmdx.Responce }).catch((e) => {
                                 client.errNormal(
                                     {
                                         error: "I can't DM you, maybe you have DM turned off!",
+                                        type: 'ephemeral'
                                     },
-                                    interaction
+                                    interaction,
                                 );
                             });
                         }
@@ -64,7 +64,7 @@ module.exports = async (client, interaction) => {
                     return client.embed({
                         title: `❓・Help panel`,
                         desc: `Get help with the commands in \`${interaction.commandName}\` \n\n${commands}`,
-                        type: 'editreply'
+                        type: 'reply'
                     }, interaction)
                 }
 

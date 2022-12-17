@@ -14,6 +14,7 @@ module.exports = {
      */
 
     run: async (client, interaction, args) => {
+        await interaction.deferReply({ fetchReply: true });
         let row = new Discord.ActionRowBuilder()
             .addComponents(
                 new Discord.ButtonBuilder()

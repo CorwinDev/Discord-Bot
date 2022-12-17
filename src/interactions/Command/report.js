@@ -29,6 +29,7 @@ module.exports = {
      */
 
     run: async (client, interaction, args) => {
+        await interaction.deferReply({ fetchReply: true });
         const webhookClient = new Discord.WebhookClient({
             id: client.webhooks.bugReportLogs.id,
             token: client.webhooks.bugReportLogs.token

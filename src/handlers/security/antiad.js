@@ -104,9 +104,16 @@ module.exports = (client) => {
                                     .setAuthor(client.user.username, client.user.avatarURL())
                                     .setDescription(`Discord links are not allowed in this server!`)
                                     .setColor(client.config.colors.error)
-                                    .setFooter(client.config.discord.footer)
+                                    .setFooter({ text: client.config.discord.footer })
                                     .setTimestamp();
-                                newMessage.channel.send({ content: `${newMessage.author}`, embeds: [error] })
+                                var msg = newMessage.channel.send({ content: `${newMessage.author}`, embeds: [error] })
+                                setTimeout(() => {
+                                    try{
+                                        msg.delete();
+                                    } catch (e) {
+                                        return;
+                                    }
+                                }, 5000)
                             }
                             else {
                                 if (newMessage.member.permissions.has(Discord.PermissionsBitField.Flags.ManageMessages)) return;
@@ -118,7 +125,14 @@ module.exports = (client) => {
                                     .setColor(client.config.colors.error)
                                     .setFooter(client.config.discord.footer)
                                     .setTimestamp();
-                                newMessage.channel.send({ content: `${newMessage.author}`, embeds: [error] })
+                                var msg = newMessage.channel.send({ content: `${newMessage.author}`, embeds: [error] })
+                                setTimeout(() => {
+                                    try {
+                                        msg.delete();
+                                    } catch (e) {
+                                        return;
+                                    }
+                                }, 5000)
                             }
                         })
                     }
@@ -141,7 +155,14 @@ module.exports = (client) => {
                                     .setColor(client.config.colors.error)
                                     .setFooter(client.config.discord.footer)
                                     .setTimestamp();
-                                newMessage.channel.send({ content: `${newMessage.author}`, embeds: [error] })
+                                var msg = newMessage.channel.send({ content: `${newMessage.author}`, embeds: [error] })
+                                setTimeout(() => {
+                                    try {
+                                        msg.delete();
+                                    } catch (e) {
+                                        return;
+                                    }
+                                }, 5000)
                             }
                             else {
                                 if (newMessage.member.permissions.has(Discord.PermissionsBitField.Flags.ManageMessages)) return;
@@ -153,7 +174,14 @@ module.exports = (client) => {
                                     .setColor(client.config.colors.error)
                                     .setFooter(client.config.discord.footer)
                                     .setTimestamp();
-                                newMessage.channel.send({ content: `${newMessage.author}`, embeds: [error] })
+                                var msg = newMessage.channel.send({ content: `${newMessage.author}`, embeds: [error] })
+                                setTimeout(() => {
+                                    try {
+                                        msg.delete();
+                                    } catch (e) {
+                                        return;
+                                    }
+                                }, 5000)
                             }
                         })
                     }

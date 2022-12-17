@@ -4,7 +4,7 @@ const Schema = require("../../database/models/wordsnake");
 
 module.exports = async (client) => {
   client.on(Discord.Events.MessageCreate, async (message) => {
-    if (message.author.bot || message.channel.type === 'DM') return;
+    if (message.author.bot || message.channel.type === Discord.ChannelType.DM) return;
 
     Schema.findOne({ Guild: message.guild.id, Channel: message.channel.id }, async (err, data) => {
       if (data) {
@@ -36,7 +36,7 @@ module.exports = async (client) => {
           }
         }
         catch (err) {
-          throw err;
+          console.log(err);
         }
       }
     })

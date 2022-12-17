@@ -12,20 +12,17 @@ module.exports = async (client, reaction, user) => {
       
     if (reaction.message.author.id === user.id)
       return client.errNormal({
-        error: `You cannot star your own messages`,
-        type: "ephemeral",
-      }, reaction.message);
+        error: `You cannot star your own messages\n\nMessage: ${reaction.message.cleanContent}`,
+      }, client.users.cache.get(user.id));
 
     if (reaction.message.author.bot) return client.errNormal({
-      error: `You cannot star bot messages`,
-      type: "ephemeral",
-    }, reaction.message);
+      error: `You cannot star bot messages\n\nMessage: ${reaction.message.cleanContent}`,
+    }, client.users.cache.get(user.id));
 
     const starboardChannel = reaction.message.guild.channels.cache.get(data.Channel);
     if (!starboardChannel) return client.errNormal({
       error: `No star channel found! Run the channel setup`,
-      type: 'ephemeral'
-    }, reaction.message);
+    }, client.users.cache.get(user.id));
 
     const fetch = await starboardChannel.messages.fetch({ limit: 100 });
     const stars = fetch.find(m =>

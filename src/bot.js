@@ -44,6 +44,7 @@ const client = new Discord.Client({
         Discord.GatewayIntentBits.DirectMessageReactions,
         Discord.GatewayIntentBits.DirectMessageTyping,
         Discord.GatewayIntentBits.GuildScheduledEvents,
+        Discord.GatewayIntentBits.GuildPresences,
         Discord.GatewayIntentBits.MessageContent
     ],
     restTimeOffset: 0

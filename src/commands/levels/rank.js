@@ -24,7 +24,7 @@ module.exports = async (client, interaction, args) => {
             .setProgressBar(client.config.colors.normal, "COLOR")
             .setUsername(target.username)
             .setDiscriminator(target.discriminator)
-            .setStatus("dnd")
+            .setStatus(interaction.member.presence.status)
             .setRank(user.position)
 
         rankCard.build()

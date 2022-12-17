@@ -22,6 +22,16 @@ module.exports = {
                 .setName('members')
                 .setDescription('See how many members there are in this server')
         )
+        .addSubcommand((subcommand) =>
+            subcommand
+                .setName('avatar')
+                .setDescription('View server avatar'),
+        )
+        .addSubcommand((subcommand) =>
+            subcommand
+                .setName('banner')
+                .setDescription('View server banner'),
+        )
         .addSubcommand(subcommand =>
             subcommand
                 .setName('oldestmember')

@@ -15,49 +15,13 @@ axios.get('https://api.github.com/repos/CorwinDev/Discord-Bot/releases/latest').
 
 const webhook = require("./config/webhooks.json");
 const config = require("./config/bot.js");
+const webHooksArray = ['startLogs', 'shardLogs', 'errorLogs', 'dmLogs', 'voiceLogs', 'serverLogs', 'serverLogs2', 'commandLogs', 'consoleLogs', 'warnLogs', 'voiceErrorLogs', 'creditLogs', 'evalLogs', 'interactionLogs'];
 // Check if .env webhook_id and webhook_token are set
 if (process.env.WEBHOOK_ID && process.env.WEBHOOK_TOKEN) {
-    webhook.startLogs.id = process.env.WEBHOOK_ID;
-    webhook.startLogs.token = process.env.WEBHOOK_TOKEN;
-
-    webhook.shardLogs.id = process.env.WEBHOOK_ID;
-    webhook.shardLogs.token = process.env.WEBHOOK_TOKEN;
-
-    webhook.errorLogs.id = process.env.WEBHOOK_ID;
-    webhook.errorLogs.token = process.env.WEBHOOK_TOKEN;
-
-    webhook.dmLogs.id = process.env.WEBHOOK_ID;
-    webhook.dmLogs.token = process.env.WEBHOOK_TOKEN;
-
-    webhook.voiceLogs.id = process.env.WEBHOOK_ID;
-    webhook.voiceLogs.token = process.env.WEBHOOK_TOKEN;
-
-    webhook.serverLogs.id = process.env.WEBHOOK_ID;
-    webhook.serverLogs.token = process.env.WEBHOOK_TOKEN;
-
-    webhook.serverLogs2.id = process.env.WEBHOOK_ID;
-    webhook.serverLogs2.token = process.env.WEBHOOK_TOKEN;
-
-    webhook.commandLogs.id = process.env.WEBHOOK_ID;
-    webhook.commandLogs.token = process.env.WEBHOOK_TOKEN;
-
-    webhook.consoleLogs.id = process.env.WEBHOOK_ID;
-    webhook.consoleLogs.token = process.env.WEBHOOK_TOKEN;
-
-    webhook.warnLogs.id = process.env.WEBHOOK_ID;
-    webhook.warnLogs.token = process.env.WEBHOOK_TOKEN;
-
-    webhook.voiceErrorLogs.id = process.env.WEBHOOK_ID;
-    webhook.voiceErrorLogs.token = process.env.WEBHOOK_TOKEN;
-
-    webhook.creditLogs.id = process.env.WEBHOOK_ID;
-    webhook.creditLogs.token = process.env.WEBHOOK_TOKEN;
-
-    webhook.evalLogs.id = process.env.WEBHOOK_ID;
-    webhook.evalLogs.token = process.env.WEBHOOK_TOKEN;
-
-    webhook.interactionLogs.id = process.env.WEBHOOK_ID;
-    webhook.interactionLogs.token = process.env.WEBHOOK_TOKEN;
+    for (const webhookName of webHooksArray) {
+        webhook[webhookName].id = process.env.WEBHOOK_ID;
+        webhook[webhookName].token = process.env.WEBHOOK_TOKEN;
+    }
 }
 
 

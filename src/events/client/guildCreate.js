@@ -44,8 +44,7 @@ module.exports = async (client, guild) => {
         let defaultChannel = "";
         guild.channels.cache.forEach((channel) => {
             if (channel.type == Discord.ChannelType.GuildText && defaultChannel == "") {
-                console.log(channel.permissionsFor(guild.me).has(Discord.PermissionFlagsBits.SendMessages))
-                if (channel.permissionsFor(guild.me).has()) {
+                if (channel.permissionsFor(guild.members.me).has(Discord.PermissionFlagsBits.SendMessages)) {
                     defaultChannel = channel;
                 }
             }

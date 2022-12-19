@@ -18,7 +18,6 @@ module.exports = {
      */
 
     run: async (client, interaction, args) => {
-        await interaction.deferReply({ fetchReply: true });
         const badgeFlags = {
             DEVELOPER: client.emotes.badges.developer,
             EVENT: client.emotes.badges.event,
@@ -63,6 +62,7 @@ module.exports = {
 
         Schema.findOne({ User: user.id }, async (err, data) => {
             if (data) {
+                await interaction.deferReply({ fetchReply: true });
                 let Badges = await model.findOne({ User: user.id });
 
                 let credits = 0;
@@ -186,7 +186,7 @@ module.exports = {
                 }, interaction);
             }
             else {
-                return client.errNormal({ error: "No profile found! Open a profile with /profile create", type: 'editreply' }, interaction);
+                return client.errNormal({ error: "No profile found! Open a profile with /profile create", type: 'ephemeral' }, interaction);
             }
         })
     },

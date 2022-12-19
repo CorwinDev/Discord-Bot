@@ -7,7 +7,7 @@ module.exports = async (client, interaction, args) => {
         thumbnail: client.user.avatarURL({ dynamic: true, size: 1024 }),
         fields: [{
             name: "👑┆Owner name",
-            value: `Corwinl`,
+            value: `Corwin`,
             inline: true,
         },
         {
@@ -17,7 +17,7 @@ module.exports = async (client, interaction, args) => {
         },
         {
             name: "🏢┆Organization",
-            value: `CorwinDev`,
+            value: `CoreWare`,
             inline: true,
         },
         {

@@ -169,7 +169,6 @@ process.on('unhandledRejection', error => {
                 value: error.stack ? Discord.codeBlock(error.stack) : "No stack error",
             }
         ])
-        .setColor(client.config.colors.normal)
     consoleLogs.send({
         username: 'Bot Logs',
         embeds: [embed],
@@ -187,7 +186,6 @@ process.on('warning', warn => {
                 value: `\`\`\`${warn}\`\`\``,
             },
         ])
-        .setColor(client.config.colors.normal)
     warnLogs.send({
         username: 'Bot Logs',
         embeds: [embed],

@@ -14,7 +14,7 @@ Do you like the bot? Leave a star! Or donate at https://github.com/sponsors/Corw
 
 Don't wanna host it yourself? [Use our public bot!](https://discord.com/api/oauth2/authorize?client_id=1051755231848972328&permissions=8&scope=bot%20applications.commands)
 
-### Replit: https://replit.com/@CorwinDeveloper/Discord-Bot?v=1
+### Replit: https://replit.com/@CorwinDeveloper/Discord-Bot-v14?v=1
 
 ### Discord: https://discord.gg/qHXxpQKC2H
 

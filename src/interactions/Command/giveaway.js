@@ -17,7 +17,7 @@ module.exports = {
             subcommand
                 .setName('start')
                 .setDescription('Start a giveaway')
-                .addChannelOption(option => option.setName('channel').setDescription('Channel where the giveaway should be').setRequired(true).addChannelTypes(ChannelType.GuildText))
+                .addChannelOption(option => option.setName('channel').setDescription('Channel where the giveaway should be').setRequired(true).addChannelTypes(ChannelType.GuildText, ChannelType.GuildAnnouncement))
                 .addStringOption(option => option.setName('duration').setDescription('Duration of the giveaway').setRequired(true))
                 .addNumberOption(option => option.setName('winners').setDescription('The number of giveaway winners').setRequired(true))
                 .addStringOption(option => option.setName('prize').setDescription('The giveaway prize').setRequired(true)),
@@ -26,7 +26,7 @@ module.exports = {
             subcommand
                 .setName('drop')
                 .setDescription('Start a drop giveaway')
-                .addChannelOption(option => option.setName('channel').setDescription('Channel where the giveaway should be').setRequired(true).addChannelTypes(ChannelType.GuildText))
+                .addChannelOption(option => option.setName('channel').setDescription('Channel where the giveaway should be').setRequired(true).addChannelTypes(ChannelType.GuildText, ChannelType.GuildAnnouncement))
                 .addStringOption(option => option.setName('duration').setDescription('Duration of the giveaway').setRequired(true))
                 .addNumberOption(option => option.setName('winners').setDescription('The number of giveaway winners').setRequired(true))
                 .addStringOption(option => option.setName('prize').setDescription('The giveaway prize').setRequired(true)),

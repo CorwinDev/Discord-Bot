@@ -95,8 +95,11 @@ If you liked this repository, feel free to leave a star ⭐ to motivate me!
 [Support Server](https://discord.gg/jVeC7cFX5T) - Discord-Bot's Support Server Invite
 
 # <img src="https://cdn.discordapp.com/emojis/1015745034076819516.png" width="25px" height="25px">》Faq
-> How to get access to Developers Commands? You will have to set them up via MongoDB [Click here for a guide]()
+> How to get access to Developers Commands? You will have to set them up via MongoDB or run the below command.
 
+```bash
+npm add-dev YOUR_ID
+```
 # Donate
 
  By Donating, You Will Help Me To Maintain This Project 

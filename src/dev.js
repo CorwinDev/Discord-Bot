@@ -5,6 +5,7 @@
 * 
 * @string member - The member you want to add the badge to
 */
+const chalk = require('chalk');
 if (!process.argv[2]) {
     console.log(chalk.red(`[ERROR]`), chalk.white(`>>`), chalk.red(`Developer Badge`), chalk.white(`>>`), chalk.red(`Please provide a member id!`))
     process.exit(1);
@@ -14,7 +15,6 @@ require('dotenv').config('./.env');
 const mongoose = require('mongoose');
 // Require the model
 const model = require('./database/models/badge.js');
-const chalk = require('chalk');
 // Connect to the database
 mongoose.set('strictQuery', false);
 // Await the connection

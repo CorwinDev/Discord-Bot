@@ -8,7 +8,11 @@ module.exports = async (client) => {
     //----------------------------------------------------------------//
     //                         Permissions                            //
     //----------------------------------------------------------------//
-
+    // All bitfields to name
+    client.bitfieldToName = function (bitfield) {
+        const permissions = new Discord.PermissionsBitField(bitfield);
+        return permissions.toArray();
+    }
     client.checkPerms = async function ({
         flags: flags,
         perms: perms
@@ -16,7 +20,7 @@ module.exports = async (client) => {
         for (let i = 0; i < flags.length; i++) {
             if (!interaction.member.permissions.has(flags[i])) {
                 client.errMissingPerms({
-                    perms: perms[i],
+                    perms: client.bitfieldToName(flags[i]) || flags[i],
                     type: 'editreply'
                 }, interaction);
 
@@ -24,18 +28,13 @@ module.exports = async (client) => {
             }
             if (!interaction.guild.members.me.permissions.has(flags[i])) {
                 client.errNoPerms({
-                    perms: perms[i],
+                    perms: client.bitfieldToName(flags[i]) || flags[i],
                     type: 'editreply'
                 }, interaction);
 
                 return false
             }
         }
-    }
-    // All bitfields to name
-    client.bitfieldToName = function (bitfield) {
-        const permissions = new Discord.PermissionsBitField(bitfield);
-        return permissions.toArray();
     }
     client.checkBotPerms = async function ({
         flags: flags,

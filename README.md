@@ -7,6 +7,10 @@
 [![MIT License][license-shield]][license-url]
 <center><img src="https://capsule-render.vercel.app/api?type=waving&color=gradient&height=200&section=header&text=Discord-Bot&fontSize=80&fontAlignY=35&animation=twinkling&fontColor=gradient" /></center>
 
+<br />
+
+[![Run on Repl.it](https://repl.it/badge/github/CorwinDev/Discord-Bot)](https://replit.com/@CorwinDeveloper/Discord-Bot-v14?v=1)
+[![Remix on Glitch](https://cdn.glitch.com/2703baf2-b643-4da7-ab91-7ee2a2d00b5b%2Fremix-button.svg)](https://glitch.com/edit/#!/import/github/CorwinDev/Discord-Bot)
 
 <!-- PROJECT LOGO -->
 <br />
@@ -39,6 +43,7 @@
 - [x] Reaction Roles
 - [x] Giveaways 
 - [x] Easy to use
+- [x] Don't wanna host it yourself? [Use our public bot](https://discord.com/api/oauth2/authorize?client_id=1051755231848972328&permissions=8&scope=bot%20applications.commands)
 ## 🖼️ Screenshots
 <br />
 <p align="center">
@@ -68,8 +73,10 @@ To start your bot
 ```
 node src/index.js
 ```
-### About
-Discord-Bot is a Multipurpose Discord bot base in [Discord.js](https://github.com/Discordjs/discordjs)
+### <img src="https://cdn.discordapp.com/emojis/1055803759831294013.png" width="20px" height="20px"> 》Notice
+> You may not claim this as your own!! **Copyright to Graphix Development and CorwinDev**
+
+> Discord-Bot is a Multipurpose Discord bot base in [Discord.js](https://github.com/Discordjs/discordjs)
 If you liked this repository, feel free to leave a star ⭐ to motivate me!
 
 ## 💌 Support Server
@@ -80,7 +87,7 @@ If you liked this repository, feel free to leave a star ⭐ to motivate me!
 
  By Donating, You Will Help Me To Maintain This Project 
 
-- [Sponsor](https://github.com/sponsors/CorwinDev)
+<img src="https://cdn.discordapp.com/emojis/809085860632985630.png" width="20px" height="20px"> 》[Sponsor](https://github.com/sponsors/CorwinDev)
 
 
 [version-shield]: https://img.shields.io/github/package-json/v/CorwinDev/Discord-Bot?style=for-the-badge

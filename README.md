@@ -16,7 +16,7 @@
 <br />
 <p align="center">
   <a href="https://github.com/corwindev/Discord-Bot">
-    <img src="https://cdn.discordapp.com/avatars/755297485328482356/8de823efa9bffa87e9eafcf70750d757.webp" alt="Pbot-plus" width="200" height="200">
+    <img src="https://cdn.discordapp.com/attachments/778665159316209748/1055857473749274694/Corwin-1-modified.png" alt="Pbot-plus" width="200" height="200">
   </a>
 
   <h3 align="center">Discord-Bot</h3>
@@ -32,9 +32,9 @@
 </p>
 <!-- ABOUT THE PROJECT -->
 
-## <img src="https://cdn.discordapp.com/emojis/989970681506697266.png" width="20px" height="20px"> 》Description 
+## <img src="https://cdn.discordapp.com/emojis/859424401186095114.png" width="20px" height="20px">》Description 
 [![Readme Card](https://github-readme-stats.vercel.app/api/pin/?username=corwindev&repo=Discord-bot&theme=tokyonight)](https://github.com/corwindev/Discord-bot)
-## <img src="https://cdn.discordapp.com/emojis/852881450667081728.gif" width="20px" height="20px"> 》Feature
+## <img src="https://cdn.discordapp.com/emojis/852881450667081728.gif" width="20px" height="20px">》Feature
 - [x] Slash Commands 
 - [x] Upto date with Discord.js v14
 - [x] Automod 
@@ -44,7 +44,7 @@
 - [x] Giveaways 
 - [x] Easy to use
 - [x] Don't wanna host it yourself? [Use our public bot](https://discord.com/api/oauth2/authorize?client_id=1051755231848972328&permissions=8&scope=bot%20applications.commands)
-## 🖼️ Screenshots
+## <img src="https://cdn.discordapp.com/emojis/1028680849195020308.png" width="25px" height="25px">》Screenshots
 <br />
 <p align="center">
   <a href="https://github.com/corwindev/discord-bot">
@@ -52,25 +52,24 @@
   </a>
 </p>
 
-## 🎛️ Requirements
+## <img src="https://cdn.discordapp.com/emojis/1009754836314628146.gif" width="25px" height="25px">》Requirements
 - [x] NodeJs v17+
-- [x] Java v13 (for lavalink server)
+- [x] Java v13 (for lavalink server, [click here for a guide]())
 - [x] Discord Token (Get it from [Discord Developers Portal](https://discord.com/developers/applications) )
 - [x] Mongo Database URL (Get it from [MongoDB](https://cloud.mongodb.com/v2/635277bf9f5c7b5620db28a4#clusters) )
-- [x] Giphy API Token (Get it from ....)
-- [x] APi Key for OpenAi (Get it from [OpenAi Developers Portal](https://beta.openai.com/account/api-keys) )
+- [x] Giphy API Token (Get it from [Giphy Developers Portal](https://developers.giphy.com/))
+- [x] APi Key for OpenAi (Get it from [OpenAi Developers Portal](https://beta.openai.com/account/api-keys) )6
 
-## ⚙️ Installation 
+## <img src="https://cdn.discordapp.com/emojis/814216203466965052.png" width="25px" height="25px">》Installation Guide
 Fill all requirement in `.env` **(rename `.env.example` to `.env`)**
+### <img src="https://cdn.discordapp.com/emojis/1028680849195020308.png" width="15px" height="15px"> Installing via [NPM](https://www.npmjs.com/)
 
-Then Follow the below Steps
-
-• [Npm](https://www.npmjs.com/) 》For install all dependencies use
-```
+1. For installing all dependencies use
+```js
 npm install
 ```
-To start your bot 
-```
+2. To start your bot 
+```js
 node src/index.js
 ```
 ### <img src="https://cdn.discordapp.com/emojis/1055803759831294013.png" width="20px" height="20px"> 》Notice
@@ -79,15 +78,18 @@ node src/index.js
 > Discord-Bot is a Multipurpose Discord bot base in [Discord.js](https://github.com/Discordjs/discordjs)
 If you liked this repository, feel free to leave a star ⭐ to motivate me!
 
-## 💌 Support Server
+## <img src="https://cdn.discordapp.com/emojis/1036083490292244493.png" width="15px" height="15px">》Support Server
 [![DiscordBanner](https://invidget.switchblade.xyz/jVeC7cFX5T)](https://discord.gg/jVeC7cFX5T)
 [Support Server](https://discord.gg/jVeC7cFX5T) - Discord-Bot's Support Server Invite
+
+# <img src="https://cdn.discordapp.com/emojis/1015745034076819516.png" width="25px" height="25px">》Faq
+> How to get access to Developers Commands? You will have to set them up via MongoDB [Click here for a guide]()
 
 # Donate
 
  By Donating, You Will Help Me To Maintain This Project 
 
-<img src="https://cdn.discordapp.com/emojis/809085860632985630.png" width="20px" height="20px"> 》[Sponsor](https://github.com/sponsors/CorwinDev)
+<img src="https://cdn.discordapp.com/emojis/809085860632985630.png" width="15px" height="15px"> 》[Sponsor](https://github.com/sponsors/CorwinDev)
 
 
 [version-shield]: https://img.shields.io/github/package-json/v/CorwinDev/Discord-Bot?style=for-the-badge

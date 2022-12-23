@@ -58,7 +58,7 @@
 
 ## <img src="https://cdn.discordapp.com/emojis/1009754836314628146.gif" width="25px" height="25px">》Requirements
 - NodeJs v17+
-- Java v13 for lavalink server, [click here for a guide]())
+- Java v13 for lavalink server.
 - Discord Token. Get it from [Discord Developers Portal](https://discord.com/developers/applications)
 - Mongo Database URL. Get it from [MongoDB](https://cloud.mongodb.com/v2/635277bf9f5c7b5620db28a4#clusters)
 - Giphy API Token. Get it from [Giphy Developers Portal](https://developers.giphy.com/)

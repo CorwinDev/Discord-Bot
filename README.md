@@ -35,10 +35,9 @@
 - [x] Upto date with Discord.js v14
 - [x] Automod 
 - [X] Custom Commands
-- [x] Music System
+- [x] Music Commands
 - [x] Reaction Roles
 - [x] Giveaways 
-- [x] Custom Filters
 - [x] Easy to use
 ## 🖼️ Screenshots
 <br />
@@ -49,32 +48,25 @@
 </p>
 
 ## 🎛️ Requirements
-- [x] Node js v17+
-- [x] Java v 13 (for lavalink server)
+- [x] NodeJs v17+
+- [x] Java v13 (for lavalink server)
+- [x] Discord Token (Get it from [Discord Developers Portal](https://discord.com/developers/applications) )
+- [x] Mongo Database URL (Get it from [MongoDB](https://cloud.mongodb.com/v2/635277bf9f5c7b5620db28a4#clusters) )
+- [x] Giphy API Token (Get it from ....)
+- [x] APi Key for OpenAi (Get it from [OpenAi Developers Portal](https://beta.openai.com/account/api-keys) )
+
 ## ⚙️ Installation 
-Fill all requirement in `src/config.js` or `.env` **(rename `.env.example` to `.env`)**
+Fill all requirement in `.env` **(rename `.env.example` to `.env`)**
 
-• [yarn](https://yarnpkg.com/)
+Then Follow the below Steps
 
-For install all dependencies use
-```
-yarn
-```
-To start your bot 
-```
-yarn start
-```
-**Or**
-
-• [Npm](https://www.npmjs.com/)
-
-For install all dependencies use
+• [Npm](https://www.npmjs.com/) 》For install all dependencies use
 ```
 npm install
 ```
 To start your bot 
 ```
-npm start
+node src/index.js
 ```
 ### About
 Discord-Bot is a Multipurpose Discord bot base in [Discord.js](https://github.com/Discordjs/discordjs)
@@ -88,7 +80,7 @@ If you liked this repository, feel free to leave a star ⭐ to motivate me!
 
  By Donating, You Will Help Me To Maintain This Project 
 
-- [PayPal](https://www.paypal.me/)
+- [Sponsor](https://github.com/sponsors/CorwinDev)
 
 
 [version-shield]: https://img.shields.io/github/package-json/v/CorwinDev/Discord-Bot?style=for-the-badge

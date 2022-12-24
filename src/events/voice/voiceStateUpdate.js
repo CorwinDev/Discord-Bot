@@ -88,6 +88,9 @@ module.exports = (client, oldState, newState) => {
                     let channelName = data.ChannelName;
                     channelName = channelName.replace(`{emoji}`, "🔊")
                     channelName = channelName.replace(`{channel name}`, `Voice ${data.ChannelCount}`)
+                    channelName = channelName.replace(`{channel count}`, `${data.ChannelCount}`)
+                    channelName = channelName.replace(`{member}`, `${user.username}`)
+                    channelName = channelName.replace(`{member tag}`, `${user.tag}`)
 
                     const channel = await newState.guild.channels.create({
                         name: "⌛",

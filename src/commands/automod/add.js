@@ -14,6 +14,7 @@ module.exports = async (client, interaction, args) => {
                     type: 'editreply' 
                 }, interaction);
             }
+            if(!data.Words) data.Words = [];
             data.Words.push(word);
             data.save();
             blacklistedWords.get(interaction.guild.id).push(word);

@@ -17,6 +17,7 @@ module.exports = async (client, interaction, args) => {
             if(!data.Words) data.Words = [];
             data.Words.push(word);
             data.save();
+            if(!blacklistedWords.get(interaction.guild.id)) blacklistedWords.set(interaction.guild.id, [])
             blacklistedWords.get(interaction.guild.id).push(word);
         }
         else {

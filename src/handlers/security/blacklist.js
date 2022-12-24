@@ -1,7 +1,6 @@
 const Discord = require('discord.js');
 
 const BlackList = require("../../database/models/blacklist");
-const { blacklistedWords } = require("../../Collection");
 
 module.exports = async (client) => {
     client.on(Discord.Events.MessageCreate, async (message) => {

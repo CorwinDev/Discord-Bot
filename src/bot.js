@@ -62,8 +62,6 @@ if (clientID && clientSecret) {
             new Spotify({
                 clientID,
                 clientSecret,
-                playlistLimit: 100,
-                albumLimit: 100
             })
         ],
         nodes: [

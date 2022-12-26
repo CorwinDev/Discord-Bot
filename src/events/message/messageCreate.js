@@ -426,38 +426,6 @@ module.exports = async (client, message) => {
       });
     }
   }
-
-  if (command) {
-    let row = new Discord.ActionRowBuilder().addComponents(
-      new Discord.ButtonBuilder()
-        .setLabel("Invite")
-        .setURL(
-          client.config.discord.botInvite
-        )
-        .setStyle(Discord.ButtonStyle.Link),
-
-      new Discord.ButtonBuilder()
-        .setLabel("Support server")
-        .setURL(client.config.discord.serverInvite)
-        .setStyle(Discord.ButtonStyle.Link)
-    );
-
-    client.embed(
-      {
-        title: "👋・Hi, i'm Bot",
-        desc: `Bot is now completely in ${client.emotes.normal.slash} commands. The current message commands have expired! Try our new improved commands and make your server better with Bot!`,
-        fields: [
-          {
-            name: "❓┇I don't see any slash commands",
-            value:
-              "The bot may not have permissions for this. Open the invite link again and select your server. The bot then gets the correct permissions",
-          },
-        ],
-        components: [row],
-      },
-      message.channel
-    );
-  }
 };
 
 

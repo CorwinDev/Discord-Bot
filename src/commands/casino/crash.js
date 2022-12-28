@@ -112,6 +112,7 @@ module.exports = async (client, interaction, args) => {
                             i.deferUpdate();
 
                             index = result + 1;
+                            profit = money * multiplier;
 
                             Schema.findOne({ Guild: interaction.guild.id, User: user.id }, async (err, data) => {
                                 if (data) {
@@ -122,7 +123,6 @@ module.exports = async (client, interaction, args) => {
 
                             return client.embed({
                                 desc: `Crash Results of ${user}`,
-                                edit: true,
                                 fields: [
                                     {
                                         name: `Profit`,
@@ -130,7 +130,8 @@ module.exports = async (client, interaction, args) => {
                                         inline: false,
                                     }
                                 ],
-                                components: [disableRow]
+                                components: [disableRow],
+                                type: 'edit'
                             }, msg)
 
                         }

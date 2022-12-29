@@ -23,6 +23,10 @@ module.exports = async (client, role, oldName, newName) => {
             {
                 name: `> ID`,
                 value: `${role.id}`
+            },
+            {
+                name: `> Timestamp`,
+                value: `- <t:${Math.floor(Date.now() / 1000)}:R>`
             }
         ]
     }, logsChannel).catch(() => { })

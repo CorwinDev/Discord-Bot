@@ -20,6 +20,10 @@ module.exports = async (client, ban) => {
             {
                 name: `> ID`,
                 value: `- ${ban.user.id}`
+            },
+            {
+                name: `> Timestamp`,
+                value: `- <t:${Math.floor(ban.createdTimestamp / 1000)}:R>`
             }
         ]
     }, logsChannel).catch(() => { })

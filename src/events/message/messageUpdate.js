@@ -38,8 +38,8 @@ module.exports = async (client, oldMessage, newMessage) => {
                     value: `- <t:${Math.floor(newMessage.createdTimestamp / 1000)}:R>`
                 },
                 {
-                    name: `> Timestamp`,
-                    value: `- <t:${Math.floor(newMessage.createdTimestamp / 1000)}:R>`
+                    name: `> Jump to the Message`,
+                    value: `https://discordapp.com/channels/${newMessage.guild.id}/${newMessage.channel.id}/${newMessage.id}`
                 }
             ]
         }, logsChannel).catch(() => { })

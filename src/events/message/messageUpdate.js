@@ -36,6 +36,10 @@ module.exports = async (client, oldMessage, newMessage) => {
                 {
                     name: `> Timestamp`,
                     value: `- <t:${Math.floor(newMessage.createdTimestamp / 1000)}:R>`
+                },
+                {
+                    name: `> Timestamp`,
+                    value: `- <t:${Math.floor(newMessage.createdTimestamp / 1000)}:R>`
                 }
             ]
         }, logsChannel).catch(() => { })

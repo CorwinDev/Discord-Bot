@@ -1,7 +1,12 @@
 const Discord = require('discord.js');
 const chalk = require('chalk');
 require('dotenv').config();
-
+const express = require('express')
+const app = express()
+app.get('/', function (req, res) {
+res.send('Hello World')
+})
+app.listen(3000)
 const webhook = require("./config/webhooks.json");
 const config = require("./config/bot.js");
 

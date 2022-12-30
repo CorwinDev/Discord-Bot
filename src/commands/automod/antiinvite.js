@@ -18,7 +18,7 @@ module.exports = async (client, interaction, args) => {
     }
 
     client.succNormal({
-        text: `Anti invite is now **${boolean ? 'enabled' : 'disabled'}** in this guild`,
+        text: `Le mode Anti Invite est **${boolean ? 'activé' : 'désactivé'}** dans ce serveur`,
         type: 'editreply'
     }, interaction);
 }

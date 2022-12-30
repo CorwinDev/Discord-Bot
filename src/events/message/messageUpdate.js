@@ -1,4 +1,4 @@
-const discord = require('discord.js');
+const Discord = require('discord.js');
 
 module.exports = async (client, oldMessage, newMessage) => {
     try {
@@ -9,6 +9,15 @@ module.exports = async (client, oldMessage, newMessage) => {
         const logsChannel = await client.getLogs(oldMessage.guild.id);
         if (!logsChannel) return;
 
+let row = new Discord.ActionRowBuilder()
+                .addComponents(
+                    new Discord.ButtonBuilder()
+                        .setEmoji("🔗")
+                        .setLabel("Jump to the Message")
+                        .setURL(`https://discordapp.com/channels/${newMessage.guild.id}/${newMessage.channel.id}/${newMessage.id}`)
+                        .setStyle(Discord.ButtonStyle.Link),
+                  );
+      
         client.embed({
             title: `💬・Message updated`,
             desc: `A message has been updated`,
@@ -36,12 +45,9 @@ module.exports = async (client, oldMessage, newMessage) => {
                 {
                     name: `> Timestamp`,
                     value: `- <t:${Math.floor(newMessage.createdTimestamp / 1000)}:R>`
-                },
-                {
-                    name: `> Jump to the Message`,
-                    value: `https://discordapp.com/channels/${newMessage.guild.id}/${newMessage.channel.id}/${newMessage.id}`
-              }
-            ]
+                }
+            ],
+            components: [row]
         }, logsChannel).catch(() => { })
     }
     catch { }

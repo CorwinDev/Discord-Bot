@@ -10,7 +10,7 @@ module.exports = async (client, interaction, args) => {
             let money = parseInt(args[0]);
 
             if (!money) return client.errUsage({ usage: "blackjack [amount]", type: 'editreply' }, interaction);
-            if (money > data.Money) return client.errNormal({ error: `You are betting more than you have!`, type: 'editreply' }, interaction);
+            if (money > data.Money) return client.errNormal({ error: `Tu mises plus de ce que tu n'as !`, type: 'editreply' }, interaction);
 
             var numCardsPulled = 0;
             var gameOver = false;
@@ -152,12 +152,12 @@ module.exports = async (client, interaction, args) => {
                         desc: `${f} \n${msg}`,
                         fields: [
                             {
-                                name: `You`,
+                                name: `Toi`,
                                 value: cardsMsg,
                                 inline: true,
                             },
                             {
-                                name: `Bot`,
+                                name: `Le Friturier`,
                                 value: dealerMsg,
                                 inline: true,
                             }
@@ -171,12 +171,12 @@ module.exports = async (client, interaction, args) => {
                         desc: `${f} \n${msg}`,
                         fields: [
                             {
-                                name: `You`,
+                                name: `Toi`,
                                 value: cardsMsg,
                                 inline: true,
                             },
                             {
-                                name: `Bot`,
+                                name: `Le Friturier`,
                                 value: dealerMsg,
                                 inline: true,
                             }
@@ -192,7 +192,7 @@ module.exports = async (client, interaction, args) => {
                     bet("win");
                     gameOver = true;
                     await endMsg(
-                        `Win! You got 21!`,
+                        `Gagnant ! Tu as 21 !`,
                         `Bot had ${dealer.score.toString()}`,
                         `GREEN`
                     );
@@ -201,7 +201,7 @@ module.exports = async (client, interaction, args) => {
                     bet("lose");
                     gameOver = true;
                     await endMsg(
-                        `Lost! You reached over 21!`,
+                        `Perdu ! Tu as dépassé 21 !`,
                         `Bot had ${dealer.score.toString()}`,
                         `RED`
                     );
@@ -210,7 +210,7 @@ module.exports = async (client, interaction, args) => {
                     bet("lose");
                     gameOver = true;
                     await endMsg(
-                        `Lost! The dealer got 21!`,
+                        `Perdu ! Le dealer a 21 !`,
                         `Bot had ${dealer.score.toString()}`,
                         `RED`
                     );
@@ -219,7 +219,7 @@ module.exports = async (client, interaction, args) => {
                     bet("win");
                     gameOver = true;
                     await endMsg(
-                        `Win! Bot reached over 21!`,
+                        `Gagné ! Le Friturier a dépassé 21 !`,
                         `Bot had ${dealer.score.toString()}`,
                         `GREEN`
                     );
@@ -232,7 +232,7 @@ module.exports = async (client, interaction, args) => {
                     bet("win");
                     gameOver = true;
                     await endMsg(
-                        `Win! You defeated Bot!`,
+                        `Gagnant ! Tu as gagné face au Friturier !`,
                         `Bot had ${dealer.score.toString()}`,
                         `GREEN`
                     );
@@ -245,7 +245,7 @@ module.exports = async (client, interaction, args) => {
                     bet("lose");
                     gameOver = true;
                     await endMsg(
-                        `Lost! Bot won!`,
+                        `Perdu ! Le Friturier a gagné !`,
                         `Bot had ${dealer.score.toString()}`,
                         `RED`
                     );
@@ -256,7 +256,7 @@ module.exports = async (client, interaction, args) => {
                     dealer.score < 21
                 ) {
                     gameOver = true;
-                    await endMsg(`Tie!`, `Bot had ${dealer.score.toString()}`, `RED`);
+                    await endMsg(`Tie!`, `Le Friturier a ${dealer.score.toString()}`, `RED`);
                 }
             }
 
@@ -294,8 +294,8 @@ module.exports = async (client, interaction, args) => {
                 if (gameOver) return;
 
                 endMsg(
-                    "To hit type `h`, for stand type `s`",
-                    `GoodLuck ;)`,
+                    "Pour demander une carte, appuie sur `h`, pour s'arrêter appuie sur `s`",
+                    `Bonne chance ;)`,
                     client.color
                 );
 
@@ -313,7 +313,7 @@ module.exports = async (client, interaction, args) => {
                         }
                     })
                     .catch(_ => {
-                        interaction.channel.send("Lost!!");
+                        interaction.channel.send("Perdu !!");
                         bet("lose");
                         return;
                     });
@@ -321,7 +321,7 @@ module.exports = async (client, interaction, args) => {
             await loop();
         }
         else {
-            client.errNormal({ error: `You don't have any ${client.emotes.economy.coins}!`, type: 'editreply' }, interaction);
+            client.errNormal({ error: `Tu n'as pas assez de ${client.emotes.economy.coins}!`, type: 'editreply' }, interaction);
         }
     })
 }

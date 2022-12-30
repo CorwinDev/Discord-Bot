@@ -16,73 +16,73 @@ module.exports = async (client, interaction, args) => {
             const totalChannels = results[2].reduce((acc, channelCount) => acc + channelCount, 0);
             const totalVoice = results[3].reduce((acc, voiceCount) => acc + voiceCount, 0);
 
-            const duration = moment.duration(client.uptime).format("\`D\` [days], \`H\` [hrs], \`m\` [mins], \`s\` [secs]");
+            const duration = moment.duration(client.uptime).format("\`D\` [jours], \`H\` [h], \`m\` [m], \`s\` [s]");
 
             client.embed({
-                title: `<:uo_info:1015553303242883112>・Bot information`,
+                title: `<:uo_info:1015553303242883112>・Fiche du bot`,
                 thumbnail: client.user.avatarURL({ size: 1024 }),
                 fields: [{
                     name: "<:uo_info:1015553303242883112> ┆ Information",
-                    value: `Bot is a bot with which you can run your entire server! With no less than 400+ commands, we have a large bot with many options to improve your server!`,
+                    value: `Beep boop, je suis là pour vour servir`,
                     inline: false,
                 },
                 {
-                    name: "<:discord_bot:1012038552521031703> ┆ Bot name",
+                    name: "<:discord_bot:1012038552521031703> ┆ Nom du bot",
                     value: `${client.user.username}`,
                     inline: true,
                 },
                 {
-                    name: "<:uo_add:1015553154533838879> ┆ Bot id",
+                    name: "<:uo_add:1015553154533838879> ┆ Id du bot",
                     value: `${client.user.id}`,
                     inline: true,
                 },
                 {
-                    name: "<:uo_BotsManeger:1015564324422553670> ┆ Shards",
+                    name: "<:uo_BotsManeger:1015564324422553670> ┆ Fragments",
                     value: `\`${client.options.shardCount}\` shards`,
                     inline: true,
                 },
                 {
-                    name: "<:blue_crown:1012017210992115812> ┆ Bot owner",
-                    value: `<@!784649693363306518> `,
+                    name: "<:blue_crown:1012017210992115812> ┆ Propriétaire",
+                    value: `<@87107972676751360>`,
                     inline: true,
                 },
                 {
-                    name: "<:blue_hammers:1012018248163786763> ┆ Bot developer",
-                    value: `<@!784649693363306518>`,
+                    name: "<:blue_hammers:1012018248163786763> ┆ Développeur",
+                    value: `<@!784649693363306518>, <@87107972676751360>`,
                     inline: true,
                 },
                 {
-                    name: "<:uoBot_icon_slash:1015552999332003850> ┆ Commands",
+                    name: "<:uoBot_icon_slash:1015552999332003850> ┆ Commandes",
                     value: `\`${client.commands.size}\` commands`,
                     inline: true,
                 },
                 {
-                    name: "<:discord:1012017257158824027> ┆ Servers",
+                    name: "<:discord:1012017257158824027> ┆ Serveurs",
                     value: `\`${totalGuilds}\` servers`,
                     inline: true,
                 },
                 {
-                    name: "<:discord:1012017257158824027> ┆ Servers this shard",
+                    name: "<:discord:1012017257158824027> ┆ Serveurs sur ce fragment",
                     value: `\`${client.guilds.cache.size}\` servers`,
                     inline: true,
                 },
                 {
-                    name: "<:member:1012017243837702174> ┆ Members",
+                    name: "<:member:1012017243837702174> ┆ Membres",
                     value: `\`${totalMembers}\` members`,
                     inline: true,
                 },
                 {
-                    name: "<:uo_voice_channel:1015566886303440906> ┆ Connected channels",
+                    name: "<:uo_voice_channel:1015566886303440906> ┆ Canaux vocaux",
                     value: `\`${totalVoice}\` channels`,
                     inline: true,
                 },
                 {
-                    name: "<:hashtag:1012018249854091415> ┆ Channels",
+                    name: "<:hashtag:1012018249854091415> ┆ Canaux",
                     value: `\`${totalChannels}\` channels`,
                     inline: true,
                 },
                 {
-                    name: "<:uo_clock:1015551740281622538> ┆ Created",
+                    name: "<:uo_clock:1015551740281622538> ┆ Création",
                     value: `<t:${Math.round(client.user.createdTimestamp / 1000)}>`,
                     inline: true,
                 },
@@ -92,33 +92,33 @@ module.exports = async (client, interaction, args) => {
                     inline: true,
                 },
                 {
-                    name: "<:to_space:1012038751729491968> ┆ API speed:",
+                    name: "<:to_space:1012038751729491968> ┆ Vitesse de l'API :",
                     value: `\`${client.ws.ping}\`ms`,
                     inline: true,
                 },
                 {
-                    name: "<:values:1012038654916579358> ┆ Bot memory",
+                    name: "<:values:1012038654916579358> ┆ RAM du bot",
                     value: `\`${(process.memoryUsage().heapUsed / 1024 / 1024).toFixed(2)}\` MB`,
                     inline: true,
                 },
                 {
-                    name: "<:cpu:1012038346199023687> ┆ Bot Version",
+                    name: "<:cpu:1012038346199023687> ┆ Version du bot",
                     value: `\`${require(`${process.cwd()}/package.json`).version}\``,
                     inline: true,
                 },
                 {
-                    name: "<:cpu:1012038346199023687> ┆ Node.js Version",
+                    name: "<:cpu:1012038346199023687> ┆ Version de Node.js",
                     value: `\`${process.version}\``,
                     inline: true,
                 },
                 {
-                    name: "<:cpu:1012038346199023687> ┆ Discord.js Version",
+                    name: "<:cpu:1012038346199023687> ┆ Version de Discord.js",
                     value: `\`${Discord.version}\``,
                     inline: true,
                 },
                 {
                     name: "<:plane:1012017388440531015> ┆ Links",
-                    value: `Add me: [[HERE]](${client.config.discord.botInvite}) \nSupport server: [[HERE]](${client.config.discord.serverInvite})`,
+                    value: ``,
                     inline: false,
                 }],
                 type: 'editreply'

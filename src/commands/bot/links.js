@@ -1,3 +1,5 @@
+/* Pas nécessaire -Pierre
+
 const Discord = require('discord.js');
 
 module.exports = async (client, interaction, args) => {
@@ -5,16 +7,16 @@ module.exports = async (client, interaction, args) => {
         .addComponents(
             new Discord.MessageSelectMenu()
                 .setCustomId('Bot-linkspanel')
-                .setPlaceholder('❌┆Nothing selected')
+                .setPlaceholder('❌ ┆ Aucune sélection')
                 .addOptions([
                     {
-                        label: `Support server`,
+                        label: `Serveur support`,
                         description: `Join the suppport server`,
                         emoji: "❓",
                         value: "support-linkspanel",
                     },
                     {
-                        label: `Invite Bot`,
+                        label: `Inviter le bot`,
                         description: `Invite Bot to your server`,
                         emoji: "📨",
                         value: "invite-linkspanel",
@@ -43,4 +45,4 @@ module.exports = async (client, interaction, args) => {
     }, interaction)
 }
 
- 
+*/

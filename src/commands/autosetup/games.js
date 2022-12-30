@@ -9,12 +9,12 @@ module.exports = async (client, interaction, args) => {
     const choice = interaction.options.getString('setup');
 
     if (choice == "counting") {
-        interaction.guild.channels.create("counting", {
+        interaction.guild.channels.create("compteur", {
             type: "GUILD_TEXT"
         }).then((ch) => {
             client.embed({
-                title: `<:uo_Christmas:1015567779602108438>・Counting`,
-                desc: `This is the start of counting! The first number is **1**`
+                title: `<:uo_Christmas:1015567779602108438>・Compteur`,
+                desc: `C'est le début du Compteur! Le premier chiffre est **1**`
             }, ch)
 
             client.createChannelSetup(Counting, ch, interaction)
@@ -22,12 +22,12 @@ module.exports = async (client, interaction, args) => {
     }
 
     if (choice == "gtn") {
-        interaction.guild.channels.create("guess-the-number", {
+        interaction.guild.channels.create("devine-le-nombre", {
             type: "GUILD_TEXT"
         }).then((ch) => {
             client.embed({ 
-                title: `<:uo_Christmas:1015567779602108438>・Guess the number`,
-                desc: `Guess the number between **1** and **10.000**!`
+                title: `<:uo_Christmas:1015567779602108438>・Devine le nombre`,
+                desc: `Devine le nombre entre **1** et **10.000**!`
             }, ch)
 
             client.createChannelSetup(GTN, ch, interaction)
@@ -35,18 +35,18 @@ module.exports = async (client, interaction, args) => {
     }
 
     if (choice == "gtw") {
-        interaction.guild.channels.create("guess-the-word", {
+        interaction.guild.channels.create("devine-le-mot", {
             type: "GUILD_TEXT"
         }).then((ch) => {
-            var word = "start";
+            var word = "frite";
             var shuffled = word.split('').sort(function () { return 0.5 - Math.random() }).join('');
 
             client.embed({ 
-                title: `<:uo_BotEvent:1015565719330627584>・Guess the word`,
-                desc: `Put the letters in the right position!`,
+                title: `<:uo_BotEvent:1015565719330627584>・Devine le mot`,
+                desc: `Mets les lettres aux bons endroits !`,
                 fields: [
                     {
-                        name: `<:uo_Christmas:1015567779602108438> ┆ Word`,
+                        name: `<:uo_Christmas:1015567779602108438> ┆ Mot`,
                         value: `${shuffled.toLowerCase()}`
                     }
                 ],
@@ -57,7 +57,7 @@ module.exports = async (client, interaction, args) => {
     }
 
     if (choice == "wordsnake") {
-        interaction.guild.channels.create("word-snake", {
+        interaction.guild.channels.create("serpent-de-mots", {
             type: "GUILD_TEXT"
         }).then((ch) => {
             client.createChannelSetup(WordSnake, ch, interaction)

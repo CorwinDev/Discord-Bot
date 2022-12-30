@@ -5,15 +5,15 @@ module.exports = async (client, interaction, args) => {
     const channel = interaction.options.getChannel('channel');
 
     client.embed({ 
-        title: `📢・Announcement!`, 
+        title: `📢・Annonce !`, 
         desc: message 
     }, channel);
 
     client.succNormal({
-        text: `Announcement has been sent successfully!`,
+        text: `L'Annonce a été envoyée avec succès`,
         fields: [
             {
-                name: `📘 ┆ Channel`,
+                name: `📘 ┆ Canal`,
                 value: `${channel} (${channel.name})`
             }
         ],

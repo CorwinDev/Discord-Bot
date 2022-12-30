@@ -10,7 +10,7 @@ module.exports = async (client, interaction, args) => {
         if (data) {
             if (data.Words.includes(word)) {
                 return client.errNormal({ 
-                    error: `That word is already exists in the database!`,
+                    error: `Ce mot existe déjà dans la base de donnée!`,
                     type: 'editreply' 
                 }, interaction);
             }
@@ -29,10 +29,10 @@ module.exports = async (client, interaction, args) => {
     })
 
     client.succNormal({
-        text: `Word is now blacklisted!`,
+        text: `Le mot est ajouté à la liste noire.`,
         fields: [
             {
-                name: `<:uo_BotEvent:1015565719330627584> Word`,
+                name: `<:uo_BotEvent:1015565719330627584> Mot`,
                 value: `${word}`
             }
         ],

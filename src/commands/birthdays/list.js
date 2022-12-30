@@ -6,13 +6,13 @@ module.exports = async (client, interaction, args) => {
     const rawBirthdayboard = await Schema.find({ Guild: interaction.guild.id })
 
     if (rawBirthdayboard.length < 1) return client.errNormal({ 
-        error: "No birthdays found!",
+        error: "Pas d'anniversaires trouvés !",
         type: 'editreply' 
     }, interaction);
 
     const lb = rawBirthdayboard.map(e => `${client.emotes.normal.birthday} | **<@!${e.User}>** - ${e.Birthday} `);
 
-    await client.createLeaderboard(`<:uo_party:1015552073405841458>・Birthdays - ${interaction.guild.name}`, lb, interaction);
+    await client.createLeaderboard(`<:uo_party:1015552073405841458>・Anniversaires - ${interaction.guild.name}`, lb, interaction);
 }
 
  

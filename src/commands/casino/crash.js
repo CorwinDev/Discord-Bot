@@ -136,6 +136,31 @@ module.exports = async (client, interaction, args) => {
 
                         }
                     })
+                    .catch(async () => {
+                        index = result + 1;
+
+                        Schema.findOne({ Guild: interaction.guild.id, User: user.id },
+                            async (err, data) => {
+                                if (data) {
+                                    data.Money -= money;
+                                    data.save();
+                                }
+                            }
+                        )
+                        return client.embed({
+                            desc: `Crash Results of ${user}`,
+                            type: 'edit',
+                            fields: [
+                                {
+                                    name: `Loss`,
+                                    value: `**${money}**`,
+                                    inline: false,
+                                }
+                            ],
+                            components: [disableRow]
+                        }, msg)
+
+                    })
             })
 
         }

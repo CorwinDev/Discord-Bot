@@ -82,7 +82,7 @@ module.exports = {
                 .setDescription('Keep track of your current time zone')
                 .addStringOption(option =>
                     option.setName('timezone')
-                        .setDescription('Description with your report')
+                        .setDescription('The timezone you want to set (e.g. Europe/Amsterdam)')
                         .setRequired(true)
                 )
         )

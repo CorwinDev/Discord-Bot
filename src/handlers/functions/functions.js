@@ -196,7 +196,7 @@ module.exports = async (client) => {
     }
 
     client.generateActivity = function (id, name, channel, interaction) {
-        fetch(`https://discord.com/api/v8/channels/${channel.id}/invites`, {
+        fetch(`https://discord.com/api/v10/channels/${channel.id}/invites`, {
             method: "POST",
             body: JSON.stringify({
                 max_age: 86400,

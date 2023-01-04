@@ -8,7 +8,8 @@ module.exports = async (client, interaction, args) => {
 
     const attachment = new Discord.AttachmentBuilder(image, "clyde.png");
 
-    interaction.editReply({ files: [attachment] });
+    const embed = client.templateEmbed().setImage("attachment://clyde.png");
+    interaction.editReply({ files: [attachment], embeds: [embed] });
 }
 
  

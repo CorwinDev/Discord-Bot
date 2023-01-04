@@ -3,14 +3,9 @@ const Discord = require('discord.js');
 const Schema = require("../../database/models/stats");
 
 module.exports = async (client, interaction, args) => {
-    let Emojis = "";
     let EmojiCount = 0;
     let Animated = 0;
     let OverallEmojis = 0;
-
-    function Emoji(id) {
-        return client.emojis.cache.get(id).toString();
-    }
 
     interaction.guild.emojis.cache.forEach((emoji) => {
         OverallEmojis++;

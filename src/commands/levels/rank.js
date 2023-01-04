@@ -17,7 +17,7 @@ module.exports = async (client, interaction, args) => {
         let xpRequired = client.xpFor(user.level + 1);
 
         const rankCard = new Canvacord.Rank()
-            .setAvatar(target.displayAvatarURL({ dynamic: false, format: 'png' }))
+            .setAvatar(target.displayAvatarURL({ dynamic: false, extension: 'png' }))
             .setRequiredXP(xpRequired)
             .setCurrentXP(user.xp)
             .setLevel(user.level)

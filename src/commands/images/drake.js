@@ -9,6 +9,7 @@ module.exports = async (client, interaction, args) => {
     const image = await pop.drake(splitArgs1, splitArgs2);
     let attach = new Discord.AttachmentBuilder(image, { name: "drake.png" });
 
-    interaction.editReply({ files: [attach] })
+    const embed = client.templateEmbed().setImage("attachment://drake.png");
+    interaction.editReply({ files: [attach], embeds: [embed] });
 }
 

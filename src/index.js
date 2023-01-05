@@ -173,11 +173,13 @@ process.on('unhandledRejection', error => {
         username: 'Bot Logs',
         embeds: [embed],
     }).catch(() => {
+        console.log('Error sending unhandled promise rejection to webhook')
         console.log(error)
     })
 });
 
 process.on('warning', warn => {
+    console.warn("Warning:", warn);
     const embed = new Discord.EmbedBuilder()
         .setTitle(`🚨・New warning found`)
         .addFields([
@@ -190,6 +192,7 @@ process.on('warning', warn => {
         username: 'Bot Logs',
         embeds: [embed],
     }).catch(() => {
-
+        console.log('Error sending warning to webhook')
+        console.log(warn)
     })
 });

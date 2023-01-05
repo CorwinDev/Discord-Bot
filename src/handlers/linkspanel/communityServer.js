@@ -27,12 +27,6 @@ module.exports = async (client) => {
                                     value: "invite-linkspanel",
                                 },
                                 {
-                                    label: `Invite Bot 2`,
-                                    description: `Invite Bot 2 to your server`,
-                                    emoji: "📕",
-                                    value: "invite2-linkspanel",
-                                },
-                                {
                                     label: `Community Server`,
                                     description: `Join the community server!`,
                                     emoji: "🌍",
@@ -66,7 +60,7 @@ module.exports = async (client) => {
                 }, interaction.message)
             }
         }
-    }).setMaxListeners(0);
+    })
 }
 
  

@@ -31,10 +31,7 @@ module.exports = async (client) => {
     }).setMaxListeners(0);
 
     client.on(Discord.Events.MessageUpdate, async (oldMessage, newMessage) => {
-        if (oldMessage.content === newMessage.content) {
-            return;
-        }
-
+        if (oldMessage.content === newMessage.content || newMessage.channel.type === Discord.ChannelType.DM) return;
         try {
             BlackList.findOne({ Guild: oldMessage.guild.id }, async (err, data) => {
             if (data) {

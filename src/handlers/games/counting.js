@@ -11,7 +11,7 @@ module.exports = async (client) => {
       if (
         isNaN(message.content) ||
         message.attachments.size > 0 ||
-        message.type == "PINS_ADD"
+        message.type == Discord.MessageType.ChannelPinnedMessage
       )
         return;
 

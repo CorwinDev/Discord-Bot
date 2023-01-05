@@ -169,11 +169,13 @@ process.on('unhandledRejection', error => {
         username: 'Bot Logs',
         embeds: [embed],
     }).catch(() => {
+        console.log('Error sending unhandledRejection to webhook')
         console.log(error)
     })
 });
 
 process.on('warning', warn => {
+    console.warn("Warning:", warn);
     const embed = new Discord.EmbedBuilder()
         .setTitle(`🚨・New warning found`)
         .addFields([
@@ -187,12 +189,16 @@ process.on('warning', warn => {
         username: 'Bot Logs',
         embeds: [embed],
     }).catch(() => {
-
+        console.log('Error sending warning to webhook')
+        console.log(warn)
     })
 });
 
 client.on(Discord.ShardEvents.Error, error => {
     console.log(error)
+    if (error) if (error.length > 950) error = error.slice(0, 950) + '... view console for details';
+    if (error.stack) if (error.stack.length > 950) error.stack = error.stack.slice(0, 950) + '... view console for details';
+    if (!error.stack) return
     const embed = new Discord.EmbedBuilder()
         .setTitle(`🚨・A websocket connection encountered an error`)
         .addFields([
@@ -211,4 +217,3 @@ client.on(Discord.ShardEvents.Error, error => {
         embeds: [embed],
     });
 });
-

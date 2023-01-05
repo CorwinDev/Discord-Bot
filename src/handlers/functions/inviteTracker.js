@@ -16,31 +16,47 @@ module.exports = async (client) => {
     })
 
     client.once(Discord.Events.ClientReady, async () => {
+        setTimeout(() => {
+            try {
+                client.guilds.cache.forEach(async (guild) => {
+                    if (!guild || !guild.invites) return;
+
+                    guild.invites.fetch().then(rawGuildInvites => {
+                        const codeUses = new Map();
+                        Array.from(rawGuildInvites).forEach(i => {
+                            codeUses.set(i[1].code, i[1].uses);
+                        })
+                        guildInvites.set(guild.id, codeUses);
+                    }).catch(() => { });
+                });
+            } catch (e) { }
+        }, 1000);
+    });
+
+    client.on(Discord.Events.GuildCreate, async guild => {
         try {
-            const Guilds = client.guilds.cache.map(guild => guild.id);
-            let i = 0;
-            let interval = setInterval(async function () {
-                const guild = await client.guilds.fetch(Guilds[i]).catch(() => { });
-                if (!guild || !guild.invites) return i++;
+            if (!guild || !guild.invites) return;
 
-                guild.invites.fetch().then(rawGuildInvites => {
-                    const codeUses = new Map();
-                    Array.from(rawGuildInvites).forEach(i => {
-                        codeUses.set(i[1].code, i[1].uses);
-                    })
-                    guildInvites.set(guild.id, codeUses);
-                }).catch(() => { });
-                i++;
+            guild.invites.fetch().then(rawGuildInvites => {
+                const codeUses = new Map();
+                Array.from(rawGuildInvites).forEach(i => {
+                    codeUses.set(i[1].code, i[1].uses);
+                })
+                guildInvites.set(guild.id, codeUses);
+            }).catch(() => { });
+        } catch (e) { }
+    });
 
-                if (i === Guilds.size) clearInterval(interval);
-            }, 1500);
+    client.on(Discord.Events.GuildDelete, async guild => {
+        try {
+            guildInvites.delete(guild.id);
         } catch (e) { }
     });
 
     client.on(Discord.Events.GuildMemberAdd, async member => {
         try {
-            const cachedInvites = guildInvites.get(member.guild.id)
-            const newInvites = await member.guild.invites.fetch().catch(() => { console.log});
+            const cachedInvites = await guildInvites.get(member.guild.id)
+            const newInvites = await member.guild.invites.fetch().catch(() => { console.log });
 
             guildInvites.set(member.guild.id, newInvites)
 

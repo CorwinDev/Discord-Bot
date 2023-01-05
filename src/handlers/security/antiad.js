@@ -5,12 +5,11 @@ const Schema2 = require("../../database/models/channelList");
 
 module.exports = (client) => {
     client.on(Discord.Events.MessageCreate, async (message) => {
-        if (message.channel.type === Discord.ChannelType.DM) return;
-        if (message.author.bot) return;
+        if (message.channel.type === Discord.ChannelType.DM || message.author.bot) return;
         Schema.findOne({ Guild: message.guild.id }, async (err, data) => {
             if (data) {
                 if (data.AntiInvite == true) {
-                    const { guild, member, content } = message
+                    const { content } = message
 
                     const code = content.split('discord.gg/')[1]
                     if (code) {
@@ -44,7 +43,7 @@ module.exports = (client) => {
                     }
                 }
                 else if (data.AntiLinks == true) {
-                    const { guild, member, content } = message
+                    const { content } = message
 
                     if (content.includes('http://') || content.includes('https://') || content.includes('www.')) {
                         Schema2.findOne({ Guild: message.guild.id }, async (err, data2) => {
@@ -80,15 +79,13 @@ module.exports = (client) => {
         })
     }).setMaxListeners(0);
 
-    client.on('messageUpdate', async (oldMessage, newMessage) => {
-        if (oldMessage.content === newMessage.content) {
-            return;
-        }
+    client.on(Discord.Events.MessageUpdate, async (oldMessage, newMessage) => {
+        if (oldMessage.content === newMessage.content || newMessage.channel.type === Discord.ChannelType.DM) return;
 
         Schema.findOne({ Guild: newMessage.guild.id }, async (err, data) => {
             if (data) {
                 if (data.AntiInvite == true) {
-                    const { guild, member, content } = newMessage
+                    const { content } = newMessage
 
                     const code = content.split('discord.gg/')[1]
                     if (code) {

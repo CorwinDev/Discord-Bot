@@ -8,9 +8,9 @@ module.exports = async (client) => {
             const invites = await invite.guild.invites.fetch().catch(() => { });
 
             const codeUses = new Map();
-            invites.each(inv => codeUses.set(inv.code, inv.uses));
+            await invites.each(inv => codeUses.set(inv.code, inv.uses));
 
-            guildInvites.set(invite.guild.id, codeUses);
+            await guildInvites.set(invite.guild.id, codeUses);
         }
         catch { }
     })
@@ -27,7 +27,7 @@ module.exports = async (client) => {
                             codeUses.set(i[1].code, i[1].uses);
                         })
                         guildInvites.set(guild.id, codeUses);
-                    }).catch(() => { });
+                    }).catch(() => { console.log });
                 });
             } catch (e) { }
         }, 1000);
@@ -58,9 +58,13 @@ module.exports = async (client) => {
             const cachedInvites = await guildInvites.get(member.guild.id)
             const newInvites = await member.guild.invites.fetch().catch(() => { console.log });
 
-            guildInvites.set(member.guild.id, newInvites)
+            const codeUses = new Map();
+            Array.from(newInvites).forEach(async i => {
+                codeUses.set(i[1].code, i[1].uses);
+            })
+            guildInvites.set(member.guild.id, codeUses);
 
-            const usedInvite = newInvites.find(inv => cachedInvites.get(inv.code) < inv.uses)
+            const usedInvite = await newInvites.find(inv => cachedInvites.get(inv.code) < inv.uses);
             if (!usedInvite) return client.emit("inviteJoin", member, null, null);
 
             client.emit("inviteJoin", member, usedInvite, usedInvite.inviter);

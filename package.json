@@ -35,7 +35,7 @@
     "canvacord": "^5.4.8",
     "chalk": "^4.1.2",
     "discord-giveaways": "^6.0.1",
-    "discord-image-generation": "^1.4.21",
+    "discord-image-generation": "^1.4.23",
     "discord.js": "^14.7.1",
     "dompurify": "^2.4.1",
     "dotenv": "^16.0.3",

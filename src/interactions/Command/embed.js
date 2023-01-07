@@ -132,7 +132,7 @@ module.exports = {
                 })
                 .then(async (collected) => {
                   message.delete({ timeout: 1000 });
-                  collected.first().delete({ timeout: 1000 });
+                  collected.delete({ timeout: 1000 });
 
                   embed.setTitle(`${collected.first().content}`);
                   await interaction.editReply({ embeds: [embed] });
@@ -155,7 +155,7 @@ module.exports = {
                 })
                 .then(async (collected) => {
                   message.delete({ timeout: 1000 });
-                  collected.first().delete({ timeout: 1000 });
+                  collected.delete({ timeout: 1000 });
 
                   embed.setDescription(`${collected.first().content}`);
                   await interaction.editReply({ embeds: [embed] });
@@ -178,7 +178,7 @@ module.exports = {
                 })
                 .then(async (collected) => {
                   message.delete({ timeout: 1000 });
-                  collected.first().delete({ timeout: 1000 });
+                  collected.delete({ timeout: 1000 });
 
                   embed.setAuthor({
                     name: `${collected.first().content}`,
@@ -204,7 +204,7 @@ module.exports = {
                 })
                 .then(async (collected) => {
                   message.delete({ timeout: 1000 });
-                  collected.first().delete({ timeout: 1000 });
+                  collected.delete({ timeout: 1000 });
 
                   embed.setFooter({
                     text: `${collected.first().content}`,
@@ -229,7 +229,7 @@ module.exports = {
                 })
                 .then(async (collected) => {
                   message.delete({ timeout: 1000 });
-                  collected.first().delete({ timeout: 1000 });
+                  collected.delete({ timeout: 1000 });
 
                   if (
                     !collected.first().content.includes("http://") &&
@@ -264,7 +264,7 @@ module.exports = {
                 })
                 .then(async (collected) => {
                   message.delete({ timeout: 1000 });
-                  collected.first().delete({ timeout: 1000 });
+                  collected.delete({ timeout: 1000 });
 
                   if (
                     !collected.first().content.includes("http://") &&
@@ -294,7 +294,7 @@ module.exports = {
                 })
                 .then(async (collected) => {
                   message.delete({ timeout: 1000 });
-                  collected.first().delete({ timeout: 1000 });
+                  collected.delete({ timeout: 1000 });
 
                   if (
                     !collected.first().content.includes("http://") &&
@@ -324,7 +324,7 @@ module.exports = {
                 })
                 .then(async (collected) => {
                   message.delete({ timeout: 1000 });
-                  collected.first().delete({ timeout: 1000 });
+                  collected.delete({ timeout: 1000 });
 
                   embed.setColor(`${collected.first().content}`);
                   await interaction.editReply({ embeds: [embed] });

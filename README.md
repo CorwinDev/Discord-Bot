@@ -74,7 +74,7 @@ Clone the repo by running
 ```bash
 git clone https://github.com/Corwindev/Discord-Bot.git
 ```
-After cloning Fill all requirement in `.env` **(rename `.env.example` to `.env`)**, then run
+### After cloning Fill all requirement in `.env` **(rename `.env.example` to `.env`)**, then run
 
 ```bash
 npm install

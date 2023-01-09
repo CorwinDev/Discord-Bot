@@ -11,10 +11,19 @@ module.exports = async (client, interaction, args) => {
     if (perms == false) return;
 
     var member = interaction.options.getUser('user');
+    var Case = interaction.options.getInteger('case');
 
     Schema.findOne({ Guild: interaction.guild.id, User: member.id }, async (err, data) => {
         if (data) {
-            data.Warns -= 1;
+            var warn = data.Warnings.find(x => x.Case == Case);
+            if (!warn) {
+                client.errNormal({
+                    error: "This user doesn't have a warning with this case number!",
+                    type: 'editreply'
+                }, interaction);
+                return;
+            }
+            data.Warnings.splice(data.Warnings.indexOf(warn), 1);
             data.save();
         }
         else {

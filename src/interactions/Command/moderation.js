@@ -105,12 +105,14 @@ module.exports = {
                 .setName('warn')
                 .setDescription('Warn a user')
                 .addUserOption(option => option.setName('user').setDescription('Select a user').setRequired(true))
+                .addStringOption(option => option.setName('reason').setDescription('The reason for the warn').setRequired(true))
         )
         .addSubcommand(subcommand =>
             subcommand
                 .setName('unwarn')
                 .setDescription('Unwarn a user')
                 .addUserOption(option => option.setName('user').setDescription('Select a user').setRequired(true))
+                .addIntegerOption(option => option.setName('case').setDescription('Give a case number').setRequired(true))
         )
         .addSubcommand(subcommand =>
             subcommand

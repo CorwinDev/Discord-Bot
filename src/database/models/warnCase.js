@@ -2,8 +2,7 @@ const mongoose = require('mongoose');
 
 const Schema = new mongoose.Schema({
     Guild: String,
-    User: String,
-    Warnings: [Object]
+    Case: Number
 });
 
-module.exports = mongoose.model("warnings", Schema);
+module.exports = mongoose.model("warnCase", Schema);

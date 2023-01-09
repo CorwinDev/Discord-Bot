@@ -8,22 +8,36 @@ module.exports = async (client, interaction, args) => {
         perms: [Discord.PermissionsBitField.Flags.ManageMessages]
     }, interaction);
 
-    if (perms == false) return;
+    if (perms == false) {
+        client.errNormal({
+            error: "You don't have the required permissions to use this command!",
+            type: 'editreply'
+        }, interaction);
+        return;
+    }
 
     const member = interaction.options.getUser('user');
 
+
     Schema.findOne({ Guild: interaction.guild.id, User: member.id }, async (err, data) => {
         if (data) {
-
+            var fields = [];
+            data.Warnings.forEach(element => {
+                fields.push({
+                    name: "Warning **" + element.Case + "**",
+                    value: "Reason: " + element.Reason + "\nModerator <@!" + element.Moderator + ">",
+                    inline: true
+                })
+            });
             client.embed({
                 title: `${client.emotes.normal.error}・Warnings`,
                 desc: `The warnings of **${member.tag}**`,
                 fields: [
                     {
                         name: "Total",
-                        value: `${data.Warns}`,
-                        inline: false
-                    }
+                        value: `${data.Warnings.length}`,
+                    },
+                    ...fields
                 ],
                 type: 'editreply'
             }, interaction)
@@ -31,18 +45,10 @@ module.exports = async (client, interaction, args) => {
         else {
             client.embed({
                 title: `${client.emotes.normal.error}・Warnings`,
-                desc: `The warnings of **${member.tag}**`,
-                fields: [
-                    {
-                        name: "Total",
-                        value: "0",
-                        inline: false
-                    }
-                ],
+                desc: `User ${member.user.tag} has no warnings!`,
                 type: 'editreply'
             }, interaction)
         }
     })
 }
 
- 

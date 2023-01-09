@@ -18,6 +18,7 @@ module.exports = async (client, interaction, args) => {
         const map = Object.keys(data.Roles)
             .map((value, index) => {
                 const role = interaction.guild.roles.cache.get(data.Roles[value][0]);
+                if(!role) return;
 
                 return `${data.Roles[value][1].raw} | ${role}`;
             }).join("\n");
@@ -31,6 +32,7 @@ module.exports = async (client, interaction, args) => {
 
         const mapped = Object.keys(data.Roles).map((value, index) => {
             const role = interaction.guild.roles.cache.get(data.Roles[value][0]);
+            if(!role) return;
 
             const generated = {
                 label: `${role.name}`,
@@ -51,7 +53,14 @@ module.exports = async (client, interaction, args) => {
             title: `${upper}・Roles`,
             desc: `_____ \n\nChoose your roles in the menu! \n\n${map}`,
             components: [row]
-        }, channel).then((msg) => {
+        }, channel).then(async(msg) => {
+            if(!msg){
+                client.errNormal({
+                    error: "I couldn't send the message!\nMake sure I have the correct permissions!",
+                    type: 'editreply'
+                }, interaction);
+                return;
+            }
             data.Message = msg.id;
             data.save();
         })

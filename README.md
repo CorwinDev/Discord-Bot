@@ -98,7 +98,7 @@ If you liked this repository, feel free to leave a star ⭐ to motivate me!
 > How to get access to Developers Commands? You will have to set them up via MongoDB or run the below command.
 
 ```bash
-npm add-dev YOUR_ID
+npm run add-dev YOUR_ID
 ```
 # Donate
 

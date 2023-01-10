@@ -13,6 +13,12 @@ const Commands = require("../../database/models/customCommand");
 const CommandsSchema = require("../../database/models/customCommandAdvanced");
 const fetch = require("node-fetch");
 
+/**
+ * 
+ * @param {Discord.Client} client 
+ * @param {Discord.Message} message 
+ * @returns 
+ */
 module.exports = async (client, message) => {
   const dmlog = new Discord.WebhookClient({
     id: client.webhooks.dmLogs.id,
@@ -254,7 +260,7 @@ module.exports = async (client, message) => {
         const input = message;
         try {
           fetch(
-            `https://api.coreware.nl/fun/chat?msg=${encodeURIComponent(input)}`
+            `https://api.coreware.nl/fun/chat?msg=${encodeURIComponent(input)}&uid=${message.author.id}`,
           )
             .catch(() => { console.log })
             .then((res) => res.json())

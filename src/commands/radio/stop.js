@@ -8,7 +8,7 @@ module.exports = async (client, interaction, args) => {
     });
 
     let channel = interaction.member.voice ? interaction.member.voice.channel : null;
-    if (!channel) return client.errNormal({ error: `Le canal n'existe pas !`, type: 'editreply' }, interaction);
+    if (!channel) return client.errNormal({ error: `The channel does not exist!`, type: 'editreply' }, interaction);
 
     client.radioStop(channel);
 
@@ -16,14 +16,14 @@ module.exports = async (client, interaction, args) => {
 
     client.embed({
         title: `📻・Radio stopped`,
-        desc: `Radio a été coupée avec succès\nPour appeler le bot : \`rplay\``,
+        desc: `Radio has stopped successfully \nTo make the bot join do: \`rplay\``,
         fields: [{
-            name: "👤┆Arrêté par",
+            name: "👤┆Stopped By",
             value: `${interaction.user} (${interaction.user.tag})`,
             inline: true
         },
         {
-            name: "📺┆Canal",
+            name: "📺┆Channel",
             value: `${channel} (${channel.name})`,
             inline: true
         }
@@ -34,9 +34,9 @@ module.exports = async (client, interaction, args) => {
     let embed = new Discord.MessageEmbed()
         .setTitle(`📻・Radio stopped`)
         .setDescription(`_______________ \n\nRadio has stopped successfully`)
-        .addField('👤┆Arrêté par', `${interaction.user} (${interaction.user.tag})`, true)
-        .addField('📺┆Canal', `${channel} (${channel.id})`, true)
-        .addField('⚙️┆Serveur', `${interaction.guild.name} (${interaction.guild.id})`, true)
+        .addField('👤┆Stopped by', `${interaction.user} (${interaction.user.tag})`, true)
+        .addField(`📺┆Channel`, `${channel} (${channel.id})`, true)
+        .addField(`⚙️┆Guild`, `${interaction.guild.name} (${interaction.guild.id})`, true)
         .setColor(client.config.colors.normal)
         .setTimestamp();
     webhookClientLogs.send({

@@ -16,7 +16,9 @@ module.exports = async (client, interaction, args) => {
 
             client.embed({
                 title: `${client.emotes.normal.pong}・Pong`,
-                desc: ``,
+
+                desc: `Vérifier la rapidité du bot`,
+
                 fields: [
                     {
                         name: "<:discord_bot:1012038552521031703> ┆ Bot latence",

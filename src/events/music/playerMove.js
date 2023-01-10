@@ -6,7 +6,7 @@ module.exports = (client, player, currentChannel, newChannel) => {
 
         const channel = client.channels.cache.get(player.textChannel);
         client.errNormal({
-            error: "Music has stopped. I'm disconnected from the channel"
+            error: "La musique s'est arrêtée. Je me déconnecte"
         }, channel)
     } else {
         player.set('moved', true)

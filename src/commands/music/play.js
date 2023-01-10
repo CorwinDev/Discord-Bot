@@ -151,7 +151,7 @@ module.exports = async (client, interaction, args) => {
                 .addComponents(
                     new Discord.MessageButton()
                         .setEmoji("🛑")
-                        .setLabel("Cancel")
+                        .setLabel("Annuler")
                         .setCustomId("cancel")
                         .setStyle("DANGER"),
                 );

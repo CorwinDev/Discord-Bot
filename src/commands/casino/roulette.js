@@ -32,7 +32,7 @@ module.exports = async (client, interaction, args) => {
                 data.Money += money;
                 data.save();
 
-                client.embed({ title: `🎰・Multiplier: 15x`, desc: `Tu as gagné **${client.emotes.economy.coins} $${money}**`, type: 'editreply' }, interaction);
+                client.embed({ title: `🎰・Multiplicateur: 15x`, desc: `Tu as gagné **${client.emotes.economy.coins} $${money}**`, type: 'editreply' }, interaction);
             }
 
             else if (isOdd(random) && colour == 1) { // Red
@@ -40,7 +40,7 @@ module.exports = async (client, interaction, args) => {
                 data.Money += money;
                 data.save();
 
-                client.embed({ title: `🎰・Multiplier: 1.5x`, desc: `Tu as gagné **${client.emotes.economy.coins} $${money}**`, type: 'editreply' }, interaction);
+                client.embed({ title: `🎰・Multiplicateur: 1.5x`, desc: `Tu as gagné **${client.emotes.economy.coins} $${money}**`, type: 'editreply' }, interaction);
             }
 
             else if (!isOdd(random) && colour == 0) { // Black
@@ -48,14 +48,14 @@ module.exports = async (client, interaction, args) => {
                 data.Money += money;
                 data.save();
 
-                client.embed({ title: `🎰・Multiplier: 2x`, desc: `Tu as gagné **${client.emotes.economy.coins} $${money}**`, type: 'editreply' }, interaction);
+                client.embed({ title: `🎰・Multiplicateur: 2x`, desc: `Tu as gagné **${client.emotes.economy.coins} $${money}**`, type: 'editreply' }, interaction);
             }
 
             else { // Wrong
                 data.Money -= money;
                 data.save();
 
-                client.embed({ title: `🎰・Multiplier: 0x`, desc: `Tu as gagné **${client.emotes.economy.coins} $${money}**`, type: 'editreply' }, interaction);
+                client.embed({ title: `🎰・Multiplicateur: 0x`, desc: `Tu as gagné **${client.emotes.economy.coins} $${money}**`, type: 'editreply' }, interaction);
             }
 
         }

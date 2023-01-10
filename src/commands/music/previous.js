@@ -5,17 +5,17 @@ module.exports = async (client, interaction, args) => {
 
     const channel = interaction.member.voice.channel;
     if (!channel) return client.errNormal({
-        error: `You're not in a voice channel!`,
+        error: `Tu n'es pas dans un canal vocal !`,
         type: 'editreply'
     }, interaction);
 
     if (player && (channel.id !== player?.voiceChannel)) return client.errNormal({
-        error: `You're not in the same voice channel!`,
+        error: `Tu n'es pas dans le même canal vocal que moi !`,
         type: 'editreply'
     }, interaction);
 
     if (!player || !player.queue.previous) return client.errNormal({
-        error: "There are no songs was played previously",
+        error: "Il n'y a pas eu de musique jouée précedemment",
         type: 'editreply'
     }, interaction);
 
@@ -47,11 +47,11 @@ module.exports = async (client, interaction, args) => {
     client.embed({
         title: `${client.emotes.normal.music}・${track.title}`,
         url: track.uri,
-        desc: `Music started in <#${player.voiceChannel}>!`,
+        desc: `La musique a été lancée dans <#${player.voiceChannel}>!`,
         thumbnail: track.thumbnail,
         fields: [
             {
-                name: `👤┆Requested By`,
+                name: `👤┆Demandée par`,
                 value: `${track.requester}`,
                 inline: true
             },
@@ -61,7 +61,7 @@ module.exports = async (client, interaction, args) => {
                 inline: true
             },
             {
-                name: `🎬┆Author`,
+                name: `🎬┆Auteur`,
                 value: `${track.author}`,
                 inline: true
             }

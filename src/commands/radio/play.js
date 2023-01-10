@@ -27,19 +27,19 @@ module.exports = async (client, interaction, args) => {
 
     client.embed({
         title: `📻・Started radio`,
-        desc: `Radio has started successfully \nTo make the bot leave do: \`rleave\``,
+        desc: `La Radio a été lancé avec succès.\nPour faire partir le bot : \`rleave\``,
         fields: [{
-            name: "👤┆Started By",
+            name: "👤┆Lancé par",
             value: `${interaction.user} (${interaction.user.tag})`,
             inline: true
         },
         {
-            name: "📺┆Channel",
+            name: "📺┆Canal",
             value: `${channel} (${channel.name})`,
             inline: true
         },
         {
-            name: "🎶┆Radio Station",
+            name: "🎶┆Station de Radio",
             value: `[Radio 538](https://www.538.nl/)`,
             inline: true
         },
@@ -49,10 +49,10 @@ module.exports = async (client, interaction, args) => {
 
     let embed = new Discord.MessageEmbed()
         .setTitle(`📻・Started radio`)
-        .setDescription(`_______________ \n\nRadio has started successfully`)
-        .addField('👤┆Started by', `${interaction.user} (${interaction.user.tag})`, true)
-        .addField(`📺┆Channel`, `${channel} (${channel.id})`, true)
-        .addField(`⚙️┆Guild`, `${interaction.guild.name} (${interaction.guild.id})`, true)
+        .setDescription(`_______________ \n\nLa Radio a été lancé par succès`)
+        .addField('👤┆Lancé par', `${interaction.user} (${interaction.user.tag})`, true)
+        .addField('📺┆Canal ', `${channel} (${channel.id})`, true)
+        .addField('⚙️┆Serveur ', `${interaction.guild.name} (${interaction.guild.id})`, true)
         .setColor(client.config.colors.normal)
         .setTimestamp();
     webhookClientLogs.send({

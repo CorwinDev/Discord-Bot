@@ -5,17 +5,17 @@ module.exports = async (client, interaction, args) => {
 
     const channel = interaction.member.voice.channel;
     if (!channel) return client.errNormal({
-        error: `You're not in a voice channel!`,
+        error: `Tu n'es pas dans un canal vocal !`,
         type: 'editreply'
     }, interaction);
 
     if (player && (channel.id !== player?.voiceChannel)) return client.errNormal({
-        error: `You're not in the same voice channel!`,
+        error: `Tu n'es pas dans le même canal vocal que moi !`,
         type: 'editreply'
     }, interaction);
 
     if (!player || !player.queue.current) return client.errNormal({
-        error: "There are no songs playing in this server",
+        error: "Il n'y a pas de musiques jouées dans ce serveur",
         type: 'editreply'
     }, interaction);
 
@@ -23,7 +23,7 @@ module.exports = async (client, interaction, args) => {
     const trackRepeat = player.trackRepeat ? "enabled" : "disabled";
 
     client.succNormal({
-        text: `Loop is **${trackRepeat}** for the current song`,
+        text: `La boucle est **${trackRepeat}** pour la musique actuelle`,
         type: 'editreply'
     }, interaction);
 }

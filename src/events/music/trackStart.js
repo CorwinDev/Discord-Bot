@@ -29,21 +29,21 @@ module.exports = (client, player, track) => {
     client.embed({
         title: `${client.emotes.normal.music}・${track.title}`,
         url: track.uri,
-        desc: `Music started in <#${player.voiceChannel}>!`,
+        desc: `Musique lancée dans <#${player.voiceChannel}>!`,
         thumbnail: track.thumbnail,
         fields: [
             {
-                name: `👤┆Requested By`,
+                name: `👤┆Demandée par`,
                 value: `${track.requester}`,
                 inline: true
             },
             {
-                name: `${client.emotes.normal.clock}┆Ends at`,
-                value: `<t:${((Date.now() / 1000) + (track.duration / 1000)).toFixed(0)}:f>`,
+                name: `${client.emotes.normal.clock}┆Fin`,
+                value: `Terminée <t:${((Date.now() / 1000) + (track.duration / 1000)).toFixed(0)}:R>`,
                 inline: true
             },
             {
-                name: `🎬┆Author`,
+                name: `🎬┆Auteur`,
                 value: `${track.author}`,
                 inline: true
             }

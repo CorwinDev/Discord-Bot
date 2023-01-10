@@ -214,7 +214,7 @@ module.exports = async (client, interaction, args) => {
                     thumbnail: track.thumbnail,
                     fields: [
                         {
-                            name: `👤┆Demandé par`,
+                            name: `👤┆Demandée par`,
                             value: `${track.requester}`,
                             inline: true
                         },

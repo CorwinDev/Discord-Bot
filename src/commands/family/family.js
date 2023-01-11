@@ -15,7 +15,7 @@ module.exports = async (client, interaction, args) => {
         fields: [
             {
                 name: `Partenaire`,
-                value: `${data && data.Partner ? `<@!${data.Partner}>` : `Cette personne n'est pas marriée`}`
+                value: `${data && data.Partner ? `<@!${data.Partner}>` : `Cette personne n'est pas mariée`}`
             },
             {
                 name: `Parents`,

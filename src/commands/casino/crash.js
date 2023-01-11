@@ -8,7 +8,7 @@ module.exports = async (client, interaction, args) => {
 
         Schema.findOne({ Guild: interaction.guild.id, User: user.id }, async (err, data) => {
             if (data) {
-                let money = parseInt(args[0]);
+                let money = parseInt(interaction.options.getUser('amount'));
                 if (!money) return client.errUsage({ usage: "crash [amount]", type: 'editreply' }, interaction);
 
                 if (money > data.Money) return client.errNormal({ error: `Tu mises plus que ce que tu as !`, type: 'editreply' }, interaction);

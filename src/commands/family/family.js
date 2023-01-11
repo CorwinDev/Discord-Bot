@@ -7,7 +7,7 @@ module.exports = async (client, interaction, args) => {
     const target = interaction.options.getUser('user') || interaction.user;
 
     const data = await Schema.findOne({ Guild: interaction.guild.id, User: target.id });
-    const data2 = await Schema.findOne({ Guild: interaction.guild.id, User: data.Parent.id });
+    const data2 = await Schema.findOne({ Guild: interaction.guild.id, User: data.Parent });
     
     client.embed({
         title: `👪・Famille de ${target.username}`,
@@ -18,7 +18,7 @@ module.exports = async (client, interaction, args) => {
                 value: `${data && data.Partner ? `<@!${data.Partner}>` : `Cette personne n'est pas marriée`}`
             },
             {
-                name: `Parent`,
+                name: `Parents`,
                 value: `${data && data.Parent.length > 0 ? `${data.Parent.join(", ")}` : `Cette personne n'a pas de parents`}`
             },
             {

@@ -67,7 +67,7 @@ module.exports = async (client, interaction, args) => {
             );
 
         client.embed({
-            title: `👰・Demande en marriage`,
+            title: `👰・Demande en mariage`,
             desc: `${author} a demandé en mariage ${target} ! \n${target}, clique sur un des boutons`,
             components: [row],
             content: `${target}`,

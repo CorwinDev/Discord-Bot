@@ -29,7 +29,7 @@ module.exports = async (client, interaction, args) => {
         data.save();
 
         client.embed({ 
-            title: `👰・Divorcé`, 
+            title: `👰・Divorcés`, 
             desc: `${author} et ${target} viennent de divorcer`, 
             type: 'editreply' 
         }, interaction);

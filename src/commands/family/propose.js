@@ -112,7 +112,7 @@ module.exports = async (client, interaction, args) => {
                     desc: `${author} et ${target} sont maintenant mariés ! 👰🎉`,
                     components: [],
                     content: `${target}`,
-                    .setImage('https://media4.giphy.com/media/JsETGYKdNZNuLioYe3/giphy.gif'),
+                    image('https://media4.giphy.com/media/JsETGYKdNZNuLioYe3/giphy.gif'),
                     type: 'editreply'
                 }, interaction);
             }

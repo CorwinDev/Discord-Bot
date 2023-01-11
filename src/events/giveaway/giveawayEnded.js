@@ -7,7 +7,7 @@ module.exports = (client, giveaway, winners) => {
             desc: `Congratulations ${member.user.username}! You won the giveaway!`,
             fields: [
                 {
-                    name: `🎁┆Prize`,
+                    name: `🎁┆Prix`,
                     value: `${giveaway.prize}`,
                     inline: true
                 },

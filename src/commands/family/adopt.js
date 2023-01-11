@@ -45,7 +45,7 @@ module.exports = async (client, interaction, args) => {
 
             new Discord.MessageButton()
                 .setCustomId('adopt_deny')
-                .setEmoji('❌')
+                .setEmoji('🚫')
                 .setStyle('DANGER'),
         );
 

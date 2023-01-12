@@ -1,6 +1,6 @@
 {
   "name": "discordbot",
-  "version": "9.0.5",
+  "version": "9.0.4",
   "description": "DiscordBot is a bot with which you can run your entire server! With no less than 400+ commands",
   "main": "./src/index.js",
   "scripts": {
@@ -39,7 +39,7 @@
     "discord-api-types": "^0.26.0",
     "discord-giveaways": "^5.1.1",
     "discord-image-generation": "^1.4.9",
-    "discord.js": "^14.7.1",
+    "discord.js": "^13.5.1",
     "dompurify": "^2.3.5",
     "dotenv": "^10.0.0",
     "erela.js": "^2.3.3",

@@ -13,11 +13,11 @@ module.exports = async (client) => {
     console.log(chalk.blue(chalk.bold(`Bot`)), (chalk.white(`>>`)), chalk.green(`Started on`), chalk.red(`${client.guilds.cache.size}`), chalk.green(`servers!`))
 
     let embed = new Discord.EmbedBuilder()
-        .setTitle(`🆙・Finishing shard`)
+        .setTitle(`<a:on:1063189632730267688>・Finishing shard`)
         .setDescription(`A shard just finished`)
         .addFields(
-            { name: "🆔┆ID", value: `${client.shard.ids[0] + 1}/${client.options.shardCount}`, inline: true },
-            { name: "📃┆State", value: `Ready`, inline: true },
+            { name: "<:idd:1063207706514686043>┆ID", value: `${client.shard.ids[0] + 1}/${client.options.shardCount}`, inline: true },
+            { name: "<:stat:1063207885359812799>┆State", value: `Ready`, inline: true },
         )
         .setColor(client.config.colors.normal)
     startLogs.send({
@@ -45,10 +45,9 @@ module.exports = async (client) => {
                     ];
                 }
                 const randomText = statuttext[Math.floor(Math.random() * statuttext.length)];
-                client.user.setPresence({ activities: [{ name: randomText, type: Discord.ActivityType.Playing }], status: 'online' });
+                client.user.setPresence({ activities: [{ name: randomText, type: Discord.ActivityType.Watching }], status: 'dnd' });
             })
     }, 50000)
 
     client.player.init(client.user.id);
 }
-

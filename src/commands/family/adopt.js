@@ -64,14 +64,14 @@ module.exports = async (client, interaction, args) => {
 
             Schema.findOne({ Guild: interaction.guild.id, User: author.id }, async (err, data) => {
                 if (data) {
-                    data.Children.push(target.username);
+                    data.Children.push(target.id);
                     data.save();
                 }
                 else {
                     new Schema({
                         Guild: interaction.guild.id,
                         User: author.id,
-                        Children: target.username
+                        Children: target.id
                     }).save();
                 }
             })
@@ -85,7 +85,7 @@ module.exports = async (client, interaction, args) => {
                     new Schema({
                         Guild: interaction.guild.id,
                         User: target.id,
-                        Parent: author.username
+                        Parent: author.id
                     }).save();
                 }
             })

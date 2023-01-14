@@ -14,32 +14,32 @@ module.exports = async (client, interaction, args) => {
     });
 
     await client.embed({
-        title: '🎮・${s.name}',
+        title: `🎮・${s.name}`,
         thumbnail: s.thumbnail,
         fields: [
             {
-                name: '💬┇Name',
-                value: '${s.name}',
+                name: `💬┇Name`,
+                value: `${s.name}`,
                 inline: true,
             },
             {
-                name: '📃┇Capital',
-                value: '${s.description}',
+                name: `📃┇Capital`,
+                value: `${s.description}`,
                 inline: false,
             },
             {
                 name: "💻┇Developers",
-                value: '${s.developers.join(", ")}',
+                value: `${s.developers.join(", ")}`,
                 inline: true,
             },
             {
                 name: "☁┇Publishers",
-                value: '${s.publishers.join(", ")}',
+                value: `${s.publishers.join(", ")}`,
                 inline: true,
             },
             {
                 name: "🪙┇Price",
-                value: '${s.price}',
+                value: `${s.price}`,
                 inline: true,
             }
         ],

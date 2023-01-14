@@ -10,7 +10,7 @@ module.exports = async (client, interaction, args) => {
 
             if (data && data.Pets) {
                 if (!data.Pets.includes(pet)) {
-                    return client.errNormal({ error: 'That pet doesn't exist in the database!', type: 'editreply' }, interaction);
+                    return client.errNormal({ error: `That pet doesn't exist in the database!`, type: 'editreply' }, interaction);
                 }
 
                 const filtered = data.Pets.filter((target) => target !== pet);
@@ -23,7 +23,7 @@ module.exports = async (client, interaction, args) => {
                 text: "Removed your pet",
                 fields: [{
                     name: "🐶┆Pet",
-                    value: '\'\'\'${pet}\'\'\'',
+                    value: `\`\`\`${pet}\`\`\``,
                     inline: true,
                 }],
                 type: 'editreply'

@@ -19,7 +19,7 @@ module.exports = async (client, interaction, args) => {
     if (!day || day > 31) return client.errNormal({ error: "Wrong day format!", type: 'editreply' }, interaction);
     if (!month || month > 12) return client.errNormal({ error: "Wrong month format!", type: 'editreply' }, interaction);
 
-    const bday = '${day}/${month}';
+    const bday = `${day}/${month}`;
 
     Schema.findOne({ User: interaction.user.id }, async (err, data) => {
         if (data) {
@@ -30,7 +30,7 @@ module.exports = async (client, interaction, args) => {
                 text: "Your birthday is set",
                 fields: [{
                     name: "🎂┆Bday",
-                    value: '\'\'\'${bday}\'\'\'',
+                    value: `\`\`\`${bday}\`\`\``,
                     inline: true,
                 }],
                 type: 'editreply'

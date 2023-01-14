@@ -9,7 +9,7 @@ module.exports = async (client, interaction, args) => {
 
             if (data && data.Songs) {
                 if (data.Songs.includes(song)) {
-                    return client.errNormal({ error: 'That song is already exists in your database!', type: 'editreply' }, interaction);
+                    return client.errNormal({ error: `That song is already exists in your database!`, type: 'editreply' }, interaction);
                 }
                 data.Songs.push(song);
                 data.save();
@@ -22,7 +22,7 @@ module.exports = async (client, interaction, args) => {
                 text: "Added your song",
                 fields: [{
                     name: "🎶┆Song",
-                    value: '\'\'\'${song}\'\'\'',
+                    value: `\`\`\`${song}\`\`\``,
                     inline: true,
                 }],
                 type: 'editreply'

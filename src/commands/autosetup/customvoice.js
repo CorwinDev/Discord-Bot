@@ -34,11 +34,11 @@ module.exports = async (client, interaction, args) => {
             });
 
             client.succNormal({
-                text: 'Le Canal custom a été configuré avec succès !',
+                text: `Le Canal custom a été configuré avec succès !`,
                 fields: [
                     {
-                        name: '<:uo_BotEvent:1015565719330627584> ┆ Canal',
-                        value: '${ch} (${ch.name})'
+                        name: `<:uo_BotEvent:1015565719330627584> ┆ Canal`,
+                        value: `${ch} (${ch.name})`
                     }
                 ],
                 type: 'editreply'

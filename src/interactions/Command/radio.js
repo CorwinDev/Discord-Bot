@@ -42,7 +42,7 @@ module.exports = {
         }, interaction)
 
         if (!interaction.member.voice.channel) return client.errNormal({ 
-            error: 'You're not in a voice channel!', 
+            error: `You're not in a voice channel!`, 
             type: 'reply' 
         }, interaction);
 

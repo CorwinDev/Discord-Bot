@@ -15,7 +15,7 @@ module.exports = async (client, interaction, args) => {
                 text: "Your origin is set",
                 fields: [{
                     name: "🌍┆Country",
-                    value: '\'\'\'${country}\'\'\'',
+                    value: `\`\`\`${country}\`\`\``,
                     inline: true,
                 }],
                 type: 'editreply'

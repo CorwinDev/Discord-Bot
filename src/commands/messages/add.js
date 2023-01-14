@@ -27,11 +27,11 @@ module.exports = async (client, interaction, args) => {
     }
 
     client.succNormal({
-        text: 'Added **${amount}** messages to ${user}',
+        text: `Added **${amount}** messages to ${user}`,
         fields: [
             {
                 name: "💬┆Total messages",
-                value: '${data.Messages}',
+                value: `${data.Messages}`,
                 inline: true,
             }
         ],

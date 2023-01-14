@@ -40,7 +40,7 @@ module.exports = (client) => {
                 client.embed({
                     title: embedData.title,
                     url: embedData.url,
-                    desc: 'Music is currently paused',
+                    desc: `Music is currently paused`,
                     thumbnail: embedData.thumbnail.url,
                     fields: embedData.fields,
                     components: [row],
@@ -85,7 +85,7 @@ module.exports = (client) => {
                 client.embed({
                     title: embedData.title,
                     url: embedData.url,
-                    desc: 'Music is currently resumed',
+                    desc: `Music is currently resumed`,
                     thumbnail: embedData.thumbnail.url,
                     fields: embedData.fields,
                     components: [row],
@@ -102,7 +102,7 @@ module.exports = (client) => {
                 player.destroy();
 
                 client.embed({
-                    desc: 'Music is currently stopped',
+                    desc: `Music is currently stopped`,
                     color: client.config.colors.error,
                     components: [],
                     type: 'edit'
@@ -143,24 +143,24 @@ module.exports = (client) => {
                     );
 
                 client.embed({
-                    title: '${client.emotes.normal.music}・${track.title}',
+                    title: `${client.emotes.normal.music}・${track.title}`,
                     url: track.uri,
-                    desc: 'Music started in <#${player.voiceChannel}>!',
+                    desc: `Music started in <#${player.voiceChannel}>!`,
                     thumbnail: track.thumbnail,
                     fields: [
                         {
-                            name: '👤┆Requested By',
-                            value: '${track.requester}',
+                            name: `👤┆Requested By`,
+                            value: `${track.requester}`,
                             inline: true
                         },
                         {
-                            name: '${client.emotes.normal.clock}┆Ends at',
-                            value: '<t:${((Date.now() / 1000) + (track.duration / 1000)).toFixed(0)}:f>',
+                            name: `${client.emotes.normal.clock}┆Ends at`,
+                            value: `<t:${((Date.now() / 1000) + (track.duration / 1000)).toFixed(0)}:f>`,
                             inline: true
                         },
                         {
-                            name: '🎬┆Author',
-                            value: '${track.author}',
+                            name: `🎬┆Author`,
+                            value: `${track.author}`,
                             inline: true
                         }
                     ],
@@ -201,24 +201,24 @@ module.exports = (client) => {
                     );
 
                 client.embed({
-                    title: '${client.emotes.normal.music}・${track.title}',
+                    title: `${client.emotes.normal.music}・${track.title}`,
                     url: track.uri,
-                    desc: 'Music started in <#${player.voiceChannel}>!',
+                    desc: `Music started in <#${player.voiceChannel}>!`,
                     thumbnail: track.thumbnail,
                     fields: [
                         {
-                            name: '👤┆Requested By',
-                            value: '${track.requester}',
+                            name: `👤┆Requested By`,
+                            value: `${track.requester}`,
                             inline: true
                         },
                         {
-                            name: '${client.emotes.normal.clock}┆Ends at',
-                            value: '<t:${((Date.now() / 1000) + (track.duration / 1000)).toFixed(0)}:f>',
+                            name: `${client.emotes.normal.clock}┆Ends at`,
+                            value: `<t:${((Date.now() / 1000) + (track.duration / 1000)).toFixed(0)}:f>`,
                             inline: true
                         },
                         {
-                            name: '🎬┆Author',
-                            value: '${track.author}',
+                            name: `🎬┆Author`,
+                            value: `${track.author}`,
                             inline: true
                         }
                     ],

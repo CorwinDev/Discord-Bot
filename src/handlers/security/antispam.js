@@ -35,10 +35,10 @@ module.exports = async (client) => {
                                 message.delete();
 
                                 client.embed({
-                                    title: '${client.emotes.normal.error}・Moderator',
-                                    desc: 'It is not allowed to spam in this server!',
+                                    title: `${client.emotes.normal.error}・Moderator`,
+                                    desc: `It is not allowed to spam in this server!`,
                                     color: client.config.colors.error,
-                                    content: '${message.author}'
+                                    content: `${message.author}`
                                 }, message.channel)
                             } else {
                                 userData.msgCount = msgCount;

@@ -5,28 +5,28 @@ module.exports = async (client, role) => {
     if (!logsChannel) return;
 
     client.embed({
-        title: '🧻・Role deleted',
-        desc: 'A role has been deleted',
+        title: `🧻・Role deleted`,
+        desc: `A role has been deleted`,
         fields: [
             {
-                name: '> Role',
-                value: '- ${role}'
+                name: `> Role`,
+                value: `- ${role}`
             },
             {
-                name: '> Name',
-                value: '- ${role.name}'
+                name: `> Name`,
+                value: `- ${role.name}`
             },
             {
-                name: '> ID',
-                value: '- ${role.id}'
+                name: `> ID`,
+                value: `- ${role.id}`
             },
             {
-                name: '> Color',
-                value: '${role.hexColor}'
+                name: `> Color`,
+                value: `${role.hexColor}`
             },
             {
-                name: '> Position',
-                value: '${role.position}'
+                name: `> Position`,
+                value: `${role.position}`
             }
         ]
     }, logsChannel).catch(() => { })

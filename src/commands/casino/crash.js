@@ -11,7 +11,7 @@ module.exports = async (client, interaction, args) => {
                 let money = parseInt(interaction.options.getUser('amount'));
                 if (!money) return client.errUsage({ usage: "crash [amount]", type: 'editreply' }, interaction);
 
-                if (money > data.Money) return client.errNormal({ error: 'Tu mises plus que ce que tu as !', type: 'editreply' }, interaction);
+                if (money > data.Money) return client.errNormal({ error: `Tu mises plus que ce que tu as !`, type: 'editreply' }, interaction);
 
                 const row = new Discord.MessageActionRow()
                     .addComponents(
@@ -31,16 +31,16 @@ module.exports = async (client, interaction, args) => {
                     )
 
                 client.embed({
-                    desc: 'Crash lancé par ${user}・Réagi avec 🛑 pour arrêter',
+                    desc: `Crash lancé par ${user}・Réagi avec 🛑 pour arrêter`,
                     fields: [
                         {
-                            name: 'Multiplier',
-                            value: '1x',
+                            name: `Multiplier`,
+                            value: `1x`,
                             inline: true,
                         },
                         {
-                            name: 'Profit',
-                            value: '**0**',
+                            name: `Profit`,
+                            value: `**0**`,
                             inline: true,
                         }
                     ],
@@ -65,13 +65,13 @@ module.exports = async (client, interaction, args) => {
                             })
 
                             return client.embed({
-                                title: 'Résultats de Crash de ${user}',
-                                desc: '${f} \n${msg}',
+                                title: `Résultats de Crash de ${user}`,
+                                desc: `${f} \n${msg}`,
                                 edit: true,
                                 fields: [
                                     {
-                                        name: 'Perte',
-                                        value: '**${money}**',
+                                        name: `Perte`,
+                                        value: `**${money}**`,
                                         inline: false,
                                     }
                                 ]
@@ -86,17 +86,17 @@ module.exports = async (client, interaction, args) => {
                             let profit = calc - money;
 
                             client.embed({
-                                desc: 'Crash lancé par ${user}・Réagi avec 🛑 pour arrêter',
+                                desc: `Crash lancé par ${user}・Réagi avec 🛑 pour arrêter`,
                                 edit: true,
                                 fields: [
                                     {
-                                        name: 'Multiplier',
-                                        value: '${multiplier.toFixed(1)}x',
+                                        name: `Multiplier`,
+                                        value: `${multiplier.toFixed(1)}x`,
                                         inline: true,
                                     },
                                     {
-                                        name: 'Gain',
-                                        value: '**$${profit.toFixed(2)}**',
+                                        name: `Gain`,
+                                        value: `**$${profit.toFixed(2)}**`,
                                         inline: true,
                                     }
                                 ],
@@ -119,12 +119,12 @@ module.exports = async (client, interaction, args) => {
                                         })
 
                                         return client.embed({
-                                            desc: 'Résultats de Crash de ${user}',
+                                            desc: `Résultats de Crash de ${user}`,
                                             edit: true,
                                             fields: [
                                                 {
-                                                    name: 'Gain',
-                                                    value: '**$${profit.toFixed(2)}**',
+                                                    name: `Gain`,
+                                                    value: `**$${profit.toFixed(2)}**`,
                                                     inline: false,
                                                 }
                                             ],
@@ -139,7 +139,7 @@ module.exports = async (client, interaction, args) => {
 
             }
             else {
-                client.errNormal({ error: 'Tu n'as pas assez de ${client.emotes.economy.coins}!', type: 'editreply' }, interaction);
+                client.errNormal({ error: `Tu n'as pas assez de ${client.emotes.economy.coins}!`, type: 'editreply' }, interaction);
             }
         })
 }

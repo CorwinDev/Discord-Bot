@@ -26,16 +26,16 @@ module.exports = async (client, interaction) => {
 
     const text = args.toLowerCase().split('').map(letter => {
         if (/[a-z]/g.test(letter)) {
-            return ':regional_indicator_${letter}:'
+            return `:regional_indicator_${letter}:`
         } else if (specialCodes[letter]) {
-            return '${specialCodes[letter]}'
+            return `${specialCodes[letter]}`
         }
         return letter;
     }).join('');
 
     client.embed({
-        title: '🙂・Emojify',
-        desc: '${text}',
+        title: `🙂・Emojify`,
+        desc: `${text}`,
         type: 'editreply'
     }, interaction)
 

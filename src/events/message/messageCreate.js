@@ -22,17 +22,17 @@ module.exports = async (client, message) => {
 
   if (message.channel.type === "DM") {
     let embedLogs = new Discord.MessageEmbed()
-      .setTitle('💬・New DM message!')
-      .setDescription('Bot has received a new DM message!')
-      .addField("👤┆Send By", '${message.author} (${message.author.tag})', true)
-      .addField('💬┆Message', '${message.content || "None"}', true)
+      .setTitle(`💬・New DM message!`)
+      .setDescription(`Bot has received a new DM message!`)
+      .addField("👤┆Send By", `${message.author} (${message.author.tag})`, true)
+      .addField(`💬┆Message`, `${message.content || "None"}`, true)
       .setColor(client.config.colors.normal)
       .setTimestamp();
 
     if (message.attachments.size > 0)
       embedLogs.addField(
-        '📃┆Attachments',
-        '${message.attachments.first()?.url}',
+        `📃┆Attachments`,
+        `${message.attachments.first()?.url}`,
         false
       );
     return dmlog.send({
@@ -68,24 +68,24 @@ module.exports = async (client, message) => {
           if (messageData) {
             var levelMessage = messageData.Message;
             levelMessage = levelMessage.replace(
-              '{user:username}',
+              `{user:username}`,
               message.author.username
             );
             levelMessage = levelMessage.replace(
-              '{user:discriminator}',
+              `{user:discriminator}`,
               message.author.discriminator
             );
             levelMessage = levelMessage.replace(
-              '{user:tag}',
+              `{user:tag}`,
               message.author.tag
             );
             levelMessage = levelMessage.replace(
-              '{user:mention}',
+              `{user:mention}`,
               message.author
             );
 
-            levelMessage = levelMessage.replace('{user:level}', user.level);
-            levelMessage = levelMessage.replace('{user:xp}', user.xp);
+            levelMessage = levelMessage.replace(`{user:level}`, user.level);
+            levelMessage = levelMessage.replace(`{user:xp}`, user.xp);
 
             try {
               if (levelData) {
@@ -105,17 +105,17 @@ module.exports = async (client, message) => {
                 await client.channels.cache
                   .get(levelData.Channel)
                   .send({
-                    content: '**GG** <@!${message.author.id}>, you are now level **${user.level}**',
+                    content: `**GG** <@!${message.author.id}>, you are now level **${user.level}**`,
                   })
                   .catch(() => {});
               } else {
                 message.channel.send({
-                  content: '**GG** <@!${message.author.id}>, you are now level **${user.level}**',
+                  content: `**GG** <@!${message.author.id}>, you are now level **${user.level}**`,
                 });
               }
             } catch {
               message.channel.send({
-                content: '**GG** <@!${message.author.id}>, you are now level **${user.level}**',
+                content: `**GG** <@!${message.author.id}>, you are now level **${user.level}**`,
               });
             }
           }
@@ -179,7 +179,7 @@ module.exports = async (client, message) => {
         client
           .simpleEmbed(
             {
-              desc: '${message.author} is no longer afk!',
+              desc: `${message.author} is no longer afk!`,
             },
             message.channel
           )
@@ -189,8 +189,8 @@ module.exports = async (client, message) => {
             }, 5000);
           });
 
-        if (message.member.displayName.startsWith('[AFK] ')) {
-          let name = message.member.displayName.replace('[AFK] ', '');
+        if (message.member.displayName.startsWith(`[AFK] `)) {
+          let name = message.member.displayName.replace(`[AFK] `, ``);
           message.member.setNickname(name).catch((e) => {});
         }
       }
@@ -207,7 +207,7 @@ module.exports = async (client, message) => {
         async (err, data) => {
           if (data) {
             client.simpleEmbed(
-              { desc: '${u} is currently afk! **Reason:** ${data.Message}' },
+              { desc: `${u} is currently afk! **Reason:** ${data.Message}` },
               message.channel
             );
           }
@@ -225,7 +225,7 @@ module.exports = async (client, message) => {
       const input = message;
       try {
         fetch(
-          'https://api.monkedev.com/fun/chat?msg=${encodeURIComponent(input)}'
+          `https://api.monkedev.com/fun/chat?msg=${encodeURIComponent(input)}`
         )
           .catch(() => {})
           .then((res) => res.json())
@@ -265,7 +265,7 @@ module.exports = async (client, message) => {
         await lastStickyMessage.delete({ timeout: 1000 });
 
         const newMessage = await client.simpleEmbed(
-          { desc: '${data.Content}' },
+          { desc: `${data.Content}` },
           message.channel
         );
 
@@ -303,7 +303,7 @@ module.exports = async (client, message) => {
 
   const escapeRegex = (str) => str.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
   const prefixRegex = new RegExp(
-    '^(<@!?${client.user.id}>|${escapeRegex(prefix)})\\s*'
+    `^(<@!?${client.user.id}>|${escapeRegex(prefix)})\\s*`
   );
 
   if (!prefixRegex.test(message.content.toLowerCase())) return;
@@ -335,7 +335,7 @@ module.exports = async (client, message) => {
       .embed(
         {
           title: "Hi, i'm Bot",
-          desc: 'Use with commands via Discord ${client.emotes.normal.slash} commands',
+          desc: `Use with commands via Discord ${client.emotes.normal.slash} commands`,
           fields: [
            {
                 name: "📢┆Alert!",
@@ -344,7 +344,7 @@ module.exports = async (client, message) => {
             },
             {
               name: "📨┆Invite me",
-              value: 'Invite Bot in your own server! [Click here](${client.config.discord.botInvite})',
+              value: `Invite Bot in your own server! [Click here](${client.config.discord.botInvite})`,
             },
             {
               name: "❓┇I don't see any slash commands",
@@ -353,11 +353,11 @@ module.exports = async (client, message) => {
             },
             {
               name: "❓┆Need support?",
-              value: 'For questions you can join our [support server](${client.config.discord.serverInvite})!',
+              value: `For questions you can join our [support server](${client.config.discord.serverInvite})!`,
             },
             {
               name: "🐞┆Found a bug?",
-              value: 'Report all bugs via: \'/report bug\'!',
+              value: `Report all bugs via: \`/report bug\`!`,
             },
           ],
           components: [row],
@@ -385,7 +385,7 @@ module.exports = async (client, message) => {
     } else if (cmdx.Action == "Embed") {
       return client.simpleEmbed(
         {
-          desc: '${cmdx.Responce}',
+          desc: `${cmdx.Responce}`,
         },
         message.channel
       );
@@ -419,7 +419,7 @@ module.exports = async (client, message) => {
     client.embed(
       {
         title: "👋・Hi, i'm Bot",
-        desc: 'Bot is now completely in ${client.emotes.normal.slash} commands. The current message commands have expired! Try our new improved commands and make your server better with Bot!',
+        desc: `Bot is now completely in ${client.emotes.normal.slash} commands. The current message commands have expired! Try our new improved commands and make your server better with Bot!`,
         fields: [
            {
                 name: "📢┇Alert!",

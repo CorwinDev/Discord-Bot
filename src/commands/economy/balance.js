@@ -17,31 +17,31 @@ module.exports = async (client, interaction, args) => {
             let total = data.Money + data.Bank;
 
             client.embed({
-                title: '${client.emotes.economy.coins}・Balance',
+                title: `${client.emotes.economy.coins}・Balance`,
                 fields: [
                     {
-                        name: '${client.emotes.economy.pocket}┆Wallet',
-                        value: '$${data.Money}',
+                        name: `${client.emotes.economy.pocket}┆Wallet`,
+                        value: `$${data.Money}`,
                         inline: true
                     },
                     {
-                        name: '${client.emotes.economy.bank}┆Bank',
-                        value: '$${data.Bank}',
+                        name: `${client.emotes.economy.bank}┆Bank`,
+                        value: `$${data.Bank}`,
                         inline: true
                     },
                     {
-                        name: '💰┆Total',
-                        value: '$${total}',
+                        name: `💰┆Total`,
+                        value: `$${total}`,
                         inline: true
                     }
                 ],
-                desc: 'The current balance of \'${user.tag}\'',
+                desc: `The current balance of \`${user.tag}\``,
                 type: 'editreply'
             }, interaction);
         }
         else {
             client.errNormal({
-                error: 'The user doesn't have any money!', type: 'editreply'
+                error: `The user doesn't have any money!`, type: 'editreply'
             }, interaction);
         }
     })

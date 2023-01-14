@@ -28,7 +28,7 @@ module.exports = async (client, interaction, args) => {
     };
 
     client.simpleEmbed({ 
-        title: '${client.emotes.animated.loading}┆Loading...',
+        title: `${client.emotes.animated.loading}┆Loading...`,
         type: 'editreply'
     }, interaction).then(async msg => {
 
@@ -75,8 +75,8 @@ module.exports = async (client, interaction, args) => {
             .addComponents(btn, btn2);
 
         client.embed({
-            title: '🤔・Would you rather...',
-            desc: '**A)** ${decode(res.questions[0])} \n**B)** ${decode(res.questions[1])}',
+            title: `🤔・Would you rather...`,
+            desc: `**A)** ${decode(res.questions[0])} \n**B)** ${decode(res.questions[1])}`,
             components: [row],
             type: 'editreply'
         }, interaction).then(async (m) => {
@@ -89,38 +89,38 @@ module.exports = async (client, interaction, args) => {
                 if (btn.customId === id1) {
                     btn = new Discord.MessageButton()
                         .setStyle('PRIMARY')
-                        .setLabel('Option A (${res.percentage['1']})')
+                        .setLabel(`Option A (${res.percentage['1']})`)
                         .setCustomId(id1)
                         .setDisabled(true);
                     btn2 = new Discord.MessageButton()
                         .setStyle('SECONDARY')
-                        .setLabel('Option B (${res.percentage['2']})')
+                        .setLabel(`Option B (${res.percentage['2']})`)
                         .setCustomId(id2)
                         .setDisabled(true);
                     collector.stop();
 
                     client.embed({
-                        title: '🤔・Would you rather...',
-                        desc: '**A) ${decode(res.questions[0])} (${res.percentage['1']})** \nB) ${decode(res.questions[1])} (${res.percentage['2']})',
+                        title: `🤔・Would you rather...`,
+                        desc: `**A) ${decode(res.questions[0])} (${res.percentage['1']})** \nB) ${decode(res.questions[1])} (${res.percentage['2']})`,
                         components: [{ type: 1, components: [btn, btn2] }],
                         type: 'editreply'
                     }, interaction)
                 } else if (btn.customId === id2) {
                     btn = new Discord.MessageButton()
                         .setStyle('SECONDARY')
-                        .setLabel('Option A (${res.percentage['1']})')
+                        .setLabel(`Option A (${res.percentage['1']})`)
                         .setCustomId(id1)
                         .setDisabled(true);
                     btn2 = new Discord.MessageButton()
                         .setStyle('PRIMARY')
-                        .setLabel('Option B (${res.percentage['2']})')
+                        .setLabel(`Option B (${res.percentage['2']})`)
                         .setCustomId(id2)
                         .setDisabled(true);
                     collector.stop();
 
                     client.embed({
-                        title: '🤔・Would you rather...',
-                        desc: 'A) ${decode(res.questions[0])} (${res.percentage['1']}) \n**B) ${decode(res.questions[1])} (${res.percentage['2']})**',
+                        title: `🤔・Would you rather...`,
+                        desc: `A) ${decode(res.questions[0])} (${res.percentage['1']}) \n**B) ${decode(res.questions[1])} (${res.percentage['2']})**`,
                         components: [{ type: 1, components: [btn, btn2] }],
                         type: 'editreply'
                     }, interaction)

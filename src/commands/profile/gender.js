@@ -11,18 +11,18 @@ module.exports = async (client, interaction, args) => {
                 .addOptions(
                     {
                         emoji: "👨",
-                        label: 'Male',
-                        value: 'Male',
+                        label: `Male`,
+                        value: `Male`,
                     },
                     {
                         emoji: "👩",
-                        label: 'Female',
-                        value: 'Female',
+                        label: `Female`,
+                        value: `Female`,
                     },
                     {
                         emoji: "👪",
-                        label: 'Other',
-                        value: 'Other',
+                        label: `Other`,
+                        value: `Other`,
                     }
                 );
 
@@ -30,7 +30,7 @@ module.exports = async (client, interaction, args) => {
                 .addComponents(menu)
 
             client.embed({
-                desc: 'Select a gender',
+                desc: `Select a gender`,
                 type: 'editreply',
                 components: [row],
             }, interaction).then(msg => {
@@ -45,7 +45,7 @@ module.exports = async (client, interaction, args) => {
                             data: {
                                 type: 4,
                                 data: {
-                                    content: 'Your gender is set',
+                                    content: `Your gender is set`,
                                     embeds: [],
                                     flags: 64,
                                 }

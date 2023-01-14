@@ -16,12 +16,12 @@ module.exports = async (client, interaction, args) => {
         if (data) {
 
             client.embed({
-                title: '${client.emotes.normal.error}・Warnings',
-                desc: 'The warnings of **${member.tag}**',
+                title: `${client.emotes.normal.error}・Warnings`,
+                desc: `The warnings of **${member.tag}**`,
                 fields: [
                     {
                         name: "Total",
-                        value: '${data.Warns}',
+                        value: `${data.Warns}`,
                         inline: false
                     }
                 ],
@@ -30,8 +30,8 @@ module.exports = async (client, interaction, args) => {
         }
         else {
             client.embed({
-                title: '${client.emotes.normal.error}・Warnings',
-                desc: 'The warnings of **${member.tag}**',
+                title: `${client.emotes.normal.error}・Warnings`,
+                desc: `The warnings of **${member.tag}**`,
                 fields: [
                     {
                         name: "Total",

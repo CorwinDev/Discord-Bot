@@ -9,7 +9,7 @@ module.exports = async (client, interaction, args) => {
 
             if (data && data.Pets) {
                 if (data.Pets.includes(pet)) {
-                    return client.errNormal({ error: 'That pet is already exists in your database!', type: 'editreply' }, interaction);
+                    return client.errNormal({ error: `That pet is already exists in your database!`, type: 'editreply' }, interaction);
                 }
                 data.Pets.push(pet);
                 data.save();
@@ -22,7 +22,7 @@ module.exports = async (client, interaction, args) => {
                 text: "Added your pet",
                 fields: [{
                     name: "🐶┆Pet",
-                    value: '\'\'\'${pet}\'\'\'',
+                    value: `\`\`\`${pet}\`\`\``,
                     inline: true,
                 }],
                 type: 'editreply'

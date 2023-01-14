@@ -16,7 +16,7 @@ module.exports = async (client, interaction, args) => {
                 text: "Your favorite color is set",
                 fields: [{
                     name: "🎨┆Color",
-                    value: '\'\'\'${color}\'\'\'',
+                    value: `\`\`\`${color}\`\`\``,
                     inline: true,
                 }],
                 type: 'editreply'

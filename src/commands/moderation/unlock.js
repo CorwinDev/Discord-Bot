@@ -18,8 +18,8 @@ module.exports = async (client, interaction, args) => {
         text: "Channel unlocked successfully!",
         fields: [
             {
-                name: '📘┆Channel',
-                value: '${channel} (${channel.name})'
+                name: `📘┆Channel`,
+                value: `${channel} (${channel.name})`
             }
         ],
         type: 'editreply'

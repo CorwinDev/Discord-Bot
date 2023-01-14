@@ -14,7 +14,7 @@ module.exports = async (client, interaction, args) => {
         }
         else {
             client.errNormal({
-                error: 'Ce serveur ne possède pas de données!',
+                error: `Ce serveur ne possède pas de données!`,
                 type: 'editreply'
             }, interaction);
         }

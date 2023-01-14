@@ -12,18 +12,18 @@ module.exports = async (client, reaction, user) => {
       
     if (reaction.message.author.id === user.id)
       return client.errNormal({
-        error: 'You cannot star your own messages',
+        error: `You cannot star your own messages`,
         type: "ephemeral",
       }, reaction.message);
 
     if (reaction.message.author.bot) return client.errNormal({
-      error: 'You cannot star bot messages',
+      error: `You cannot star bot messages`,
       type: "ephemeral",
     }, reaction.message);
 
     const starboardChannel = reaction.message.guild.channels.cache.get(data.Channel);
     if (!starboardChannel) return client.errNormal({
-      error: 'No star channel found! Run the channel setup',
+      error: `No star channel found! Run the channel setup`,
       type: 'ephemeral'
     }, reaction.message);
 
@@ -41,58 +41,58 @@ module.exports = async (client, reaction, user) => {
       starMsg.delete();
 
       client.embed({
-        title: '⭐・Starboard',
+        title: `⭐・Starboard`,
         desc: foundStar.description,
         image: image,
         fields: [
           {
-            name: '⭐┇Stars',
-            value: '${reaction.count}',
+            name: `⭐┇Stars`,
+            value: `${reaction.count}`,
             inline: true
           },
           {
-            name: '🗨️┇Message',
-            value: '[Jump to the message](${reaction.message.url})',
+            name: `🗨️┇Message`,
+            value: `[Jump to the message](${reaction.message.url})`,
             inline: true
           },
           {
-            name: '👤┇Author',
-            value: '${reaction.message.author} (${reaction.message.author.tag})',
+            name: `👤┇Author`,
+            value: `${reaction.message.author} (${reaction.message.author.tag})`,
             inline: true
           }
         ],
-        footer: '${client.config.discord.footer} | ${reaction.message.id}',
+        footer: `${client.config.discord.footer} | ${reaction.message.id}`,
       }, starboardChannel)
     }
     if (!stars) {
       const image = reaction.message.attachments.size > 0 ? await extension(reaction, reaction.message.attachments.first()?.url) : "";
       if (image === "" && reaction.message.cleanContent.length < 1) return client.errNormal({
-        error: 'You cannot star an empty message',
+        error: `You cannot star an empty message`,
         type: 'ephemeral'
       }, reaction.message);
 
       client.embed({
-        title: '⭐・Starboard',
+        title: `⭐・Starboard`,
         desc: reaction.message.cleanContent,
         image: image,
         fields: [
           {
-            name: '⭐┇Stars',
-            value: '${reaction.count}',
+            name: `⭐┇Stars`,
+            value: `${reaction.count}`,
             inline: true
           },
           {
-            name: '🗨️┇Message',
-            value: '[Jump to the message](${reaction.message.url})',
+            name: `🗨️┇Message`,
+            value: `[Jump to the message](${reaction.message.url})`,
             inline: true
           },
           {
-            name: '👤┇Author',
-            value: '${reaction.message.author} (${reaction.message.author.tag})',
+            name: `👤┇Author`,
+            value: `${reaction.message.author} (${reaction.message.author.tag})`,
             inline: true
           }
         ],
-        footer: '${client.config.discord.footer} | ${reaction.message.id}'
+        footer: `${client.config.discord.footer} | ${reaction.message.id}`
       }, starboardChannel)
     }
   }

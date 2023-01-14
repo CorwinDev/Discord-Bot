@@ -29,16 +29,16 @@ module.exports = async (client, interaction, args) => {
             if (data) {
 
                 client.succNormal({
-                    text: 'Added money to a user!',
+                    text: `Added money to a user!`,
                     fields: [
                         {
-                            name: '👤┆User',
-                            value: '<@!${user.id}>',
+                            name: `👤┆User`,
+                            value: `<@!${user.id}>`,
                             inline: true
                         },
                         {
-                            name: '${client.emotes.economy.coins}┆Amount',
-                            value: '$${amount}',
+                            name: `${client.emotes.economy.coins}┆Amount`,
+                            value: `$${amount}`,
                             inline: true
                         }
                     ],
@@ -46,7 +46,7 @@ module.exports = async (client, interaction, args) => {
                 }, interaction);
             }
             else {
-                client.errNormal({ error: 'This user doesn't have any money!', type: 'editreply' }, interaction);
+                client.errNormal({ error: `This user doesn't have any money!`, type: 'editreply' }, interaction);
             }
         }, 500)
     })

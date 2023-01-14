@@ -22,8 +22,8 @@ module.exports = async (client, interaction, args) => {
     });
 
     var channelName = await client.getTemplate(interaction.guild);
-    channelName = channelName.replace('{emoji}', "🤡")
-    channelName = channelName.replace('{name}', 'Animated Emojis: ${Animated || '0'}')
+    channelName = channelName.replace(`{emoji}`, "🤡")
+    channelName = channelName.replace(`{name}`, `Animated Emojis: ${Animated || '0'}`)
 
     await interaction.guild.channels.create(channelName, {
         type: 'GUILD_VOICE', permissionOverwrites: [
@@ -47,11 +47,11 @@ module.exports = async (client, interaction, args) => {
         })
 
         client.succNormal({
-            text: 'Animated emoji's count created!',
+            text: `Animated emoji's count created!`,
             fields: [
                 {
-                    name: '📘┆Channel',
-                    value: '${channel}'
+                    name: `📘┆Channel`,
+                    value: `${channel}`
                 }
             ],
             type: 'editreply'

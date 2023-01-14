@@ -10,7 +10,7 @@ module.exports = async (client, interaction, args) => {
 
             if (data && data.Hobbys) {
                 if (!data.Hobbys.includes(hobby)) {
-                    return client.errNormal({ error: 'That hobby doesn't exist in the database!', type: 'editreply' }, interaction);
+                    return client.errNormal({ error: `That hobby doesn't exist in the database!`, type: 'editreply' }, interaction);
                 }
 
                 const filtered = data.Hobbys.filter((target) => target !== hobby);
@@ -23,7 +23,7 @@ module.exports = async (client, interaction, args) => {
                 text: "Removed your hobby",
                 fields: [{
                     name: "⚽┆Hobby",
-                    value: '\'\'\'${hobby}\'\'\'',
+                    value: `\`\`\`${hobby}\`\`\``,
                     inline: true,
                 }],
                 type: 'editreply'

@@ -18,25 +18,25 @@ module.exports = async (client, interaction, args) => {
                         .addOptions(
                             [
                                 {
-                                    label: 'Embed',
-                                    description: 'Send a message in an embed',
+                                    label: `Embed`,
+                                    description: `Send a message in an embed`,
                                     value: "command-embed",
                                 },
                                 {
-                                    label: 'Normal',
-                                    description: 'Send a message as normal',
+                                    label: `Normal`,
+                                    description: `Send a message as normal`,
                                     value: "command-normal",
                                 },
                                 {
-                                    label: 'Private',
-                                    description: 'Send the message in DM',
+                                    label: `Private`,
+                                    description: `Send the message in DM`,
                                     value: "command-dm",
                                 },
                             ]
                         )
                 );
 
-            client.embed({ desc: 'What action should be attached to this command?', components: [row], type: 'editreply' }, interaction)
+            client.embed({ desc: `What action should be attached to this command?`, components: [row], type: 'editreply' }, interaction)
 
             const filter = i => i.user.id === interaction.user.id;
 
@@ -51,10 +51,10 @@ module.exports = async (client, interaction, args) => {
                         }).save();
 
                         client.succNormal({
-                            text: 'The command has been added successfully',
+                            text: `The command has been added successfully`,
                             fields: [{
                                 name: "🔧┆Command",
-                                value: '\'\'\'${cmdname.toLowerCase()}\'\'\'',
+                                value: `\`\`\`${cmdname.toLowerCase()}\`\`\``,
                                 inline: true,
                             }],
                             type: 'editreply'
@@ -70,10 +70,10 @@ module.exports = async (client, interaction, args) => {
                         }).save();
 
                         client.succNormal({
-                            text: 'The command has been added successfully',
+                            text: `The command has been added successfully`,
                             fields: [{
                                 name: "🔧┆Command",
-                                value: '\'\'\'${cmdname.toLowerCase()}\'\'\'',
+                                value: `\`\`\`${cmdname.toLowerCase()}\`\`\``,
                                 inline: true,
                             }],
                             type: 'editreply'
@@ -89,10 +89,10 @@ module.exports = async (client, interaction, args) => {
                         }).save();
 
                         client.succNormal({
-                            text: 'The command has been added successfully',
+                            text: `The command has been added successfully`,
                             fields: [{
                                 name: "🔧┆Command",
-                                value: '\'\'\'${cmdname.toLowerCase()}\'\'\'',
+                                value: `\`\`\`${cmdname.toLowerCase()}\`\`\``,
                                 inline: true,
                             }],
                             type: 'editreply'

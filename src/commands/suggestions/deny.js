@@ -19,8 +19,8 @@ module.exports = async (client, interaction, args) => {
         const embedData = suggestEmbed.embeds[0];
 
         client.embed({
-            title: '${client.emotes.normal.error}・Suggestion denied',
-            desc: '\'\'\'${embedData.description}\'\'\'',
+            title: `${client.emotes.normal.error}・Suggestion denied`,
+            desc: `\`\`\`${embedData.description}\`\`\``,
             color: client.config.colors.error,
             author: {
                 name: embedData.author.name,
@@ -34,12 +34,12 @@ module.exports = async (client, interaction, args) => {
 
             if (user) {
                 client.embed({
-                    title: '${client.emotes.normal.check}・Suggestion denied',
-                    desc: 'Your suggestion in ${interaction.guild.name} has been denied by a moderator!',
+                    title: `${client.emotes.normal.check}・Suggestion denied`,
+                    desc: `Your suggestion in ${interaction.guild.name} has been denied by a moderator!`,
                     fields: [
                         {
-                            name: '💬┆Suggestion',
-                            value: '${embedData.description}'
+                            name: `💬┆Suggestion`,
+                            value: `${embedData.description}`
                         }
                     ],
                 }, user).catch({})
@@ -51,8 +51,8 @@ module.exports = async (client, interaction, args) => {
             text: "Suggestion successfully denied",
             fields: [
                 {
-                    name: '💬┆Suggestion',
-                    value: '${embedData.description}'
+                    name: `💬┆Suggestion`,
+                    value: `${embedData.description}`
                 }
             ],
             type: 'editreply'
@@ -60,7 +60,7 @@ module.exports = async (client, interaction, args) => {
     }
     else {
         client.errNormal({
-            error: 'No suggestion channel set! Please do the setup',
+            error: `No suggestion channel set! Please do the setup`,
             type: 'editreply'
         }, interaction);
     }

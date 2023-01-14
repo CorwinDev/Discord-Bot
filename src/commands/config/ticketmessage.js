@@ -22,16 +22,16 @@ module.exports = async (client, interaction, args) => {
                 data.save();
 
                 client.succNormal({
-                    text: 'The ticket message has been set successfully',
+                    text: `The ticket message has been set successfully`,
                     fields: [
                         {
-                            name: '📘┆Message type',
-                            value: '${type}',
+                            name: `📘┆Message type`,
+                            value: `${type}`,
                             inline: true
                         },
                         {
-                            name: '💬┆Message',
-                            value: '${data.openTicket}',
+                            name: `💬┆Message`,
+                            value: `${data.openTicket}`,
                             inline: true
                         },
                     ],
@@ -40,7 +40,7 @@ module.exports = async (client, interaction, args) => {
             }
             else {
                 client.errNormal({
-                    error: 'No ticket message data found!',
+                    error: `No ticket message data found!`,
                     type: 'editreply'
                 }, interaction)
             }
@@ -62,16 +62,16 @@ module.exports = async (client, interaction, args) => {
         })
 
         client.succNormal({
-            text: 'The ticket message has been set successfully',
+            text: `The ticket message has been set successfully`,
             fields: [
                 {
-                    name: '📘┆Message type',
-                    value: '${type}',
+                    name: `📘┆Message type`,
+                    value: `${type}`,
                     inline: true
                 },
                 {
-                    name: '💬┆Message',
-                    value: '${message}',
+                    name: `💬┆Message`,
+                    value: `${message}`,
                     inline: true
                 },
             ],
@@ -87,16 +87,16 @@ module.exports = async (client, interaction, args) => {
                 data.save();
 
                 client.succNormal({
-                    text: 'The ticket message has been set successfully',
+                    text: `The ticket message has been set successfully`,
                     fields: [
                         {
-                            name: '📘┆Message type',
-                            value: '${type}',
+                            name: `📘┆Message type`,
+                            value: `${type}`,
                             inline: true
                         },
                         {
-                            name: '💬┆Message',
-                            value: '${data.dmMessage}',
+                            name: `💬┆Message`,
+                            value: `${data.dmMessage}`,
                             inline: true
                         },
                     ],
@@ -105,7 +105,7 @@ module.exports = async (client, interaction, args) => {
             }
             else {
                 client.errNormal({
-                    error: 'No ticket message data found!',
+                    error: `No ticket message data found!`,
                     type: 'editreply'
                 }, interaction)
             }
@@ -127,16 +127,16 @@ module.exports = async (client, interaction, args) => {
         })
 
         client.succNormal({
-            text: 'The ticket message has been set successfully',
+            text: `The ticket message has been set successfully`,
             fields: [
                 {
-                    name: '📘┆Message type',
-                    value: '${type}',
+                    name: `📘┆Message type`,
+                    value: `${type}`,
                     inline: true
                 },
                 {
-                    name: '💬┆Message',
-                    value: '${message}',
+                    name: `💬┆Message`,
+                    value: `${message}`,
                     inline: true
                 },
             ],

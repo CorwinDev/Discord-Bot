@@ -9,7 +9,7 @@ module.exports = async (client, interaction, args) => {
 
             if (data && data.Movies) {
                 if (data.Movies.includes(movie)) {
-                    return client.errNormal({ error: 'That movie is already exists in your database!', type: 'editreply' }, interaction);
+                    return client.errNormal({ error: `That movie is already exists in your database!`, type: 'editreply' }, interaction);
                 }
                 data.Movies.push(movie);
                 data.save();
@@ -22,7 +22,7 @@ module.exports = async (client, interaction, args) => {
                 text: "Added your movie",
                 fields: [{
                     name: "🎬┆Movies",
-                    value: '\'\'\'${movie}\'\'\'',
+                    value: `\`\`\`${movie}\`\`\``,
                     inline: true,
                 }],
                 type: 'editreply'

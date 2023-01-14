@@ -172,7 +172,7 @@ module.exports = async (client, interaction, args) => {
 
 
         client.embed({
-            title: '🐍・Snake',
+            title: `🐍・Snake`,
             desc: gameBoardToString(),
             components: [
                 {
@@ -232,8 +232,8 @@ module.exports = async (client, interaction, args) => {
             .setDisabled(true);
 
         client.embed({
-            title: '🐍・Snake',
-            desc: 'GG, you scored **${score}** points!',
+            title: `🐍・Snake`,
+            desc: `GG, you scored **${score}** points!`,
             components: [
                 {
                     type: 1,
@@ -287,7 +287,7 @@ module.exports = async (client, interaction, args) => {
         .setCustomId(id6);
 
     client.embed({
-        title: '🐍・Snake',
+        title: `🐍・Snake`,
         desc: gameBoardToString(),
         components: [
             {

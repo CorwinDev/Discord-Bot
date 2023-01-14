@@ -15,7 +15,7 @@ module.exports = async (client, interaction, args) => {
                 text: "Your status is set",
                 fields: [{
                     name: "😎┆Status",
-                    value: '\'\'\'${status}\'\'\'',
+                    value: `\`\`\`${status}\`\`\``,
                     inline: true,
                 }],
                 type: 'editreply'

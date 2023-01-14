@@ -19,7 +19,7 @@ module.exports = async (client, interaction, args) => {
 
     store.findOne({ Guild: interaction.guild.id, Role: role.id }, async (err, storeData) => {
         if (storeData) {
-            client.errNormal({ error: 'This role is already in the store!', type: 'editreply' }, interaction);
+            client.errNormal({ error: `This role is already in the store!`, type: 'editreply' }, interaction);
         }
         else {
 
@@ -30,16 +30,16 @@ module.exports = async (client, interaction, args) => {
             }).save();
 
             client.succNormal({
-                text: 'The role was added to the store!',
+                text: `The role was added to the store!`,
                 fields: [
                     {
-                        name: '🛒┆Role',
-                        value: '<@&${role.id}>',
+                        name: `🛒┆Role`,
+                        value: `<@&${role.id}>`,
                         inline: true
                     },
                     {
-                        name: '${client.emotes.economy.coins}┆Amount',
-                        value: '$${amount}',
+                        name: `${client.emotes.economy.coins}┆Amount`,
+                        value: `$${amount}`,
                         inline: true
                     }
                 ],

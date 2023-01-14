@@ -27,15 +27,15 @@ module.exports = async (client, interaction, args) => {
         })
 
         client.succNormal({
-            text: 'Added **${amount} credits** to ${user}',
+            text: `Added **${amount} credits** to ${user}`,
             type: 'editreply'
         }, interaction);
 
         let embedLogs = new Discord.MessageEmbed()
-            .setTitle('🪙・Credits added')
-            .setDescription('Added credits to ${user} (${user.id})')
-            .addField('👤┆Added By', '${interaction.user} (${interaction.user.tag})', true)
-            .addField('🔢┆Amount', '${amount}', true)
+            .setTitle(`🪙・Credits added`)
+            .setDescription(`Added credits to ${user} (${user.id})`)
+            .addField('👤┆Added By', `${interaction.user} (${interaction.user.tag})`, true)
+            .addField(`🔢┆Amount`, `${amount}`, true)
             .setColor(client.config.colors.normal)
             .setTimestamp();
         webhookClientLogs.send({
@@ -52,15 +52,15 @@ module.exports = async (client, interaction, args) => {
         })
 
         client.succNormal({
-            text: 'Removed **${amount} credits** from ${user}',
+            text: `Removed **${amount} credits** from ${user}`,
             type: 'editreply'
         }, interaction);
 
         let embedLogs = new Discord.MessageEmbed()
-            .setTitle('🪙・Credits removed')
-            .setDescription('Removed credits from ${user} (${user.id})')
-            .addField('👤┆Removed By', '${interaction.user} (${interaction.user.tag})', true)
-            .addField('🔢┆Amount', '${amount}', true)
+            .setTitle(`🪙・Credits removed`)
+            .setDescription(`Removed credits from ${user} (${user.id})`)
+            .addField('👤┆Removed By', `${interaction.user} (${interaction.user.tag})`, true)
+            .addField(`🔢┆Amount`, `${amount}`, true)
             .setColor(client.config.colors.normal)
             .setTimestamp();
         webhookClientLogs.send({

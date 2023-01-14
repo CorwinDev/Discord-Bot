@@ -37,10 +37,10 @@ module.exports = {
 
         if (type == "bug") {
             const embed = new Discord.MessageEmbed()
-                .setTitle('📣・New bug report!')
+                .setTitle(`📣・New bug report!`)
                 .addField("Report category", "Bug", true)
-                .addField("Submitted by", '${interaction.user.tag}', true)
-                .setDescription('${desc}')
+                .addField("Submitted by", `${interaction.user.tag}`, true)
+                .setDescription(`${desc}`)
                 .setColor(client.config.colors.normal)
             webhookClient.send({
                 username: 'Bot Reports',
@@ -48,16 +48,16 @@ module.exports = {
             });
 
             client.succNormal({
-                text: 'Bug successfully sent to the developers!',
+                text: `Bug successfully sent to the developers!`,
                 type: 'ephemeraledit'
             }, interaction);
         }
         else if (type == "user") {
             const embed = new Discord.MessageEmbed()
-                .setTitle('📣・New user report!')
+                .setTitle(`📣・New user report!`)
                 .addField("Report category", "User", true)
-                .addField("Submitted by", '${interaction.user.tag}', true)
-                .setDescription('${desc}')
+                .addField("Submitted by", `${interaction.user.tag}`, true)
+                .setDescription(`${desc}`)
                 .setColor(client.config.colors.normal)
             webhookClient.send({
                 username: 'Bot Reports',
@@ -65,7 +65,7 @@ module.exports = {
             });
 
             client.succNormal({
-                text: 'User report successfully sent to the developers!',
+                text: `User report successfully sent to the developers!`,
                 type: 'ephemeraledit'
             }, interaction);
         }

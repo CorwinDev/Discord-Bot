@@ -13,25 +13,25 @@ module.exports = async (client, interaction, args) => {
 
   if (parsedEmoji.id) {
     const extension = parsedEmoji.animated ? ".gif" : ".png";
-    const url = 'https://cdn.discordapp.com/emojis/${parsedEmoji.id + extension}';
+    const url = `https://cdn.discordapp.com/emojis/${parsedEmoji.id + extension}`;
 
     interaction.guild.emojis.create(url, parsedEmoji.name).then(emoji => {
       client.succNormal({
-        text: 'Emoji successfully added to the server',
+        text: `Emoji successfully added to the server`,
         fields: [
           {
             name: "😛┇Emoji",
-            value: '${emoji}',
+            value: `${emoji}`,
             inline: true,
           },
           {
             name: "😜┇Emoji name",
-            value: '${emoji.name}',
+            value: `${emoji.name}`,
             inline: true,
           },
           {
             name: "😝┇Emoji id",
-            value: '${emoji.id}',
+            value: `${emoji.id}`,
             inline: true,
           },
         ],

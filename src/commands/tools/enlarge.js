@@ -7,7 +7,7 @@ module.exports = async (client, interaction, args) => {
 
     if (parsedEmoji) {
         const ex = parsedEmoji.animated ? ".gif" : ".png";
-        const url = 'https://cdn.discordapp.com/emojis/${parsedEmoji.id + ex}';
+        const url = `https://cdn.discordapp.com/emojis/${parsedEmoji.id + ex}`;
 
         return client.embed({
             image: url,

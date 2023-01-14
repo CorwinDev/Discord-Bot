@@ -63,8 +63,8 @@ module.exports = async (client, interaction, args) => {
                             );
 
                         client.embed({
-                            title: '${client.emotes.animated.loading}・Progress',
-                            desc: 'Your ticket is being created...',
+                            title: `${client.emotes.animated.loading}・Progress`,
+                            desc: `Your ticket is being created...`,
                             type: 'ephemeral'
                         }, interaction).then((msg) => {
 
@@ -97,7 +97,7 @@ module.exports = async (client, interaction, args) => {
 
                                 var ticketid = String(TicketData.TicketCount).padStart(4, 0);;
 
-                                interaction.guild.channels.create('ticket-${ticketid}', {
+                                interaction.guild.channels.create(`ticket-${ticketid}`, {
                                     permissionOverwrites: [
                                         {
                                             deny: 'VIEW_CHANNEL',
@@ -115,22 +115,22 @@ module.exports = async (client, interaction, args) => {
                                     parent: category.id
                                 }).then(async channel => {
                                     client.embed({
-                                        title: '⚙️・System',
-                                        desc: 'Ticket has been created',
+                                        title: `⚙️・System`,
+                                        desc: `Ticket has been created`,
                                         fields: [
                                             {
                                                 name: "👤┆Creator",
-                                                value: '${interaction.user}',
+                                                value: `${interaction.user}`,
                                                 inline: true
                                             },
                                             {
                                                 name: "📂┆Channel",
-                                                value: '${channel}',
+                                                value: `${channel}`,
                                                 inline: true
                                             },
                                             {
                                                 name: "⏰┆Created at",
-                                                value: '<t:${(Date.now() / 1000).toFixed(0)}:f>',
+                                                value: `<t:${(Date.now() / 1000).toFixed(0)}:f>`,
                                                 inline: true
                                             }
                                         ],
@@ -147,22 +147,22 @@ module.exports = async (client, interaction, args) => {
 
                                     if (logsChannel) {
                                         client.embed({
-                                            title: '📝・Open ticket',
-                                            desc: 'A new ticket has been created',
+                                            title: `📝・Open ticket`,
+                                            desc: `A new ticket has been created`,
                                             fields: [
                                                 {
                                                     name: "👤┆Creator",
-                                                    value: '${interaction.user.tag} (${interaction.user.id})',
+                                                    value: `${interaction.user.tag} (${interaction.user.id})`,
                                                     inline: false
                                                 },
                                                 {
                                                     name: "📂┆Channel",
-                                                    value: '${channel.name} is found at ${channel}',
+                                                    value: `${channel.name} is found at ${channel}`,
                                                     inline: false
                                                 },
                                                 {
                                                     name: "⏰┆Created at",
-                                                    value: '<t:${(Date.now() / 1000).toFixed(0)}:F>',
+                                                    value: `<t:${(Date.now() / 1000).toFixed(0)}:F>`,
                                                     inline: false
                                                 }
                                             ],
@@ -174,22 +174,22 @@ module.exports = async (client, interaction, args) => {
                                         fields: [
                                             {
                                                 name: "👤┆Creator",
-                                                value: '${interaction.user}',
+                                                value: `${interaction.user}`,
                                                 inline: true
                                             },
                                             {
                                                 name: "📄┆Subject",
-                                                value: '${reason}',
+                                                value: `${reason}`,
                                                 inline: true
                                             },
                                             {
                                                 name: "⏰┆Created at",
-                                                value: '<t:${(Date.now() / 1000).toFixed(0)}:F>',
+                                                value: `<t:${(Date.now() / 1000).toFixed(0)}:F>`,
                                                 inline: true
                                             }
                                         ],
                                         components: [row],
-                                        content: '${interaction.user}, ${role}'
+                                        content: `${interaction.user}, ${role}`
                                     }, channel)
                                 })
                             }

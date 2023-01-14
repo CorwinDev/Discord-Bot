@@ -11,19 +11,19 @@ module.exports = async (client, interaction, args) => {
 
     Schema.findOne({ Text: text, User: interaction.user.id, endTime: endtime }, async (err, data) => {
         if (data) {
-            return client.errNormal({ error: 'You already made this reminder!', type: 'editreply' }, interaction);
+            return client.errNormal({ error: `You already made this reminder!`, type: 'editreply' }, interaction);
         }
         else {
             return client.succNormal({
-                text: 'Your reminder is set!',
+                text: `Your reminder is set!`,
                 fields: [{
-                    name: '${client.emotes.normal.clock}┇End Time',
-                    value: '${new Date(endtime).toLocaleTimeString()}',
+                    name: `${client.emotes.normal.clock}┇End Time`,
+                    value: `${new Date(endtime).toLocaleTimeString()}`,
                     inline: true,
                 },
                 {
-                    name: '💭┇Reminder',
-                    value: '${text}',
+                    name: `💭┇Reminder`,
+                    value: `${text}`,
                     inline: true,
                 }
                 ],
@@ -35,12 +35,12 @@ module.exports = async (client, interaction, args) => {
     setTimeout(async () => {
 
         client.embed({
-            title: '🔔・Reminder',
-            desc: 'Your reminder just ended!',
+            title: `🔔・Reminder`,
+            desc: `Your reminder just ended!`,
             fields: [
                 {
-                    name: '💭┇Reminder',
-                    value: '${text}',
+                    name: `💭┇Reminder`,
+                    value: `${text}`,
                     inline: true,
                 }
             ],

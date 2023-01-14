@@ -24,17 +24,17 @@ module.exports = async (client, interaction, args) => {
     var resultaat = Math.floor((Math.random() * antwoorden.length));
 
     client.embed({
-        title: '${client.emotes.normal.ball}・8ball',
-        desc: 'See the answer on your question!',
+        title: `${client.emotes.normal.ball}・8ball`,
+        desc: `See the answer on your question!`,
         fields: [
             {
-                name: '💬┆Your Question',
-                value: '\'\'\'${question}\'\'\'',
+                name: `💬┆Your Question`,
+                value: `\`\`\`${question}\`\`\``,
                 inline: false
             },
             {
-                name: '🤖┆Bot Answer',
-                value: '\'\'\'${antwoorden[resultaat]}\'\'\'',
+                name: `🤖┆Bot Answer`,
+                value: `\`\`\`${antwoorden[resultaat]}\`\`\``,
                 inline: false
             }
         ],

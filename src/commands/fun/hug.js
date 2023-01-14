@@ -16,8 +16,8 @@ module.exports = async (client, interaction, args) => {
     }
 
     client.embed({
-        title: '${interaction.user.tag} hugs ${user.tag}',
-        image: '${data.link}',
+        title: `${interaction.user.tag} hugs ${user.tag}`,
+        image: `${data.link}`,
         type: 'editreply'
     }, interaction);
 }

@@ -13,14 +13,14 @@ module.exports = (client, err, command, interaction) => {
     });
 
     let embed = new Discord.MessageEmbed()
-        .setTitle('🚨・${password}')
-        .addField("✅┇Serveur", '${interaction.guild.name} (${interaction.guild.id})')
-        .addField('💻┇Commande', '${command}')
-        .addField('💬┇Erreur', '\'\'\'${err}\'\'\'')
-        .addField('📃┇Erreur stack', '\'\'\'${err.stack.substr(0, 1018)}\'\'\'')
+        .setTitle(`🚨・${password}`)
+        .addField("✅┇Serveur", `${interaction.guild.name} (${interaction.guild.id})`)
+        .addField(`💻┇Commande`, `${command}`)
+        .addField(`💬┇Erreur`, `\`\`\`${err}\`\`\``)
+        .addField(`📃┇Erreur stack`, `\`\`\`${err.stack.substr(0, 1018)}\`\`\``)
         .setColor(client.config.colors.normal)
     errorlog.send({
-        username: 'Erreurs du bot',
+        username: `Erreurs du bot`,
         embeds: [embed],
 
     }).catch(error => { console.log(error) })
@@ -34,18 +34,18 @@ module.exports = (client, err, command, interaction) => {
         );*/
 
     client.embed({
-        title: '${client.emotes.normal.error}・Erreur',
-        desc: 'Il y a eu une erreur en executant cette commande',
+        title: `${client.emotes.normal.error}・Erreur`,
+        desc: `Il y a eu une erreur en executant cette commande`,
         color: client.config.colors.error,
         fields: [
             {
-                name: 'Code d'erreur',
-                value: '\'${password}\'',
+                name: `Code d'erreur`,
+                value: `\`${password}\``,
                 inline: true,
             }/*,
             {
-                name: 'What now?',
-                value: 'You can contact the developers by joining the support server',
+                name: `What now?`,
+                value: `You can contact the developers by joining the support server`,
                 inline: true,
             }*/
         ],
@@ -53,18 +53,18 @@ module.exports = (client, err, command, interaction) => {
         type: 'editreply'
     }, interaction).catch(() => {
         client.embed({
-            title: '${client.emotes.normal.error}・Error',
-            desc: 'Il y a eu une erreur en executant cette commande',
+            title: `${client.emotes.normal.error}・Error`,
+            desc: `Il y a eu une erreur en executant cette commande`,
             color: client.config.colors.error,
             fields: [
                 {
-                    name: 'Code d'erreur',
-                    value: '\'${password}\'',
+                    name: `Code d'erreur`,
+                    value: `\`${password}\``,
                     inline: true,
                 }/*,
                 {
-                    name: 'What now?',
-                    value: 'You can contact the developers by joining the support server',
+                    name: `What now?`,
+                    value: `You can contact the developers by joining the support server`,
                     inline: true,
                 }*/
             ],

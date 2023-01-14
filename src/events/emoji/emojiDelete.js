@@ -5,16 +5,16 @@ module.exports = async (client, emoji) => {
     if (!logsChannel) return;
 
     client.embed({
-        title: '😛・Emoji deleted',
-        desc: 'An emoji has been deleted',
+        title: `😛・Emoji deleted`,
+        desc: `An emoji has been deleted`,
         fields: [
             {
-                name: '> Name',
-                value: '- ${emoji.name}'
+                name: `> Name`,
+                value: `- ${emoji.name}`
             },
             {
-                name: '> ID',
-                value: '- ${emoji.id}'
+                name: `> ID`,
+                value: `- ${emoji.id}`
             }
         ]
     }, logsChannel).catch(() => { })

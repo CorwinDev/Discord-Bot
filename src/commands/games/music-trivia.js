@@ -14,13 +14,13 @@ module.exports = async (client, interaction, args) => {
     if (!number || isNaN(number)) return client.errUsage({ usage: "music-trivia [amount of numbers]", type: 'editreply' }, interaction);
 
     const channel = interaction.member.voice.channel;
-    if (!channel) return client.errNormal({ error: 'You're not in a voice channel!', type: 'editreply' }, interaction);
+    if (!channel) return client.errNormal({ error: `You're not in a voice channel!`, type: 'editreply' }, interaction);
 
-    if (interaction.guild.me.voice.channel && interaction.member.voice.channel.id !== interaction.guild.me.voice.channel.id) return client.errNormal({ error: 'You are not in the same voice channel!', type: 'editreply' }, interaction);
+    if (interaction.guild.me.voice.channel && interaction.member.voice.channel.id !== interaction.guild.me.voice.channel.id) return client.errNormal({ error: `You are not in the same voice channel!`, type: 'editreply' }, interaction);
 
-    if (interaction.client.playerManager.get(interaction.guild.id)) return client.errNormal({ error: 'You can't use this while a track is playing!', type: 'editreply' }, interaction);
+    if (interaction.client.playerManager.get(interaction.guild.id)) return client.errNormal({ error: `You can't use this while a track is playing!`, type: 'editreply' }, interaction);
 
-    if (interaction.client.triviaManager.get(interaction.guildId)) return client.errNormal({ error: 'There is already a trivia in play!', type: 'editreply' }, interaction);
+    if (interaction.client.triviaManager.get(interaction.guildId)) return client.errNormal({ error: `There is already a trivia in play!`, type: 'editreply' }, interaction);
 
     const jsonSongs = fs.readFileSync(
         '../../config/data/musictrivia.json',
@@ -79,8 +79,8 @@ async function handleSubscription(interaction, player, client) {
     player.process(player.queue);
 
     client.embed({
-        title: '🎶・Music Quiz',
-        desc: 'Get ready! Vote skip the song by entering the word 'skip'. Good luck! \n\n**Songs in queue:** ${queue.length} \n**Time to play:** 30 seconds',
+        title: `🎶・Music Quiz`,
+        desc: `Get ready! Vote skip the song by entering the word 'skip'. Good luck! \n\n**Songs in queue:** ${queue.length} \n**Time to play:** 30 seconds`,
         type: 'editreply'
     }, interaction);
 }

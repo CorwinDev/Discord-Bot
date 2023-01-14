@@ -5,16 +5,16 @@ module.exports = async (client, invite) => {
     if (!logsChannel) return;
 
     client.embed({
-        title: '📨・Invite created',
-        desc: 'A invite has been created',
+        title: `📨・Invite created`,
+        desc: `A invite has been created`,
         fields: [
             {
-                name: '> Code',
-                value: '- ${invite.code}'
+                name: `> Code`,
+                value: `- ${invite.code}`
             },
             {
-                name: '> Inviter',
-                value: '- ${invite.inviter} (${invite.inviter.tag})'
+                name: `> Inviter`,
+                value: `- ${invite.inviter} (${invite.inviter.tag})`
             }
         ]
     }, logsChannel).catch(() => { })

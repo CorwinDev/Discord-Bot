@@ -28,12 +28,12 @@ module.exports = {
         Schema.findOne({ Guild: interaction.guild.id, User: member.id }, async (err, data) => {
             if (data) {
                 client.embed({
-                    title: '${client.emotes.normal.error}・Warnings',
-                    desc: 'The warnings of **${member.tag}**',
+                    title: `${client.emotes.normal.error}・Warnings`,
+                    desc: `The warnings of **${member.tag}**`,
                     fields: [
                         {
                             name: "Total",
-                            value: '${data.Warns}',
+                            value: `${data.Warns}`,
                             innline: false
                         }
                     ],
@@ -42,8 +42,8 @@ module.exports = {
             }
             else {
                 client.embed({
-                    title: '${client.emotes.normal.error}・Warnings',
-                    desc: 'The warnings of **${member.tag}**',
+                    title: `${client.emotes.normal.error}・Warnings`,
+                    desc: `The warnings of **${member.tag}**`,
                     fields: [
                         {
                             name: "Total",

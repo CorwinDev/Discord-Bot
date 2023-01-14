@@ -22,7 +22,7 @@ module.exports = async (client, interaction, args) => {
     }, interaction);
   }).catch(function () {
     return client.errNormal({
-      error: 'I could not find the user!',
+      error: `I could not find the user!`,
       type: 'editreply'
     }, interaction);
   });

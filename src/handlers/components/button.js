@@ -8,8 +8,8 @@ module.exports = (client) => {
         reactions.map((emoji) => {
             let btn = new Discord.MessageButton()
                 .setStyle('PRIMARY')
-                .setEmoji('${emoji}')
-                .setCustomId('reaction_button-${emoji}');
+                .setEmoji(`${emoji}`)
+                .setCustomId(`reaction_button-${emoji}`);
             return labels.push(btn);
         })
 

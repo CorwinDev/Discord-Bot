@@ -6,12 +6,12 @@ module.exports = async (client, interaction, args) => {
 
     client.giveawaysManager.reroll(messageID).then(() => {
         client.succNormal({ 
-            text: 'Giveaway gererolled', 
+            text: `Giveaway gererolled`, 
             type: 'editreply' 
         }, interaction);
     }).catch((err) => {
         client.errNormal({ 
-            error: 'I can't find the giveaway for ${messageID}!', 
+            error: `I can't find the giveaway for ${messageID}!`, 
             type: 'editreply' 
         }, interaction)
     });

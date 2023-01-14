@@ -33,27 +33,27 @@ module.exports = async (client, reaction, user) => {
       }
       else {
         client.embed({
-          title: '⭐・Starboard',
+          title: `⭐・Starboard`,
           desc: foundStar.description,
           image: image,
           fields: [
             {
-              name: '⭐┇Stars',
-              value: '${reaction.count}',
+              name: `⭐┇Stars`,
+              value: `${reaction.count}`,
               inline: true
             },
             {
-              name: '🗨️┇Message',
-              value: '[Jump to the message](${reaction.message.url})',
+              name: `🗨️┇Message`,
+              value: `[Jump to the message](${reaction.message.url})`,
               inline: true
             },
             {
-              name: '👤┇Author',
-              value: '${reaction.message.author} (${reaction.message.author.tag})',
+              name: `👤┇Author`,
+              value: `${reaction.message.author} (${reaction.message.author.tag})`,
               inline: true
             }
           ],
-          footer: '${client.config.discord.footer} | ${reaction.message.id}',
+          footer: `${client.config.discord.footer} | ${reaction.message.id}`,
           type: 'edit'
         }, starMsg)
       }

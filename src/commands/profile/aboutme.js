@@ -15,7 +15,7 @@ module.exports = async (client, interaction, args) => {
                 text: "Your about me is set",
                 fields: [{
                     name: "📘┆About Me",
-                    value: '\'\'\'${aboutme}\'\'\'',
+                    value: `\`\`\`${aboutme}\`\`\``,
                     inline: true,
                 }],
                 type: 'editreply'

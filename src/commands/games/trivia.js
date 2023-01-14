@@ -32,22 +32,22 @@ module.exports = async (client, interaction, args) => {
         const d = absoluteDays
             ? absoluteDays === 1
                 ? '1 day'
-                : '${absoluteDays} days'
+                : `${absoluteDays} days`
             : null;
         const h = absoluteHours
             ? absoluteHours === 1
                 ? '1 hour'
-                : '${absoluteHours} hours'
+                : `${absoluteHours} hours`
             : null;
         const m = absoluteMinutes
             ? absoluteMinutes === 1
                 ? '1 minute'
-                : '${absoluteMinutes} minutes'
+                : `${absoluteMinutes} minutes`
             : null;
         const s = absoluteSeconds
             ? absoluteSeconds === 1
                 ? '1 second'
-                : '${absoluteSeconds} seconds'
+                : `${absoluteSeconds} seconds`
             : null;
         const absoluteTime = [];
         if (d) absoluteTime.push(d);
@@ -95,7 +95,7 @@ module.exports = async (client, interaction, args) => {
 
     const question = {};
 
-    await fetch('https://opentdb.com/api.php?amount=1&type=multiple&difficulty=hard').then((res) => res.json()).then(async (res) => {
+    await fetch(`https://opentdb.com/api.php?amount=1&type=multiple&difficulty=hard`).then((res) => res.json()).then(async (res) => {
         const q = [];
         q.push(res.results[0]);
         question.question = res.results[0].question;
@@ -142,15 +142,15 @@ module.exports = async (client, interaction, args) => {
 
     let opt = '';
     for (let i = 0; i < question.options.length; i++) {
-        opt += '**${i + 1})** ${decode(question.options[i])}\n';
+        opt += `**${i + 1})** ${decode(question.options[i])}\n`;
     }
 
     await client.embed({
-        title: '🕹️・Trivia',
+        title: `🕹️・Trivia`,
         fields: [
             {
-                name: '${decode(question.question)}',
-                value: 'You only have **${convertTime(60000)}** to guess the answer!\n\n${opt}'
+                name: `${decode(question.question)}`,
+                value: `You only have **${convertTime(60000)}** to guess the answer!\n\n${opt}`
             }
         ],
         components: [row],
@@ -214,8 +214,8 @@ module.exports = async (client, interaction, args) => {
                 const time = convertTime(Date.now() - gameCreatedAt);
 
                 await client.embed({
-                    title: '🕹️・Trivia',
-                    desc: 'GG, It was **${question.options[question.correct]}**. You gave the correct answer in **${time}**.',
+                    title: `🕹️・Trivia`,
+                    desc: `GG, It was **${question.options[question.correct]}**. You gave the correct answer in **${time}**.`,
                     components: [{ type: 1, components: [fbtn1, fbtn2, fbtn3, fbtn4] }],
                     type: 'editreply'
                 }, interaction)
@@ -306,8 +306,8 @@ module.exports = async (client, interaction, args) => {
                 }
 
                 await client.embed({
-                    title: '🕹️・Trivia',
-                    desc: 'Better luck next time! The correct answer was **${question.options[question.correct]}**.',
+                    title: `🕹️・Trivia`,
+                    desc: `Better luck next time! The correct answer was **${question.options[question.correct]}**.`,
                     components: [{ type: 1, components: [fbtn1, fbtn2, fbtn3, fbtn4] }],
                     type: 'editreply'
                 }, interaction)
@@ -356,8 +356,8 @@ module.exports = async (client, interaction, args) => {
                 }
 
                 client.embed({
-                    title: '🕹️・Trivia',
-                    desc: 'Better luck next time! The correct answer was **${question.options[question.correct]}**.',
+                    title: `🕹️・Trivia`,
+                    desc: `Better luck next time! The correct answer was **${question.options[question.correct]}**.`,
                     components: [{ type: 1, components: [fbtn1, fbtn2, fbtn3, fbtn4] }],
                     type: 'editreply'
                 }, interaction)

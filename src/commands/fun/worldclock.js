@@ -24,51 +24,51 @@ module.exports = async (client, interaction, args) => {
     });
 
     client.embed({
-        title: '⏰・World clock',
+        title: `⏰・World clock`,
         fields: [
             {
                 name: ":flag_eu:┇London (GMT)",
-                value: '${gmt}\n(GMT+0/GMT+1)',
+                value: `${gmt}\n(GMT+0/GMT+1)`,
                 inline: true,
             },
             {
                 name: ":flag_us:┇New York (EST)",
-                value: '${est}\n(GMT-5)',
+                value: `${est}\n(GMT-5)`,
                 inline: true,
             },
             {
                 name: ":flag_us:┇Los Angles (PST)",
-                value: '${pst}\n(GMT-8)',
+                value: `${pst}\n(GMT-8)`,
                 inline: true,
             },
             {
                 name: ":flag_us:┇Mexico City (CST)",
-                value: '${cst}\n(GMT-7)',
+                value: `${cst}\n(GMT-7)`,
                 inline: true,
             },
             {
                 name: ":flag_au:┇Sydney (AEST)",
-                value: '${aest}\n(GMT+11)',
+                value: `${aest}\n(GMT+11)`,
                 inline: true,
             },
             {
                 name: ":flag_au:┇Perth (AWST)",
-                value: '${awst}\n(GMT+8)',
+                value: `${awst}\n(GMT+8)`,
                 inline: true,
             },
             {
                 name: ":flag_kr:┇Korean (KST)",
-                value: '${kst}\n(GMT+9)',
+                value: `${kst}\n(GMT+9)`,
                 inline: true,
             },
             {
                 name: ":flag_in:┇India (IST)",
-                value: '${ist}\n(GMT+05:30)',
+                value: `${ist}\n(GMT+05:30)`,
                 inline: true,
             },
             {
                 name: "\u200b",
-                value: '\u200b',
+                value: `\u200b`,
                 inline: true,
             },
         ],

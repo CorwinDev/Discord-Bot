@@ -5,24 +5,24 @@ module.exports = async (client, user, mod) => {
     if (!logsChannel) return;
 
     client.embed({
-        title: '🔨・Member warned',
-        desc: 'A user has been warned',
+        title: `🔨・Member warned`,
+        desc: `A user has been warned`,
         fields: [
             {
-                name: '> User',
-                value: '- ${user}'
+                name: `> User`,
+                value: `- ${user}`
             },
             {
-                name: '> Tag',
-                value: '- ${user.user.username}#${user.user.discriminator}'
+                name: `> Tag`,
+                value: `- ${user.user.username}#${user.user.discriminator}`
             },
             {
-                name: '> ID',
-                value: '${user.id}'
+                name: `> ID`,
+                value: `${user.id}`
             },
             {
-                name: '> Moderator',
-                value: '${mod} (${mod.id})'
+                name: `> Moderator`,
+                value: `${mod} (${mod.id})`
             }
         ]
     }, logsChannel).catch(() => { })

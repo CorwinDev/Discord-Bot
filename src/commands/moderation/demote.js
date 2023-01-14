@@ -12,8 +12,8 @@ module.exports = async (client, interaction, args) => {
 
   member.roles.remove(member.roles.highest.id).then(r => {
     client.embed({
-      title: '🔨・Demote',
-      desc: 'You've been demoted from **${interaction.guild.name}**',
+      title: `🔨・Demote`,
+      desc: `You've been demoted from **${interaction.guild.name}**`,
       fields: [
         {
           name: "👤┆Moderator",
@@ -24,10 +24,10 @@ module.exports = async (client, interaction, args) => {
     }, member).catch(() => { })
 
     client.succNormal({
-      text: 'User successfully demoted', fields: [
+      text: `User successfully demoted`, fields: [
         {
           name: "👤┆User",
-          value: '${member}',
+          value: `${member}`,
           inline: true
         }
       ],

@@ -22,7 +22,7 @@ module.exports = async (client, interaction, args) => {
         if (data) {
             Schema.findOne({ Guild: interaction.guild.id, User: data.Parent }, async (err, data2) => {
                 if (data2) {
-                    client.embed({ title: '👪・Renié', desc: '${author} a renié <@!${data.Parent}>', type: 'editreply' }, interaction);
+                    client.embed({ title: `👪・Renié`, desc: `${author} a renié <@!${data.Parent}>`, type: 'editreply' }, interaction);
 
                     data.Parent = null;
                     data.save();
@@ -48,7 +48,7 @@ module.exports = async (client, interaction, args) => {
                             }
                         })
 
-                        client.embed({ title: '👪・Renié', desc: '${author} a renié <@!${target.id}>', type: 'editreply' }, interaction);
+                        client.embed({ title: `👪・Renié`, desc: `${author} a renié <@!${target.id}>`, type: 'editreply' }, interaction);
                     }
                     else {
                         client.errNormal({ error: "Tu n'as pas d'enfants/parents pour le moment", type: 'editreply' }, interaction);

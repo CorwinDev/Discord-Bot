@@ -50,17 +50,17 @@ module.exports = async (client, interaction, args) => {
                             fields: [
                                 {
                                     name: "👤┆Closer",
-                                    value: '${interaction.user}',
+                                    value: `${interaction.user}`,
                                     inline: true
                                 },
                                 {
                                     name: "📄┆Ticket id",
-                                    value: '${ticketData.TicketID}',
+                                    value: `${ticketData.TicketID}`,
                                     inline: true
                                 },
                                 {
                                     name: "💬┆Server",
-                                    value: '${interaction.guild.name}',
+                                    value: `${interaction.guild.name}`,
                                     inline: true
                                 }
                             ]
@@ -72,29 +72,29 @@ module.exports = async (client, interaction, args) => {
 
                 if (logsChannel) {
                     client.embed({
-                        title: '🔒・Ticket closed',
-                        desc: 'Ticket is closed',
+                        title: `🔒・Ticket closed`,
+                        desc: `Ticket is closed`,
                         color: client.config.colors.error,
                         fields: [
                             {
                                 name: "📘┆Ticket id",
-                                value: '${ticketData.TicketID}',
+                                value: `${ticketData.TicketID}`,
                             },
                             {
                                 name: "👤┆Closer",
-                                value: '${interaction.user.tag} (${interaction.user.id})',
+                                value: `${interaction.user.tag} (${interaction.user.id})`,
                             },
                             {
                                 name: "👤┆Creator",
-                                value: '<@!${ticketData.creator}>',
+                                value: `<@!${ticketData.creator}>`,
                             },
                             {
                                 name: "✋┆Claimed by",
-                                value: '<@!${ticketData.creator}>',
+                                value: `<@!${ticketData.creator}>`,
                             },
                             {
                                 name: "⏰┆Date",
-                                value: '<t:${(Date.now() / 1000).toFixed(0)}:F>',
+                                value: `<t:${(Date.now() / 1000).toFixed(0)}:F>`,
                             }
                         ]
                     }, logsChannel)
@@ -104,9 +104,9 @@ module.exports = async (client, interaction, args) => {
                 ticketData.resolved = true;
                 ticketData.save();
 
-                interaction.channel.edit({ name: 'ticket-closed' });
+                interaction.channel.edit({ name: `ticket-closed` });
                 client.simpleEmbed({
-                    desc: 'Ticket closed by <@!${interaction.user.id}>',
+                    desc: `Ticket closed by <@!${interaction.user.id}>`,
                     type: type
                 }, interaction)
 
@@ -130,7 +130,7 @@ module.exports = async (client, interaction, args) => {
 
                 client.embed({
                     title: "🔒・Closed",
-                    desc: '📝 - Save transcript \n🔓 - Reopen ticket \n⛔ - Delete ticket',
+                    desc: `📝 - Save transcript \n🔓 - Reopen ticket \n⛔ - Delete ticket`,
                     components: [row],
                 }, interaction.channel)
             }

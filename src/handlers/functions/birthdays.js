@@ -10,7 +10,7 @@ module.exports = (client) => {
         let month = now.getMonth() + 1;
         let day = now.getDate();
 
-        let dateNow = '${day} - ${month}';
+        let dateNow = `${day} - ${month}`;
 
         if (getLastDate) {
             const lastDate = getLastDate.Date;
@@ -44,7 +44,7 @@ module.exports = (client) => {
 
         const convertedDay = suffixes(day);
         const convertedMonth = months[month];
-        const birthdayString = '${convertedDay} of ${convertedMonth}';
+        const birthdayString = `${convertedDay} of ${convertedMonth}`;
 
         const results = await Schema.find({ Birthday: birthdayString })
 
@@ -59,8 +59,8 @@ module.exports = (client) => {
                             const channel = finalGuild.channels.cache.get(data.Channel);
                             
                             client.embed({ 
-                                title: '${client.emotes.normal.birthday}・Birthday',
-                                desc: 'Happy birthday to <@!${User}>!'
+                                title: `${client.emotes.normal.birthday}・Birthday`,
+                                desc: `Happy birthday to <@!${User}>!`
                             }, channel)
                         }
                     })
@@ -80,9 +80,9 @@ function suffixes(number) {
     const lastChar = converted.charAt(converted.length - 1);
 
     return lastChar == "1" ?
-        '${converted}st' : lastChar == "2" ?
-            '${converted}nd' : lastChar == '3'
-                ? '${converted}rd' : '${converted}th'
+        `${converted}st` : lastChar == "2" ?
+            `${converted}nd` : lastChar == '3'
+                ? `${converted}rd` : `${converted}th`
 }
 
  

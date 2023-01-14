@@ -4,8 +4,8 @@ const Schema = require("../../database/models/stats");
 
 module.exports = async (client, interaction, args) => {
     var channelName = await client.getTemplate(interaction.guild);
-    channelName = channelName.replace('{emoji}', "🎤")
-    channelName = channelName.replace('{name}', 'Stage Channels: ${interaction.guild.channels.cache.filter(channel => channel.type === 'GUILD_STAGE_VOICE').size || 0}')
+    channelName = channelName.replace(`{emoji}`, "🎤")
+    channelName = channelName.replace(`{name}`, `Stage Channels: ${interaction.guild.channels.cache.filter(channel => channel.type === 'GUILD_STAGE_VOICE').size || 0}`)
 
     await interaction.guild.channels.create(channelName, {
         type: 'GUILD_VOICE', permissionOverwrites: [
@@ -29,11 +29,11 @@ module.exports = async (client, interaction, args) => {
         })
 
         client.succNormal({
-            text: 'Stage channel count created!',
+            text: `Stage channel count created!`,
             fields: [
                 {
-                    name: '📘┆Channel',
-                    value: '${channel}'
+                    name: `📘┆Channel`,
+                    value: `${channel}`
                 }
             ],
             type: 'editreply'

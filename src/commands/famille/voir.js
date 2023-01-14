@@ -23,12 +23,12 @@ module.exports = async (client, interaction, args) => {
     }
     
     let fields = [{
-                name: 'Partenaire',
-                value: '${data && data.Partner ? '<@!${data.Partner}>' : 'Cette personne n'est pas mariée'}'
+                name: `Partenaire`,
+                value: `${data && data.Partner ? `<@!${data.Partner}>` : `Cette personne n'est pas mariée`}`
             },
             {
-                name: 'Parents',
-                value: '${data && data.Parent.length > 0 ? '${temp.join(", ")}' : 'Cette personne n'a pas de parents'}'
+                name: `Parents`,
+                value: `${data && data.Parent.length > 0 ? `${temp.join(", ")}` : `Cette personne n'a pas de parents`}`
             }
         ];
 
@@ -50,19 +50,19 @@ module.exports = async (client, interaction, args) => {
             temp3 = [...temp3].join(", ");
             
         } else {
-            temp3 = 'Cette personne n'a pas de frères et soeurs'
+            temp3 = `Cette personne n'a pas de frères et soeurs`
         };
     
         fields.push({
-            name: 'Frères/Soeurs',
+            name: `Frères/Soeurs`,
             value: temp3
         });
         fields.push({
-            name: 'Enfants',
-            value: '${data && data.Children.length > 0 ? '${temp2.join(", ")}' : 'Cette personne n'a pas d'enfants'}'
+            name: `Enfants`,
+            value: `${data && data.Children.length > 0 ? `${temp2.join(", ")}` : `Cette personne n'a pas d'enfants`}`
         });
     client.embed({
-        title: '👪・Famille de ${target.username}',
+        title: `👪・Famille de ${target.username}`,
         thumbnail: target.avatarURL({ size: 1024 }),
         fields: fields,
         type: 'editreply'

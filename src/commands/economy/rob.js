@@ -25,13 +25,13 @@ module.exports = async (client, interaction, args) => {
             else {
                 Schema.findOne({ Guild: interaction.guild.id, User: interaction.user.id }, async (err, authorData) => {
                     if (authorData) {
-                        if (authorData.Money < 200) return client.errNormal({ error: 'You need atleast 200 coins in your wallet to rob someone!', type: 'editreply' }, interaction);
+                        if (authorData.Money < 200) return client.errNormal({ error: `You need atleast 200 coins in your wallet to rob someone!`, type: 'editreply' }, interaction);
 
                         Schema.findOne({ Guild: interaction.guild.id, User: user.id }, async (err, targetData) => {
                             if (targetData) {
                                 console.log(targetData.Money)
                                 if (targetData = undefined || !targetData || targetData.Money == 0 || targetData.Money < 0) {
-                                    return client.errNormal({ error: '${user.user.username} does not have anything you can rob!', type: 'editreply' }, interaction);
+                                    return client.errNormal({ error: `${user.user.username} does not have anything you can rob!`, type: 'editreply' }, interaction);
                                 }
 
                                 if (dataTime) {
@@ -64,16 +64,16 @@ module.exports = async (client, interaction, args) => {
                                 }
 
                                 client.succNormal({
-                                    text: 'Your robbed a user and got away!',
+                                    text: `Your robbed a user and got away!`,
                                     fields: [
                                         {
-                                            name: '👤┆User',
-                                            value: '${user}',
+                                            name: `👤┆User`,
+                                            value: `${user}`,
                                             inline: true
                                         },
                                         {
-                                            name: '${client.emotes.economy.coins}┆Robbed',
-                                            value: '$${random}',
+                                            name: `${client.emotes.economy.coins}┆Robbed`,
+                                            value: `$${random}`,
                                             inline: true
                                         }
                                     ],
@@ -81,7 +81,7 @@ module.exports = async (client, interaction, args) => {
                                 }, interaction);
                             }
                             else {
-                                return client.errNormal({ error: '${user.user.username} does not have anything you can rob!', type: 'editreply' }, interaction);
+                                return client.errNormal({ error: `${user.user.username} does not have anything you can rob!`, type: 'editreply' }, interaction);
                             }
                         })
                     }

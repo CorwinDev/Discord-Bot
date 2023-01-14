@@ -51,7 +51,7 @@ module.exports = async (client) => {
             try {
               client.errNormal(
                 {
-                  error: 'The correct number was ${countData.Count}! Count starts again from 1',
+                  error: `The correct number was ${countData.Count}! Count starts again from 1`,
                   type: "reply",
                 },
                 message
@@ -99,7 +99,7 @@ module.exports = async (client) => {
           if (message.content == lastCount) {
             client.simpleEmbed(
               {
-                desc: '**${message.author.tag}**: ${message.content}',
+                desc: `**${message.author.tag}**: ${message.content}`,
               },
               message.channel
             );

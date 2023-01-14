@@ -58,9 +58,9 @@ module.exports = {
             .slice(0, -1);
         const userFlags = member.user.flags ? member.user.flags.toArray() : [];
 
-        const userBanner = await axios.get('https://discord.com/api/users/${member.id}', {
+        const userBanner = await axios.get(`https://discord.com/api/users/${member.id}`, {
             headers: {
-                Authorization: 'Bot ${client.token}',
+                Authorization: `Bot ${client.token}`,
             },
         })
 
@@ -71,58 +71,58 @@ module.exports = {
 
         if (banner) {
             const extension = banner.startsWith("a_") ? ".gif" : ".png";
-            url = 'https://cdn.discordapp.com/banners/${member.id}/${banner}${extension}?size=1024';
+            url = `https://cdn.discordapp.com/banners/${member.id}/${banner}${extension}?size=1024`;
         }
 
         return client.embed({
-            title: '👤・User information',
-            desc: 'Information about ${member.user.username}',
+            title: `👤・User information`,
+            desc: `Information about ${member.user.username}`,
             thumbnail: member.user.displayAvatarURL({ dynamic: true, size: 1024 }),
             image: url,
             fields: [
                 {
                     name: "Username",
-                    value: '${member.user.username}',
+                    value: `${member.user.username}`,
                     inline: true,
                 },
                 {
                     name: "Discriminator",
-                    value: '${member.user.discriminator}',
+                    value: `${member.user.discriminator}`,
                     inline: true,
                 },
                 {
                     name: "Nickname",
-                    value: '${nickName || 'No nickname'}',
+                    value: `${nickName || 'No nickname'}`,
                     inline: true,
                 },
                 {
                     name: "id",
-                    value: '${member.user.id}',
+                    value: `${member.user.id}`,
                     inline: true,
                 },
                 {
                     name: "Flags",
-                    value: '${userFlags.length ? userFlags.map(flag => flags[flag]).join(', ') : 'None'}',
+                    value: `${userFlags.length ? userFlags.map(flag => flags[flag]).join(', ') : 'None'}`,
                     inline: true,
                 },
                 {
                     name: "Badges",
-                    value: '${Badges.FLAGS ? Badges.FLAGS.map(flag => badgeFlags[flag]).join(' ') : 'None'}',
+                    value: `${Badges.FLAGS ? Badges.FLAGS.map(flag => badgeFlags[flag]).join(' ') : 'None'}`,
                     inline: true,
                 },
                 {
                     name: "Discord joined at",
-                    value: '<t:${Math.round(member.user.createdTimestamp / 1000)}>',
+                    value: `<t:${Math.round(member.user.createdTimestamp / 1000)}>`,
                     inline: true,
                 },
                 {
                     name: "Server joined at",
-                    value: '<t:${Math.round(member.joinedAt / 1000)}>',
+                    value: `<t:${Math.round(member.joinedAt / 1000)}>`,
                     inline: true,
                 },
                 {
-                    name: 'Roles [${roles.length}]',
-                    value: '${roles.join(', ')}',
+                    name: `Roles [${roles.length}]`,
+                    value: `${roles.join(', ')}`,
                     inline: false,
                 }
             ],

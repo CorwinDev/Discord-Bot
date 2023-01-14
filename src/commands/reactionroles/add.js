@@ -9,7 +9,7 @@ module.exports = async (client, interaction, args) => {
 
     const parsedEmoji = Discord.Util.parseEmoji(emoji);
     if (!parsedEmoji) return client.errNormal({
-        error: 'Emoji not found in this server!',
+        error: `Emoji not found in this server!`,
         type: 'editreply'
     }, interaction)
 
@@ -46,13 +46,13 @@ module.exports = async (client, interaction, args) => {
             text: "Reaction role successfully created! Create a panel in the following way",
             fields: [
                 {
-                    name: '📘┆Menu panel',
-                    value: '\'/reactionroles menu [category name]\'',
+                    name: `📘┆Menu panel`,
+                    value: `\`/reactionroles menu [category name]\``,
                     inline: true
                 },
                 {
-                    name: '📘┆Button panel',
-                    value: '\'/reactionroles button [category name]\'',
+                    name: `📘┆Button panel`,
+                    value: `\`/reactionroles button [category name]\``,
                     inline: true
                 }
             ],

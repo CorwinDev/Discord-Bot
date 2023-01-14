@@ -86,7 +86,7 @@ class TriviaPlayer {
                     if (this.wasTriviaEndCalled) return;
 
                     this.textChannel.client.embed({
-                        title: '🎶・Music Quiz - Results',
+                        title: `🎶・Music Quiz - Results`,
                         desc: getLeaderBoard(Array.from(sortedScoreMap.entries())),
                         edit: true
                     }, this.textChannel)
@@ -210,13 +210,13 @@ class TriviaPlayer {
                         })
                     );
 
-                    const song = '${capitalize_Words(
+                    const song = `${capitalize_Words(
                         this.queue[0].singer
-                    )}: ${capitalize_Words(this.queue[0].title)}';
+                    )}: ${capitalize_Words(this.queue[0].title)}`;
 
                     this.textChannel.client.embed({
-                        title: '🎶・Music Quiz',
-                        desc: 'The song was:  ${song} \n\n${getLeaderBoard(Array.from(sortedScoreMap.entries()))}',
+                        title: `🎶・Music Quiz`,
+                        desc: `The song was:  ${song} \n\n${getLeaderBoard(Array.from(sortedScoreMap.entries()))}`,
                         edit: true
                     }, this.textChannel)
                     return;
@@ -260,12 +260,12 @@ var getLeaderBoard = arr => {
     if (!arr[0]) return;
     let leaderBoard = '';
 
-    leaderBoard = '👑   **${arr[0][0]}:** ${arr[0][1]}  points';
+    leaderBoard = `👑   **${arr[0][0]}:** ${arr[0][1]}  points`;
 
     if (arr.length > 1) {
         for (let i = 1; i < arr.length; i++) {
             leaderBoard =
-                leaderBoard + '\n\n   ${i + 1}: ${arr[i][0]}: ${arr[i][1]}  points';
+                leaderBoard + `\n\n   ${i + 1}: ${arr[i][0]}: ${arr[i][1]}  points`;
         }
     }
     return leaderBoard;

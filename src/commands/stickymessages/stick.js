@@ -7,7 +7,7 @@ module.exports = async (client, interaction, args) => {
     const content = interaction.options.getString('message');
 
     const embed = new Discord.MessageEmbed()
-        .setDescription('${content}')
+        .setDescription(`${content}`)
         .setColor(client.config.colors.normal);
     channel.send({ embeds: [embed] }).then(msg => {
         Schema.findOne({ Guild: interaction.guild.id, Channel: channel.id }, async (err, data) => {
@@ -31,8 +31,8 @@ module.exports = async (client, interaction, args) => {
             text: "Sticky message created",
             fields: [
                 {
-                    name: '💬┆Message',
-                    value: '${content}'
+                    name: `💬┆Message`,
+                    value: `${content}`
                 }
             ],
             type: 'editreply'

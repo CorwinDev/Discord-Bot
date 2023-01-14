@@ -10,39 +10,39 @@ module.exports = async (client, event) => {
         NONE: "None",
         STAGE_INSTANCE: "Stage Channel",
         VOICE: "Voice Channel",
-        EXTERNAL: 'External'
+        EXTERNAL: `External`
     }
 
     const logsChannel = await client.getLogs(event.guildId);
     if (!logsChannel) return;
 
     client.embed({
-        title: '🎡・Event created',
-        desc: 'An event has been created',
+        title: `🎡・Event created`,
+        desc: `An event has been created`,
         fields: [
             {
-                name: '> Name',
-                value: '- ${event.name}'
+                name: `> Name`,
+                value: `- ${event.name}`
             },
             {
-                name: '> Description',
-                value: '- ${event.description || 'None'}'
+                name: `> Description`,
+                value: `- ${event.description || 'None'}`
             },
             {
-                name: '> Start',
-                value: '- <t:${(event.scheduledStartTimestamp / 1000).toFixed(0)}>'
+                name: `> Start`,
+                value: `- <t:${(event.scheduledStartTimestamp / 1000).toFixed(0)}>`
             },
             {
-                name: '> Privacy',
-                value: '- ${types[event.privacyLevel]}'
+                name: `> Privacy`,
+                value: `- ${types[event.privacyLevel]}`
             },
             {
-                name: '> Creator',
-                value: '- <@!${event.creatorId}> (${event.creatorId})'
+                name: `> Creator`,
+                value: `- <@!${event.creatorId}> (${event.creatorId})`
             },
             {
-                name: '> Location type',
-                value: '- ${locations[event.entityType]}'
+                name: `> Location type`,
+                value: `- ${locations[event.entityType]}`
             }
         ]
     }, logsChannel).catch(() => { })

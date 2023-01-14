@@ -9,12 +9,12 @@ module.exports = async (client, interaction, args) => {
     }).then(() => {
         const numberOfSecondsMax = client.giveawaysManager.options.updateCountdownEvery / 1000;
         client.succNormal({
-            text: 'Giveaway will updated in less than ${numberOfSecondsMax} seconds',
+            text: `Giveaway will updated in less than ${numberOfSecondsMax} seconds`,
             type: 'editreply'
         }, interaction);
     }).catch((err) => {
         client.errNormal({
-            error: 'I can't find the giveaway for ${messageID}!',
+            error: `I can't find the giveaway for ${messageID}!`,
             type: 'editreply'
         }, interaction)
     });

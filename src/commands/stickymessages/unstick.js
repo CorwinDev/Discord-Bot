@@ -12,8 +12,8 @@ module.exports = async (client, interaction, args) => {
                     text: "Sticky message deleted",
                     fields: [
                         {
-                            name: '📘┆Channel',
-                            value: '${channel}'
+                            name: `📘┆Channel`,
+                            value: `${channel}`
                         }
                     ],
                     type: 'editreply'

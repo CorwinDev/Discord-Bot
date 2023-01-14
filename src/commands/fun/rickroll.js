@@ -13,8 +13,8 @@ module.exports = async (client, interaction, args) => {
       const rick = roll[Math.floor(Math.random() * roll.length)];
 
         client.embed({
-            title: '😂・${rick}',
-            image: 'https://i.pinimg.com/originals/88/82/bc/8882bcf327896ab79fb97e85ae63a002.gif',
+            title: `😂・${rick}`,
+            image: `https://i.pinimg.com/originals/88/82/bc/8882bcf327896ab79fb97e85ae63a002.gif`,
             type: 'editreply',
         }, interaction);
 }

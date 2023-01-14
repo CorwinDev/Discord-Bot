@@ -5,12 +5,12 @@ module.exports = async (client, interaction, args) => {
 
     const channel = interaction.member.voice.channel;
     if (!channel) return client.errNormal({
-        error: 'Tu n'es pas dans un canal vocal !',
+        error: `Tu n'es pas dans un canal vocal !`,
         type: 'editreply'
     }, interaction);
 
     if (player && (channel.id !== player?.voiceChannel)) return client.errNormal({
-        error: 'Tu n'es pas dans le même canal vocal que moi !',
+        error: `Tu n'es pas dans le même canal vocal que moi !`,
         type: 'editreply'
     }, interaction);
 
@@ -28,7 +28,7 @@ module.exports = async (client, interaction, args) => {
     else {
         status = player.queue.map((track) => {
             count += 1;
-            return ('**[#${count}]**┆${track.title.length >= 45 ? '${track.title.slice(0, 45)}...' : track.title} (Requested by <@!${track.requester.id}>)');
+            return (`**[#${count}]**┆${track.title.length >= 45 ? `${track.title.slice(0, 45)}...` : track.title} (Requested by <@!${track.requester.id}>)`);
         }).join("\n");
     }
 
@@ -36,13 +36,13 @@ module.exports = async (client, interaction, args) => {
     else thumbnail = interaction.guild.iconURL({ size: 1024 });
 
     client.embed({
-        title: '${client.emotes.normal.music}・Songs queue - ${interaction.guild.name}',
+        title: `${client.emotes.normal.music}・Songs queue - ${interaction.guild.name}`,
         desc: status,
         thumbnail: thumbnail,
         fields: [
             {
-                name: '${client.emotes.normal.music} Musique actuelle:',
-                value: '${player.queue.current.title} (Demandée par <@!${player.queue.current.requester.id}>)'
+                name: `${client.emotes.normal.music} Musique actuelle:`,
+                value: `${player.queue.current.title} (Demandée par <@!${player.queue.current.requester.id}>)`
             }
         ],
         type: 'editreply'

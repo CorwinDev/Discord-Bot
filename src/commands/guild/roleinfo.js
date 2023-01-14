@@ -5,28 +5,28 @@ module.exports = async (client, interaction, args) => {
   const perms = new Discord.Permissions(role.permissions.bitfield).toArray();
 
   client.embed({
-    title: 'ℹ️・Role information',
+    title: `ℹ️・Role information`,
     thumbnail: interaction.guild.iconURL({ dynamic: true, size: 1024 }),
-    desc: 'Information about the role ${role}',
+    desc: `Information about the role ${role}`,
     fields: [
       {
         name: 'Role ID:',
-        value: '${role.id}',
+        value: `${role.id}`,
         inline: true
       },
       {
         name: 'Role Name:',
-        value: '${role.name}',
+        value: `${role.name}`,
         inline: true
       },
       {
         name: 'Mentionable:',
-        value: '${role.mentionable ? 'Yes' : 'No'}',
+        value: `${role.mentionable ? 'Yes' : 'No'}`,
         inline: true
       },
       {
         name: 'Role Permissions:',
-        value: '${perms.join(', ')}'
+        value: `${perms.join(', ')}`
       }
     ],
     type: 'editreply'

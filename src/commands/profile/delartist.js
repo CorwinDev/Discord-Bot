@@ -10,7 +10,7 @@ module.exports = async (client, interaction, args) => {
 
             if (data && data.Artists) {
                 if (!data.Artists.includes(artist)) {
-                    return client.errNormal({ error: 'That artist doesn't exist in the database!', type: 'editreply' }, interaction);
+                    return client.errNormal({ error: `That artist doesn't exist in the database!`, type: 'editreply' }, interaction);
                 }
 
                 const filtered = data.Artists.filter((target) => target !== artist);
@@ -23,7 +23,7 @@ module.exports = async (client, interaction, args) => {
                 text: "Removed your artist",
                 fields: [{
                     name: "🎤┆Artist",
-                    value: '\'\'\'${artist}\'\'\'',
+                    value: `\`\`\`${artist}\`\`\``,
                     inline: true,
                 }],
                 type: 'editreply'

@@ -28,7 +28,7 @@ module.exports = async (client) => {
                 data.save();
             }
             else {
-                client.errNormal('User has no ${client.emotes.economy.coins}!', interaction.channel);
+                client.errNormal(`User has no ${client.emotes.economy.coins}!`, interaction.channel);
             }
         })
     }

@@ -11,7 +11,7 @@ module.exports = async (client, interaction, args) => {
 
     Schema.findOne({ Guild: interaction.guild.id, Category: category }, async (err, data) => {
         if (!data) return client.errNormal({ 
-            error: 'No data found!',
+            error: `No data found!`,
             type: 'editreply'
         }, interaction);
 
@@ -19,7 +19,7 @@ module.exports = async (client, interaction, args) => {
             .map((value, index) => {
                 const role = interaction.guild.roles.cache.get(data.Roles[value][0]);
 
-                return '${data.Roles[value][1].raw} | ${role}';
+                return `${data.Roles[value][1].raw} | ${role}`;
             }).join("\n");
 
         const menu = new Discord.MessageSelectMenu()
@@ -33,8 +33,8 @@ module.exports = async (client, interaction, args) => {
             const role = interaction.guild.roles.cache.get(data.Roles[value][0]);
 
             const generated = {
-                label: '${role.name}',
-                description: 'Add or remove the role ${role.name}',
+                label: `${role.name}`,
+                description: `Add or remove the role ${role.name}`,
                 emoji: data.Roles[value][1].raw,
                 value: data.Roles[value][1].raw,
             }
@@ -48,8 +48,8 @@ module.exports = async (client, interaction, args) => {
             .addComponents(menu)
 
         client.embed({
-            title: '${upper}・Roles',
-            desc: '_____ \n\nChoose your roles in the menu! \n\n${map}',
+            title: `${upper}・Roles`,
+            desc: `_____ \n\nChoose your roles in the menu! \n\n${map}`,
             components: [row]
         }, channel).then((msg) => {
             data.Message = msg.id;

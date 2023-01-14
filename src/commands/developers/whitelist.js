@@ -21,7 +21,7 @@ module.exports = async (client, interaction, args) => {
             })
 
             client.succNormal({
-                text: '${guild} added to the bot whitelist',
+                text: `${guild} added to the bot whitelist`,
                 type: 'editreply'
             }, interaction);
         }
@@ -30,7 +30,7 @@ module.exports = async (client, interaction, args) => {
                 if (data) {
                     Schema.findOneAndDelete({ Guild: guild }).then(() => {
                         client.succNormal({
-                            text: '${guild} removed from the bot whitelist',
+                            text: `${guild} removed from the bot whitelist`,
                             type: 'editreply'
                         }, interaction);
                     })

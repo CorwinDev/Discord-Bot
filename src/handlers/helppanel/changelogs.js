@@ -15,26 +15,26 @@ module.exports = async (client) => {
                             .setPlaceholder('❌┆Nothing selected')
                             .addOptions([
                                 {
-                                    label: 'Commands',
-                                    description: 'Show the commands of Bot!',
+                                    label: `Commands`,
+                                    description: `Show the commands of Bot!`,
                                     emoji: "💻",
                                     value: "commands-Bothelp",
                                 },
                                 {
-                                    label: 'Invite',
-                                    description: 'Invite Bot to your server',
+                                    label: `Invite`,
+                                    description: `Invite Bot to your server`,
                                     emoji: "📨",
                                     value: "invite-Bothelp",
                                 },
                                 {
-                                    label: 'Support server',
-                                    description: 'Join the suppport server',
+                                    label: `Support server`,
+                                    description: `Join the suppport server`,
                                     emoji: "❓",
                                     value: "support-Bothelp",
                                 },
                                 {
-                                    label: 'Changelogs',
-                                    description: 'Show the bot changelogs',
+                                    label: `Changelogs`,
+                                    description: `Show the bot changelogs`,
                                     emoji: "📃",
                                     value: "changelogs-Bothelp",
                                 },
@@ -43,7 +43,7 @@ module.exports = async (client) => {
 
                 client.embed({
                     title: "📃・Changelogs",
-                    desc: '_____',
+                    desc: `_____`,
                     thumbnail: client.user.avatarURL({ size: 1024 }),
                     components: [row],
                     type: 'edit'

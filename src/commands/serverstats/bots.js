@@ -6,8 +6,8 @@ module.exports = async (client, interaction, args) => {
     const members = await interaction.guild.members.fetch();
 
     var channelName = await client.getTemplate(interaction.guild);
-    channelName = channelName.replace('{emoji}', "🤖")
-    channelName = channelName.replace('{name}', 'Bots: ${members.filter(member => member.user.bot).size || 0}')
+    channelName = channelName.replace(`{emoji}`, "🤖")
+    channelName = channelName.replace(`{name}`, `Bots: ${members.filter(member => member.user.bot).size || 0}`)
 
     await interaction.guild.channels.create(channelName, {
         type: 'GUILD_VOICE', permissionOverwrites: [
@@ -31,11 +31,11 @@ module.exports = async (client, interaction, args) => {
         })
 
         client.succNormal({
-            text: 'Bots count created!',
+            text: `Bots count created!`,
             fields: [
                 {
-                    name: '📘┆Channel',
-                    value: '${channel}'
+                    name: `📘┆Channel`,
+                    value: `${channel}`
                 }
             ],
             type: 'editreply'

@@ -55,11 +55,11 @@ module.exports = async (client, guild) => {
 
             const embed = new discord.MessageEmbed()
                 .setTitle("🔴・Removed from a server!")
-                .addField("Total servers:", '${totalGuilds}', true)
-                .addField("Server name", '${guild.name}', true)
-                .addField("Server ID", '${guild.id}', true)
-                .addField("Server members", '${guild.memberCount}', true)
-                .addField("Server owner", '<@!${guild.ownerId}> (${guild.ownerId})', true)
+                .addField("Total servers:", `${totalGuilds}`, true)
+                .addField("Server name", `${guild.name}`, true)
+                .addField("Server ID", `${guild.id}`, true)
+                .addField("Server members", `${guild.memberCount}`, true)
+                .addField("Server owner", `<@!${guild.ownerId}> (${guild.ownerId})`, true)
                 .setThumbnail("https://cdn.discordapp.com/attachments/843487478881976381/852419424895631370/BotSadEmote.png")
                 .setColor(client.config.colors.normal)
             kickLogs.send({

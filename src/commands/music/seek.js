@@ -7,12 +7,12 @@ module.exports = async (client, interaction, args) => {
 
     const channel = interaction.member.voice.channel;
     if (!channel) return client.errNormal({
-        error: 'Tu n'es pas dans un canal vocal !',
+        error: `Tu n'es pas dans un canal vocal !`,
         type: 'editreply'
     }, interaction);
 
     if (player && (channel.id !== player?.voiceChannel)) return client.errNormal({
-        error: 'Tu n'es pas dans le même canal vocal que moi !',
+        error: `Tu n'es pas dans le même canal vocal que moi !`,
         type: 'editreply'
     }, interaction);
 
@@ -30,13 +30,13 @@ module.exports = async (client, interaction, args) => {
     const bar = await createProgressBar(musicLength, nowTime);
 
     client.succNormal({
-        text: 'Seeked song to: ${format(Number(number) * 1000)}',
+        text: `Seeked song to: ${format(Number(number) * 1000)}`,
         fields: [
             {
-                name: '${client.emotes.normal.music}┆Progression',
-                value: '${new Date(player.position).toISOString().slice(11, 19)} ┃ ' +
+                name: `${client.emotes.normal.music}┆Progression`,
+                value: `${new Date(player.position).toISOString().slice(11, 19)} ┃ ` +
                     bar +
-                    ' ┃ ${new Date(player.queue.current.duration).toISOString().slice(11, 19)}',
+                    ` ┃ ${new Date(player.queue.current.duration).toISOString().slice(11, 19)}`,
                 inline: false
             }
         ],

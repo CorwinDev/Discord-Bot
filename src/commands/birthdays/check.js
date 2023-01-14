@@ -10,8 +10,8 @@ module.exports = async (client, interaction, args) => {
         }, interaction);
 
         client.embed({ 
-            title: '${client.emotes.normal.birthday}・Anniversaire', 
-            desc: 'L'anniversaire de ${interaction.user.username} est le ${data.Birthday}',
+            title: `${client.emotes.normal.birthday}・Anniversaire`, 
+            desc: `L'anniversaire de ${interaction.user.username} est le ${data.Birthday}`,
             type: 'editreply'
         }, interaction)
     })

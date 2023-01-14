@@ -7,7 +7,7 @@ module.exports = async (client, interaction, args) => {
     const image = await hdqwalls(query);
 
     client.embed({
-        title: '🖼・Your wallpaper',
+        title: `🖼・Your wallpaper`,
         image: image[0],
         type: 'editreply'
     }, interaction)

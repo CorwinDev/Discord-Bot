@@ -23,7 +23,7 @@ module.exports = async (client, interaction, args) => {
 
     if (familyMember || familyMember2 || familyMember3) {
         return client.errNormal({
-            error: 'Tu ne peux pas adopter un membre de ta famille !',
+            error: `Tu ne peux pas adopter un membre de ta famille !`,
             type: 'editreply'
         }, interaction);
     }
@@ -31,7 +31,7 @@ module.exports = async (client, interaction, args) => {
     const checkAdopt = await Schema.findOne({ Guild: interaction.guild.id, Children: target.id });
     if (checkAdopt) {
         return client.errNormal({
-            error: 'Cette personne a été adoptée !',
+            error: `Cette personne a été adoptée !`,
             type: 'editreply'
         }, interaction);
     }
@@ -50,10 +50,10 @@ module.exports = async (client, interaction, args) => {
         );
 
     client.embed({
-        title: '👪・Adoption',
-        desc: '${author} a demandé d'adopter ${target} ! \n${target}, clique sur un des boutons',
+        title: `👪・Adoption`,
+        desc: `${author} a demandé d'adopter ${target} ! \n${target}, clique sur un des boutons`,
         components: [row],
-        content: '${target}',
+        content: `${target}`,
         type: 'editreply',
     }, interaction)
 
@@ -91,8 +91,8 @@ module.exports = async (client, interaction, args) => {
             })
 
             client.embed({
-                title: '👪・Adoption acceptée',
-                desc: '${author} est maintenant l'heureux parent de ${target}! 🎉',
+                title: `👪・Adoption acceptée`,
+                desc: `${author} est maintenant l'heureux parent de ${target}! 🎉`,
                 components: [],
                 type: 'editreply'
             }, interaction);
@@ -100,16 +100,16 @@ module.exports = async (client, interaction, args) => {
 
         if (i.customId == "adopt_deny") {
             client.embed({
-                title: '👪・Adoption refusée',
-                desc: '${target} ne veut pas être adopté ${author}',
+                title: `👪・Adoption refusée`,
+                desc: `${target} ne veut pas être adopté ${author}`,
                 components: [],
                 type: 'editreply'
             }, interaction);
         }
     }).catch(() => {
         client.embed({
-            title: '👪・Adoption refusée',
-            desc: '${target} n'a pas répondu ! L'adoption a été annulée',
+            title: `👪・Adoption refusée`,
+            desc: `${target} n'a pas répondu ! L'adoption a été annulée`,
             components: [],
             type: 'editreply'
         }, interaction);

@@ -6,13 +6,13 @@ module.exports = async (client, interaction, args) => {
     const text = interaction.options.getString('text');
 
     try {
-        fetch('https://nekobot.xyz/api/imagegen?type=tweet&username=${user}&text=${text}')
+        fetch(`https://nekobot.xyz/api/imagegen?type=tweet&username=${user}&text=${text}`)
 
             .then((res) => res.json()).catch({})
             .then(async (json) => {
 
                 client.embed({
-                    title: '🖼・Tweet',
+                    title: `🖼・Tweet`,
                     image: json.message,
                     type: 'editreply'
                 }, interaction)

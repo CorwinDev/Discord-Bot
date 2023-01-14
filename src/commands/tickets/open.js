@@ -43,14 +43,14 @@ module.exports = async (client, interaction, args) => {
                             });
 
                             var ticketid = String(ticketData.TicketID).padStart(4, 0);
-                            interaction.channel.setName('ticket-${ticketid}');
+                            interaction.channel.setName(`ticket-${ticketid}`);
                         })
 
                         ticketData.resolved = false;
                         ticketData.save();
 
                         return client.simpleEmbed({
-                            desc: 'Ticket opened by <@!${interaction.user.id}>',
+                            desc: `Ticket opened by <@!${interaction.user.id}>`,
                             type: type
                         }, interaction)
                     }

@@ -26,7 +26,7 @@ module.exports = async (client, interaction, args) => {
             interaction.channel.edit({ name: name });
 
             return client.simpleEmbed({
-                desc: 'Channel name has changed to ${name}',
+                desc: `Channel name has changed to ${name}`,
                 type: 'editreply'
             }, interaction)
         }

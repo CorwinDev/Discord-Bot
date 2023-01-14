@@ -4,42 +4,42 @@ module.exports = async (client, interaction, args) => {
   const channel = interaction.options.getChannel('channel');
 
   client.embed({
-      title: 'ℹ・Channel information',
-      desc: 'Channel information about: <#${channel.id}>',
+      title: `ℹ・Channel information`,
+      desc: `Channel information about: <#${channel.id}>`,
       fields: [
           {
               name: "Type",
-              value: '${channel.type}',
+              value: `${channel.type}`,
               inline: true,
           },
           {
               name: "ID",
-              value: '${channel.id}',
+              value: `${channel.id}`,
               inline: true,
           },
           {
               name: "Type",
-              value: '${channel.type}',
+              value: `${channel.type}`,
               inline: true,
           },
           {
               name: "Made on",
-              value: '${channel.createdAt}',
+              value: `${channel.createdAt}`,
               inline: true,
           },
           {
               name: "Subject",
-              value: '${channel.topic ? channel.topic : 'N/A'}',
+              value: `${channel.topic ? channel.topic : 'N/A'}`,
               inline: true,
           },
           {
               name: "NSFW",
-              value: '${channel.nsfw}',
+              value: `${channel.nsfw}`,
               inline: true,
           },
           {
               name: "Parent",
-              value: '${channel.parentID ? channel.parentID : 'N/A'}',
+              value: `${channel.parentID ? channel.parentID : 'N/A'}`,
               inline: true,
           },
       ],

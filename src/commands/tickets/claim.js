@@ -36,7 +36,7 @@ module.exports = async (client, interaction, args) => {
                         ticketData.save();
 
                         return client.simpleEmbed({
-                            desc: 'You will now be assisted by <@!${interaction.user.id}>',
+                            desc: `You will now be assisted by <@!${interaction.user.id}>`,
                             type: type
                         }, interaction)
 

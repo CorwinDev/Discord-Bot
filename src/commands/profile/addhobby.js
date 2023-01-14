@@ -9,7 +9,7 @@ module.exports = async (client, interaction, args) => {
 
             if (data && data.Hobbys) {
                 if (data.Hobbys.includes(hobby)) {
-                    return client.errNormal({ error: 'That hobby is already exists in your database!', type: 'editreply' }, interaction);
+                    return client.errNormal({ error: `That hobby is already exists in your database!`, type: 'editreply' }, interaction);
                 }
                 data.Hobbys.push(hobby);
                 data.save();
@@ -22,7 +22,7 @@ module.exports = async (client, interaction, args) => {
                 text: "Added your hobby",
                 fields: [{
                     name: "⚽┆Hobby",
-                    value: '\'\'\'${hobby}\'\'\'',
+                    value: `\`\`\`${hobby}\`\`\``,
                     inline: true,
                 }],
                 type: 'editreply'

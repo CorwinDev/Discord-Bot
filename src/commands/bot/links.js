@@ -10,26 +10,26 @@ module.exports = async (client, interaction, args) => {
                 .setPlaceholder('❌ ┆ Aucune sélection')
                 .addOptions([
                     {
-                        label: 'Serveur support',
-                        description: 'Join the suppport server',
+                        label: `Serveur support`,
+                        description: `Join the suppport server`,
                         emoji: "❓",
                         value: "support-linkspanel",
                     },
                     {
-                        label: 'Inviter le bot',
-                        description: 'Invite Bot to your server',
+                        label: `Inviter le bot`,
+                        description: `Invite Bot to your server`,
                         emoji: "📨",
                         value: "invite-linkspanel",
                     },
                     {
-                        label: 'Invite Bot 2',
-                        description: 'Invite Bot 2 to your server',
+                        label: `Invite Bot 2`,
+                        description: `Invite Bot 2 to your server`,
                         emoji: "📕",
                         value: "invite2-linkspanel",
                     },
                     {
-                        label: 'Community Server',
-                        description: 'Join the community server!',
+                        label: `Community Server`,
+                        description: `Join the community server!`,
                         emoji: "🌍",
                         value: "community-linkspanel",
                     },
@@ -37,8 +37,8 @@ module.exports = async (client, interaction, args) => {
         );
 
     client.embed({
-        title: '🔗・Links',
-        desc: 'Get access to all Bot links! Choose the link you need in the menu below',
+        title: `🔗・Links`,
+        desc: `Get access to all Bot links! Choose the link you need in the menu below`,
         image: "https://cdn.discordapp.com/attachments/843487478881976381/874694194474668052/Bot_banner_invite.jpg",
         components: [row],
         type: 'editreply'

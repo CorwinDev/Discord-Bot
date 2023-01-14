@@ -5,20 +5,20 @@ module.exports = async (client, guild, afkChannel) => {
     if (!logsChannel) return;
 
     client.embed({
-        title: '🛑・New AFK channel',
-        desc: 'An AFK channel has been added to the server',
+        title: `🛑・New AFK channel`,
+        desc: `An AFK channel has been added to the server`,
         fields: [
             {
-                name: '> Channel',
-                value: '- ${afkChannel}'
+                name: `> Channel`,
+                value: `- ${afkChannel}`
             },
             {
-                name: '> Name',
-                value: '- ${afkChannel.name}'
+                name: `> Name`,
+                value: `- ${afkChannel.name}`
             },
             {
-                name: '> ID',
-                value: '- ${afkChannel.id}'
+                name: `> ID`,
+                value: `- ${afkChannel.id}`
             }
         ]
     }, logsChannel).catch(() => { })

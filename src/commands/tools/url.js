@@ -8,16 +8,16 @@ module.exports = async (client, interaction, args) => {
 
     isgd.custom(url, code, function(res) {
         if (res.startsWith("Error")) return client.errNormal({
-            error: '${res.replace("Error: ", "")}',
+            error: `${res.replace("Error: ", "")}`,
             type: 'editreply'
         }, interaction)
 
         client.succNormal({
-            text: 'Your shortened url has been created!',
+            text: `Your shortened url has been created!`,
             fields: [
                 {
-                    name: '🔗 ┇ Link',
-                    value: '${res}',
+                    name: `🔗 ┇ Link`,
+                    value: `${res}`,
                     inline: true,
                 }
             ], 

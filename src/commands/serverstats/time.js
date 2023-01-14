@@ -8,15 +8,15 @@ module.exports = async (client, interaction, args) => {
     const time = interaction.options.getString("timezone");
 
     if (!momentTimezone.tz.zone(time)) return client.errNormal({
-        error: 'Timezone is not valid',
+        error: `Timezone is not valid`,
         type: 'editreply'
     }, interaction)
 
     const timeNow = moment().tz(time).format("HH:mm (z)");
 
     var channelName = await client.getTemplate(interaction.guild);
-    channelName = channelName.replace('{emoji}', "⏰")
-    channelName = channelName.replace('{name}', '${timeNow}')
+    channelName = channelName.replace(`{emoji}`, "⏰")
+    channelName = channelName.replace(`{name}`, `${timeNow}`)
 
     await interaction.guild.channels.create(channelName, {
         type: 'GUILD_VOICE', permissionOverwrites: [
@@ -42,11 +42,11 @@ module.exports = async (client, interaction, args) => {
         })
 
         client.succNormal({
-            text: 'Voice channel count created!',
+            text: `Voice channel count created!`,
             fields: [
                 {
-                    name: '📘┆Channel',
-                    value: '${channel}'
+                    name: `📘┆Channel`,
+                    value: `${channel}`
                 }
             ],
             type: 'editreply'

@@ -15,8 +15,8 @@ module.exports = async (client, interaction, args) => {
         Schema.findOne({ User: member.id }, async (err, data) => {
             if (data) {
                 return client.errNormal({
-                    error: '<@!${member.id}> (${member.id}) has already been banned from the bot',
-                    type: 'editreply'
+                    error: `<@!${member.id}> (${member.id}) has already been banned from the bot`,
+                    type: `editreply`
                 }, interaction);
             }
             else {
@@ -25,14 +25,14 @@ module.exports = async (client, interaction, args) => {
                 }).save();
 
                 client.succNormal({
-                    text: '<@!${member.id}> (${member.id}) banned from the bot',
+                    text: `<@!${member.id}> (${member.id}) banned from the bot`,
                     type: 'editreply'
                 }, interaction)
 
                 let embedLogs = new Discord.MessageEmbed()
-                    .setTitle('🔨・Ban added')
-                    .setDescription('<@!${member.id}> (${member.id}) banned from the bot')
-                    .addField('👤┆Banned By', '${interaction.user} (${interaction.user.tag})', true)
+                    .setTitle(`🔨・Ban added`)
+                    .setDescription(`<@!${member.id}> (${member.id}) banned from the bot`)
+                    .addField('👤┆Banned By', `${interaction.user} (${interaction.user.tag})`, true)
                     .setColor(client.config.colors.normal)
                     .setFooter(client.config.discord.footer)
                     .setTimestamp();
@@ -48,14 +48,14 @@ module.exports = async (client, interaction, args) => {
             if (data) {
                 Schema.findOneAndDelete({ User: member.id }).then(() => {
                     client.succNormal({
-                        text: '<@!${member.id}> (${member.id}) unbanned from the bot',
+                        text: `<@!${member.id}> (${member.id}) unbanned from the bot`,
                         type: 'editreply'
                     }, interaction)
 
                     let embedLogs = new Discord.MessageEmbed()
-                        .setTitle('🔨・Ban removed')
-                        .setDescription('<@!${member.id}> (${member.id}) unbanned from the bot')
-                        .addField('👤┆Unbanned By', '${interaction.user} (${interaction.user.tag})', true)
+                        .setTitle(`🔨・Ban removed`)
+                        .setDescription(`<@!${member.id}> (${member.id}) unbanned from the bot`)
+                        .addField('👤┆Unbanned By', `${interaction.user} (${interaction.user.tag})`, true)
                         .setColor(client.config.colors.normal)
                         .setFooter(client.config.discord.footer)
                         .setTimestamp();
@@ -67,8 +67,8 @@ module.exports = async (client, interaction, args) => {
             }
             else {
                 return client.errNormal({
-                    error: '<@!${member.id}> (${member.id}) has not been banned from the bot',
-                    type: 'editreply'
+                    error: `<@!${member.id}> (${member.id}) has not been banned from the bot`,
+                    type: `editreply`
                 }, interaction);
             }
         })

@@ -21,17 +21,17 @@ module.exports = async (client, interaction, args) => {
     }
     else {
         return client.errNormal({
-            error: 'No invite data found for ${user}',
+            error: `No invite data found for ${user}`,
             type: 'editreply'
         }, interaction);
     }
 
     client.succNormal({
-        text: 'Removed **${amount}** invites from ${user}',
+        text: `Removed **${amount}** invites from ${user}`,
         fields: [
             {
                 name: "📨┆Total invites",
-                value: '${data.Invites}',
+                value: `${data.Invites}`,
                 inline: true,
             }
         ],

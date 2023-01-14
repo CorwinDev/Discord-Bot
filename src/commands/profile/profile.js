@@ -70,7 +70,7 @@ const flags = {
             const userFlags = user.flags ? user.flags.toArray() : [];
 
             client.embed({
-                title: '${client.user.username}・Profile',
+                title: `${client.user.username}・Profile`,
                 desc: '_____',
                 thumbnail: user.avatarURL({ dynamic: true }),
                 fields: [{
@@ -90,87 +90,87 @@ const flags = {
                 },
                 {
                     name: "👨‍👩‍👦┆Gender",
-                    value: '${data.Gender || 'Not set'}',
+                    value: `${data.Gender || 'Not set'}`,
                     inline: true
                 },
                 {
                     name: "🔢┆Age",
-                    value: '${data.Age || 'Not set'}',
+                    value: `${data.Age || 'Not set'}`,
                     inline: true
                 },
                 {
                     name: "🎂┆Birthday",
-                    value: '${data.Birthday || 'Not set'}',
+                    value: `${data.Birthday || 'Not set'}`,
                     inline: true
                 },
                 {
                     name: "🎨┆Favorite color",
-                    value: '${data.Color || 'Not set'}',
+                    value: `${data.Color || 'Not set'}`,
                     inline: true
                 },
                 {
                     name: "🐶┆Favorite pets",
-                    value: '${data.Pets.join(', ') || 'Not set'}',
+                    value: `${data.Pets.join(', ') || 'Not set'}`,
                     inline: true
                 },
                 {
                     name: "🍕┆Favorite food",
-                    value: '${data.Food.join(', ') || 'Not set'}',
+                    value: `${data.Food.join(', ') || 'Not set'}`,
                     inline: true
                 },
                 {
                     name: "🎶┆Favorite songs",
-                    value: '${data.Songs.join(', ') || 'Not set'}',
+                    value: `${data.Songs.join(', ') || 'Not set'}`,
                     inline: true
                 },
                 {
                     name: "🎤┆Favorite artists",
-                    value: '${data.Artists.join(', ') || 'Not set'}',
+                    value: `${data.Artists.join(', ') || 'Not set'}`,
                     inline: true
                 },
                 {
                     name: "🎬┆Favorite movies",
-                    value: '${data.Movies.join(', ') || 'Not set'}',
+                    value: `${data.Movies.join(', ') || 'Not set'}`,
                     inline: true
                 },
                 {
                     name: "👨‍🎤┆Favorite actors",
-                    value: '${data.Actors.join(', ') || 'Not set'}',
+                    value: `${data.Actors.join(', ') || 'Not set'}`,
                     inline: true
                 },
                 {
                     name: "🏴┆Origin",
-                    value: '${data.Orgin || 'Not set'}',
+                    value: `${data.Orgin || 'Not set'}`,
                     inline: true
                 },
                 {
                     name: "🎮┆Hobby's",
-                    value: '${data.Hobbys.join(', ') || 'Not set'}',
+                    value: `${data.Hobbys.join(', ') || 'Not set'}`,
                     inline: true
                 },
                 {
                     name: "😛┆Status",
-                    value: '${data.Status || 'Not set'}',
+                    value: `${data.Status || 'Not set'}`,
                     inline: true
                 },
                 {
                     name: "📛┆Bot Badges",
-                    value: '${Badges.FLAGS ? Badges.FLAGS.map(flag => badgeFlags[flag]).join(' ') : 'None'}',
+                    value: `${Badges.FLAGS ? Badges.FLAGS.map(flag => badgeFlags[flag]).join(' ') : 'None'}`,
                     inline: true
                 },
                 {
                     name: "🏷️┆Discord Badges",
-                    value: '${userFlags.length ? userFlags.map(flag => flags[flag]).join(', ') : 'None' || 'None'}',
+                    value: `${userFlags.length ? userFlags.map(flag => flags[flag]).join(', ') : 'None' || 'None'}`,
                     inline: true
                 },
                 {
                     name: "💳┆Dcredits",
-                    value: '${credits || 'None'}',
+                    value: `${credits || 'None'}`,
                     inline: true
                 },
                 {
                     name: "ℹ️┆About me",
-                    value: '${data.Aboutme || 'Not set'}',
+                    value: `${data.Aboutme || 'Not set'}`,
                     inline: false
                 },], type: 'editreply'
             }, interaction);

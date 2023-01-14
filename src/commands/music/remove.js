@@ -5,12 +5,12 @@ module.exports = async (client, interaction, args) => {
     
     const channel = interaction.member.voice.channel;
     if (!channel) return client.errNormal({
-        error: 'Tu n'es pas dans un canal vocal !',
+        error: `Tu n'es pas dans un canal vocal !`,
         type: 'editreply'
     }, interaction);
 
     if (player && (channel.id !== player?.voiceChannel)) return client.errNormal({
-        error: 'Tu n'es pas dans le même canal vocal que moi !',
+        error: `Tu n'es pas dans le même canal vocal que moi !`,
         type: 'editreply'
     }, interaction);
 
@@ -22,7 +22,7 @@ module.exports = async (client, interaction, args) => {
     let number = interaction.options.getNumber('number');
 
     if (number > player.queue.size) return client.errNormal({
-        error: 'Cette file n'a pas tant que ça comme musiques',
+        error: `Cette file n'a pas tant que ça comme musiques`,
         type: 'editreply'
     }, interaction);
 
@@ -30,7 +30,7 @@ module.exports = async (client, interaction, args) => {
     player.queue.remove((parseInt(number)) - 1)
 
     client.succNormal({ 
-        text: '**${name}** retirée de la file',
+        text: `**${name}** retirée de la file`,
         type: 'editreply'
     }, interaction);
 }

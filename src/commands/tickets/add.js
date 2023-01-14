@@ -26,7 +26,7 @@ module.exports = async (client, interaction, args) => {
             interaction.channel.permissionOverwrites.edit(user.id, { VIEW_CHANNEL: true, SEND_MESSAGES: true });
 
             return client.simpleEmbed({
-                desc: 'Added ${user}',
+                desc: `Added ${user}`,
                 type: 'editreply'
             }, interaction)
         }

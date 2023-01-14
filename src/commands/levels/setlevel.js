@@ -21,16 +21,16 @@ module.exports = async (client, interaction, args) => {
         const user = await client.setLevel(target.id, interaction.guild.id, level);
 
         client.succNormal({ 
-            text: 'Level has been modified successfully',
+            text: `Level has been modified successfully`,
             fields: [
                 {
                     name: "🆕┆New Level",
-                    value: '${user.level}',
+                    value: `${user.level}`,
                     inline: true,
                 },
                 {
                     name: "👤┆User",
-                    value: '${target} (${target.tag})',
+                    value: `${target} (${target.tag})`,
                     inline: true,
                 }
             ],

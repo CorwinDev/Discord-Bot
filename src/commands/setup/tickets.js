@@ -28,7 +28,7 @@ module.exports = async (client, interaction, args) => {
     })
 
     client.succNormal({
-        text: 'Tickets has been set up successfully!',
+        text: `Tickets has been set up successfully!`,
         type: 'editreply'
     }, interaction);
 }

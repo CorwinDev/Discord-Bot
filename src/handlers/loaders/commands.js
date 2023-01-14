@@ -32,10 +32,10 @@ module.exports = (client) => {
     (async () => {
         try {
             const embed = new Discord.MessageEmbed()
-                .setDescription(`Started refreshing application (/) commands.`)
+                .setDescription(`Raffraichissement des commandes slash.`)
                 .setColor(client.config.colors.normal)
             interactionLogs.send({
-                username: 'Bot Logs',
+                username: 'Logs bot',
                 embeds: [embed]
             });
 
@@ -45,10 +45,10 @@ module.exports = (client) => {
             )
 
             const embedFinal = new Discord.MessageEmbed()
-                .setDescription(`Successfully reloaded ${commands.length} application (/) commands.`)
+                .setDescription(`Raffraichissement avec succès de ${commands.length} commandes slash.`)
                 .setColor(client.config.colors.normal)
             interactionLogs.send({
-                username: 'Bot Logs',
+                username: 'Logs bot',
                 embeds: [embedFinal]
             });
         } catch (error) {

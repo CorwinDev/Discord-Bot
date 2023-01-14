@@ -22,7 +22,7 @@
   <h3 align="center">Discord-Bot</h3>
 
   <p align="center">
-    Discord-bot is a Advanced Multipurpose bot containing more than 400+ Commands. It can do Moderation, Tickets, Radio, Games, Giveaways, Customisation, Economy, Leveling, Invites, Messages, Utilities, Suggestions, Server Stats etc.
+    Discord-bot is a updated version of <a href="https://github.com/DotwoodMedia/DBot">DBot</a>, a advanced Discord multipurpose botcontaining more than 400+ Commands.<br> It can do Moderation, Tickets, Radio, Games, Giveaways, Customisation, Economy, Leveling, Invites, Messages, Utilities, Suggestions, Server Stats etc.<br> Unfortunately the owners stopped at the peak and decided to put the source online of which I made an updated version.
     <br />
     <br />
     <a href="https://github.com/corwindev/discord-bot/issues">Report Bug</a>
@@ -30,6 +30,15 @@
     <a href="https://github.com/corwindev/discord-bot/issues">Request Feature</a>
   </p>
 </p>
+
+<!-- NOTICE -->
+
+### <img src="https://cdn.discordapp.com/emojis/1055803759831294013.png" width="20px" height="20px"> 》Notice 
+> You may not claim this as your own! The original source was created by [Dotwood Media](https://github.com/DotwoodMedia) and [Graphix Development](https://github.com/GraphixDevelopment). The source is modified and being updated by my(CorwinDev)
+
+> Discord-Bot is a Multipurpose Discord bot base in [Discord.js](https://github.com/Discordjs/discordjs)
+If you liked this repository, feel free to leave a star ⭐ to motivate me!
+
 <!-- ABOUT THE PROJECT -->
 
 ## <img src="https://cdn.discordapp.com/emojis/859424401186095114.png" width="20px" height="20px">》Description 
@@ -84,11 +93,6 @@ To start your bot
 ```js
 node src/index.js
 ```
-### <img src="https://cdn.discordapp.com/emojis/1055803759831294013.png" width="20px" height="20px"> 》Notice
-> You may not claim this as your own!! **Copyright to Graphix Development and CorwinDev**
-
-> Discord-Bot is a Multipurpose Discord bot base in [Discord.js](https://github.com/Discordjs/discordjs)
-If you liked this repository, feel free to leave a star ⭐ to motivate me!
 
 ## <img src="https://cdn.discordapp.com/emojis/1036083490292244493.png" width="15px" height="15px">》Support Server
 [![DiscordBanner](https://invidget.switchblade.xyz/jVeC7cFX5T)](https://discord.gg/jVeC7cFX5T)
@@ -105,7 +109,6 @@ npm run add-dev YOUR_ID
  By Donating, You Will Help Me To Maintain This Project 
 
 <img src="https://cdn.discordapp.com/emojis/809085860632985630.png" width="15px" height="15px"> 》[Sponsor](https://github.com/sponsors/CorwinDev)
-
 
 [version-shield]: https://img.shields.io/github/package-json/v/CorwinDev/Discord-Bot?style=for-the-badge
 [version-url]: https://github.com/brblacky/WaveMusic

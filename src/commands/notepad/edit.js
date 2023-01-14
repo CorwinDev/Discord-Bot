@@ -14,7 +14,7 @@ module.exports = async (client, interaction, args) => {
             client.succNormal({ text: "Note has been edited!", type: 'editreply' }, interaction);
         }
         else {
-            client.errNormal({ error: `No note found!`, type: 'editreply' }, interaction);
+            client.errNormal({ error: 'No note found!', type: 'editreply' }, interaction);
         }
     })
 }

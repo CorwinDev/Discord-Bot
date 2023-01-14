@@ -41,7 +41,7 @@ module.exports = async (client, interaction, args) => {
             return client.errWait({ time: time, type: 'editreply' }, interaction);
         }
         else {
-            client.succNormal({ text: `You've hunted and gotten a ${huntToWin}`, type: 'editreply' }, interaction);
+            client.succNormal({ text: 'You've hunted and gotten a ${huntToWin}', type: 'editreply' }, interaction);
 
             if (dataTime) {
                 dataTime.Hunt = Date.now();

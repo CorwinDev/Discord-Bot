@@ -9,7 +9,7 @@ module.exports = async (client, interaction, args) => {
 
             if (data && data.Food) {
                 if (data.Food.includes(food)) {
-                    return client.errNormal({ error: `That food is already exists in your database!`, type: 'editreply' }, interaction);
+                    return client.errNormal({ error: 'That food is already exists in your database!', type: 'editreply' }, interaction);
                 }
                 data.Food.push(food);
                 data.save();
@@ -22,7 +22,7 @@ module.exports = async (client, interaction, args) => {
                 text: "Added your food",
                 fields: [{
                     name: "🥐┆Food",
-                    value: `\`\`\`${food}\`\`\``,
+                    value: '\'\'\'${food}\'\'\'',
                     inline: true,
                 }],
                 type: 'editreply'

@@ -5,9 +5,9 @@ module.exports = async (client, interaction, args) => {
 
     let name = interaction.options.getString('name');
 
-    const uri = `https://djsdocs.sorta.moe/v2/embed?src=stable&q=${encodeURIComponent(
+    const uri = 'https://djsdocs.sorta.moe/v2/embed?src=stable&q=${encodeURIComponent(
         name
-    )}`;
+    )}';
 
     axios.get(uri).then((embed) => {
         const { data } = embed

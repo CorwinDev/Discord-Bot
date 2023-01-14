@@ -34,11 +34,11 @@ module.exports = async (client, interaction, args) => {
         });
 
         client.succNormal({
-            text: `Custom voice has been set up successfully!`,
+            text: 'Custom voice has been set up successfully!',
             fields: [
                 {
-                    name: `📘┆Channel`,
-                    value: `${ch} (${ch.name})`
+                    name: '📘┆Channel',
+                    value: '${ch} (${ch.name})'
                 }
             ],
             type: 'editreply'

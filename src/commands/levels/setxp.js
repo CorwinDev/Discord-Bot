@@ -21,16 +21,16 @@ module.exports = async (client, interaction, args) => {
         const user = await client.setXP(target.id, interaction.guild.id, xp);
 
         client.succNormal({ 
-            text: `XP has been modified successfully`,
+            text: 'XP has been modified successfully',
             fields: [
                 {
                     name: "🆕┆New XP",
-                    value: `${user.xp}`,
+                    value: '${user.xp}',
                     inline: true,
                 },
                 {
                     name: "👤┆User",
-                    value: `${target} (${target.tag})`,
+                    value: '${target} (${target.tag})',
                     inline: true,
                 }
             ],

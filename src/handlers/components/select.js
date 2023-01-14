@@ -12,7 +12,7 @@ module.exports = (client) => {
 
         if (labels.length < 25 || labels.length == 25) {
             const menu = new Discord.MessageSelectMenu()
-                .setCustomId(`${id}-1`)
+                .setCustomId('${id}-1')
                 .setPlaceholder('❌┇Nothing selected')
                 .addOptions(labels.slice(0, 25));
 
@@ -23,12 +23,12 @@ module.exports = (client) => {
 
         if (labels.length < 50 && labels.length > 25 || labels.length == 50) {
             const menu = new Discord.MessageSelectMenu()
-                .setCustomId(`${id}-1`)
+                .setCustomId('${id}-1')
                 .setPlaceholder('❌┇Nothing selected')
                 .addOptions(labels.slice(0, 25));
 
             const menu2 = new Discord.MessageSelectMenu()
-                .setCustomId(`${id}-2`)
+                .setCustomId('${id}-2')
                 .setPlaceholder('❌┇Nothing selected')
                 .addOptions(labels.slice(25, 50));
 
@@ -40,17 +40,17 @@ module.exports = (client) => {
 
         if (labels.length < 75 && labels.length > 50 || labels.length == 75) {
             const menu = new Discord.MessageSelectMenu()
-                .setCustomId(`${id}-1`)
+                .setCustomId('${id}-1')
                 .setPlaceholder('❌┇Nothing selected')
                 .addOptions(labels.slice(0, 25));
 
             const menu2 = new Discord.MessageSelectMenu()
-                .setCustomId(`${id}-2`)
+                .setCustomId('${id}-2')
                 .setPlaceholder('❌┇Nothing selected')
                 .addOptions(labels.slice(25, 50));
 
             const menu3 = new Discord.MessageSelectMenu()
-                .setCustomId(`${id}-3`)
+                .setCustomId('${id}-3')
                 .setPlaceholder('❌┇Nothing selected')
                 .addOptions(labels.slice(50, 75));
 
@@ -63,22 +63,22 @@ module.exports = (client) => {
 
         if (labels.length < 100 && labels.length > 75 || labels.length == 100) {
             const menu = new Discord.MessageSelectMenu()
-                .setCustomId(`${id}-1`)
+                .setCustomId('${id}-1')
                 .setPlaceholder('❌┇Nothing selected')
                 .addOptions(labels.slice(0, 25));
 
             const menu2 = new Discord.MessageSelectMenu()
-                .setCustomId(`${id}-2`)
+                .setCustomId('${id}-2')
                 .setPlaceholder('❌┇Nothing selected')
                 .addOptions(labels.slice(25, 50));
 
             const menu3 = new Discord.MessageSelectMenu()
-                .setCustomId(`${id}-3`)
+                .setCustomId('${id}-3')
                 .setPlaceholder('❌┇Nothing selected')
                 .addOptions(labels.slice(50, 75));
 
             const menu4 = new Discord.MessageSelectMenu()
-                .setCustomId(`${id}-4`)
+                .setCustomId('${id}-4')
                 .setPlaceholder('❌┇Nothing selected')
                 .addOptions(labels.slice(75, 100));
 
@@ -92,27 +92,27 @@ module.exports = (client) => {
 
         if (labels.length < 125 && labels.length > 100 || labels.length == 125) {
             const menu = new Discord.MessageSelectMenu()
-                .setCustomId(`${id}-1`)
+                .setCustomId('${id}-1')
                 .setPlaceholder('❌┇Nothing selected')
                 .addOptions(labels.slice(0, 25));
 
             const menu2 = new Discord.MessageSelectMenu()
-                .setCustomId(`${id}-2`)
+                .setCustomId('${id}-2')
                 .setPlaceholder('❌┇Nothing selected')
                 .addOptions(labels.slice(25, 50));
 
             const menu3 = new Discord.MessageSelectMenu()
-                .setCustomId(`${id}-3`)
+                .setCustomId('${id}-3')
                 .setPlaceholder('❌┇Nothing selected')
                 .addOptions(labels.slice(50, 75));
 
             const menu4 = new Discord.MessageSelectMenu()
-                .setCustomId(`${id}-4`)
+                .setCustomId('${id}-4')
                 .setPlaceholder('❌┇Nothing selected')
                 .addOptions(labels.slice(75, 100));
 
             const menu5 = new Discord.MessageSelectMenu()
-                .setCustomId(`${id}-5`)
+                .setCustomId('${id}-5')
                 .setPlaceholder('❌┇Nothing selected')
                 .addOptions(labels.slice(100, 125));
 

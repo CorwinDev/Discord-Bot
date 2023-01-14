@@ -28,11 +28,11 @@ module.exports = async (client, interaction, args) => {
             }).save();
 
             client.succNormal({ 
-                text: `Level reward created`,
+                text: 'Level reward created',
                 fields: [
                     {
                         name: "📘┆Role",
-                        value: `${role}`,
+                        value: '${role}',
                         inline: true,
                     }
                 ],

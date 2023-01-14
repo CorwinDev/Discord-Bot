@@ -23,20 +23,20 @@ module.exports = (client) => {
                                 message.delete();
 
                                 client.embed({
-                                    title: `${client.emotes.normal.error}・Moderator`,
-                                    desc: `Discord links are not allowed in this server!`,
+                                    title: '${client.emotes.normal.error}・Moderator',
+                                    desc: 'Discord links are not allowed in this server!',
                                     color: client.config.colors.error,
-                                    content: `${message.author}`
+                                    content: '${message.author}'
                                 }, message.channel)
                             }
                             else {
                                 message.delete();
 
                                 client.embed({
-                                    title: `${client.emotes.normal.error}・Moderator`,
-                                    desc: `Discord links are not allowed in this server!`,
+                                    title: '${client.emotes.normal.error}・Moderator',
+                                    desc: 'Discord links are not allowed in this server!',
                                     color: client.config.colors.error,
-                                    content: `${message.author}`
+                                    content: '${message.author}'
                                 }, message.channel)
                             }
                         })
@@ -55,20 +55,20 @@ module.exports = (client) => {
                                 message.delete();
 
                                 client.embed({
-                                    title: `${client.emotes.normal.error}・Moderator`,
-                                    desc: `Links are not allowed in this server!`,
+                                    title: '${client.emotes.normal.error}・Moderator',
+                                    desc: 'Links are not allowed in this server!',
                                     color: client.config.colors.error,
-                                    content: `${message.author}`
+                                    content: '${message.author}'
                                 }, message.channel)
                             }
                             else {
                                 message.delete();
                                
                                 client.embed({
-                                    title: `${client.emotes.normal.error}・Moderator`,
-                                    desc: `Links are not allowed in this server!`,
+                                    title: '${client.emotes.normal.error}・Moderator',
+                                    desc: 'Links are not allowed in this server!',
                                     color: client.config.colors.error,
-                                    content: `${message.author}`
+                                    content: '${message.author}'
                                 }, message.channel)
                             }
                         })
@@ -98,24 +98,24 @@ module.exports = (client) => {
 
                                 newMessage.delete();
                                 let error = new Discord.MessageEmbed()
-                                    .setTitle(`${client.emotes.normal.error}・Moderator`)
+                                    .setTitle('${client.emotes.normal.error}・Moderator')
                                     .setAuthor(client.user.username, client.user.avatarURL())
-                                    .setDescription(`Discord links are not allowed in this server!`)
+                                    .setDescription('Discord links are not allowed in this server!')
                                     .setColor(client.config.colors.error)
                                     .setFooter(client.config.discord.footer)
                                     .setTimestamp();
-                                newMessage.channel.send({ content: `${newMessage.author}`, embeds: [error] })
+                                newMessage.channel.send({ content: '${newMessage.author}', embeds: [error] })
                             }
                             else {
                                 newMessage.delete();
                                 let error = new Discord.MessageEmbed()
-                                    .setTitle(`${client.emotes.normal.error}・Moderator`)
+                                    .setTitle('${client.emotes.normal.error}・Moderator')
                                     .setAuthor(client.user.username, client.user.avatarURL())
-                                    .setDescription(`Discord links are not allowed in this server!`)
+                                    .setDescription('Discord links are not allowed in this server!')
                                     .setColor(client.config.colors.error)
                                     .setFooter(client.config.discord.footer)
                                     .setTimestamp();
-                                newMessage.channel.send({ content: `${newMessage.author}`, embeds: [error] })
+                                newMessage.channel.send({ content: '${newMessage.author}', embeds: [error] })
                             }
                         })
                     }
@@ -132,24 +132,24 @@ module.exports = (client) => {
 
                                 newMessage.delete();
                                 var error = new Discord.MessageEmbed()
-                                    .setTitle(`${client.emotes.normal.error}・Moderator`)
+                                    .setTitle('${client.emotes.normal.error}・Moderator')
                                     .setAuthor(client.user.username, client.user.avatarURL())
-                                    .setDescription(`Links are not allowed in this server!`)
+                                    .setDescription('Links are not allowed in this server!')
                                     .setColor(client.config.colors.error)
                                     .setFooter(client.config.discord.footer)
                                     .setTimestamp();
-                                newMessage.channel.send({ content: `${newMessage.author}`, embeds: [error] })
+                                newMessage.channel.send({ content: '${newMessage.author}', embeds: [error] })
                             }
                             else {
                                 newMessage.delete();
                                 var error = new Discord.MessageEmbed()
-                                    .setTitle(`${client.emotes.normal.error}・Moderator`)
+                                    .setTitle('${client.emotes.normal.error}・Moderator')
                                     .setAuthor(client.user.username, client.user.avatarURL())
-                                    .setDescription(`Links are not allowed in this server!`)
+                                    .setDescription('Links are not allowed in this server!')
                                     .setColor(client.config.colors.error)
                                     .setFooter(client.config.discord.footer)
                                     .setTimestamp();
-                                newMessage.channel.send({ content: `${newMessage.author}`, embeds: [error] })
+                                newMessage.channel.send({ content: '${newMessage.author}', embeds: [error] })
                             }
                         })
                     }

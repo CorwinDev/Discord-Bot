@@ -16,11 +16,11 @@ module.exports = async (client, interaction, args) => {
         if (data) {
             Schema.findOneAndDelete({ Guild: interaction.guild.id, Messages: messages }).then(() => {
                 client.succNormal({
-                    text: `Message reward removed`,
+                    text: 'Message reward removed',
                     fields: [
                         {
                             name: "💬┆Messages",
-                            value: `${messages}`,
+                            value: '${messages}',
                             inline: true,
                         }
                     ],

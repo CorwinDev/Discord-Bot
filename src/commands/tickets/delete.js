@@ -27,7 +27,7 @@ module.exports = async (client, interaction, args) => {
 
             if (interaction.channel.parentId == ticketCategory.id) {
                 client.simpleEmbed({
-                    desc: `Delete this ticket in **5s**`,
+                    desc: 'Delete this ticket in **5s**',
                     type: type
                 }, interaction).then(msg => setTimeout(() => {
                     interaction.channel.delete();

@@ -7,40 +7,40 @@ module.exports = async (client, interaction, args) => {
 
     const r = await pop.github(name).catch(() => {
         return client.errNormal({
-            error: `No account found with the username: ${name}`,
+            error: 'No account found with the username: ${name}',
             type: 'editreply'
         }, interaction)
     
     })
 
     client.embed({
-        title: `🏷️・${r.name}`,
+        title: '🏷️・${r.name}',
         thumbnail: r.avatar,
         url: r.url,
         fields: [
             {
                 name: "💬┇Name",
-                value: `${r.name}`,
+                value: '${r.name}',
                 inline: true,
             },
             {
                 name: "🧑‍💼┇Company",
-                value: `${r.company}`,
+                value: '${r.company}',
                 inline: true,
             },
             {
                 name: "💬┇Bio",
-                value: `${r.bio}`,
+                value: '${r.bio}',
                 inline: true,
             },
             {
                 name: "📁┇Public Repositories",
-                value: `${r.public_repos}`,
+                value: '${r.public_repos}',
                 inline: true,
             },
             {
                 name: "⏰┇Created At",
-                value: `<t:${Math.round(new Date(r.created_at).getTime() / 1000)}>`,
+                value: '<t:${Math.round(new Date(r.created_at).getTime() / 1000)}>',
                 inline: true,
             },
         ], type: 'editreply'

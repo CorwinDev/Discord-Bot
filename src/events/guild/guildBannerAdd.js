@@ -5,8 +5,8 @@ module.exports = async (client, guild, bannerURL) => {
     if (!logsChannel) return;
 
     client.embed({
-        title: `🖼️・New banner`,
-        desc: `The server banner has been updated`,
+        title: '🖼️・New banner',
+        desc: 'The server banner has been updated',
         image: bannerURL
     }, logsChannel).catch(() => { })
 };

@@ -14,38 +14,38 @@ module.exports = async (client, interaction, args) => {
         var location = result[0].location;
 
         client.embed({
-            title: `☀️・Weather - ${current.skytext}`,
-            desc: `Weather forecast for ${current.observationpoint}`,
+            title: '☀️・Weather - ${current.skytext}',
+            desc: 'Weather forecast for ${current.observationpoint}',
             thumbnail: current.imageUrl,
             fields: [
                 {
                     name: "Timezone",
-                    value: `UTC${location.timezone}`,
+                    value: 'UTC${location.timezone}',
                     inline: true,
                 },
                 {
                     name: "Degree Type",
-                    value: `Celsius`,
+                    value: 'Celsius',
                     inline: true,
                 },
                 {
                     name: "Temperature",
-                    value: `${current.temperature}°`,
+                    value: '${current.temperature}°',
                     inline: true,
                 },
                 {
                     name: "Wind",
-                    value: `${current.winddisplay}`,
+                    value: '${current.winddisplay}',
                     inline: true,
                 },
                 {
                     name: "Feels like",
-                    value: `${current.feelslike}°`,
+                    value: '${current.feelslike}°',
                     inline: true,
                 },
                 {
                     name: "Humidity",
-                    value: `${current.humidity}%`,
+                    value: '${current.humidity}%',
                     inline: true,
                 }
             ],

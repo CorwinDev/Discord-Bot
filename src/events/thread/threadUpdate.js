@@ -11,32 +11,32 @@ module.exports = async (client, oldChannel, newChannel) => {
     if (!logsChannel) return;
 
     client.embed({
-        title: `📖・Thread created`,
-        desc: `A thread has been created`,
+        title: '📖・Thread created',
+        desc: 'A thread has been created',
         fields: [
             {
-                name: `> Old name`,
-                value: `- ${oldChannel.name}`
+                name: '> Old name',
+                value: '- ${oldChannel.name}'
             },
             {
-                name: `> New name`,
-                value: `- ${newChannel.name}`
+                name: '> New name',
+                value: '- ${newChannel.name}'
             },
             {
-                name: `> ID`,
-                value: `- ${newChannel.id}`
+                name: '> ID',
+                value: '- ${newChannel.id}'
             },
             {
-                name: `> Category`,
-                value: `${newChannel.parent}`
+                name: '> Category',
+                value: '${newChannel.parent}'
             },
             {
-                name: `> Channel`,
-                value: `<#${newChannel.id}>`
+                name: '> Channel',
+                value: '<#${newChannel.id}>'
             },
             {
-                name: `> Type`,
-                value: `${types[newChannel.type]}`
+                name: '> Type',
+                value: '${types[newChannel.type]}'
             }
         ]
     }, logsChannel).catch(() => { })

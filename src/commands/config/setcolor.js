@@ -27,23 +27,23 @@ module.exports = async (client, interaction, args) => {
 
     Schema.findOne({ Guild: interaction.guild.id }, async (err, data) => {
         if (data) {
-            data.Color = `#${color}`;
+            data.Color = '#${color}';
             data.save();
         }
         else {
             new Schema({
                 Guild: interaction.guild.id,
-                Color: `#${color}`
+                Color: '#${color}'
             }).save();
         }
     })
 
     client.succNormal({
-        text: `The embed color has been adjusted successfully`,
+        text: 'The embed color has been adjusted successfully',
         fields: [
             {
-                name: `🎨┆New color`,
-                value: `#${color}`,
+                name: '🎨┆New color',
+                value: '#${color}',
                 inline: true
             },
         ],

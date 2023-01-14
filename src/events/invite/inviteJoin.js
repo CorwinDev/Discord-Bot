@@ -13,20 +13,20 @@ module.exports = async (client, member, invite, inviter) => {
     if (!invite || !inviter) {
         if (messageData && messageData.inviteJoin) {
             var joinMessage = messageData.inviteJoin;
-            joinMessage = joinMessage.replace(`{user:username}`, member.user.username)
-            joinMessage = joinMessage.replace(`{user:discriminator}`, member.user.discriminator)
-            joinMessage = joinMessage.replace(`{user:tag}`, member.user.tag)
-            joinMessage = joinMessage.replace(`{user:mention}`, member)
+            joinMessage = joinMessage.replace('{user:username}', member.user.username)
+            joinMessage = joinMessage.replace('{user:discriminator}', member.user.discriminator)
+            joinMessage = joinMessage.replace('{user:tag}', member.user.tag)
+            joinMessage = joinMessage.replace('{user:mention}', member)
 
-            joinMessage = joinMessage.replace(`{inviter:username}`, "System")
-            joinMessage = joinMessage.replace(`{inviter:discriminator}`, "#0000")
-            joinMessage = joinMessage.replace(`{inviter:tag}`, "System#0000")
-            joinMessage = joinMessage.replace(`{inviter:mention}`, "System")
-            joinMessage = joinMessage.replace(`{inviter:invites}`, "∞")
-            joinMessage = joinMessage.replace(`{inviter:invites:left}`, "∞")
+            joinMessage = joinMessage.replace('{inviter:username}', "System")
+            joinMessage = joinMessage.replace('{inviter:discriminator}', "#0000")
+            joinMessage = joinMessage.replace('{inviter:tag}', "System#0000")
+            joinMessage = joinMessage.replace('{inviter:mention}', "System")
+            joinMessage = joinMessage.replace('{inviter:invites}', "∞")
+            joinMessage = joinMessage.replace('{inviter:invites:left}', "∞")
 
-            joinMessage = joinMessage.replace(`{guild:name}`, member.guild.name)
-            joinMessage = joinMessage.replace(`{guild:members}`, member.guild.memberCount)
+            joinMessage = joinMessage.replace('{guild:name}', member.guild.name)
+            joinMessage = joinMessage.replace('{guild:members}', member.guild.memberCount)
 
             welcomeSchema.findOne({ Guild: member.guild.id }, async (err, channelData) => {
                 if (channelData) {
@@ -34,7 +34,7 @@ module.exports = async (client, member, invite, inviter) => {
                     var channel = member.guild.channels.cache.get(channelData.Channel)
 
                     await client.embed({
-                        title: `👋・Welcome`,
+                        title: '👋・Welcome',
                         desc: joinMessage
                     }, channel).catch(() => { })
                 }
@@ -46,8 +46,8 @@ module.exports = async (client, member, invite, inviter) => {
                     var channel = member.guild.channels.cache.get(channelData.Channel)
 
                     client.embed({
-                        title: `👋・Welcome`,
-                        desc: `I cannot trace how **${member} | ${member.user.tag}** has been joined`
+                        title: '👋・Welcome',
+                        desc: 'I cannot trace how **${member} | ${member.user.tag}** has been joined'
                     }, channel).catch(() => { })
                 }
             })
@@ -63,20 +63,20 @@ module.exports = async (client, member, invite, inviter) => {
 
             if (messageData) {
                 var joinMessage = messageData.inviteJoin;
-                joinMessage = joinMessage.replace(`{user:username}`, member.user.username)
-                joinMessage = joinMessage.replace(`{user:discriminator}`, member.user.discriminator)
-                joinMessage = joinMessage.replace(`{user:tag}`, member.user.tag)
-                joinMessage = joinMessage.replace(`{user:mention}`, member)
+                joinMessage = joinMessage.replace('{user:username}', member.user.username)
+                joinMessage = joinMessage.replace('{user:discriminator}', member.user.discriminator)
+                joinMessage = joinMessage.replace('{user:tag}', member.user.tag)
+                joinMessage = joinMessage.replace('{user:mention}', member)
 
-                joinMessage = joinMessage.replace(`{inviter:username}`, inviter.username)
-                joinMessage = joinMessage.replace(`{inviter:discriminator}`, inviter.discriminator)
-                joinMessage = joinMessage.replace(`{inviter:tag}`, inviter.tag)
-                joinMessage = joinMessage.replace(`{inviter:mention}`, inviter)
-                joinMessage = joinMessage.replace(`{inviter:invites}`, data.Invites)
-                joinMessage = joinMessage.replace(`{inviter:invites:left}`, data.Left)
+                joinMessage = joinMessage.replace('{inviter:username}', inviter.username)
+                joinMessage = joinMessage.replace('{inviter:discriminator}', inviter.discriminator)
+                joinMessage = joinMessage.replace('{inviter:tag}', inviter.tag)
+                joinMessage = joinMessage.replace('{inviter:mention}', inviter)
+                joinMessage = joinMessage.replace('{inviter:invites}', data.Invites)
+                joinMessage = joinMessage.replace('{inviter:invites:left}', data.Left)
 
-                joinMessage = joinMessage.replace(`{guild:name}`, member.guild.name)
-                joinMessage = joinMessage.replace(`{guild:members}`, member.guild.memberCount)
+                joinMessage = joinMessage.replace('{guild:name}', member.guild.name)
+                joinMessage = joinMessage.replace('{guild:members}', member.guild.memberCount)
 
                 welcomeSchema.findOne({ Guild: member.guild.id }, async (err, channelData) => {
                     if (channelData) {
@@ -84,7 +84,7 @@ module.exports = async (client, member, invite, inviter) => {
                         var channel = member.guild.channels.cache.get(channelData.Channel)
 
                         await client.embed({
-                            title: `👋・Welcome`,
+                            title: '👋・Welcome',
                             desc: joinMessage
                         }, channel).catch(() => { })
                     }
@@ -97,8 +97,8 @@ module.exports = async (client, member, invite, inviter) => {
                         var channel = member.guild.channels.cache.get(channelData.Channel)
 
                         client.embed({
-                            title: `👋・Welcome`,
-                            desc: `**${member} | ${member.user.tag}** was invited by ${inviter.tag} **(${data.Invites} invites)**`
+                            title: '👋・Welcome',
+                            desc: '**${member} | ${member.user.tag}** was invited by ${inviter.tag} **(${data.Invites} invites)**'
                         }, channel)
                     }
                 })
@@ -125,20 +125,20 @@ module.exports = async (client, member, invite, inviter) => {
 
             if (messageData) {
                 var joinMessage = messageData.inviteJoin;
-                joinMessage = joinMessage.replace(`{user:username}`, member.user.username)
-                joinMessage = joinMessage.replace(`{user:discriminator}`, member.user.discriminator)
-                joinMessage = joinMessage.replace(`{user:tag}`, member.user.tag)
-                joinMessage = joinMessage.replace(`{user:mention}`, member)
+                joinMessage = joinMessage.replace('{user:username}', member.user.username)
+                joinMessage = joinMessage.replace('{user:discriminator}', member.user.discriminator)
+                joinMessage = joinMessage.replace('{user:tag}', member.user.tag)
+                joinMessage = joinMessage.replace('{user:mention}', member)
 
-                joinMessage = joinMessage.replace(`{inviter:username}`, inviter.username)
-                joinMessage = joinMessage.replace(`{inviter:discriminator}`, inviter.discriminator)
-                joinMessage = joinMessage.replace(`{inviter:tag}`, inviter.tag)
-                joinMessage = joinMessage.replace(`{inviter:mention}`, inviter)
-                joinMessage = joinMessage.replace(`{inviter:invites}`, "1")
-                joinMessage = joinMessage.replace(`{inviter:invites:left}`, "0")
+                joinMessage = joinMessage.replace('{inviter:username}', inviter.username)
+                joinMessage = joinMessage.replace('{inviter:discriminator}', inviter.discriminator)
+                joinMessage = joinMessage.replace('{inviter:tag}', inviter.tag)
+                joinMessage = joinMessage.replace('{inviter:mention}', inviter)
+                joinMessage = joinMessage.replace('{inviter:invites}', "1")
+                joinMessage = joinMessage.replace('{inviter:invites:left}', "0")
 
-                joinMessage = joinMessage.replace(`{guild:name}`, member.guild.name)
-                joinMessage = joinMessage.replace(`{guild:members}`, member.guild.memberCount)
+                joinMessage = joinMessage.replace('{guild:name}', member.guild.name)
+                joinMessage = joinMessage.replace('{guild:members}', member.guild.memberCount)
 
                 welcomeSchema.findOne({ Guild: member.guild.id }, async (err, channelData) => {
                     if (channelData) {
@@ -146,7 +146,7 @@ module.exports = async (client, member, invite, inviter) => {
                         var channel = member.guild.channels.cache.get(channelData.Channel)
 
                         await client.embed({
-                            title: `👋・Welcome`,
+                            title: '👋・Welcome',
                             desc: joinMessage
                         }, channel).catch(() => { })
                     }
@@ -159,8 +159,8 @@ module.exports = async (client, member, invite, inviter) => {
                         var channel = member.guild.channels.cache.get(channelData.Channel)
 
                         await client.embed({
-                            title: `👋・Welcome`,
-                            desc: `**${member} | ${member.user.tag}** was invited by ${inviter.tag} **(1 invites)**`
+                            title: '👋・Welcome',
+                            desc: '**${member} | ${member.user.tag}** was invited by ${inviter.tag} **(1 invites)**'
                         }, channel).catch(() => { })
                     }
                 })

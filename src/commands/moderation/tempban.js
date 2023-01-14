@@ -19,8 +19,8 @@ module.exports = async (client, interaction, args) => {
   }, interaction);
 
   client.embed({
-    title: `🔨・Ban`,
-    desc: `You've been banned in **${interaction.guild.name}**`,
+    title: '🔨・Ban',
+    desc: 'You've been banned in **${interaction.guild.name}**',
     fields: [
       {
         name: "👤┆Banned by",

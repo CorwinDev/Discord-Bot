@@ -22,11 +22,11 @@ module.exports = async (client, interaction, args) => {
 
     interaction.channel.bulkDelete(amount + 1).then(() => {
         client.succNormal({
-            text: `I have successfully deleted the messages`,
+            text: 'I have successfully deleted the messages',
             fields: [
                 {
                     name: "💬┆Amount",
-                    value: `${amount}`,
+                    value: '${amount}',
                     inline: true
                 }
             ],

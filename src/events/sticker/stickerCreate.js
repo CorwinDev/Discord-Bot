@@ -5,20 +5,20 @@ module.exports = async (client, sticker) => {
     if (!logsChannel) return;
 
     client.embed({
-        title: `😜・Sticker created`,
-        desc: `A sticker has been created`,
+        title: '😜・Sticker created',
+        desc: 'A sticker has been created',
         fields: [
             {
-                name: `> Name`,
-                value: `- ${sticker.name}`
+                name: '> Name',
+                value: '- ${sticker.name}'
             },
             {
-                name: `> ID`,
-                value: `- ${sticker.id}`
+                name: '> ID',
+                value: '- ${sticker.id}'
             },
             {
-                name: `> Url`,
-                value: `${sticker.url}`
+                name: '> Url',
+                value: '${sticker.url}'
             }
         ]
     }, logsChannel).catch(() => { })

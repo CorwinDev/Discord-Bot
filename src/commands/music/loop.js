@@ -5,12 +5,12 @@ module.exports = async (client, interaction, args) => {
 
     const channel = interaction.member.voice.channel;
     if (!channel) return client.errNormal({
-        error: `Tu n'es pas dans un canal vocal !`,
+        error: 'Tu n'es pas dans un canal vocal !',
         type: 'editreply'
     }, interaction);
 
     if (player && (channel.id !== player?.voiceChannel)) return client.errNormal({
-        error: `Tu n'es pas dans le même canal vocal que moi !`,
+        error: 'Tu n'es pas dans le même canal vocal que moi !',
         type: 'editreply'
     }, interaction);
 
@@ -23,7 +23,7 @@ module.exports = async (client, interaction, args) => {
     const trackRepeat = player.trackRepeat ? "enabled" : "disabled";
 
     client.succNormal({
-        text: `La boucle est **${trackRepeat}** pour la musique actuelle`,
+        text: 'La boucle est **${trackRepeat}** pour la musique actuelle',
         type: 'editreply'
     }, interaction);
 }

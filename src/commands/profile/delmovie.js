@@ -10,7 +10,7 @@ module.exports = async (client, interaction, args) => {
 
             if (data && data.Movies) {
                 if (!data.Movies.includes(movie)) {
-                    return client.errNormal({ error: `That movie doesn't exist in the database!`, type: 'editreply' }, interaction);
+                    return client.errNormal({ error: 'That movie doesn't exist in the database!', type: 'editreply' }, interaction);
                 }
 
                 const filtered = data.Movies.filter((target) => target !== movie);
@@ -23,7 +23,7 @@ module.exports = async (client, interaction, args) => {
                 text: "Removed your movie",
                 fields: [{
                     name: "🎬┆Movies",
-                    value: `\`\`\`${movie}\`\`\``,
+                    value: '\'\'\'${movie}\'\'\'',
                     inline: true,
                 }],
                 type: 'editreply'

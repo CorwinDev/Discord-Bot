@@ -23,7 +23,7 @@ module.exports = async (client, interaction, args) => {
                 Note: note
             }).save();
 
-            client.succNormal({ text: "Note has been added! \`/notepad notes\` to see all your notes", type: 'editreply' }, interaction);
+            client.succNormal({ text: "Note has been added! \'/notepad notes\' to see all your notes", type: 'editreply' }, interaction);
         }
     })
 }

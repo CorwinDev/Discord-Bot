@@ -73,13 +73,13 @@ module.exports = async (client) => {
                 const author = referencedMessage?.author ?? static.DummyUser;
 
                 reference.innerHTML =
-                    `<img class="chatlog__reference-avatar" src="${author.avatarURL() ?? static.defaultPFP}" alt="Avatar" loading="lazy">
-                <span class="chatlog__reference-name" title="${author.username.replace(/"/g, '')}" style="color: ${author.hexAccentColor ?? '#FFFFFF'}">${author.bot ? `<span class="chatlog__bot-tag">BOT</span> ${xss(author.username)}` : xss(author.username)}</span>
+                    '<img class="chatlog__reference-avatar" src="${author.avatarURL() ?? static.defaultPFP}" alt="Avatar" loading="lazy">
+                <span class="chatlog__reference-name" title="${author.username.replace(/"/g, '')}" style="color: ${author.hexAccentColor ?? '#FFFFFF'}">${author.bot ? '<span class="chatlog__bot-tag">BOT</span> ${xss(author.username)}' : xss(author.username)}</span>
                 <div class="chatlog__reference-content">
                     <span class="chatlog__reference-link" onclick="scrollToMessage(event, '${message.reference.messageId}')">
-                            ${referencedMessage ? (referencedMessage?.content ? `${formatContent(referencedMessage?.content, false, true)}...` : '<em>Click to see attachment</em>') : '<em>Original message was deleted.</em>'}
+                            ${referencedMessage ? (referencedMessage?.content ? '${formatContent(referencedMessage?.content, false, true)}...' : '<em>Click to see attachment</em>') : '<em>Original message was deleted.</em>'}
                     </span>
-                </div>`;
+                </div>';
 
                 messageGroup.appendChild(referenceSymbol);
                 messageGroup.appendChild(reference);
@@ -130,8 +130,8 @@ module.exports = async (client) => {
             const messageContent = document.createElement('div');
             messageContent.classList.add('chatlog__message');
             messageContent.setAttribute('data-message-id', message.id);
-            messageContent.setAttribute('id', `message-${message.id}`);
-            messageContent.title = `Message sent: ${message.createdAt.toLocaleString()}`;
+            messageContent.setAttribute('id', 'message-${message.id}');
+            messageContent.title = 'Message sent: ${message.createdAt.toLocaleString()}';
 
             // message content
             if (message.content) {
@@ -166,7 +166,7 @@ module.exports = async (client) => {
                         attachmentImage.src = attachment.proxyURL ?? attachment.url;
                         attachmentImage.alt = 'Image attachment';
                         attachmentImage.loading = 'lazy';
-                        attachmentImage.title = `Image: ${attachment.name} (${formatBytes(attachment.size)})`;
+                        attachmentImage.title = 'Image: ${attachment.name} (${formatBytes(attachment.size)})';
 
                         attachmentLink.appendChild(attachmentImage);
                         attachmentsDiv.appendChild(attachmentLink);
@@ -176,7 +176,7 @@ module.exports = async (client) => {
                         attachmentVideo.src = attachment.proxyURL ?? attachment.url;
                         attachmentVideo.alt = 'Video attachment';
                         attachmentVideo.controls = true;
-                        attachmentVideo.title = `Video: ${attachment.name} (${formatBytes(attachment.size)})`;
+                        attachmentVideo.title = 'Video: ${attachment.name} (${formatBytes(attachment.size)})';
 
                         attachmentsDiv.appendChild(attachmentVideo);
                     } else if (['mp3', 'ogg'].includes(attachmentType)) {
@@ -185,7 +185,7 @@ module.exports = async (client) => {
                         attachmentAudio.src = attachment.proxyURL ?? attachment.url;
                         attachmentAudio.alt = 'Audio attachment';
                         attachmentAudio.controls = true;
-                        attachmentAudio.title = `Audio: ${attachment.name} (${formatBytes(attachment.size)})`;
+                        attachmentAudio.title = 'Audio: ${attachment.name} (${formatBytes(attachment.size)})';
 
                         attachmentsDiv.appendChild(attachmentAudio);
                     } else {
@@ -214,7 +214,7 @@ module.exports = async (client) => {
                         const attachmentGenericSize = document.createElement('div');
                         attachmentGenericSize.classList.add('chatlog__attachment-generic-size');
 
-                        attachmentGenericSize.textContent = `${formatBytes(attachment.size)}`;
+                        attachmentGenericSize.textContent = '${formatBytes(attachment.size)}';
                         attachmentGeneric.appendChild(attachmentGenericSize);
 
                         attachmentsDiv.appendChild(attachmentGeneric);
@@ -427,7 +427,7 @@ module.exports = async (client) => {
 
                         const embedFooterText = document.createElement('span');
                         embedFooterText.classList.add('chatlog__embed-footer-text');
-                        embedFooterText.textContent = embed.timestamp ? `${embed.footer.text} • ${new Date(embed.timestamp).toLocaleString()}` : embed.footer.text;
+                        embedFooterText.textContent = embed.timestamp ? '${embed.footer.text} • ${new Date(embed.timestamp).toLocaleString()}' : embed.footer.text;
 
                         embedFooter.appendChild(embedFooterText);
 
@@ -443,14 +443,14 @@ module.exports = async (client) => {
             transcript.appendChild(messageGroup);
         }
 
-        const fileTrans = new discord.MessageAttachment(Buffer.from(dom.serialize()), `${interaction.channel.id}.html`);
+        const fileTrans = new discord.MessageAttachment(Buffer.from(dom.serialize()), '${interaction.channel.id}.html');
         channel.send({ files: [fileTrans] });
     }
 
     function formatContent(content, allowExtra = false, replyStyle = false, purify = he.escape) {
         content = purify(content)
-            .replace(/\&\#x60;/g, '`') // we dont want ` to be escaped
-            .replace(/```(.+?)```/gs, code => {
+            .replace(/\&\#x60;/g, ''') // we dont want ' to be escaped
+            .replace(/'''(.+?)'''/gs, code => {
                 if (!replyStyle) {
                     const split = code.slice(3, -3).split('\n');
                     let language = split.shift().trim().toLowerCase();
@@ -460,14 +460,14 @@ module.exports = async (client) => {
 
                     if (languages.includes(language)) {
                         const joined = he.unescape(split.join("\n"));
-                        return `<div class="pre pre--multiline language-${language}">${hljs.default.highlight(joined, {
+                        return '<div class="pre pre--multiline language-${language}">${hljs.default.highlight(joined, {
                             language,
                         }).value
-                            }</div>`;
+                            }</div>';
                     } else {
-                        return `<div class="pre pre--multiline nohighlight">${code
+                        return '<div class="pre pre--multiline nohighlight">${code
                             .slice(3, -3)
-                            .trim()}</div>`;
+                            .trim()}</div>';
                     }
                 } else {
                     const split = code.slice(3, -3).split('\n');
@@ -475,7 +475,7 @@ module.exports = async (client) => {
 
                     const joined = he.unescape(split.join('\n'));
 
-                    return `<span class="pre pre--inline">${joined.substring(0, 42)}</span>`;
+                    return '<span class="pre pre--inline">${joined.substring(0, 42)}</span>';
                 }
             })
             .replace(/\*\*(.+?)\*\*/g, '<strong>$1</strong>')
@@ -483,12 +483,12 @@ module.exports = async (client) => {
             .replace(/~~(.+?)~~/g, '<s>$1</s>')
             .replace(/__(.+?)__/g, '<u>$1</u>')
             .replace(/\_(.+?)\_/g, '<em>$1</em>')
-            .replace(/`(.+?)`/g, `<span class="pre pre--inline">$1</span>`)
-            .replace(/\|\|(.+?)\|\|/g, `<span class="spoiler-text spoiler-text--hidden" ${replyStyle ? '' : 'onclick="showSpoiler(event, this)"'}>$1</span>`);
+            .replace(/'(.+?)'/g, '<span class="pre pre--inline">$1</span>')
+            .replace(/\|\|(.+?)\|\|/g, '<span class="spoiler-text spoiler-text--hidden" ${replyStyle ? '' : 'onclick="showSpoiler(event, this)"'}>$1</span>');
 
         if (allowExtra) {
             content = content
-                .replace(/\[(.+?)\]\((.+?)\)/g, `<a href="$2">$1</a>`)
+                .replace(/\[(.+?)\]\((.+?)\)/g, '<a href="$2">$1</a>')
         }
 
         return replyStyle ? content.replace(/(?:\r\n|\r|\n)/g, ' ') : content.replace(/(?:\r\n|\r|\n)/g, '<br />'); // do this last

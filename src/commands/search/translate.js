@@ -8,17 +8,17 @@ module.exports = async (client, interaction, args) => {
 
     translate(text, { to: language }).then(res => {
         client.embed({
-            title: `${client.emotes.normal.check}・Success!`,
-            desc: `I have translated the following`,
+            title: '${client.emotes.normal.check}・Success!',
+            desc: 'I have translated the following',
             fields: [
                 {
                     name: "📥 - Input",
-                    value: `${text}`,
+                    value: '${text}',
                     inline: false,
                 },
                 {
                     name: "📤 - Output",
-                    value: `${res.text}`,
+                    value: '${res.text}',
                     inline: false,
                 },
             ],

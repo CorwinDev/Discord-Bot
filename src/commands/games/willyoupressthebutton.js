@@ -56,8 +56,8 @@ module.exports = async (client, interaction, args) => {
             .addComponents(btn, btn2);
 
         client.embed({
-            title: `🤔・Will you press the button?`,
-            desc: `\`\`\`${decode(res.questions[0].charAt(0).toUpperCase() + res.questions[0].slice(1))} \`\`\`\n**But** \`\`\`\n\n${decode(res.questions[1].charAt(0).toUpperCase() + res.questions[1].slice(1))}\`\`\``,
+            title: '🤔・Will you press the button?',
+            desc: '\'\'\'${decode(res.questions[0].charAt(0).toUpperCase() + res.questions[0].slice(1))} \'\'\'\n**But** \'\'\'\n\n${decode(res.questions[1].charAt(0).toUpperCase() + res.questions[1].slice(1))}\'\'\'',
             components: [row],
             type: 'editreply'
         }, interaction).then(async (m) => {
@@ -70,38 +70,38 @@ module.exports = async (client, interaction, args) => {
                 if (btn.customId === id1) {
                     btn = new Discord.MessageButton()
                         .setStyle('SUCCESS')
-                        .setLabel(`Yes (${res.percentage['1']})`)
+                        .setLabel('Yes (${res.percentage['1']})')
                         .setCustomId(id1)
                         .setDisabled(true);
                     btn2 = new Discord.MessageButton()
                         .setStyle('DANGER')
-                        .setLabel(`No (${res.percentage['2']})`)
+                        .setLabel('No (${res.percentage['2']})')
                         .setCustomId(id2)
                         .setDisabled(true);
                     collector.stop();
 
                     client.embed({
-                        title: `🤔・Will you press the button?`,
-                        desc: `\`\`\`${decode(res.questions[0].charAt(0).toUpperCase() + res.questions[0].slice(1))} \`\`\`\n**But** \`\`\`\n\n${decode(res.questions[1].charAt(0).toUpperCase() + res.questions[1].slice(1))}\`\`\``,
+                        title: '🤔・Will you press the button?',
+                        desc: '\'\'\'${decode(res.questions[0].charAt(0).toUpperCase() + res.questions[0].slice(1))} \'\'\'\n**But** \'\'\'\n\n${decode(res.questions[1].charAt(0).toUpperCase() + res.questions[1].slice(1))}\'\'\'',
                         components: [{ type: 1, components: [btn, btn2] }],
                         type: 'editreply'
                     }, interaction)
                 } else if (btn.customId === id2) {
                     btn = new Discord.MessageButton()
                         .setStyle('DANGER')
-                        .setLabel(`Yes (${res.percentage['1']})`)
+                        .setLabel('Yes (${res.percentage['1']})')
                         .setCustomId(id1)
                         .setDisabled(true);
                     btn2 = new Discord.MessageButton()
                         .setStyle('SUCCESS')
-                        .setLabel(`No (${res.percentage['2']})`)
+                        .setLabel('No (${res.percentage['2']})')
                         .setCustomId(id2)
                         .setDisabled(true);
                     collector.stop();
 
                     client.embed({
-                        title: `🤔・Will you press the button?`,
-                        desc: `\`\`\`${decode(res.questions[0].charAt(0).toUpperCase() + res.questions[0].slice(1))} \`\`\`\n**But** \`\`\`\n\n${decode(res.questions[1].charAt(0).toUpperCase() + res.questions[1].slice(1))}\`\`\``,
+                        title: '🤔・Will you press the button?',
+                        desc: '\'\'\'${decode(res.questions[0].charAt(0).toUpperCase() + res.questions[0].slice(1))} \'\'\'\n**But** \'\'\'\n\n${decode(res.questions[1].charAt(0).toUpperCase() + res.questions[1].slice(1))}\'\'\'',
                         components: [{ type: 1, components: [btn, btn2] }],
                         type: 'editreply'
                     }, interaction)

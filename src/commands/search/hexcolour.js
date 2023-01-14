@@ -6,7 +6,7 @@ module.exports = async (client, interaction, args) => {
     const color = interaction.options.getString('color');
 
     const { data } = await axios.get(
-        `https://some-random-api.ml/canvas/rgb?hex=${color}`
+        'https://some-random-api.ml/canvas/rgb?hex=${color}'
     ).catch(e => {
         return client.errNormal({ 
             error: "Color not found!",
@@ -15,18 +15,18 @@ module.exports = async (client, interaction, args) => {
     });
 
     client.embed({
-        title: `🎨・Color info`,
-        image: `https://some-random-api.ml/canvas/colorviewer?hex=${color}`,
-        color: `#${color}`,
+        title: '🎨・Color info',
+        image: 'https://some-random-api.ml/canvas/colorviewer?hex=${color}',
+        color: '#${color}',
         fields: [
             {
                 name: "Hex",
-                value: `#${color}`,
+                value: '#${color}',
                 inline: true,
             },
             {
                 name: "RGB",
-                value: `${data.r}, ${data.g}, ${data.b}`,
+                value: '${data.r}, ${data.g}, ${data.b}',
                 inline: true,
             }
         ],

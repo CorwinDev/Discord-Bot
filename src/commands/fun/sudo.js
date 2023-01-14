@@ -14,7 +14,7 @@ module.exports = async (client, interaction, args) => {
         _webhook.delete();
 
         client.succNormal({
-            text: `The sudo message was sent!`, 
+            text: 'The sudo message was sent!', 
             type: 'ephemeraledit' 
         }, interaction);
     });

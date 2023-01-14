@@ -13,43 +13,43 @@ module.exports = async (client, interaction, args) => {
     });
 
     client.embed({
-        title: `🎶・${r.name}`,
+        title: '🎶・${r.name}',
         thumbnail: r.thumbnail,
         url: r.url,
         fields: [
             {
                 name: "💬┇Name",
-                value: `${r.name}`,
+                value: '${r.name}',
                 inline: true,
             },
             {
                 name: "🎤┇Artist",
-                value: `${r.artist}`,
+                value: '${r.artist}',
                 inline: true,
             },
             {
                 name: "📁┇Album",
-                value: `${r.album}`,
+                value: '${r.album}',
                 inline: true,
             },
             {
                 name: "🎼┇Length",
-                value: `${r.length}`,
+                value: '${r.length}',
                 inline: true,
             },
             {
                 name: "🏷️┇Genre",
-                value: `${r.genre}`,
+                value: '${r.genre}',
                 inline: true,
             },
             {
                 name: "💵┇Price",
-                value: `${r.price}`,
+                value: '${r.price}',
                 inline: true,
             },
             {
                 name: "⏰┇Release Date",
-                value: `<t:${Math.round(new Date(r.release_date).getTime() / 1000)}>`,
+                value: '<t:${Math.round(new Date(r.release_date).getTime() / 1000)}>',
                 inline: true,
             },
         ],

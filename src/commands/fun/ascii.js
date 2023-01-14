@@ -14,7 +14,7 @@ module.exports = async (client, interaction, args) => {
 
         client.embed({
             title: '💬・Ascii',
-            desc: `\`\`\` ${data} \`\`\``,
+            desc: '\'\'\' ${data} \'\'\'',
             type: 'editreply',
         }, interaction);
     })

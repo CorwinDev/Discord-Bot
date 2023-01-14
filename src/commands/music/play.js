@@ -2,20 +2,20 @@ const Discord = require('discord.js');
 
 module.exports = async (client, interaction, args) => {
     if (!interaction.member.voice.channel) return client.errNormal({
-        error: `Tu n'es pas dans un canal vocal !`,
+        error: 'Tu n'es pas dans un canal vocal !',
         type: 'editreply'
     }, interaction);
 
     let channel = interaction.member.voice ? interaction.member.voice.channel : null;
     if (!channel) return client.errNormal({
-        error: `Le canal n'existe pas !`,
+        error: 'Le canal n'existe pas !',
         type: 'editreply'
     }, interaction);
 
     let player = client.player.players.get(interaction.guild.id);
 
     if (player && (channel.id !== player?.voiceChannel)) return client.errNormal({
-        error: `Tu n'es pas dans le même canal vocal que moi !`,
+        error: 'Tu n'es pas dans le même canal vocal que moi !',
         type: 'editreply'
     }, interaction);
 
@@ -28,7 +28,7 @@ module.exports = async (client, interaction, args) => {
         });
 
         if (!channel.joinable) return client.errNormal({
-            error: `Ce canal n'est pas joignable`,
+            error: 'Ce canal n'est pas joignable',
             type: 'editreply'
         }, interaction);
         player.connect()
@@ -46,7 +46,7 @@ module.exports = async (client, interaction, args) => {
     var query = interaction.options.getString('song');
 
     client.simpleEmbed({
-        desc: `🔎┆Recherche...`,
+        desc: '🔎┆Recherche...',
         type: 'editreply'
     }, interaction)
 
@@ -55,7 +55,7 @@ module.exports = async (client, interaction, args) => {
     if (res.loadType === 'LOAD_FAILED') {
         if (!player.queue.current) player.destroy();
         return client.errNormal({
-            error: `Oups ! il y a eu une erreur pour obtenir la musique\NRéessaye d'ici quelques minutes`,
+            error: 'Oups ! il y a eu une erreur pour obtenir la musique\NRéessaye d'ici quelques minutes',
             type: 'editreply'
         }, interaction);
     }
@@ -64,7 +64,7 @@ module.exports = async (client, interaction, args) => {
         case 'NO_MATCHES': {
             if (!player.queue.current) player.destroy()
             await client.errNormal({
-                error: `Aucune musique trouvée`,
+                error: 'Aucune musique trouvée',
                 type: 'editreply'
             }, interaction);
             break;
@@ -79,24 +79,24 @@ module.exports = async (client, interaction, args) => {
             }
             else {
                 client.embed({
-                    title: `${client.emotes.normal.music}・${track.title}`,
+                    title: '${client.emotes.normal.music}・${track.title}',
                     url: track.uri,
-                    desc: `La musique a été ajoutée à la file !`,
+                    desc: 'La musique a été ajoutée à la file !',
                     thumbnail: track.thumbnail,
                     fields: [
                         {
-                            name: `👤┆Demandée par`,
-                            value: `${track.requester}`,
+                            name: '👤┆Demandée par',
+                            value: '${track.requester}',
                             inline: true
                         },
                         {
-                            name: `${client.emotes.normal.clock}┆Terminée à`,
-                            value: `<t:${((Date.now() / 1000) + (track.duration / 1000)).toFixed(0)}:f>`,
+                            name: '${client.emotes.normal.clock}┆Terminée à',
+                            value: '<t:${((Date.now() / 1000) + (track.duration / 1000)).toFixed(0)}:f>',
                             inline: true
                         },
                         {
-                            name: `🎬┆Auteur`,
-                            value: `${track.author}`,
+                            name: '🎬┆Auteur',
+                            value: '${track.author}',
                             inline: true
                         }
                     ],
@@ -158,16 +158,16 @@ module.exports = async (client, interaction, args) => {
 
             const results = res.tracks
                 .slice(0, max)
-                .map((track, index) => `**[#${++index}]**┆${track.title.length >= 45 ? `${track.title.slice(0, 45)}...` : track.title}`)
+                .map((track, index) => '**[#${++index}]**┆${track.title.length >= 45 ? '${track.title.slice(0, 45)}...' : track.title}')
                 .join('\n');
 
             client.embed({
-                title: `🔍・Résultats de recherche`,
+                title: '🔍・Résultats de recherche',
                 desc: results,
                 fields: [
                     {
-                        name: `❓┆Annuler recherche ?`,
-                        value: `Clique sur \`annuler\` pour arrêter la recherche`,
+                        name: '❓┆Annuler recherche ?',
+                        value: 'Clique sur \'annuler\' pour arrêter la recherche',
                         inline: true
                     }
                 ],
@@ -180,7 +180,7 @@ module.exports = async (client, interaction, args) => {
             } catch (e) {
                 if (!player.queue.current) player.destroy();
                 return client.errNormal({
-                    error: `Tu n'as fournis aucune sélection`,
+                    error: 'Tu n'as fournis aucune sélection',
                     type: 'editreply'
                 }, interaction)
             }
@@ -196,7 +196,7 @@ module.exports = async (client, interaction, args) => {
 
             const index = Number(first) - 1;
             if (index < 0 || index > max - 1) return client.errNormal({
-                error: `Le nombre que vous avez fourni est trop petit ou trop grand (1-${max})`,
+                error: 'Le nombre que vous avez fourni est trop petit ou trop grand (1-${max})',
                 type: 'editreply'
             }, interaction)
 
@@ -208,24 +208,24 @@ module.exports = async (client, interaction, args) => {
             }
             else {
                 client.embed({
-                    title: `${client.emotes.normal.music}・${track.title}`,
+                    title: '${client.emotes.normal.music}・${track.title}',
                     url: track.uri,
-                    desc: `La musique a été ajoutée à la file !`,
+                    desc: 'La musique a été ajoutée à la file !',
                     thumbnail: track.thumbnail,
                     fields: [
                         {
-                            name: `👤┆Demandée par`,
-                            value: `${track.requester}`,
+                            name: '👤┆Demandée par',
+                            value: '${track.requester}',
                             inline: true
                         },
                         {
-                            name: `${client.emotes.normal.clock}┆Terminée à`,
-                            value: `<t:${((Date.now() / 1000) + (track.duration / 1000)).toFixed(0)}:f>`,
+                            name: '${client.emotes.normal.clock}┆Terminée à',
+                            value: '<t:${((Date.now() / 1000) + (track.duration / 1000)).toFixed(0)}:f>',
                             inline: true
                         },
                         {
-                            name: `🎬┆Auteur`,
-                            value: `${track.author}`,
+                            name: '🎬┆Auteur',
+                            value: '${track.author}',
                             inline: true
                         }
                     ],

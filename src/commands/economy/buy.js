@@ -6,7 +6,7 @@ const store = require("../../database/models/economyStore");
 module.exports = async (client, interaction, args) => {
     const storeData = await store.find({ Guild: interaction.guild.id });
     if (storeData.length == 0) return client.errNormal({
-        error: `No shop found in this server`,
+        error: 'No shop found in this server',
         type: 'editreply'
     }, interaction);
 
@@ -16,18 +16,18 @@ module.exports = async (client, interaction, args) => {
         const role = interaction.guild.roles.cache.get(d.Role);
 
         const generated = {
-            label: `${role.name.substr(0, 24)}.`,
+            label: '${role.name.substr(0, 24)}.',
             value: role.id,
         }
 
         return labels.push(generated);
     });
 
-    const select = await client.generateSelect(`economyBuy`, labels);
+    const select = await client.generateSelect('economyBuy', labels);
 
     client.embed({
-        title: `🛒・${interaction.guild.name}'s Store`,
-        desc: `Choose a item from the menu to buy`,
+        title: '🛒・${interaction.guild.name}'s Store',
+        desc: 'Choose a item from the menu to buy',
         components: [select],
         type: 'editreply'
     }, interaction)
@@ -45,7 +45,7 @@ module.exports = async (client, interaction, args) => {
         const checkStore = await store.findOne({ Guild: i.guild.id, Role: role });
 
         if (parseInt(checkStore.Amount) > parseInt(data.Money)) return client.errNormal({
-            error: `You don't have enough money to buy this!`,
+            error: 'You don't have enough money to buy this!',
             type: 'editreply'
         }, i);
 
@@ -54,11 +54,11 @@ module.exports = async (client, interaction, args) => {
         buyPerson.roles.add(role);
 
         client.succNormal({
-            text: `The purchase has been successfully completed`,
+            text: 'The purchase has been successfully completed',
             fields: [
                 {
-                    name: `📘┆Item`,
-                    value: `<@&${role}>`
+                    name: '📘┆Item',
+                    value: '<@&${role}>'
                 }
             ],
             type: 'editreply'

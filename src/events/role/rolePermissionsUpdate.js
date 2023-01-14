@@ -73,24 +73,24 @@ module.exports = async (client, role, oldPerms, newPerms) => {
     if (!logsChannel) return;
 
     client.embed({
-        title: `🧻・Role permissions updated`,
-        desc: `A role has been updated`,
+        title: '🧻・Role permissions updated',
+        desc: 'A role has been updated',
         fields: [
             {
-                name: `> Role`,
-                value: `- ${role}`
+                name: '> Role',
+                value: '- ${role}'
             },
             {
-                name: `> Before`,
-                value: `- ${perms[oldPerms]}`
+                name: '> Before',
+                value: '- ${perms[oldPerms]}'
             },
             {
-                name: `> After`,
-                value: `- ${perms[newPerms]}`
+                name: '> After',
+                value: '- ${perms[newPerms]}'
             },
             {
-                name: `> ID`,
-                value: `${role.id}`
+                name: '> ID',
+                value: '${role.id}'
             }
         ]
     }, logsChannel).catch(() => { })

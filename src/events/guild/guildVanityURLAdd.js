@@ -5,12 +5,12 @@ module.exports = async (client, guild, url) => {
     if (!logsChannel) return;
 
     client.embed({
-        title: `🔗・New Vanity URL`,
-        desc: `The server vanity URL has been updated`,
+        title: '🔗・New Vanity URL',
+        desc: 'The server vanity URL has been updated',
         fields: [
             {
-                name: `> URL`,
-                value: `- ${url}`
+                name: '> URL',
+                value: '- ${url}'
             },
         ]
     }, logsChannel).catch(() => { })

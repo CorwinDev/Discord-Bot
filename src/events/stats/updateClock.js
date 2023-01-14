@@ -17,8 +17,8 @@ module.exports = async (client) => {
                         const guild = client.guilds.cache.get(d.Guild);
 
                         var channelName = await client.getTemplate(guild);
-                        channelName = channelName.replace(`{emoji}`, "⏰")
-                        channelName = channelName.replace(`{name}`, `${timeNow}`)
+                        channelName = channelName.replace('{emoji}', "⏰")
+                        channelName = channelName.replace('{name}', '${timeNow}')
 
                         const channel = guild.channels.cache.get(d.Time)
                         await channel.setName(channelName)

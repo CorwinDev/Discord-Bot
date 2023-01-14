@@ -11,12 +11,12 @@ module.exports = (client, error) => {
     });
 
     let embed = new Discord.MessageEmbed()
-        .setTitle(`🚨・Voice error`)
-        .addField(`Error`, `\`\`\`${error.message}\`\`\``)
-        .addField(`Stack error`, `\`\`\`${error.stack}\`\`\``)
+        .setTitle('🚨・Voice error')
+        .addField('Error', '\'\'\'${error.message}\'\'\'')
+        .addField('Stack error', '\'\'\'${error.stack}\'\'\'')
         .setColor(client.config.colors.normal)
     errorlog.send({
-        username: `Bot errors`,
+        username: 'Bot errors',
         embeds: [embed],
 
     }).catch(error => { console.log(error) })

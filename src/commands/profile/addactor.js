@@ -9,7 +9,7 @@ module.exports = async (client, interaction, args) => {
 
             if (data && data.Actors) {
                 if (data.Actors.includes(actor)) {
-                    return client.errNormal({ error: `That actor is already exists in your database!`, type: 'editreply' }, interaction);
+                    return client.errNormal({ error: 'That actor is already exists in your database!', type: 'editreply' }, interaction);
                 }
                 data.Actors.push(actor);
                 data.save();
@@ -22,7 +22,7 @@ module.exports = async (client, interaction, args) => {
                 text: "Added your actor",
                 fields: [{
                     name: "👨‍🎤┆Actor",
-                    value: `\`\`\`${actor}\`\`\``,
+                    value: '\'\'\'${actor}\'\'\'',
                     inline: true,
                 }],
                 type: 'editreply'

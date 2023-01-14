@@ -30,8 +30,8 @@ module.exports = async (client, interaction, args) => {
 
                         if (interaction.channel.parentId == ticketCategory.id) {
                             client.simpleEmbed({
-                                desc: `Hey <@!${ticketData.creator}>, \n\nCan we still help you? \nIf there is no response within **24 hours**, we will close this ticket \n\n- Team ${interaction.guild.name}`,
-                                content: `<@!${ticketData.creator}>`,
+                                desc: 'Hey <@!${ticketData.creator}>, \n\nCan we still help you? \nIf there is no response within **24 hours**, we will close this ticket \n\n- Team ${interaction.guild.name}',
+                                content: '<@!${ticketData.creator}>',
                                 type: type
                             }, interaction)
                         }

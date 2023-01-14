@@ -27,16 +27,16 @@ module.exports = async (client, interaction, args) => {
             if (result2 > 7) {
 
                 client.succNormal({
-                    text: `Your crime went successfully!`,
+                    text: 'Your crime went successfully!',
                     fields: [
                         {
-                            name: `🦹‍♂️┆Crime`,
-                            value: `${replies[result]}`,
+                            name: '🦹‍♂️┆Crime',
+                            value: '${replies[result]}',
                             inline: true
                         },
                         {
-                            name: `${client.emotes.economy.coins}┆Earned`,
-                            value: `$${amount}`,
+                            name: '${client.emotes.economy.coins}┆Earned',
+                            value: '$${amount}',
                             inline: true
                         }
                     ],
@@ -59,7 +59,7 @@ module.exports = async (client, interaction, args) => {
                 }
             }
             else {
-                client.errNormal({ error: `You were caught carrying out the crime ${replies[result]}`, type: 'editreply' }, interaction);
+                client.errNormal({ error: 'You were caught carrying out the crime ${replies[result]}', type: 'editreply' }, interaction);
 
                 if (dataTime) {
                     dataTime.Crime = Date.now();

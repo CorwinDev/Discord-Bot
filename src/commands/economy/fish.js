@@ -54,7 +54,7 @@ module.exports = async (client, interaction, args) => {
             return client.errWait({ time: time, type: 'editreply' }, interaction);
         }
         else {
-            client.succNormal({ text: `You've fished and gotten a ${fishToWin}`, type: 'editreply' }, interaction);
+            client.succNormal({ text: 'You've fished and gotten a ${fishToWin}', type: 'editreply' }, interaction);
 
             if (userItems) {
                 userItems.FishingRodUsage += 1;

@@ -18,8 +18,8 @@ module.exports = async (client, interaction, args) => {
         );
 
     client.embed({
-        title: `${client.emotes.normal.error}・Remise à zero`,
-        desc: `Es-tu sûr de vouloir décimer ta famille ?`,
+        title: '${client.emotes.normal.error}・Remise à zero',
+        desc: 'Es-tu sûr de vouloir décimer ta famille ?',
         components: [row],
         type: 'editreply'
     }, interaction);
@@ -53,7 +53,7 @@ module.exports = async (client, interaction, args) => {
                     partner.save();
                 }
 
-                client.succNormal({ text: `Ta famille a été décimée !`, type: 'editreply' }, interaction);
+                client.succNormal({ text: 'Ta famille a été décimée !', type: 'editreply' }, interaction);
             }
 
             if (i.customId == "family_stop") {

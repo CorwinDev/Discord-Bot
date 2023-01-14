@@ -20,11 +20,11 @@ module.exports = async (client, interaction) => {
             else {
                 const cmd = client.commands.get(interaction.commandName);
                 if (interaction.options._subcommand !== null && interaction.options.getSubcommand() == "help") {
-                    const commands = interaction.client.commands.filter(x => x.data.name == interaction.commandName).map((x) => x.data.options.map((c) => '`' + c.name + '` - ' + c.description).join("\n"));
+                    const commands = interaction.client.commands.filter(x => x.data.name == interaction.commandName).map((x) => x.data.options.map((c) => ''' + c.name + '' - ' + c.description).join("\n"));
 
                     return client.embed({
-                        title: `❓・Help panel`,
-                        desc: `Get help with the commands in \`${interaction.commandName}\` \n\n${commands}`,
+                        title: '❓・Help panel',
+                        desc: 'Get help with the commands in \'${interaction.commandName}\' \n\n${commands}',
                         type: 'editreply'
                     }, interaction)
                 }
@@ -101,12 +101,12 @@ module.exports = async (client, interaction) => {
                 if (interaction.member.roles.cache.get(roleid)) {
                     interaction.guild.members.cache.get(interaction.user.id).roles.remove(roleid).catch(error => { })
 
-                    interaction.reply({ content: `<@&${roleid}> was removed!`, ephemeral: true });
+                    interaction.reply({ content: '<@&${roleid}> was removed!', ephemeral: true });
                 }
                 else {
                     interaction.guild.members.cache.get(interaction.user.id).roles.add(roleid).catch(error => { })
 
-                    interaction.reply({ content: `<@&${roleid}> was added!`, ephemeral: true });
+                    interaction.reply({ content: '<@&${roleid}> was added!', ephemeral: true });
                 }
             })
         }
@@ -125,7 +125,7 @@ module.exports = async (client, interaction) => {
                     for (let i = 0; i < interaction.values.length; i++) {
                         const [roleid] = data.Roles[interaction.values[i]];
 
-                        roles += `<@&${roleid}> `;
+                        roles += '<@&${roleid}> ';
 
                         if (interaction.member.roles.cache.get(roleid)) {
                             interaction.guild.members.cache
@@ -141,7 +141,7 @@ module.exports = async (client, interaction) => {
 
                         if ((i + 1) === interaction.values.length) {
                             interaction.reply({
-                                content: `I have updated the following roles for you: ${roles}`,
+                                content: 'I have updated the following roles for you: ${roles}',
                                 ephemeral: true,
                             });
                         }
@@ -153,31 +153,31 @@ module.exports = async (client, interaction) => {
 
     // Tickets
     if (interaction.customId == "Bot_openticket") {
-        return require(`${process.cwd()}/src/commands/tickets/create.js`)(client, interaction);
+        return require('${process.cwd()}/src/commands/tickets/create.js')(client, interaction);
     }
 
     if (interaction.customId == "Bot_closeticket") {
-        return require(`${process.cwd()}/src/commands/tickets/close.js`)(client, interaction);
+        return require('${process.cwd()}/src/commands/tickets/close.js')(client, interaction);
     }
 
     if (interaction.customId == "Bot_claimTicket") {
-        return require(`${process.cwd()}/src/commands/tickets/claim.js`)(client, interaction);
+        return require('${process.cwd()}/src/commands/tickets/claim.js')(client, interaction);
     }
 
     if (interaction.customId == "Bot_transcriptTicket") {
-        return require(`${process.cwd()}/src/commands/tickets/transcript.js`)(client, interaction);
+        return require('${process.cwd()}/src/commands/tickets/transcript.js')(client, interaction);
     }
 
     if (interaction.customId == "Bot_openTicket") {
-        return require(`${process.cwd()}/src/commands/tickets/open.js`)(client, interaction);
+        return require('${process.cwd()}/src/commands/tickets/open.js')(client, interaction);
     }
 
     if (interaction.customId == "Bot_deleteTicket") {
-        return require(`${process.cwd()}/src/commands/tickets/delete.js`)(client, interaction);
+        return require('${process.cwd()}/src/commands/tickets/delete.js')(client, interaction);
     }
 
     if (interaction.customId == "Bot_noticeTicket") {
-        return require(`${process.cwd()}/src/commands/tickets/notice.js`)(client, interaction);
+        return require('${process.cwd()}/src/commands/tickets/notice.js')(client, interaction);
     }
 }
 

@@ -9,60 +9,60 @@ module.exports = async (client, interaction, args) => {
     switch (option) {
         case "rock":
             if (result == "paper") return client.embed({
-                title: `${client.emotes.normal.paper}・Rock paper scissors`,
-                desc: `I have ${result}, I win!`,
+                title: '${client.emotes.normal.paper}・Rock paper scissors',
+                desc: 'I have ${result}, I win!',
                 type: 'editreply'
             }, interaction);
 
             if (result == "scissors") return client.embed({
-                title: `${client.emotes.normal.paper}・Rock paper scissors`,
-                desc: `I have ${result}, You win!`,
+                title: '${client.emotes.normal.paper}・Rock paper scissors',
+                desc: 'I have ${result}, You win!',
                 type: 'editreply'
             }, interaction);
 
             if (result == "rock") return client.embed({
-                title: `${client.emotes.normal.paper}・Rock paper scissors`,
-                desc: `I have ${result}, It's a draw!`,
+                title: '${client.emotes.normal.paper}・Rock paper scissors',
+                desc: 'I have ${result}, It's a draw!',
                 type: 'editreply'
             }, interaction);
             break;
 
         case "paper":
             if (result == "paper") return client.embed({
-                title: `${client.emotes.normal.paper}・Rock paper scissors`,
-                desc: `I have ${result}, It's a draw!`,
+                title: '${client.emotes.normal.paper}・Rock paper scissors',
+                desc: 'I have ${result}, It's a draw!',
                 type: 'editreply'
             }, interaction);
 
             if (result == "scissors") return client.embed({
-                title: `${client.emotes.normal.paper}・Rock paper scissors`,
-                desc: `I have ${result}, I win!`,
+                title: '${client.emotes.normal.paper}・Rock paper scissors',
+                desc: 'I have ${result}, I win!',
                 type: 'editreply'
             }, interaction);
 
             if (result == "rock") return client.embed({
-                title: `${client.emotes.normal.paper}・Rock paper scissors`,
-                desc: `I have ${result}, You win!`,
+                title: '${client.emotes.normal.paper}・Rock paper scissors',
+                desc: 'I have ${result}, You win!',
                 type: 'editreply'
             }, interaction);
             break;
 
         case "scissors":
             if (result == "paper") return client.embed({
-                title: `${client.emotes.normal.paper}・Rock paper scissors`,
-                desc: `I have ${result}, You win!`,
+                title: '${client.emotes.normal.paper}・Rock paper scissors',
+                desc: 'I have ${result}, You win!',
                 type: 'editreply'
             }, interaction);
 
             if (result == "scissors") return client.embed({
-                title: `${client.emotes.normal.paper}・Rock paper scissors`,
-                desc: `I have ${result}, It's a draw!`,
+                title: '${client.emotes.normal.paper}・Rock paper scissors',
+                desc: 'I have ${result}, It's a draw!',
                 type: 'editreply'
             }, interaction);
 
             if (result == "rock") return client.embed({
-                title: `${client.emotes.normal.paper}・Rock paper scissors`,
-                desc: `I have ${result}, I win!`,
+                title: '${client.emotes.normal.paper}・Rock paper scissors',
+                desc: 'I have ${result}, I win!',
                 type: 'editreply'
             }, interaction);
             break;

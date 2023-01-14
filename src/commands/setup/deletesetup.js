@@ -41,7 +41,7 @@ module.exports = async (client, interaction, args) => {
 
     options[choice].findOneAndDelete({ Guild: interaction.guild.id }).then(() => {
         client.succNormal({ 
-            text: `Setup successfully deleted!`,
+            text: 'Setup successfully deleted!',
             type: 'editreply'
         }, interaction);
     })

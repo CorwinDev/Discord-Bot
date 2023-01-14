@@ -22,13 +22,13 @@ module.exports = async (client, interaction, args) => {
             }, channel)
 
             client.succNormal({
-                text: `Le panel des Tickets a été configuré avec succès !`,
+                text: 'Le panel des Tickets a été configuré avec succès !',
                 type: 'editreply'
             }, interaction);
         }
         else {
             client.errNormal({
-                error: `Configure les tickets en premier !`,
+                error: 'Configure les tickets en premier !',
                 type: 'editreply'
             }, interaction);
         }

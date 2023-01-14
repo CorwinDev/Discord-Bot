@@ -15,32 +15,32 @@ module.exports = async (client) => {
                             .setPlaceholder('❌┆Nothing selected')
                             .addOptions([
                                 {
-                                    label: `Support server`,
-                                    description: `Join the suppport server`,
+                                    label: 'Support server',
+                                    description: 'Join the suppport server',
                                     emoji: "❓",
                                     value: "support-linkspanel",
                                 },
                                 {
-                                    label: `Invite Bot`,
-                                    description: `Invite Bot to your server`,
+                                    label: 'Invite Bot',
+                                    description: 'Invite Bot to your server',
                                     emoji: "📨",
                                     value: "invite-linkspanel",
                                 },
                                 {
-                                    label: `Invite Bot 2`,
-                                    description: `Invite Bot 2 to your server`,
+                                    label: 'Invite Bot 2',
+                                    description: 'Invite Bot 2 to your server',
                                     emoji: "📕",
                                     value: "invite2-linkspanel",
                                 },
                                 {
-                                    label: `Community Server`,
-                                    description: `Join the community server!`,
+                                    label: 'Community Server',
+                                    description: 'Join the community server!',
                                     emoji: "🌍",
                                     value: "community-linkspanel",
                                 },
                                 {
-                                    label: `Top.gg`,
-                                    description: `Show the top.gg link`,
+                                    label: 'Top.gg',
+                                    description: 'Show the top.gg link',
                                     emoji: "📃",
                                     value: "top.gg-linkspanel",
                                 },
@@ -56,8 +56,8 @@ module.exports = async (client) => {
                     );
 
                 client.embed({
-                    title: `❓・Support Server`,
-                    desc: `Make your server even better with Bot!`,
+                    title: '❓・Support Server',
+                    desc: 'Make your server even better with Bot!',
                     image: "https://cdn.discordapp.com/attachments/843487478881976381/874694194474668052/Bot_banner_invite.jpg",
                     url: client.config.discord.serverInvite,
                     components: [row2, row],

@@ -21,17 +21,17 @@ module.exports = async (client) => {
         client.addMoney(message, message.author, amount);
 
         client.embed({
-          title: `💬・Guess the word`,
-          desc: `The word is guessed and has a value of $${amount}`,
+          title: '💬・Guess the word',
+          desc: 'The word is guessed and has a value of $${amount}',
           fields: [
             {
-              name: `👤┇Guessed by`,
-              value: `${message.author} (${message.author.tag})`,
+              name: '👤┇Guessed by',
+              value: '${message.author} (${message.author.tag})',
               inline: true
             },
             {
-              name: `💬┇Correct word`,
-              value: `${data.Word}`,
+              name: '💬┇Correct word',
+              value: '${data.Word}',
               inline: true
             }
           ]
@@ -41,12 +41,12 @@ module.exports = async (client) => {
         data.save();
 
         return client.embed({
-          title: `💬・Guess the word`,
-          desc: `Put the letters in the right position!`,
+          title: '💬・Guess the word',
+          desc: 'Put the letters in the right position!',
           fields: [
             {
-              name: `🔀┆Word`,
-              value: `${shuffled.toLowerCase()}`
+              name: '🔀┆Word',
+              value: '${shuffled.toLowerCase()}'
             }
           ]
         }, message.channel)

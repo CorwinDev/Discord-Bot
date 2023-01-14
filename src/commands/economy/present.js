@@ -20,11 +20,11 @@ module.exports = async (client, interaction, args) => {
             let amount = Math.floor(Math.random() * 1000) + 1;
 
             client.succNormal({
-                text: `You've collected your present reward!`,
+                text: 'You've collected your present reward!',
                 fields: [
                     {
-                        name: `${client.emotes.economy.coins}┆Amount`,
-                        value: `$${amount}`,
+                        name: '${client.emotes.economy.coins}┆Amount',
+                        value: '$${amount}',
                         inline: true
                     }
                 ],

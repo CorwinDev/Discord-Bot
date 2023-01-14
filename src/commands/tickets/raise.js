@@ -35,7 +35,7 @@ module.exports = async (client, interaction, args) => {
                     });
 
                     return client.simpleEmbed({
-                        desc: `Ticket raised by <@!${interaction.user.id}>`,
+                        desc: 'Ticket raised by <@!${interaction.user.id}>',
                         type: 'editreply'
                     }, interaction)
                 }

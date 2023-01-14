@@ -102,7 +102,7 @@ module.exports = {
     );
 
     let embed = new Discord.MessageEmbed().setDescription(
-      `Please select some options`
+      'Please select some options'
     );
 
     interaction.editReply({ embeds: [embed], components: [row, row2] });
@@ -117,7 +117,7 @@ module.exports = {
         i.deferUpdate();
         const embedData = i.message.embeds[0];
         if (embedData.description == "Please select some options") {
-          embed.setDescription(``);
+          embed.setDescription('');
         }
 
         if (i.values == "title_embed") {
@@ -137,7 +137,7 @@ module.exports = {
                   message.delete({ timeout: 1000 });
                   collected.first().delete({ timeout: 1000 });
 
-                  embed.setTitle(`${collected.first().content}`);
+                  embed.setTitle('${collected.first().content}');
                   await interaction.editReply({ embeds: [embed] });
                 });
             });
@@ -160,7 +160,7 @@ module.exports = {
                   message.delete({ timeout: 1000 });
                   collected.first().delete({ timeout: 1000 });
 
-                  embed.setDescription(`${collected.first().content}`);
+                  embed.setDescription('${collected.first().content}');
                   await interaction.editReply({ embeds: [embed] });
                 });
             });
@@ -184,7 +184,7 @@ module.exports = {
                   collected.first().delete({ timeout: 1000 });
 
                   embed.setAuthor({
-                    name: `${collected.first().content}`,
+                    name: '${collected.first().content}',
                     iconURL: interaction.guild.iconURL({ size: 1024 }),
                   });
                   await interaction.editReply({ embeds: [embed] });
@@ -210,7 +210,7 @@ module.exports = {
                   collected.first().delete({ timeout: 1000 });
 
                   embed.setFooter({
-                    text: `${collected.first().content}`,
+                    text: '${collected.first().content}',
                   });
                   await interaction.editReply({ embeds: [embed] });
                 });
@@ -241,7 +241,7 @@ module.exports = {
                     return interaction.channel.send({
                       content: "Incorrect thumbnail link!",
                     });
-                  embed.setThumbnail(`${collected.first().content}`);
+                  embed.setThumbnail('${collected.first().content}');
                   await interaction.editReply({ embeds: [embed] });
                 });
             });
@@ -276,7 +276,7 @@ module.exports = {
                     return interaction.channel.send({
                       content: "Incorrect image link!",
                     });
-                  embed.setImage(`${collected.first().content}`);
+                  embed.setImage('${collected.first().content}');
                   await interaction.editReply({ embeds: [embed] });
                 });
             });
@@ -306,7 +306,7 @@ module.exports = {
                     return interaction.channel.send({
                       content: "Incorrect url!",
                     });
-                  embed.setURL(`${collected.first().content}`);
+                  embed.setURL('${collected.first().content}');
                   await interaction.editReply({ embeds: [embed] });
                 });
             });
@@ -329,7 +329,7 @@ module.exports = {
                   message.delete({ timeout: 1000 });
                   collected.first().delete({ timeout: 1000 });
 
-                  embed.setColor(`${collected.first().content}`);
+                  embed.setColor('${collected.first().content}');
                   await interaction.editReply({ embeds: [embed] });
                 });
             });
@@ -339,7 +339,7 @@ module.exports = {
         const channel = interaction.options.getChannel("channel");
         if (!channel)
           return client.errNormal(
-            { error: `Channel not found` },
+            { error: 'Channel not found' },
             collected.first().channel
           );
 
@@ -352,7 +352,7 @@ module.exports = {
 
             client.succNormal(
               {
-                text: `Embed successfully sent in ${channel}`,
+                text: 'Embed successfully sent in ${channel}',
                 components: [],
                 type: "editreply",
               },

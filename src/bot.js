@@ -76,10 +76,10 @@ client.player = new Manager({
     },
 })
 
-const events = fs.readdirSync(`./src/events/music`).filter(files => files.endsWith('.js'));
+const events = fs.readdirSync('./src/events/music').filter(files => files.endsWith('.js'));
 
 for (const file of events) {
-    const event = require(`./events/music/${file}`);
+    const event = require('./events/music/${file}');
     client.player.on(file.split(".")[0], event.bind(null, client)).setMaxListeners(0);
 };
 
@@ -109,8 +109,8 @@ const warnLogs = new Discord.WebhookClient({
 
 // Load handlers
 fs.readdirSync('./src/handlers').forEach((dir) => {
-    fs.readdirSync(`./src/handlers/${dir}`).forEach((handler) => {
-        require(`./handlers/${dir}/${handler}`)(client);
+    fs.readdirSync('./src/handlers/${dir}').forEach((handler) => {
+        require('./handlers/${dir}/${handler}')(client);
     });
 });
 
@@ -118,9 +118,9 @@ client.login(process.env.DISCORD_TOKEN);
 
 process.on('unhandledRejection', error => {
     const embed = new Discord.MessageEmbed()
-        .setTitle(`🚨・Unhandled promise rejection`)
-        .addField(`Error`, `\`\`\`${error}\`\`\``)
-        .addField(`Stack error`, `\`\`\`${error.stack}\`\`\``)
+        .setTitle('🚨・Unhandled promise rejection')
+        .addField('Error', '\'\'\'${error}\'\'\'')
+        .addField('Stack error', '\'\'\'${error.stack}\'\'\'')
         .setColor(client.config.colors.normal)
     consoleLogs.send({
         username: 'Bot Logs',
@@ -132,8 +132,8 @@ process.on('unhandledRejection', error => {
 
 process.on('warning', warn => {
     const embed = new Discord.MessageEmbed()
-        .setTitle(`🚨・New warning found`)
-        .addField(`Warn`, `\`\`\`${warn}\`\`\``)
+        .setTitle('🚨・New warning found')
+        .addField('Warn', '\'\'\'${warn}\'\'\'')
         .setColor(client.config.colors.normal)
     warnLogs.send({
         username: 'Bot Logs',
@@ -143,9 +143,9 @@ process.on('warning', warn => {
 
 client.on('shardError', error => {
     const embed = new Discord.MessageEmbed()
-        .setTitle(`🚨・A websocket connection encountered an error`)
-        .addField(`Error`, `\`\`\`${error}\`\`\``)
-        .addField(`Stack error`, `\`\`\`${error.stack}\`\`\``)
+        .setTitle('🚨・A websocket connection encountered an error')
+        .addField('Error', '\'\'\'${error}\'\'\'')
+        .addField('Stack error', '\'\'\'${error.stack}\'\'\'')
         .setColor(client.config.colors.normal)
     consoleLogs.send({
         username: 'Bot Logs',
@@ -158,6 +158,6 @@ const express = require('express');
 const app = express();
 const port = 8080;
 app.all('/', (req, res) => {
-  res.send(`Express Activated`);
+  res.send('Express Activated');
   res.end();
 });

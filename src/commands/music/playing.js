@@ -7,12 +7,12 @@ module.exports = async (client, interaction, args) => {
 
     const channel = interaction.member.voice.channel;
     if (!channel) return client.errNormal({
-        error: `Tu n'es pas dans un canal vocal !`,
+        error: 'Tu n'es pas dans un canal vocal !',
         type: 'editreply'
     }, interaction);
 
     if (player && (channel.id !== player?.voiceChannel)) return client.errNormal({
-        error: `Tu n'es pas dans le même canal vocal que moi !`,
+        error: 'Tu n'es pas dans le même canal vocal que moi !',
         type: 'editreply'
     }, interaction);
 
@@ -27,30 +27,30 @@ module.exports = async (client, interaction, args) => {
     const bar = await createProgressBar(musicLength, nowTime);
 
     client.embed({
-        title: `${client.emotes.normal.music}・${player.queue.current.title}`,
+        title: '${client.emotes.normal.music}・${player.queue.current.title}',
         url: player.queue.current.uri,
         thumbnail: player.queue.current?.thumbnail ? player.queue.current?.thumbnail : '',
         fields: [
             {
-                name: `👤┆Demandée par`,
-                value: `${player.queue.current.requester}`,
+                name: '👤┆Demandée par',
+                value: '${player.queue.current.requester}',
                 inline: true
             },
             {
-                name: `${client.emotes.normal.clock}┆Durée`,
-                value: `<t:${((Date.now() / 1000) + (player.queue.current.duration / 1000) - nowTime / 1000).toFixed(0)}:f>`,
+                name: '${client.emotes.normal.clock}┆Durée',
+                value: '<t:${((Date.now() / 1000) + (player.queue.current.duration / 1000) - nowTime / 1000).toFixed(0)}:f>',
                 inline: true
             },
             {
-                name: `${client.emotes.normal.volume}┆Volume`,
-                value: `${player.volume}%`,
+                name: '${client.emotes.normal.volume}┆Volume',
+                value: '${player.volume}%',
                 inline: true
             },
             {
-                name: `${client.emotes.normal.music}┆Progression`,
-                value: `${new Date(player.position).toISOString().slice(11, 19)} ┃ ` +
+                name: '${client.emotes.normal.music}┆Progression',
+                value: '${new Date(player.position).toISOString().slice(11, 19)} ┃ ' +
                     bar +
-                    ` ┃ ${new Date(player.queue.current.duration).toISOString().slice(11, 19)}`,
+                    ' ┃ ${new Date(player.queue.current.duration).toISOString().slice(11, 19)}',
                 inline: false
             }
         ],

@@ -25,11 +25,11 @@ module.exports = async (client, guild) => {
                 const totalGuilds = results[0].reduce((acc, guildCount) => acc + guildCount, 0);
                 const embed = new Discord.MessageEmbed()
                     .setTitle("🟢・Added to a new server!")
-                    .addField("Total servers:", `${totalGuilds}`, true)
-                    .addField("Server name", `${guild.name}`, true)
-                    .addField("Server ID", `${guild.id}`, true)
-                    .addField("Server members", `${guild.memberCount}`, true)
-                    .addField("Server owner", `<@!${guild.ownerId}> (${guild.ownerId})`, true)
+                    .addField("Total servers:", '${totalGuilds}', true)
+                    .addField("Server name", '${guild.name}', true)
+                    .addField("Server ID", '${guild.id}', true)
+                    .addField("Server members", '${guild.memberCount}', true)
+                    .addField("Server owner", '<@!${guild.ownerId}> (${guild.ownerId})', true)
                     .setThumbnail("https://cdn.discordapp.com/attachments/843487478881976381/852419422392156210/BotPartyEmote.png")
                     .setColor(client.config.colors.normal)
                 webhookClient.send({
@@ -71,22 +71,22 @@ module.exports = async (client, guild) => {
             },
             {
                 name: "❓┆How to setup?",
-                value: 'The default prefix = \`/\` \nTo run setups with Bot run \`/setup\`',
+                value: 'The default prefix = \'/\' \nTo run setups with Bot run \'/setup\'',
                 inline: false,
             },
             {
                 name: "☎️┆I need help what now?",
-                value: `You can DM <@784649693363306518> for support or joining the [[Support server]](${client.config.discord.serverInvite})`,
+                value: 'You can DM <@784649693363306518> for support or joining the [[Support server]](${client.config.discord.serverInvite})',
                 inline: false,
             },
             {
                 name: "💻┆What are the commands?",
-                value: 'See that list of commands by doing \`/help\`',
+                value: 'See that list of commands by doing \'/help\'',
                 inline: false,
             },
             {
                 name: "📨┆Invite the bot!",
-                value: `Invite the bot to click [[HERE]](${client.config.discord.botInvite})`,
+                value: 'Invite the bot to click [[HERE]](${client.config.discord.botInvite})',
                 inline: false,
             },
             ],

@@ -20,38 +20,38 @@ module.exports = async (client, interaction, args) => {
                     if (interaction.channel.parentId == ticketCategory.id) {
 
                         client.embed({
-                            desc: `${client.emotes.animated.loading}・Loading information...`,
+                            desc: '${client.emotes.animated.loading}・Loading information...',
                             type: 'editreply'
                         }, interaction).then((msg) => {
 
                             client.transcript(interaction, interaction.channel);
 
                             return client.embed({
-                                title: `ℹ・Information`,
+                                title: 'ℹ・Information',
                                 fields: [
                                     {
                                         name: "Ticket name",
-                                        value: `\`${interaction.channel.name}\``,
+                                        value: '\'${interaction.channel.name}\'',
                                         inline: true,
                                     },
                                     {
                                         name: "Channel id",
-                                        value: `\`${interaction.channel.id}\``,
+                                        value: '\'${interaction.channel.id}\'',
                                         inline: true,
                                     },
                                     {
                                         name: "Creator",
-                                        value: `<@!${ticketData.creator}>`,
+                                        value: '<@!${ticketData.creator}>',
                                         inline: true,
                                     },
                                     {
                                         name: "Claimed by",
-                                        value: `<@!${ticketData.claimed}>`,
+                                        value: '<@!${ticketData.claimed}>',
                                         inline: true,
                                     },
                                     {
                                         name: "Ticket id",
-                                        value: `${ticketData.TicketID}`,
+                                        value: '${ticketData.TicketID}',
                                         inline: true,
                                     },
                                 ],

@@ -11,7 +11,7 @@ module.exports = async (client, interaction, args) => {
             if (data) {
                 if (data.Channels.includes(channel.id)) {
                     return client.errNormal({
-                        error: `Ce canal ${channel} est déjà dans la base de données!`,
+                        error: 'Ce canal ${channel} est déjà dans la base de données!',
                         type: 'editreply'
                     }, interaction);
                 }
@@ -28,11 +28,11 @@ module.exports = async (client, interaction, args) => {
         })
 
         client.succNormal({
-            text: `Le Canal a été ajouté à la liste blanche !`,
+            text: 'Le Canal a été ajouté à la liste blanche !',
             fields: [
                 {
-                    name: `<:uo_BotEvent:1015565719330627584> ┆ Canal`,
-                    value: `${channel} (${channel.name})`
+                    name: '<:uo_BotEvent:1015565719330627584> ┆ Canal',
+                    value: '${channel} (${channel.name})'
                 }
             ],
             type: 'editreply'
@@ -43,7 +43,7 @@ module.exports = async (client, interaction, args) => {
             if (data) {
                 if (!data.Channels.includes(channel.id)) {
                     return client.errNormal({
-                        error: `Ce canal ${channel} n'existe pas dans la base de données !`,
+                        error: 'Ce canal ${channel} n'existe pas dans la base de données !',
                         type: 'editreply'
                     }, interaction);
                 }
@@ -57,11 +57,11 @@ module.exports = async (client, interaction, args) => {
 
 
                 client.succNormal({
-                    text: `Le canal a été retiré de la liste blanche !`,
+                    text: 'Le canal a été retiré de la liste blanche !',
                     fields: [
                         {
-                            name: `<:uo_BotEvent:1015565719330627584> ┆ Canal`,
-                            value: `${channel} (${channel.name})`
+                            name: '<:uo_BotEvent:1015565719330627584> ┆ Canal',
+                            value: '${channel} (${channel.name})'
                         }
                     ],
                     type: 'editreply'
@@ -69,7 +69,7 @@ module.exports = async (client, interaction, args) => {
             }
             else {
                 return client.errNormal({
-                    error: `Ce serveur ne possède pas de données !`,
+                    error: 'Ce serveur ne possède pas de données !',
                     type: 'editreply'
                 }, interaction);
             }

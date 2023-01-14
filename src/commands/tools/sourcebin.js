@@ -9,8 +9,8 @@ module.exports = async (client, interaction, args) => {
     const bin = await sourcebin.create(
         [
             {
-                content: `${code}`,
-                language: `${language}`,
+                content: '${code}',
+                language: '${language}',
             },
         ],
         {
@@ -19,11 +19,11 @@ module.exports = async (client, interaction, args) => {
         },
     ).then(value => {
         client.succNormal({
-            text: `Your code has been posted!`,
+            text: 'Your code has been posted!',
             fields: [
                 {
-                    name: `🔗┇Link`,
-                    value: `[Click here to see your code](${value.url})`,
+                    name: '🔗┇Link',
+                    value: '[Click here to see your code](${value.url})',
                     inline: true,
                 }
             ],

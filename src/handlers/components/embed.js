@@ -35,9 +35,9 @@ module.exports = (client) => {
         content: content,
         components: components
     }, interaction) {
-        embed.setTitle(`${client.emotes.normal.error}・Erreur!`)
-        embed.setDescription(`Quelque chose a mal tourné !`)
-        embed.addField("💬┇Commentaire", `\`\`\`${error}\`\`\``)
+        embed.setTitle('${client.emotes.normal.error}・Erreur!')
+        embed.setDescription('Quelque chose a mal tourné !')
+        embed.addField("💬┇Commentaire", '\'\'\'${error}\'\'\'')
         embed.setColor(client.config.colors.error)
 
         return client.sendEmbed({
@@ -56,9 +56,9 @@ module.exports = (client) => {
         content: content,
         components: components
     }, interaction) {
-        embed.setTitle(`${client.emotes.normal.error}・Erreur!`)
-        embed.setDescription(`Tu n'as pas fourni de variables correctes`)
-        embed.addField("💬┇Variables requises", `\`\`\`${usage}\`\`\``)
+        embed.setTitle('${client.emotes.normal.error}・Erreur!')
+        embed.setDescription('Tu n'as pas fourni de variables correctes')
+        embed.addField("💬┇Variables requises", '\'\'\'${usage}\'\'\'')
         embed.setColor(client.config.colors.error)
 
         return client.sendEmbed({
@@ -78,9 +78,9 @@ module.exports = (client) => {
         content: content,
         components: components
     }, interaction) {
-        embed.setTitle(`${client.emotes.normal.error}・Erreurr!`)
-        embed.setDescription(`Tu n'as pas suffisamment de permissions`)
-        embed.addField("🔑┇Permission requise", `\`\`\`${perms}\`\`\``)
+        embed.setTitle('${client.emotes.normal.error}・Erreurr!')
+        embed.setDescription('Tu n'as pas suffisamment de permissions')
+        embed.addField("🔑┇Permission requise", '\'\'\'${perms}\'\'\'')
         embed.setColor(client.config.colors.error)
 
         return client.sendEmbed({
@@ -100,9 +100,9 @@ module.exports = (client) => {
         content: content,
         components: components
     }, interaction) {
-        embed.setTitle(`${client.emotes.normal.error}・Erreur!`)
-        embed.setDescription(`Je n'ai pas les bonnes permissions`)
-        embed.addField("🔑┇Permission requise", `\`\`\`${perms}\`\`\``)
+        embed.setTitle('${client.emotes.normal.error}・Erreur!')
+        embed.setDescription('Je n'ai pas les bonnes permissions')
+        embed.addField("🔑┇Permission requise", '\'\'\'${perms}\'\'\'')
         embed.setColor(client.config.colors.error)
 
         return client.sendEmbed({
@@ -122,9 +122,9 @@ module.exports = (client) => {
         content: content,
         components: components
     }, interaction) {
-        embed.setTitle(`${client.emotes.normal.error}・Erreur!`)
-        embed.setDescription(`Tu as déjà fais cette commande une fois`)
-        embed.addField("⏰┇Essaye à nouveau", `<t:${time}:f>`)
+        embed.setTitle('${client.emotes.normal.error}・Erreur!')
+        embed.setDescription('Tu as déjà fais cette commande une fois')
+        embed.addField("⏰┇Essaye à nouveau", '<t:${time}:f>')
         embed.setColor(client.config.colors.error)
 
         return client.sendEmbed({
@@ -148,8 +148,8 @@ module.exports = (client) => {
         content: content,
         components: components
     }, interaction) {
-        embed.setTitle(`${client.emotes.normal.check}・Succès!`)
-        embed.setDescription(`${text}`)
+        embed.setTitle('${client.emotes.normal.check}・Succès!')
+        embed.setDescription('${text}')
         embed.setColor(client.config.colors.succes)
 
         if (fields) embed.addFields(fields);

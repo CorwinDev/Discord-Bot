@@ -4,7 +4,7 @@ const ms = require('ms');
 let timeLength = 50000;
 module.exports = async (client, interaction, args) => {
 
-    let list = `Because we were lost, we had to go back the way we came.
+    let list = 'Because we were lost, we had to go back the way we came.
     He's in a boy band which doesn't make much sense for a snake.
     A dead duck doesn't fly backward.
     Don't piss in my garden and tell me you're trying to help my plants grow.
@@ -53,7 +53,7 @@ module.exports = async (client, interaction, args) => {
     Erin accidentally created a new universe.
     David subscribes to the "stuff your tent into the bag" strategy over nicely folding it.
     The waitress was not amused when he ordered green eggs and ham.
-    All you need to do is pick up the pen and begin.`;
+    All you need to do is pick up the pen and begin.';
 
     async function start() {
         const inGame = new Set();
@@ -71,12 +71,12 @@ module.exports = async (client, interaction, args) => {
             let ogSentence = sentenceList.toLowerCase().replace("    ", "");
 
             ogSentence.split(' ').forEach(argument => {
-                sentence += '`' + argument.split('').join(' ') + '` '
+                sentence += ''' + argument.split('').join(' ') + '' '
             });
 
             await client.embed({
-                title: `💬・FastType`,
-                desc: `Type the below in ${ms(timeLength, { long: true })}! \n${sentence}`,
+                title: '💬・FastType',
+                desc: 'Type the below in ${ms(timeLength, { long: true })}! \n${sentence}',
                 type: 'editreply'
             }, interaction)
 
@@ -107,7 +107,7 @@ module.exports = async (client, interaction, args) => {
             } else if (msg.first().content.toLowerCase().trim() === ogSentence.toLowerCase()) {
                 msg.first().delete();
                 client.succNormal({
-                    text: `You did it in ${ms(Date.now() - time, { long: true })}!`,
+                    text: 'You did it in ${ms(Date.now() - time, { long: true })}!',
                     type: 'editreply'
                 }, interaction)
                 break;
@@ -121,7 +121,7 @@ module.exports = async (client, interaction, args) => {
             }
 
             if (i === 25) {
-                client.succNormal({ text: `You did it!`, type: 'editreply' }, interaction)
+                client.succNormal({ text: 'You did it!', type: 'editreply' }, interaction)
                 inGame.delete(interaction.user.id)
                 break
             }

@@ -14,11 +14,11 @@ module.exports = (client) => {
         });
 
         client.succNormal({
-            text: `Channel has been set up successfully!`,
+            text: 'Channel has been set up successfully!',
             fields: [
                 {
-                    name: `📘┆Channel`,
-                    value: `${channel} (${channel.id})`
+                    name: '📘┆Channel',
+                    value: '${channel} (${channel.id})'
                 }
             ],
             type: 'editreply'
@@ -40,11 +40,11 @@ module.exports = (client) => {
         });
 
         client.succNormal({
-            text: `Role has been set up successfully!`,
+            text: 'Role has been set up successfully!',
             fields: [
                 {
-                    name: `📘┆Role`,
-                    value: `${role} (${role.id})`
+                    name: '📘┆Role',
+                    value: '${role} (${role.id})'
                 }
             ],
             type: 'editreply'

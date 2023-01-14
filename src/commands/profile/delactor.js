@@ -10,7 +10,7 @@ module.exports = async (client, interaction, args) => {
 
             if (data && data.Actors) {
                 if (!data.Actors.includes(actor)) {
-                    return client.errNormal({ error: `That actor doesn't exist in the database!`, type: 'editreply' }, interaction);
+                    return client.errNormal({ error: 'That actor doesn't exist in the database!', type: 'editreply' }, interaction);
                 }
 
                 const filtered = data.Actors.filter((target) => target !== actor);
@@ -23,7 +23,7 @@ module.exports = async (client, interaction, args) => {
                 text: "Removed your actor",
                 fields: [{
                     name: "👨‍🎤┆Actor",
-                    value: `\`\`\`${actor}\`\`\``,
+                    value: '\'\'\'${actor}\'\'\'',
                     inline: true,
                 }],
                 type: 'editreply'

@@ -40,7 +40,7 @@ module.exports = async (client, interaction, args) => {
                             ticketData.save();
 
                             return client.simpleEmbed({
-                                desc: `This ticket can now be claimed again!`,
+                                desc: 'This ticket can now be claimed again!',
                                 type: 'editreply'
                             }, interaction)
 

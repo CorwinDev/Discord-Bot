@@ -34,9 +34,9 @@ module.exports = async (client, interaction, args) => {
     const convertedDay = suffixes(day);
     const convertedMonth = months[month];
     if (convertedDay == 1) {
-        const birthdayString = `1er ${convertedMonth}`;
+        const birthdayString = '1er ${convertedMonth}';
     } else {
-        const birthdayString = `${convertedDay} ${convertedMonth}`;
+        const birthdayString = '${convertedDay} ${convertedMonth}';
     }
     
     Schema.findOne({ Guild: interaction.guild.id, User: interaction.user.id }, async (err, data) => {
@@ -54,11 +54,11 @@ module.exports = async (client, interaction, args) => {
     })
 
     client.succNormal({ 
-        text: `Ton anniversaire a bien été configuré avec succès !`,
+        text: 'Ton anniversaire a bien été configuré avec succès !',
         fields: [
             {
-                name: `${client.emotes.normal.birthday} ┆ Anniversaire`,
-                value: `${birthdayString}`
+                name: '${client.emotes.normal.birthday} ┆ Anniversaire',
+                value: '${birthdayString}'
             }
         ],
         type: 'editreply'
@@ -71,9 +71,9 @@ function suffixes(number) {
     const lastChar = converted.charAt(converted.length - 1);
 
     return lastChar == "1" ?
-        `${converted}st` : lastChar == "2" ?
-            `${converted}nd` : lastChar == '3'
-                ? `${converted}rd` : `${converted}th`
+        '${converted}st' : lastChar == "2" ?
+            '${converted}nd' : lastChar == '3'
+                ? '${converted}rd' : '${converted}th'
 }
 
  

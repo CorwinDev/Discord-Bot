@@ -29,13 +29,13 @@ module.exports = async (client, interaction, args) => {
 
                     if (interaction.channel.parentId == ticketCategory.id) {
                         return client.simpleEmbed({
-                            desc: `${client.emotes.animated.loading}・Transcript saving...`,
+                            desc: '${client.emotes.animated.loading}・Transcript saving...',
                             type: type
                         }, interaction).then(async (editMsg) => {
                             client.transcript(interaction, interaction.channel).then(() => {
 
                                 return client.simpleEmbed({
-                                    desc: `Transcript saved`,
+                                    desc: 'Transcript saved',
                                     type: 'editreply'
                                 }, interaction)
 

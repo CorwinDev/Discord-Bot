@@ -11,8 +11,8 @@ module.exports = async (client, interaction, args) => {
 
     if (choice == "counting") {
         client.embed({
-            title: `🔢・Counting`,
-            desc: `This is the start of counting! The first number is **1**`
+            title: '🔢・Counting',
+            desc: 'This is the start of counting! The first number is **1**'
         }, channel)
 
         client.createChannelSetup(Counting, channel, interaction)
@@ -20,8 +20,8 @@ module.exports = async (client, interaction, args) => {
 
     if (choice == "gtn") {
         client.embed({
-            title: `🔢・Guess the number`,
-            desc: `Guess the number between **1** and **10.000**!`
+            title: '🔢・Guess the number',
+            desc: 'Guess the number between **1** and **10.000**!'
         }, channel)
 
         client.createChannelSetup(GTN, channel, interaction)
@@ -32,12 +32,12 @@ module.exports = async (client, interaction, args) => {
         var shuffled = word.split('').sort(function () { return 0.5 - Math.random() }).join('');
 
         client.embed({
-            title: `💬・Guess the word`,
-            desc: `Put the letters in the right position!`,
+            title: '💬・Guess the word',
+            desc: 'Put the letters in the right position!',
             fields: [
                 {
-                    name: `🔀┆Word`,
-                    value: `${shuffled.toLowerCase()}`
+                    name: '🔀┆Word',
+                    value: '${shuffled.toLowerCase()}'
                 }
             ],
         }, channel)

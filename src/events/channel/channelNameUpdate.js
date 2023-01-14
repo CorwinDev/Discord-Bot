@@ -18,32 +18,32 @@ module.exports = async (client, channel, oldName, newName) => {
     if (!logsChannel) return;
 
     client.embed({
-        title: `🔧・Channel name adjusted`,
-        desc: `One channel name modified`,
+        title: '🔧・Channel name adjusted',
+        desc: 'One channel name modified',
         fields: [
             {
-                name: `> Old Name`,
-                value: `- ${oldName}`
+                name: '> Old Name',
+                value: '- ${oldName}'
             },
             {
-                name: `> New Name`,
-                value: `- ${newName}`
+                name: '> New Name',
+                value: '- ${newName}'
             },
             {
-                name: `> ID`,
-                value: `- ${channel.id}`
+                name: '> ID',
+                value: '- ${channel.id}'
             },
             {
-                name: `> Category`,
-                value: `- ${channel.parent}`
+                name: '> Category',
+                value: '- ${channel.parent}'
             },
             {
-                name: `> Channel`,
-                value: `- <#${channel.id}>`
+                name: '> Channel',
+                value: '- <#${channel.id}>'
             },
             {
-                name: `> Type`,
-                value: `- ${types[channel.type]}`
+                name: '> Type',
+                value: '- ${types[channel.type]}'
             }
         ]
     }, logsChannel).catch(() => { })

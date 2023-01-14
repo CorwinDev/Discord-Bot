@@ -16,11 +16,11 @@ module.exports = async (client, interaction, args) => {
             let userMessages = messages.filter((m) => m.author.id === member.id);
             await channel.bulkDelete(userMessages).then(() => {
                 client.succNormal({
-                    text: `I have successfully deleted the messages`,
+                    text: 'I have successfully deleted the messages',
                     fields: [
                         {
                             name: "👤┆User",
-                            value: `${member} (${member.tag})`,
+                            value: '${member} (${member.tag})',
                             inline: true
                         }
                     ],
@@ -34,7 +34,7 @@ module.exports = async (client, interaction, args) => {
 
     interaction.channel.bulkDelete(amount + 1).then(() => {
         client.succNormal({
-            text: `I have successfully deleted the messages`,
+            text: 'I have successfully deleted the messages',
             fields: [
                 {
                     name: "💬┆Amount",

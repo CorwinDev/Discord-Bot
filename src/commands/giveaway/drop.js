@@ -9,10 +9,10 @@ module.exports = async (client, interaction, args) => {
 
     client.giveawaysManager.start(gchannel, {
         duration: ms(duration),
-        prize: `${client.emotes.normal.gift} - ${prize}`,
+        prize: '${client.emotes.normal.gift} - ${prize}',
         lastChance: {
             enabled: true,
-            content: `${client.emotes.normal.error} **LAST CHANCE TO ENTER !** ${client.emotes.normal.error}`,
+            content: '${client.emotes.normal.error} **LAST CHANCE TO ENTER !** ${client.emotes.normal.error}',
             threshold: 5000,
             embedColor: '#FF0000'
         },
@@ -27,16 +27,16 @@ module.exports = async (client, interaction, args) => {
         thumbnail: interaction.guild.iconURL({ dynamic: true, size: 1024 }),
         isDrop: true,
         messages: {
-            giveaway: `${client.emotes.normal.party} **GIVEAWAY** ${client.emotes.normal.party}`,
-            giveawayEnded: `${client.emotes.normal.party} **GIVEAWAY ENDED** ${client.emotes.normal.party}`,
-            drawing: `${client.emotes.normal.clock} - Ends at: **{timestamp}**!`,
-            dropMessage: `Be the first to react with 🥳`,
+            giveaway: '${client.emotes.normal.party} **GIVEAWAY** ${client.emotes.normal.party}',
+            giveawayEnded: '${client.emotes.normal.party} **GIVEAWAY ENDED** ${client.emotes.normal.party}',
+            drawing: '${client.emotes.normal.clock} - Ends at: **{timestamp}**!',
+            dropMessage: 'Be the first to react with 🥳',
             winMessage: "Congratulations {winners}! You just won the **{this.prize}** !",
             embedFooter: "Giveaway!",
             embedColor: client.config.colors.normal,
             noWinner: "Giveaway canceled, not enough participants. \n",
-            hostedBy: `${client.emotes.normal.party} - Hosted by: {this.hostedBy}`,
-            winners: `🏆 - Winner(s)`,
+            hostedBy: '${client.emotes.normal.party} - Hosted by: {this.hostedBy}',
+            winners: '🏆 - Winner(s)',
             endedAt: "Ends at:",
             units: {
                 seconds: "seconds",
@@ -49,7 +49,7 @@ module.exports = async (client, interaction, args) => {
 
     }).then((gData) => {
         client.succNormal({ 
-            text: `Giveaway started in ${gchannel}`,
+            text: 'Giveaway started in ${gchannel}',
             type: 'ephemeraledit'
         }, interaction);
     });

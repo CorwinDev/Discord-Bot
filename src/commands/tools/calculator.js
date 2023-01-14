@@ -27,7 +27,7 @@ module.exports = async (client, interaction, args) => {
                 .setStyle(style)
                 .setDisabled();
             if (label === '\u200b') {
-                btn.setCustomId(`${getRandomString(10)}`);
+                btn.setCustomId('${getRandomString(10)}');
             } else {
                 btn.setCustomId('cal' + label);
             }
@@ -36,7 +36,7 @@ module.exports = async (client, interaction, args) => {
             const btn = new Discord.MessageButton().setLabel(label).setStyle(style);
             if (label === '\u200b') {
                 btn.setDisabled();
-                btn.setCustomId(`${getRandomString(10)}`);
+                btn.setCustomId('${getRandomString(10)}');
             } else {
                 btn.setCustomId('cal' + label);
             }
@@ -64,7 +64,7 @@ module.exports = async (client, interaction, args) => {
     };
 
     let str = ' ';
-    let stringify = '```\n' + str + '\n```';
+    let stringify = ''''\n' + str + '\n'''';
 
     const row = [];
     const rows = [];
@@ -114,14 +114,14 @@ module.exports = async (client, interaction, args) => {
     }
 
     await client.embed({
-        title: `🧮・Calculator`,
+        title: '🧮・Calculator',
         desc: stringify,
         components: row,
         type: 'editreply'
     }, interaction).then(msg => {
         function edit() {
             client.embed({
-                title: `🧮・Calculator`,
+                title: '🧮・Calculator',
                 desc: stringify,
                 components: row,
                 type: 'editreply'
@@ -140,7 +140,7 @@ module.exports = async (client, interaction, args) => {
             }
 
             client.embed({
-                title: `🧮・Calculator`,
+                title: '🧮・Calculator',
                 desc: stringify,
                 components: [rows],
                 type: 'editreply'
@@ -155,15 +155,15 @@ module.exports = async (client, interaction, args) => {
             btn.deferUpdate();
             if (btn.customId === 'calAC') {
                 str += ' ';
-                stringify = '```\n' + str + '\n```';
+                stringify = ''''\n' + str + '\n'''';
                 edit();
             } else if (btn.customId === 'calx') {
                 str += '*';
-                stringify = '```\n' + str + '\n```';
+                stringify = ''''\n' + str + '\n'''';
                 edit();
             } else if (btn.customId === 'cal÷') {
                 str += '/';
-                stringify = '```\n' + str + '\n```';
+                stringify = ''''\n' + str + '\n'''';
                 edit();
             } else if (btn.customId === 'cal⌫') {
                 if (str === ' ' || str === '' || str === null || str === undefined) {
@@ -172,7 +172,7 @@ module.exports = async (client, interaction, args) => {
                     str = str.split('');
                     str.pop();
                     str = str.join('');
-                    stringify = '```\n' + str + '\n```';
+                    stringify = ''''\n' + str + '\n'''';
                     edit();
                 }
             } else if (btn.customId === 'cal=') {
@@ -181,33 +181,33 @@ module.exports = async (client, interaction, args) => {
                 } else {
                     try {
                         str += ' = ' + math.evaluate(str);
-                        stringify = '```\n' + str + '\n```';
+                        stringify = ''''\n' + str + '\n'''';
                         edit();
                         str = ' ';
-                        stringify = '```\n' + str + '\n```';
+                        stringify = ''''\n' + str + '\n'''';
                     } catch (e) {
                         str = "The provided equation is invalid!";
-                        stringify = '```\n' + str + '\n```';
+                        stringify = ''''\n' + str + '\n'''';
                         edit();
                         str = ' ';
-                        stringify = '```\n' + str + '\n```';
+                        stringify = ''''\n' + str + '\n'''';
                     }
                 }
             } else if (btn.customId === 'calDC') {
                 str = "Calculator is disabled!";
-                stringify = '```\n' + str + '\n```';
+                stringify = ''''\n' + str + '\n'''';
                 edit();
                 calc.stop();
                 lock();
             } else {
                 str += btn.customId.replace('cal', '');
-                stringify = '```\n' + str + '\n```';
+                stringify = ''''\n' + str + '\n'''';
                 edit();
             }
         });
 
         client.embed({
-            title: `🧮・Calculator`,
+            title: '🧮・Calculator',
             desc: stringify,
             components: row,
             type: 'editreply'

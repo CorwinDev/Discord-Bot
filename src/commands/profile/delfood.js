@@ -10,7 +10,7 @@ module.exports = async (client, interaction, args) => {
 
             if (data && data.Food) {
                 if (!data.Food.includes(food)) {
-                    return client.errNormal({ error: `That food doesn't exist in the database!`, type: 'editreply' }, interaction);
+                    return client.errNormal({ error: 'That food doesn't exist in the database!', type: 'editreply' }, interaction);
                 }
 
                 const filtered = data.Food.filter((target) => target !== food);
@@ -23,7 +23,7 @@ module.exports = async (client, interaction, args) => {
                 text: "Removed your food",
                 fields: [{
                     name: "🥐┆Food",
-                    value: `\`\`\`${food}\`\`\``,
+                    value: '\'\'\'${food}\'\'\'',
                     inline: true,
                 }],
                 type: 'editreply'

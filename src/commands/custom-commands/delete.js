@@ -11,10 +11,10 @@ module.exports = async (client, interaction, args) => {
                 await interaction.guild.commands.delete(command.id);
 
                 client.succNormal({
-                    text: `The command has been deleted successfully`,
+                    text: 'The command has been deleted successfully',
                     fields: [{
                         name: "🔧┆Command",
-                        value: `\`\`\`${cmdname}\`\`\``,
+                        value: '\'\'\'${cmdname}\'\'\'',
                         inline: true,
                     }],
                     type: 'editreply'

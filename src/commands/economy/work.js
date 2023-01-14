@@ -21,19 +21,19 @@ module.exports = async (client, interaction, args) => {
       let result = Math.floor((Math.random() * replies.length));
       let amount = Math.floor(Math.random() * 100) + 1;
 
-      client.succNormal({ text: `You worked as a ${replies[result]} and earned: **${client.emotes.economy.coins} $${amount}**`, type: 'editreply' }, interaction);
+      client.succNormal({ text: 'You worked as a ${replies[result]} and earned: **${client.emotes.economy.coins} $${amount}**', type: 'editreply' }, interaction);
 
       client.succNormal({
-        text: `You've wokred and earned some money!`,
+        text: 'You've wokred and earned some money!',
         fields: [
           {
-            name: `🦹‍♂️┆Crime`,
-            value: `${replies[result]}`,
+            name: '🦹‍♂️┆Crime',
+            value: '${replies[result]}',
             inline: true
           },
           {
-            name: `${client.emotes.economy.coins}┆Earned`,
-            value: `$${amount}`,
+            name: '${client.emotes.economy.coins}┆Earned',
+            value: '$${amount}',
             inline: true
           }
         ],

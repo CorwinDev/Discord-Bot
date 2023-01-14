@@ -6,12 +6,12 @@ module.exports = async (client, interaction, args) => {
 
     client.giveawaysManager.delete(messageID).then(() => {
         client.succNormal({
-            text: `The giveaway has been successfully removed`,
+            text: 'The giveaway has been successfully removed',
             type: 'editreply'
         }, interaction);
     }).catch((err) => {
         client.errNormal({
-            error: `I can't find the giveaway for ${messageID}!`,
+            error: 'I can't find the giveaway for ${messageID}!',
             type: 'editreply'
         }, interaction)
     });

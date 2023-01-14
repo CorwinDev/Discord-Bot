@@ -13,7 +13,7 @@ module.exports = async (client, interaction, args) => {
             let win = false;
 
             if (!money) return client.errUsage({ usage: "slots [amount]", type: 'editreply' }, interaction);
-            if (money > data.Money) return client.errNormal({ error: `Tu mises plus de ce que tu as !`, type: 'editreply' }, interaction);
+            if (money > data.Money) return client.errNormal({ error: 'Tu mises plus de ce que tu as !', type: 'editreply' }, interaction);
 
             let number = []
             for (i = 0; i < 3; i++) { number[i] = Math.floor(Math.random() * slotItems.length); }
@@ -30,24 +30,24 @@ module.exports = async (client, interaction, args) => {
                 .addComponents(
                     new Discord.MessageButton()
                         .setCustomId('slots_1')
-                        .setLabel(`${slotItems[number[0]]}`)
+                        .setLabel('${slotItems[number[0]]}')
                         .setStyle('PRIMARY'),
 
                     new Discord.MessageButton()
                         .setCustomId('slots_2')
-                        .setLabel(`${slotItems[number[1]]}`)
+                        .setLabel('${slotItems[number[1]]}')
                         .setStyle('PRIMARY'),
 
                     new Discord.MessageButton()
                         .setCustomId('slots_3')
-                        .setLabel(`${slotItems[number[2]]}`)
+                        .setLabel('${slotItems[number[2]]}')
                         .setStyle('PRIMARY'),
                 );
             if (win) {
 
                 client.embed({
-                    title: `🎰・Slots`,
-                    desc: `Tu as gagné **${client.emotes.economy.coins} $${money}**`,
+                    title: '🎰・Slots',
+                    desc: 'Tu as gagné **${client.emotes.economy.coins} $${money}**',
                     color: client.config.colors.succes, 
                     components: [row], 
                     type: 'editreply'
@@ -58,8 +58,8 @@ module.exports = async (client, interaction, args) => {
             } else {
 
                 client.embed({
-                    title: `🎰・Slots`,
-                    desc: `Tu as perdu **${client.emotes.economy.coins} $${money}**`,
+                    title: '🎰・Slots',
+                    desc: 'Tu as perdu **${client.emotes.economy.coins} $${money}**',
                     components: [row], 
                     color: client.config.colors.error, 
                     type: 'editreply'
@@ -70,7 +70,7 @@ module.exports = async (client, interaction, args) => {
             }
         }
         else {
-            client.errNormal({ error: `Tu n'as pas assez de ${client.emotes.economy.coins}!`, type: 'editreply' }, interaction);
+            client.errNormal({ error: 'Tu n'as pas assez de ${client.emotes.economy.coins}!', type: 'editreply' }, interaction);
         }
     })
 }

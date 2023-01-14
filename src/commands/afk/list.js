@@ -10,9 +10,9 @@ module.exports = async (client, interaction, args) => {
         type: 'editreply'
     }, interaction);
 
-    const lb = rawboard.map(e => `<@!${e.User}> - **Raison** ${e.Message}`);
+    const lb = rawboard.map(e => '<@!${e.User}> - **Raison** ${e.Message}');
 
-    await client.createLeaderboard(`・AFK users - ${interaction.guild.name}`, lb, interaction);
+    await client.createLeaderboard('・AFK users - ${interaction.guild.name}', lb, interaction);
 }
 
  

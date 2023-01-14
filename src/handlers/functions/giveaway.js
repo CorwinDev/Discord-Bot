@@ -41,10 +41,10 @@ module.exports = (client) => {
 
     client.giveawaysManager = manager;
 
-    const events = fs.readdirSync(`./src/events/giveaway`).filter(files => files.endsWith('.js'));
+    const events = fs.readdirSync('./src/events/giveaway').filter(files => files.endsWith('.js'));
 
     for (const file of events) {
-        const event = require(`../../events/giveaway/${file}`);
+        const event = require('../../events/giveaway/${file}');
         manager.on(file.split(".")[0], event.bind(null, client)).setMaxListeners(0);
     };
 }

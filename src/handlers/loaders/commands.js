@@ -12,16 +12,16 @@ module.exports = (client) => {
 
     const commands = [];
 
-    // if (client.shard.ids[0] === 0) console.log(chalk.blue(chalk.bold(`System`)), (chalk.white(`>>`)) (chalk.green(`Loading commands`)), (chalk.white(`...`)))
-    // if (client.shard.ids[0] === 0) console.log(`\u001b[0m`);
+    // if (client.shard.ids[0] === 0) console.log(chalk.blue(chalk.bold('System')), (chalk.white('>>')) (chalk.green('Loading commands')), (chalk.white('...')))
+    // if (client.shard.ids[0] === 0) console.log('\u001b[0m');
 
     fs.readdirSync('./src/interactions').forEach(dirs => {
-        const commandFiles = fs.readdirSync(`./src/interactions/${dirs}`).filter(files => files.endsWith('.js'));
+        const commandFiles = fs.readdirSync('./src/interactions/${dirs}').filter(files => files.endsWith('.js'));
 
-        // if (client.shard.ids[0] === 0) console.log(chalk.blue(chalk.bold(`System`)), (chalk.white(`>>`)), chalk.red(`${commandFiles.length}`), (chalk.green(`commands of`)), chalk.red(`${dirs}`), (chalk.green(`loaded`)));
+        // if (client.shard.ids[0] === 0) console.log(chalk.blue(chalk.bold('System')), (chalk.white('>>')), chalk.red('${commandFiles.length}'), (chalk.green('commands of')), chalk.red('${dirs}'), (chalk.green('loaded')));
 
         for (const file of commandFiles) {
-            const command = require(`${process.cwd()}/src/interactions/${dirs}/${file}`);
+            const command = require('${process.cwd()}/src/interactions/${dirs}/${file}');
             client.commands.set(command.data.name, command);
             commands.push(command.data);
         };
@@ -32,7 +32,7 @@ module.exports = (client) => {
     (async () => {
         try {
             const embed = new Discord.MessageEmbed()
-                .setDescription(`Raffraichissement des commandes slash.`)
+                .setDescription('Raffraichissement des commandes slash.')
                 .setColor(client.config.colors.normal)
             interactionLogs.send({
                 username: 'Logs bot',
@@ -45,7 +45,7 @@ module.exports = (client) => {
             )
 
             const embedFinal = new Discord.MessageEmbed()
-                .setDescription(`Raffraichissement avec succès de ${commands.length} commandes slash.`)
+                .setDescription('Raffraichissement avec succès de ${commands.length} commandes slash.')
                 .setColor(client.config.colors.normal)
             interactionLogs.send({
                 username: 'Logs bot',

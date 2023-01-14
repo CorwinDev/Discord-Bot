@@ -10,7 +10,7 @@ module.exports = async (client, interaction, args) => {
                 User: interaction.user.id
             }).save();
 
-            client.succNormal({ text: "Profile created! View your profile by running \`profile\`", type: "editreply" }, interaction);
+            client.succNormal({ text: "Profile created! View your profile by running \'profile\'", type: "editreply" }, interaction);
         }
     })
 }

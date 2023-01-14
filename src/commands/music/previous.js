@@ -5,12 +5,12 @@ module.exports = async (client, interaction, args) => {
 
     const channel = interaction.member.voice.channel;
     if (!channel) return client.errNormal({
-        error: `Tu n'es pas dans un canal vocal !`,
+        error: 'Tu n'es pas dans un canal vocal !',
         type: 'editreply'
     }, interaction);
 
     if (player && (channel.id !== player?.voiceChannel)) return client.errNormal({
-        error: `Tu n'es pas dans le même canal vocal que moi !`,
+        error: 'Tu n'es pas dans le même canal vocal que moi !',
         type: 'editreply'
     }, interaction);
 
@@ -45,24 +45,24 @@ module.exports = async (client, interaction, args) => {
         );
 
     client.embed({
-        title: `${client.emotes.normal.music}・${track.title}`,
+        title: '${client.emotes.normal.music}・${track.title}',
         url: track.uri,
-        desc: `La musique a été lancée dans <#${player.voiceChannel}>!`,
+        desc: 'La musique a été lancée dans <#${player.voiceChannel}>!',
         thumbnail: track.thumbnail,
         fields: [
             {
-                name: `👤┆Demandée par`,
-                value: `${track.requester}`,
+                name: '👤┆Demandée par',
+                value: '${track.requester}',
                 inline: true
             },
             {
-                name: `${client.emotes.normal.clock}┆Ends at`,
-                value: `<t:${((Date.now() / 1000) + (track.duration / 1000)).toFixed(0)}:f>`,
+                name: '${client.emotes.normal.clock}┆Ends at',
+                value: '<t:${((Date.now() / 1000) + (track.duration / 1000)).toFixed(0)}:f>',
                 inline: true
             },
             {
-                name: `🎬┆Auteur`,
-                value: `${track.author}`,
+                name: '🎬┆Auteur',
+                value: '${track.author}',
                 inline: true
             }
         ],

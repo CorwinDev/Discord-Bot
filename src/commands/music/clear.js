@@ -5,12 +5,12 @@ module.exports = async (client, interaction, args) => {
 
     const channel = interaction.member.voice.channel;
     if (!channel) return client.errNormal({
-        error: `Tu n'es pas dans un canal vocal !`,
+        error: 'Tu n'es pas dans un canal vocal !',
         type: 'editreply'
     }, interaction);
 
     if (player && (channel.id !== player?.voiceChannel)) return client.errNormal({
-        error: `Tu n'es pas dans le même canal vocal que moi !`,
+        error: 'Tu n'es pas dans le même canal vocal que moi !',
         type: 'editreply'
     }, interaction);
 
@@ -20,7 +20,7 @@ module.exports = async (client, interaction, args) => {
     }, interaction);
 
     if (player.queue.size <= 1) return client.errNormal({
-        error: `Il n'y a plus qu'une musique dans la file !`,
+        error: 'Il n'y a plus qu'une musique dans la file !',
         type: 'editreply'
     }, interaction);
 

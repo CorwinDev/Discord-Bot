@@ -14,24 +14,24 @@ module.exports = async (client, messageDeleted) => {
         if (!logsChannel) return;
 
         client.embed({
-            title: `💬・Message deleted`,
-            desc: `A message has been deleted`,
+            title: '💬・Message deleted',
+            desc: 'A message has been deleted',
             fields: [
                 {
-                    name: `> Author`,
-                    value: `- ${messageDeleted.author} (${messageDeleted.author.tag})`
+                    name: '> Author',
+                    value: '- ${messageDeleted.author} (${messageDeleted.author.tag})'
                 },
                 {
-                    name: `> Date`,
-                    value: `- ${messageDeleted.createdAt}`
+                    name: '> Date',
+                    value: '- ${messageDeleted.createdAt}'
                 },
                 {
-                    name: `> Channel`,
-                    value: `- ${messageDeleted.channel} (${messageDeleted.channel.name})`
+                    name: '> Channel',
+                    value: '- ${messageDeleted.channel} (${messageDeleted.channel.name})'
                 },
                 {
-                    name: `> Message`,
-                    value: `\`\`\`${content.replace(/`/g, "'")}\`\`\``
+                    name: '> Message',
+                    value: '\'\'\'${content.replace(/'/g, "'")}\'\'\''
                 }
             ]
         }, logsChannel).catch(() => { })

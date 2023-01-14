@@ -5,12 +5,12 @@ module.exports = async (client, interaction, args) => {
     
     const channel = interaction.member.voice.channel;
     if (!channel) return client.errNormal({
-        error: `Tu n'es pas dans un canal vocal !`,
+        error: 'Tu n'es pas dans un canal vocal !',
         type: 'editreply'
     }, interaction);
 
     if (player && (channel.id !== player?.voiceChannel)) return client.errNormal({
-        error: `Tu n'es pas dans le même canal vocal que moi !`,
+        error: 'Tu n'es pas dans le même canal vocal que moi !',
         type: 'editreply'
     }, interaction);
 
@@ -27,7 +27,7 @@ module.exports = async (client, interaction, args) => {
     player.queue.shuffle()
 
     client.succNormal({
-        text: `La file a été mélangée`,
+        text: 'La file a été mélangée',
         type: 'editreply'
     }, interaction);
 }

@@ -9,8 +9,8 @@ module.exports = async (client, interaction, args) => {
 
     giphy.random(msg, function (err, res) {
         client.embed({
-            title: `📺・${msg} Gif`,
-            image: `https://media1.giphy.com/media/${res.data.id}/giphy.gif`,
+            title: '📺・${msg} Gif',
+            image: 'https://media1.giphy.com/media/${res.data.id}/giphy.gif',
             type: 'editreply'
         }, interaction);
     });

@@ -7,7 +7,7 @@ module.exports = async (client, interaction, args) => {
     const message = interaction.options.getString('message') || 'Not given';
 
     if (stars < 1 || stars > 5) return client.errNormal({
-        error: `Stars must be a minimum of 1 and a maximum of 5`,
+        error: 'Stars must be a minimum of 1 and a maximum of 5',
         type: 'editreply'
     }, interaction)
 
@@ -15,7 +15,7 @@ module.exports = async (client, interaction, args) => {
         if (data) {
             const channel = interaction.member.guild.channels.cache.get(data.Channel);
             if (!channel) return  client.errNormal({
-                error: `No review channel set! Do \`reviewchannel\``,
+                error: 'No review channel set! Do \'reviewchannel\'',
                 type: 'editreply'
             }, interaction);
             
@@ -28,13 +28,13 @@ module.exports = async (client, interaction, args) => {
                 text: "Your review has been successfully submitted",
                 fields: [
                     {
-                        name: `⭐┇Stars`,
-                        value: `${stars}`,
+                        name: '⭐┇Stars',
+                        value: '${stars}',
                         inline: true
                     },
                     {
-                        name: `📘┇Channel`,
-                        value: `<#${data.Channel}>`,
+                        name: '📘┇Channel',
+                        value: '<#${data.Channel}>',
                         inline: true
                     }
                 ],
@@ -42,17 +42,17 @@ module.exports = async (client, interaction, args) => {
             }, interaction);
 
             client.embed({
-                title: `Review・${interaction.user.tag}`,
-                desc: `A new review has been written!`,
+                title: 'Review・${interaction.user.tag}',
+                desc: 'A new review has been written!',
                 fields: [
                     {
                         name: "Stars",
-                        value: `${totalStars}`,
+                        value: '${totalStars}',
                         inline: true,
                     },
                     {
                         name: "Note",
-                        value: `${message}`,
+                        value: '${message}',
                         inline: true,
                     },
                 ]
@@ -61,7 +61,7 @@ module.exports = async (client, interaction, args) => {
         }
         else {
             client.errNormal({
-                error: `No review channel set! Do \`reviewchannel\``,
+                error: 'No review channel set! Do \'reviewchannel\'',
                 type: 'editreply'
             }, interaction)
         }

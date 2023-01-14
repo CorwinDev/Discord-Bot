@@ -67,10 +67,10 @@ module.exports = async (client, interaction, args) => {
             );
 
         client.embed({
-            title: `👰・Demande en mariage`,
-            desc: `${author} a demandé en mariage ${target} ! \n${target}, clique sur un des boutons`,
+            title: '👰・Demande en mariage',
+            desc: '${author} a demandé en mariage ${target} ! \n${target}, clique sur un des boutons',
             components: [row],
-            content: `${target}`,
+            content: '${target}',
             type: 'editreply'
         }, interaction);
 
@@ -108,10 +108,10 @@ module.exports = async (client, interaction, args) => {
                 })
 
                 client.embed({
-                    title: `👰・Demande en mariage acceptée`,
-                    desc: `${author} et ${target} sont maintenant mariés ! 👰🎉`,
+                    title: '👰・Demande en mariage acceptée',
+                    desc: '${author} et ${target} sont maintenant mariés ! 👰🎉',
                     components: [],
-                    content: `${target}`,
+                    content: '${target}',
                     //image('https://media4.giphy.com/media/JsETGYKdNZNuLioYe3/giphy.gif'),
                     type: 'editreply'
                 }, interaction);
@@ -119,19 +119,19 @@ module.exports = async (client, interaction, args) => {
 
             if (i.customId == "propose_deny") {
                 client.embed({
-                    title: `👰・Demande en mariage refusée`,
-                    desc: `${target} aime quelqu'un d'autre ou préfère resté seul et a décidé de ne pas se marier avec ${author}`,
+                    title: '👰・Demande en mariage refusée',
+                    desc: '${target} aime quelqu'un d'autre ou préfère resté seul et a décidé de ne pas se marier avec ${author}',
                     components: [],
-                    content: `${target}`,
+                    content: '${target}',
                     type: 'editreply'
                 }, interaction);
             }
         }).catch(() => {
             client.embed({
-                title: `👰・Demande en marriage refusée`,
-                desc: `${target} n'a pas répondu ! Le marriage est annulé`,
+                title: '👰・Demande en marriage refusée',
+                desc: '${target} n'a pas répondu ! Le marriage est annulé',
                 components: [],
-                content: `${target}`,
+                content: '${target}',
                 type: 'editreply'
             }, interaction);
         });

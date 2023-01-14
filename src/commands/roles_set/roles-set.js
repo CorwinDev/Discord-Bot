@@ -8,14 +8,14 @@ module.exports = async (client, interaction, args) => {
 
     for  
     let name = encodeURIComponent(interaction.options.getString('name'));
-    let link = `https://www.bing.com/search?q=${name}`;
+    let link = 'https://www.bing.com/search?q=${name}';
 
     client.succNormal({
-        text: `I have found the following for: \`${name}\``,
+        text: 'I have found the following for: \'${name}\'',
         fields: [
             {
-                name: `🔗┇Link`,
-                value: `[Click here to see the link](${link})`,
+                name: '🔗┇Link',
+                value: '[Click here to see the link](${link})',
                 inline: true,
             }
         ], type: 'editreply'

@@ -26,8 +26,8 @@ module.exports = async (client, interaction, args) => {
     })
 
     client.embed({
-        title: `🔨・Unwarn`,
-        desc: `You've been unwarned in **${interaction.guild.name}**`,
+        title: '🔨・Unwarn',
+        desc: 'You've been unwarned in **${interaction.guild.name}**',
         fields: [
             {
                 name: "👤┆Moderator",
@@ -39,11 +39,11 @@ module.exports = async (client, interaction, args) => {
 
     client.emit('warnRemove', member, interaction.user)
     client.succNormal({
-        text: `The user's warning has been successfully removed`,
+        text: 'The user's warning has been successfully removed',
         fields: [
             {
                 name: "👤┆User",
-                value: `${member}`,
+                value: '${member}',
                 inline: true
             }
         ],

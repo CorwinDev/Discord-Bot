@@ -40,8 +40,8 @@ module.exports = {
         })
 
         client.embed({
-            title: `🔨・Warn`,
-            desc: `You've been warned in **${interaction.guild.name}**`,
+            title: '🔨・Warn',
+            desc: 'You've been warned in **${interaction.guild.name}**',
             fields: [
                 {
                     name: "👤┆Moderator",
@@ -53,11 +53,11 @@ module.exports = {
 
         client.emit('warnAdd', member, interaction.user)
         client.succNormal({
-            text: `User has received a warning!`,
+            text: 'User has received a warning!',
             fields: [
                 {
                     name: "👤┆User",
-                    value: `${member}`,
+                    value: '${member}',
                     inline: true
                 }
             ],

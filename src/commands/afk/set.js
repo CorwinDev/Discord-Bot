@@ -3,12 +3,12 @@ const Discord = require('discord.js');
 const Schema = require('../../database/models/afk');
 
 module.exports = async (client, interaction, args) => {
-    const reason = interaction.options.getString('reason') || `Not specified`;
+    const reason = interaction.options.getString('reason') || 'Not specified';
 
     Schema.findOne({ Guild: interaction.guild.id, User: interaction.user.id }, async (err, data) => {
         if (data) {
             return client.errNormal({ 
-                error: `Tu es déjà afk!`,
+                error: 'Tu es déjà afk!',
                 type: 'editreply' 
             }, interaction);
         }
@@ -19,17 +19,17 @@ module.exports = async (client, interaction, args) => {
                 Message: reason
             }).save();
 
-            if (!interaction.member.displayName.includes(`[AFK] `)) {
-                interaction.member.setNickname(`[AFK] ` + interaction.member.displayName).catch(e => { });
+            if (!interaction.member.displayName.includes('[AFK] ')) {
+                interaction.member.setNickname('[AFK] ' + interaction.member.displayName).catch(e => { });
             }
 
             client.succNormal({ 
-                text: `Ton status AFK a été activé avec succès !`,
+                text: 'Ton status AFK a été activé avec succès !',
                 type: 'ephemeral'
             }, interaction);
 
             client.embed({ 
-                desc: `${interaction.user} est maintenant inactif! **Raison:** ${reason}` 
+                desc: '${interaction.user} est maintenant inactif! **Raison:** ${reason}' 
             }, interaction.channel)
         }
     })

@@ -5,7 +5,7 @@ module.exports = async (client, interaction, args) => {
 
     let countries = interaction.options.getString('country');
 
-    fetch(`https://covid19.mathdro.id/api/countries/${countries}`)
+    fetch('https://covid19.mathdro.id/api/countries/${countries}')
         .then(response => response.json())
         .then(data => {
             let confirmed = data.confirmed.value.toLocaleString()
@@ -14,27 +14,27 @@ module.exports = async (client, interaction, args) => {
 
 
             return client.embed({
-                title: `💉・COVID-19 - ${countries}`,
+                title: '💉・COVID-19 - ${countries}',
                 fields: [{
                     name: "✅┇Confirmed Cases",
-                    value: `${confirmed}`,
+                    value: '${confirmed}',
                     inline: true,
                 },
                 {
                     name: "🤗┇Recovered",
-                    value: `${recovered}`,
+                    value: '${recovered}',
                     inline: true,
                 },
                 {
                     name: "💀┇Deaths",
-                    value: `${deaths}`,
+                    value: '${deaths}',
                     inline: true,
                 },
                 ], type: 'editreply'
             }, interaction);
 
         }).catch(e => {
-            return client.errNormal({ error: `Invalid country provided!`, type: 'editreply' }, interaction);
+            return client.errNormal({ error: 'Invalid country provided!', type: 'editreply' }, interaction);
         })
 }
 

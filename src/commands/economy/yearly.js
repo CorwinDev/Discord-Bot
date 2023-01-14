@@ -18,16 +18,16 @@ module.exports = async (client, interaction, args) => {
     }
     else {
       client.succNormal({
-        text: `You've collected your yearly reward of **${client.emotes.economy.coins} $${amount}**`,
+        text: 'You've collected your yearly reward of **${client.emotes.economy.coins} $${amount}**',
         type: 'editreply'
       }, interaction);
 
       client.succNormal({
-        text: `You've collected your yearly reward!`,
+        text: 'You've collected your yearly reward!',
         fields: [
           {
-            name: `${client.emotes.economy.coins}┆Earned`,
-            value: `$${amount}`,
+            name: '${client.emotes.economy.coins}┆Earned',
+            value: '$${amount}',
             inline: true
           }
         ],

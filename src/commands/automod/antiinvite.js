@@ -18,7 +18,7 @@ module.exports = async (client, interaction, args) => {
     }
 
     client.succNormal({
-        text: `Le mode Anti Invite est maintenant **${boolean ? 'activé' : 'désactivé'}** dans ce serveur`,
+        text: 'Le mode Anti Invite est maintenant **${boolean ? 'activé' : 'désactivé'}** dans ce serveur',
         type: 'editreply'
     }, interaction);
 }

@@ -8,14 +8,14 @@ module.exports = async (client, interaction, args) => {
 
     try {
         const { data } = await axios.get(
-            `https://api.coingecko.com/api/v3/simple/price?ids=${coin}&vs_currencies=${currency}`
+            'https://api.coingecko.com/api/v3/simple/price?ids=${coin}&vs_currencies=${currency}'
         );
 
         if (!data[coin][currency]) return;
 
         client.embed({ 
-            title: `💹・Crypto stats`, 
-            desc: `The current price of **1 ${coin}** = **${data[coin][currency]} ${currency}**`, 
+            title: '💹・Crypto stats', 
+            desc: 'The current price of **1 ${coin}** = **${data[coin][currency]} ${currency}**', 
             type: 'editreply' 
         }, interaction);
     }

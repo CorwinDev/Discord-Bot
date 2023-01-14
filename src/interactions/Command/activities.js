@@ -37,7 +37,7 @@ module.exports = {
 
         const channel = interaction.member.voice.channel;
         if (!channel) return client.errNormal({ 
-            error: `You're not in a voice channel!`, 
+            error: 'You're not in a voice channel!', 
             type: 'editreply' 
         }, interaction);
 

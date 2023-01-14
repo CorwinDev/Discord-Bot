@@ -16,13 +16,13 @@ module.exports = async (client, interaction, args) => {
                 data.save();
 
                 client.succNormal({ 
-                    text: `Word skipped successfully!`,
+                    text: 'Word skipped successfully!',
                     type: 'ephemeral'
                 }, interaction);
 
                 return client.embed({ 
-                    title: `💬・Guess the word`, 
-                    desc: `Put the letters in the right position! \n\n🔀 ${shuffled.toLowerCase()}`,
+                    title: '💬・Guess the word', 
+                    desc: 'Put the letters in the right position! \n\n🔀 ${shuffled.toLowerCase()}',
                 }, interaction.channel)
             }
             catch { }

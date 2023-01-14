@@ -9,11 +9,11 @@ module.exports = async (client) => {
                 return data.ChannelTemplate;
             }
             else {
-                return `{emoji} {name}`
+                return '{emoji} {name}'
             }
         }
         catch {
-            return `{emoji} {name}`
+            return '{emoji} {name}'
         }
     }
 

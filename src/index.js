@@ -31,21 +31,12 @@ const manager = new Discord.ShardingManager('./src/bot.js', {
 // const poster = AutoPoster(process.env.TOPGG_TOKEN, manager);
 
 console.clear();
-<<<<<<< HEAD
-console.log(chalk.blue(chalk.bold('Systeme')), (chalk.white('>>')), (chalk.green('Démarrage')), (chalk.white('...')))
-console.log('\u001b[0m')
-console.log(chalk.red('${new Date()}'))
-console.log('\u001b[0m')
-console.log(chalk.blue(chalk.bold('Système')), (chalk.white('>>')), chalk.red('Version ${require('${process.cwd()}/package.json').version}'), (chalk.green('chargée')))
-console.log('\u001b[0m');
-=======
 console.log(chalk.blue(chalk.bold(`Systeme`)), (chalk.white(`>>`)), (chalk.green(`Démarrage`)), (chalk.white(`...`)))
 console.log(`\u001b[0m`)
 console.log(chalk.red(`${new Date()}`))
 console.log(`\u001b[0m`)
 console.log(chalk.blue(chalk.bold(`Système`)), (chalk.white(`>>`)), chalk.red(`Version ${require(`${process.cwd()}/package.json`).version}`), (chalk.green(`chargée`)))
 console.log(`\u001b[0m`);
->>>>>>> parent of eeca7a9 (Replaced ` by ')
 
 manager.on('shardCreate', shard => {
     let embed = new Discord.MessageEmbed()

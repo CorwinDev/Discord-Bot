@@ -50,7 +50,7 @@ module.exports = async (client, interaction, args) => {
             temp3 = [...temp3].join(", ");
             
         } else {
-            temp3 = `Cette personne n'a pas de frères et soeurs`
+            let temp3 = `Cette personne n'a pas de frères et soeurs`;
         };
     
         fields.push({

@@ -24,10 +24,9 @@ module.exports = async (client, interaction, args) => {
                 if (data2) {
                     client.embed({ title: `👪・Renié`, desc: `${author} a renié <@!${data.Parent}>`, type: 'editreply' }, interaction);
                     let tempArray = data.Parent;
-                    const index = tempArray.indexOf(target.id);
-                    const x = tempArray.splice(index, 1);
+                    let filteredArray = tempArray.filter(val => val !== target.id);
                     
-                    data.Parent = x;
+                    data.Parent = filteredArray;
                     data.save();
                 }
             })
@@ -47,10 +46,9 @@ module.exports = async (client, interaction, args) => {
                         Schema.findOne({ Guild: interaction.guild.id, Parent: author.id }, async (err, data) => {
                             if (data) {
                                 let tempArray = data.Parent;
-                                const index = tempArray.indexOf(target.id);
-                                const x = tempArray.splice(index, 1);
+                                let filteredArray = tempArray.filter(val => val !== target.id);
 
-                                data.Parent = x;
+                                data.Parent = filteredArray;
                                 data.save();
                             }
                         })

@@ -31,7 +31,7 @@ module.exports = async (client, interaction, args) => {
     const checkAdopt = await Schema.findOne({ Guild: interaction.guild.id, Children: target.id });
     if (checkAdopt) {
         return client.errNormal({
-            error: `Cette personne a été adoptée !`,
+            error: `Cette personne a déjà été adoptée par <@!${checkAdopt.Parent}>!`,
             type: 'editreply'
         }, interaction);
     }

@@ -3,10 +3,10 @@ const chalk = require('chalk');
 
 module.exports = async (client) => {
   const activities = [
-        { name: '${client.guilds.cache.size} Servers', type: 2 }, // LISTENING
-        { name: '${client.channels.cache.size} Channels', type: 0 }, // PLAYING
-        { name: '${client.users.cache.size} Users', type: 3 }, // WATCHING
-        { name: 'si Eliott fait pas bêtises', type: 3 },
+        { name: `${client.guilds.cache.size} Servers`, type: 2 }, // LISTENING
+        { name: `${client.channels.cache.size} Channels`, type: 0 }, // PLAYING
+        { name: `${client.users.cache.size} Users`, type: 3 }, // WATCHING
+        { name: `si Eliott fait pas bêtises`, type: 3 },
     ];
     const status = [
         'online',
@@ -31,7 +31,7 @@ module.exports = async (client) => {
     client.user.setActivity(activities[3])
   
     client.player.init(client.user.id);    
-  console.log(chalk.blue(chalk.bold('Systeme')), (chalk.white('>>')), chalk.red('${client.user.username}'), chalk.green('est prêt!'))
+  console.log(chalk.blue(chalk.bold(`System`)), (chalk.white(`>>`)), chalk.red(`${client.user.username}`), chalk.green(`is ready!`))
 }
 
  

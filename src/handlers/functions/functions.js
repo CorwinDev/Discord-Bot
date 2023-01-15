@@ -79,12 +79,12 @@ module.exports = async (client) => {
             const data = await Functions.findOne({ Guild: interaction.guild.id });
 
             if (data.Beta == true) {
-                return require('${process.cwd()}/src/commands/${interaction.commandName}/${interaction.options.getSubcommand()}-beta')(client, interaction, args).catch(err => {
+                return require(`${process.cwd()}/src/commands/${interaction.commandName}/${interaction.options.getSubcommand()}-beta`)(client, interaction, args).catch(err => {
                     client.emit("errorCreate", err, interaction.commandName, interaction)
                 })
             }
             else {
-                return require('${process.cwd()}/src/commands/${interaction.commandName}/${interaction.options.getSubcommand()}')(client, interaction, args).catch(err => {
+                return require(`${process.cwd()}/src/commands/${interaction.commandName}/${interaction.options.getSubcommand()}`)(client, interaction, args).catch(err => {
                     client.emit("errorCreate", err, interaction.commandName, interaction)
                 })
             }
@@ -112,8 +112,8 @@ module.exports = async (client) => {
         const result = current.join("\n");
 
         let embed = client.templateEmbed()
-            .setTitle('${title}')
-            .setDescription('${result.toString()}')
+            .setTitle(`${title}`)
+            .setDescription(`${result.toString()}`)
 
         const functiondata = await Functions.findOne({ Guild: interaction.guild.id });
 
@@ -196,7 +196,7 @@ module.exports = async (client) => {
     }
 
     client.generateActivity = function (id, name, channel, interaction) {
-        fetch('https://discord.com/api/v8/channels/${channel.id}/invites', {
+        fetch(`https://discord.com/api/v8/channels/${channel.id}/invites`, {
             method: "POST",
             body: JSON.stringify({
                 max_age: 86400,
@@ -207,13 +207,13 @@ module.exports = async (client) => {
                 validate: null
             }),
             headers: {
-                "Authorization": 'Bot ${client.token}',
+                "Authorization": `Bot ${client.token}`,
                 "Content-Type": "application/json"
             }
         }).then(res => res.json())
             .then(invite => {
                 if (invite.error || !invite.code) return client.errNormal({ 
-                    error: 'Could not start **${name}**!', 
+                    error: `Could not start **${name}**!`, 
                     type: 'editreply'
                 }, interaction);
 
@@ -221,13 +221,13 @@ module.exports = async (client) => {
                     .addComponents(
                         new Discord.MessageButton()
                             .setLabel("Start activity")
-                            .setURL('https://discord.gg/${invite.code}')
+                            .setURL(`https://discord.gg/${invite.code}`)
                             .setStyle("LINK"),
                     );
 
                 client.embed({
-                    title: '${client.emotes.normal.tv}・Activities',
-                    desc: 'Click on the **button** to start **${name}** in **${channel.name}**',
+                    title: `${client.emotes.normal.tv}・Activities`,
+                    desc: `Click on the **button** to start **${name}** in **${channel.name}**`,
                     components: [row],
                     type: 'editreply'
                 }, interaction)
@@ -235,7 +235,7 @@ module.exports = async (client) => {
             .catch(e => {
                 console.log(e)
                 client.errNormal({
-                    error: 'Could not start **${name}**!',
+                    error: `Could not start **${name}**!`,
                     type: 'editreply'
                 }, interaction);
             })

@@ -90,7 +90,7 @@ module.exports = async (client) => {
             }
         }
         catch {
-            return require(`${process.cwd()}/src/commands/${interaction.commandName}/${interaction.options.getSubcommand()}`)(client, interaction, args).catch(err => {
+            return require('${process.cwd()}/src/commands/${interaction.commandName}/${interaction.options.getSubcommand()}')(client, interaction, args).catch(err => {
                 client.emit("errorCreate", err, interaction.commandName, interaction)
             })
         }

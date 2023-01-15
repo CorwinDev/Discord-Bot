@@ -25,7 +25,7 @@ module.exports = async (client, interaction, args) => {
                     client.embed({ title: `👪・Renié`, desc: `${author} a renié <@!${data.Parent}>`, type: 'editreply' }, interaction);
                     let tempArray = data.Parent;
                     const index = tempArray.indexOf(target.id);
-                    const x = myArray.splice(index, 1);
+                    const x = tempArray.splice(index, 1);
                     
                     data.Parent = x;
                     data.save();
@@ -48,7 +48,7 @@ module.exports = async (client, interaction, args) => {
                             if (data) {
                                 let tempArray = data.Parent;
                                 const index = tempArray.indexOf(target.id);
-                                const x = myArray.splice(index, 1);
+                                const x = tempArray.splice(index, 1);
 
                                 data.Parent = x;
                                 data.save();

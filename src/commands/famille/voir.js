@@ -33,6 +33,7 @@ module.exports = async (client, interaction, args) => {
         ];
 
         // Check siblings
+        let temp3 = `Cette personne n'a pas de frères et soeurs`;
         if (data && data.Parent.length > 0) {
             let temp3 = new Set();
             const parentPromises = data.Parent.map(async parent => {
@@ -49,9 +50,7 @@ module.exports = async (client, interaction, args) => {
             } 
             temp3 = [...temp3].join(", ");
             
-        } else {
-            let temp3 = `Cette personne n'a pas de frères et soeurs`;
-        };
+        }
     
         fields.push({
             name: `Frères/Soeurs`,

@@ -23,8 +23,11 @@ module.exports = async (client, interaction, args) => {
             Schema.findOne({ Guild: interaction.guild.id, User: data.Parent }, async (err, data2) => {
                 if (data2) {
                     client.embed({ title: `👪・Renié`, desc: `${author} a renié <@!${data.Parent}>`, type: 'editreply' }, interaction);
-
-                    data.Parent = null;
+                    let tempArray = data.Parent;
+                    const index = tempArray.indexOf(target.id);
+                    const x = myArray.splice(index, 1);
+                    
+                    data.Parent = x;
                     data.save();
                 }
             })
@@ -43,7 +46,11 @@ module.exports = async (client, interaction, args) => {
 
                         Schema.findOne({ Guild: interaction.guild.id, Parent: author.id }, async (err, data) => {
                             if (data) {
-                                data.Parent = null;
+                                let tempArray = data.Parent;
+                                const index = tempArray.indexOf(target.id);
+                                const x = myArray.splice(index, 1);
+
+                                data.Parent = x;
                                 data.save();
                             }
                         })

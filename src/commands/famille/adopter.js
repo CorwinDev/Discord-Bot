@@ -31,7 +31,7 @@ module.exports = async (client, interaction, args) => {
     const checkAdopt = await Schema.findOne({ Guild: interaction.guild.id, Children: target.id });
     if (checkAdopt) {
         return client.errNormal({
-            error: `Cette personne a déjà été adoptée par <@!${checkAdopt.Parent}>!`,
+            error: `Cette personne a déjà été adoptée !`,
             type: 'editreply'
         }, interaction);
     }
@@ -95,7 +95,7 @@ module.exports = async (client, interaction, args) => {
                 title: `👪・Adoption acceptée`,
                 desc: `${author} est maintenant l'heureux parent de ${target}! 🎉`,
                 components: [],
-                image: 'https://media.tenor.com/OiIGlFVeuuwAAAAC/im-adopted-tom-hiddleston.gif',
+                image: 'https://media1.giphy.com/media/xUySTUZ8A2RJBQitEc/giphy.gif',
                 type: 'editreply'
             }, interaction);
         }
@@ -103,7 +103,7 @@ module.exports = async (client, interaction, args) => {
         if (i.customId == "adopt_deny") {
             client.embed({
                 title: `👪・Adoption refusée`,
-                desc: `${target} ne veut pas être adopté.e ${author}`,
+                desc: `${target} ne veut pas être adopté.e par ${author}`,
                 components: [],
                 image: 'https://media0.giphy.com/media/ISOckXUybVfQ4/giphy.gif',
                 type: 'editreply'

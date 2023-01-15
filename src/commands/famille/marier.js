@@ -71,7 +71,7 @@ module.exports = async (client, interaction, args) => {
             desc: `${author} a demandé en mariage ${target} ! \n${target}, clique sur un des boutons`,
             components: [row],
             content: `${target}`,
-            image: 'https://media3.giphy.com/media/kaOTjmAsBgkCcK5cwV/giphy.gif',
+            image: 'https://media3.giphy.com/media/RjOtCFEUwmUiAavxOH/giphy.gif',
             type: 'editreply'
         }, interaction);
 
@@ -134,7 +134,7 @@ module.exports = async (client, interaction, args) => {
                 desc: `${target} n'a pas répondu ! Le mariage est annulé`,
                 components: [],
                 content: `${target}`,
-                image: 'https://media4.giphy.com/media/3ohs7SYIm3yiUbL0yc/giphy.gif',
+                image: 'https://media3.giphy.com/media/FKcC27kUBByAo/giphy.gif',
                 type: 'editreply'
             }, interaction);
         });

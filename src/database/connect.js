@@ -8,7 +8,7 @@ async function connect() {
     });
 
     mongoose.connection.once("open", () => {
-        console.log(chalk.blue(chalk.bold(`System`)), (chalk.white(`>>`)), chalk.red(`MongoDB`), chalk.green(`is ready!`))
+        console.log(chalk.blue(chalk.bold('Systeme')), (chalk.white('>>')), chalk.red('MongoDB'), chalk.green('est prêt !'))
     });
     return;
 }

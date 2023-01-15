@@ -26,7 +26,7 @@ const activities = [
         if(i >= activities.length) i = 0
         client.user.setActivity(activities[i])
         i++;
-    }, 5000);
+    }, 10000);
     
     client.user.setStatus(status[0])
   

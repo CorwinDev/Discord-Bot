@@ -12,12 +12,12 @@ module.exports = async (client, interaction, args) => {
 
     Schema.findOne({ Guild: interaction.guild.id, Partner: author.id }, async (err, data) => {
         if (data) {
-            client.errNormal({ error: "Quelqu'un dans le couple est déjà marié !", type: 'editreply' }, interaction);
+            client.errNormal({ error: "Quelqu'un dans le couple est déjà marié.e !", type: 'editreply' }, interaction);
         }
         else {
             Schema.findOne({ Guild: interaction.guild.id, Partner: target.id }, async (err, data) => {
                 if (data) {
-                    client.errNormal({ error: "Quelqu'un dans le couple est déjà marié !", type: 'editreply' }, interaction);
+                    client.errNormal({ error: "Quelqu'un dans le couple est déjà marié.e !", type: 'editreply' }, interaction);
                 }
                 else {
                     Schema.findOne({ Guild: interaction.guild.id, User: target.id, Parent: author.id }, async (err, data) => {
@@ -110,7 +110,7 @@ module.exports = async (client, interaction, args) => {
 
                 client.embed({
                     title: `👰・Demande en mariage acceptée`,
-                    desc: `${author} et ${target} sont maintenant mariés ! 👰🎉`,
+                    desc: `${author} et ${target} sont maintenant marié.es ! 👰🎉`,
                     components: [],
                     content: `${target}`,
                     image: 'https://media4.giphy.com/media/10wwy1cJ8j2aD6/giphy.gif',
@@ -121,7 +121,7 @@ module.exports = async (client, interaction, args) => {
             if (i.customId == "propose_deny") {
                 client.embed({
                     title: `👰・Demande en mariage refusée`,
-                    desc: `${target} aime quelqu'un d'autre ou préfère resté seul et a décidé de ne pas se marier avec ${author}`,
+                    desc: `${target} aime quelqu'un d'autre ou préfère rester seul.e et a décidé.e de ne pas se marier avec ${author}`,
                     components: [],
                     content: `${target}`,
                     image: 'https://media4.giphy.com/media/3ohs7SYIm3yiUbL0yc/giphy.gif',
@@ -131,7 +131,7 @@ module.exports = async (client, interaction, args) => {
         }).catch(() => {
             client.embed({
                 title: `👰・Demande en marriage refusée`,
-                desc: `${target} n'a pas répondu ! Le marriage est annulé`,
+                desc: `${target} n'a pas répondu ! Le mariage est annulé`,
                 components: [],
                 content: `${target}`,
                 image: 'https://media4.giphy.com/media/3ohs7SYIm3yiUbL0yc/giphy.gif',

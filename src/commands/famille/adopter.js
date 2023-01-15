@@ -54,6 +54,7 @@ module.exports = async (client, interaction, args) => {
         desc: `${author} a demandé d'adopter ${target} ! \n${target}, clique sur un des boutons`,
         components: [row],
         content: `${target}`,
+        image: 'https://media2.giphy.com/media/y7XmH8QgILhS5tXCCk/giphy.gif',
         type: 'editreply',
     }, interaction)
 
@@ -94,6 +95,7 @@ module.exports = async (client, interaction, args) => {
                 title: `👪・Adoption acceptée`,
                 desc: `${author} est maintenant l'heureux parent de ${target}! 🎉`,
                 components: [],
+                image: 'https://media.tenor.com/OiIGlFVeuuwAAAAC/im-adopted-tom-hiddleston.gif',
                 type: 'editreply'
             }, interaction);
         }
@@ -101,8 +103,9 @@ module.exports = async (client, interaction, args) => {
         if (i.customId == "adopt_deny") {
             client.embed({
                 title: `👪・Adoption refusée`,
-                desc: `${target} ne veut pas être adopté ${author}`,
+                desc: `${target} ne veut pas être adopté.e ${author}`,
                 components: [],
+                image: 'https://media0.giphy.com/media/ISOckXUybVfQ4/giphy.gif',
                 type: 'editreply'
             }, interaction);
         }
@@ -111,6 +114,7 @@ module.exports = async (client, interaction, args) => {
             title: `👪・Adoption refusée`,
             desc: `${target} n'a pas répondu ! L'adoption a été annulée`,
             components: [],
+            image: 'https://media.tenor.com/-Rngjigx2HAAAAAd/alone.gif',
             type: 'editreply'
         }, interaction);
     });

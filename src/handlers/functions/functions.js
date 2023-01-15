@@ -74,7 +74,7 @@ module.exports = async (client) => {
         return str.replaceAll('@', '@\u200b');
     }
 
-    client.loadSubcommands = async function (client, interaction, args) {
+    /*client.loadSubcommands = async function (client, interaction, args) {
         try {
             const data = await Functions.findOne({ Guild: interaction.guild.id });
 
@@ -90,9 +90,28 @@ module.exports = async (client) => {
             }
         }
         catch {
-            return require('${process.cwd()}/src/commands/${interaction.commandName}/${interaction.options.getSubcommand()}')(client, interaction, args).catch(err => {
+            return require(`${process.cwd()}/src/commands/${interaction.commandName}/${interaction.options.getSubcommand()}`)(client, interaction, args).catch(err => {
                 client.emit("errorCreate", err, interaction.commandName, interaction)
             })
+        }
+    }*/
+    client.loadSubcommands = async function (client, interaction, args) {
+        let path;
+        try {
+            const data = await Functions.findOne({ Guild: interaction.guild.id });
+            if (data.Beta == true) {
+                path = `${process.cwd()}/src/commands/${interaction.commandName}/${interaction.options.getSubcommand()}-beta`;
+            } else {
+                path = `${process.cwd()}/src/commands/${interaction.commandName}/${interaction.options.getSubcommand()}`;
+            }
+        } catch (error) {
+            client.emit("errorCreate", error, interaction.commandName, interaction);
+            return;
+        }
+        try {
+            return require(path)(client, interaction, args);
+        } catch (err) {
+            client.emit("errorCreate", err, interaction.commandName, interaction);
         }
     }
 

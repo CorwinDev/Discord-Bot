@@ -9,26 +9,16 @@ const StarBoard = require("../../database/models/starboardChannels");
 module.exports = async (client, interaction, args) => {
     const choice = interaction.options.getString('setup');
     const channel = interaction.options.getChannel('channel');
+    
+    const choices = {
+        birthdays : Birthdays,
+        chatbot : Chatbot,
+        reviews : Review,
+        suggestions : Suggestion,
+        starboard : StarBoard
+    };
 
-    if (choice == "birthdays") {
-        client.createChannelSetup(Birthdays, channel, interaction)
-    }
-
-    if (choice == "chatbot") {
-        client.createChannelSetup(Chatbot, channel, interaction)
-    }
-
-    if (choice == "reviews") {
-        client.createChannelSetup(Review, channel, interaction)
-    }
-
-    if (choice == "suggestions") {
-        client.createChannelSetup(Suggestion, channel, interaction)
-    }
-
-    if (choice == "starboard") {
-        client.createChannelSetup(StarBoard, channel, interaction)
-    }
+    client.createChannelSetup(choices[choice], channel, interaction);
 }
 
  

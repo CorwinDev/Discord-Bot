@@ -9,9 +9,9 @@ module.exports = async (client, interaction, args) => {
     const channel = interaction.options.getChannel('channel');
     
     const choices = {
-        'serverLogs' : logs,
-        'levelLogs' : levelLogs,
-        'boostLogs' : boostLogs
+        serverLogs : logs,
+        levelLogs : levelLogs,
+        boostLogs : boostLogs
     };
 
     client.createChannelSetup(choices[choice], channel, interaction);

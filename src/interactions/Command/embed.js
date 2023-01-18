@@ -106,7 +106,7 @@ module.exports = {
       `Please select some options`
     );
 
-    interaction.editReply({ embeds: [embed], components: [row, row2] });
+    interaction.reply({ embeds: [embed], components: [row, row2] });
 
     const filter = (i) => i.user.id === interaction.user.id;
     const collector = interaction.channel.createMessageComponentCollector({

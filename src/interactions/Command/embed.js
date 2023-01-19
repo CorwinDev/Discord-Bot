@@ -311,7 +311,7 @@ module.exports = {
 
         if (i.values == "color_embed") {
           interaction.channel
-            .send({ content: "Please enter a color" })
+            .send({ content: "Please enter a color. e.g. #FF0000" })
             .then((message) => {
               const filterMessage = (m) =>
                 m.author.id === interaction.user.id && !m.author.bot;

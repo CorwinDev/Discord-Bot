@@ -300,7 +300,7 @@ module.exports = async (client, message) => {
   } else {
     var prefix = guildSettings.Prefix;
   }
-
+/*
   const escapeRegex = (str) => str.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
   const prefixRegex = new RegExp(
     `^(<@!?${client.user.id}>|${escapeRegex(prefix)})\\s*`
@@ -439,4 +439,4 @@ module.exports = async (client, message) => {
   }
 };
 
- 
+ */

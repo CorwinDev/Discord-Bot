@@ -252,7 +252,8 @@ module.exports = async (client, message) => {
         })
         .then((res) => {
           res.json().then((data) => {
-            message.channel.send({ content: data.choices[0].text });
+            if(data.error) return console.log(data.error);
+            message.reply({ content: data.choices[0].text });
           });
         });
     } else {

@@ -7,13 +7,12 @@ module.exports = async (client, interaction, args) => {
     const choice = interaction.options.getString('setup');
     const channel = interaction.options.getChannel('channel');
 
-    if (choice == "welcomechannel") {
-        client.createChannelSetup(welcomeChannel, channel, interaction)
-    }
+    const choices = {
+        welcomechannel : welcomeChannel,
+        leavechannel : leaveChannel
+    };
 
-    if (choice == "leavechannel") {
-        client.createChannelSetup(leaveChannel, channel, interaction)
-    }
+    client.createChannelSetup(choices[choice], channel, interaction);
 }
 
  

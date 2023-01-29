@@ -15,7 +15,8 @@ const activities = [
         { name: `le crépitement de la friture`, type: 2 },
         { name: `si Eliott fait pas de bêtises`, type: 3 },
         { name: `si ça joue à LoL`, type: 3 },
-        { name: `si Thomas casse pas les couilles`, type: 3 },
+        { name: `si Thomas aussi beau aujourd'hui`, type: 3 },
+        { name: `si Lisa casse pas les couilles`, type: 3 },
         { name: `si Diana ne s'est pas trompé de micro (encore)`, type: 2 },
         { name: `si le Megapack est en live`, type: 3 },
     ];

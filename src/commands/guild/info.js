@@ -2,11 +2,11 @@ const Discord = require('discord.js');
 
 module.exports = async (client, interaction, args) => {
   let verifLevels = {
-    "NONE": "None",
-    "LOW": "Low",
-    "MEDIUM": "Medium",
-    "HIGH": "(╯°□°）╯︵  ┻━┻",
-    "VERY_HIGH": "┻━┻ミヽ(ಠ益ಠ)ノ彡┻━┻"
+    "0": "None",
+    "1": "Low",
+    "2": "Medium",
+    "3": "(╯°□°）╯︵  ┻━┻",
+    "4": "┻━┻ミヽ(ಠ益ಠ)ノ彡┻━┻"
   }
 
   let region = {

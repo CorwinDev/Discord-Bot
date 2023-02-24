@@ -22,7 +22,7 @@
   <h3 align="center">Discord-Bot</h3>
 
   <p align="center">
-    Discord-bot is a updated version of <a href="https://github.com/DotwoodMedia/Dbot">Dbot</a>, a advanced Discord multipurpose botcontaining more than 400+ Commands.<br> It can do Moderation, Tickets, Radio, Games, Giveaways, Customisation, Economy, Leveling, Invites, Messages, Utilities, Suggestions, Server Stats etc.<br> Unfortunately the owners stopped at the peak and decided to put the source online of which I made an updated version.
+    Discord-bot is an updated version of <a href="https://github.com/DotwoodMedia/Dbot">Dbot</a>, an advanced Discord multipurpose bot containing more than 400 commands.<br> It can do Moderation, Tickets, Radio, Games, Giveaways, Customisation, Economy, Leveling, Invites, Messages, Utilities, Suggestions, Server Stats etc.<br> Unfortunately the owners stopped at the peak and decided to put the source online of which I made an updated version.
     <br />
     <br />
     <a href="https://github.com/corwindev/discord-bot/issues">Report Bug</a>
@@ -36,8 +36,8 @@
 ### <img src="https://cdn.discordapp.com/emojis/1055803759831294013.png" width="20px" height="20px"> 》Notice 
 > You may not claim this as your own! The original source was created by [Dotwood Media](https://github.com/DotwoodMedia) and [Graphix Development](https://github.com/GraphixDevelopment). The source is modified and being updated by my(CorwinDev)
 
-> Discord-Bot is a Multipurpose Discord bot base in [Discord.js](https://github.com/Discordjs/discordjs)
-If you liked this repository, feel free to leave a star ⭐ to motivate me!
+> Discord-Bot is a multipurpose Discord bot base in [Discord.js](https://github.com/Discordjs/discordjs)
+If you like this repository, feel free to leave a star ⭐ to motivate me!
 
 <!-- ABOUT THE PROJECT -->
 

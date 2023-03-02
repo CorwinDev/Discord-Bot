@@ -44,6 +44,7 @@
     "erela.js-deezer": "^1.0.7",
     "erela.js-facebook": "^1.0.4",
     "erela.js-spotify": "^1.2.0",
+    "ffmpeg-static": "^5.1.0",
     "figlet": "^1.5.2",
     "fs": "^0.0.1-security",
     "generate-password": "^1.7.0",

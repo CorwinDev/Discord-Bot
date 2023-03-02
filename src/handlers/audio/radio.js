@@ -30,7 +30,7 @@ module.exports = (client) => {
 
         setTimeout(() => {
             if (channel.type ==  Discord.ChannelType.GuildStageVoice) {
-                channel.guild.me.voice.setSuppressed(false).catch(() => { });
+                channel.guild.members.me.voice.setSuppressed(false);
             }
         }, 500)
 

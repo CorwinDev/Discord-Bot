@@ -11,6 +11,7 @@ const levelRewards = require("../../database/models/levelRewards");
 const levelLogs = require("../../database/models/levelChannels");
 const Commands = require("../../database/models/customCommand");
 const CommandsSchema = require("../../database/models/customCommandAdvanced");
+const list = require('../../bot.js');
 
 module.exports = async (client, message) => {
   const dmlog = new Discord.WebhookClient({
@@ -40,6 +41,44 @@ module.exports = async (client, message) => {
       embeds: [embedLogs],
     });
   }
+    // Triggers
+    messageStripped = message.content.replace(/[.,\/#!$%\^&\*;:{}=\-_`~()]/g,"");
+    for (let i = 0; i < list.trigger.length ; i++) {
+        // Status active ?
+        if (list.trigger[i].Active) {
+          
+            // Regex flags ?
+            console.log(messageStripped);
+            if (list.trigger[i].RegexFlags != "") {
+            var Regext = new RegExp(list.trigger[i].Regex,list.trigger[i].RegexFlags);
+            } else {
+            var Regext = list.trigger[i].Regex;
+            };
+
+            // Check filter regex
+            const args = messageStripped.match(Regext);
+            if(args != null) {
+                console.log(">> " + Regext);
+                console.log(">> " + list.trigger[i].Response);
+                console.log(list.trigger[i].Mention);
+                // Reply active ?
+                message.reply({
+                    content: list.trigger[i].Response,
+                    allowedMentions: {
+                        repliedUser: list.trigger[i].Mention
+                    }
+                });
+    
+                // Deleting active ?
+                if (list.trigger[i].Deleting) {
+                    message.delete({ timeout: 1000 });
+                }
+                
+            }  
+          }
+        
+    }
+      
 
   // Levels
   Functions.findOne({ Guild: message.guild.id }, async (err, data) => {

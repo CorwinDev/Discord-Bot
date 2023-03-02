@@ -1,5 +1,6 @@
 const Discord = require('discord.js');
 const chalk = require('chalk');
+
 require('dotenv').config();
 const express = require('express')
 const app = express()

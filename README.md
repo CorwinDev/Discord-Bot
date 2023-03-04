@@ -96,6 +96,7 @@ node src/index.js
 
 ## <img src="https://cdn.discordapp.com/emojis/1036083490292244493.png" width="15px" height="15px">》Support Server
 [![DiscordBanner](https://invidget.switchblade.xyz/jVeC7cFX5T)](https://discord.gg/jVeC7cFX5T)
+
 [Support Server](https://discord.gg/jVeC7cFX5T) - Discord-Bot's Support Server Invite
 
 # <img src="https://cdn.discordapp.com/emojis/1015745034076819516.png" width="25px" height="25px">》Faq

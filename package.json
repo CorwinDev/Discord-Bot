@@ -37,7 +37,7 @@
     "discord-giveaways": "^6.0.1",
     "discord-image-generation": "^1.4.23",
     "discord.js": "^14.7.1",
-    "dompurify": "^2.4.1",
+    "dompurify": "^3.0.1",
     "dotenv": "^16.0.3",
     "erela.js": "^2.4.0",
     "erela.js-apple": "^1.2.6",

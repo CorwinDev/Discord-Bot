@@ -229,22 +229,19 @@ module.exports = async (client, message) => {
     if (message.channel.id !== data.Channel) return;
     if (process.env.OPENAI) {
       fetch(
-        `https://api.openai.com/v1/completions`,
+        `https://api.openai.com/v1/chat/completions`,
         {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',
             'Authorization': 'Bearer ' + process.env.OPENAI,
           },
-          // body: '{\n  "model": "text-davinci-003",\n  "prompt": "What is your name?",\n  "max_tokens": 4000,\n  "temperature": 0\n}',
           body: JSON.stringify({
-            'model': 'text-davinci-003',
-            'prompt': message.content,
-            'temperature': 0,
-            'max_tokens': 256,
-            'top_p': 1,
-            'frequency_penalty': 0,
-            'presence_penalty': 0,
+            'model': 'gpt-3.5-turbo',
+            'messages': [{
+              'role': 'user',
+              'content': message.content
+            }]
           })
         }
       )
@@ -252,8 +249,8 @@ module.exports = async (client, message) => {
         })
         .then((res) => {
           res.json().then((data) => {
-            if(data.error) return console.log(data.error);
-            message.reply({ content: data.choices[0].text });
+            if(data.error) return;
+            message.reply({ content: data.choices[0].message.content });
           });
         });
     } else {

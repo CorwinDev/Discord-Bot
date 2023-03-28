@@ -63,10 +63,6 @@ module.exports = {
                     name: `🪲┆Found a bug?`,
                     value: `Report this with \`/report bug\``
                 },
-                {
-                    name: `🔗┆Links`,
-                    value: `[Website](https://corwindev.nl/) | [Invite](${client.config.discord.botInvite}) | [Vote](https://top.gg/bot/798144456528363550/vote)`
-                },
             ],
             components: [row],
             type: 'editreply'

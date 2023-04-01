@@ -82,7 +82,7 @@ module.exports = {
                 .setDescription('Keep track of your current time zone')
                 .addStringOption(option =>
                     option.setName('timezone')
-                        .setDescription('Description with your report')
+                        .setDescription('The timezone you want to set (e.g. Europe/Amsterdam)')
                         .setRequired(true)
                 )
         )
@@ -95,6 +95,7 @@ module.exports = {
      */
 
     run: async (client, interaction, args) => {
+        await interaction.deferReply({ fetchReply: true });
         const perms = await client.checkPerms({
             flags: [Discord.PermissionsBitField.Flags.ManageChannels],
             perms: [Discord.PermissionsBitField.Flags.ManageChannels]

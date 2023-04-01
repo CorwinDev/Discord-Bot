@@ -27,20 +27,11 @@ module.exports = async (client, interaction, args) => {
             },
         ],
     }).then(async (channel) => {
-        Schema.findOne({ Guild: interaction.guild.id }, async (err, data) => {
-            if (data) {
-                data.Time = channel.id;
-                data.TimeZone = time;
-                data.save();
-            }
-            else {
-                new Schema({
-                    Guild: interaction.guild.id,
-                    TimeZone: time,
-                    Time: channel.id
-                }).save();
-            }
-        })
+        new Schema({
+            Guild: interaction.guild.id,
+            TimeZone: time,
+            Time: channel.id,
+        }).save();
 
         client.succNormal({
             text: `Voice channel count created!`,

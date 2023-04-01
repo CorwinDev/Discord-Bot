@@ -30,7 +30,7 @@ module.exports = (client) => {
 
         setTimeout(() => {
             if (channel.type ==  Discord.ChannelType.GuildStageVoice) {
-                channel.guild.me.voice.setSuppressed(false).catch(() => { });
+                channel.guild.members.me.voice.setSuppressed(false);
             }
         }, 500)
 
@@ -73,7 +73,7 @@ module.exports = (client) => {
         client.startStream(process.env.RADIO || "https://playerservices.streamtheworld.com/api/livestream-redirect/RADIO538");
     });
 
-    client.on('ready', async () => {
+    client.on(Discord.Events.ClientReady, async () => {
         client.startStream(process.env.RADIO || "https://playerservices.streamtheworld.com/api/livestream-redirect/RADIO538");
         
         Schema.find(async (err, data) => {

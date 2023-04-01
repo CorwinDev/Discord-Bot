@@ -13,26 +13,27 @@ module.exports = async (client, interaction, args) => {
         error: `You're not in a voice channel!`,
         type: 'editreply'
     }, interaction);
+    var checkVoice = await client.checkVoice(interaction.guild, channel);
+    if (!checkVoice) {
+        return client.errNormal({
+            error: `You cannot edit this channel!`,
+            type: 'editreply'
+        }, interaction);
+    } else {
+        client.succNormal({
+            text: `The channel was succesfully unlocked!`,
+            fields: [
+                {
+                    name: `📘┆Channel`,
+                    value: `${channel} (${channel.name})`
+                }
+            ],
+            type: 'editreply'
+        }, interaction);
 
-    if (!client.checkVoice(interaction.guild, channel)) return client.errNormal({
-        error: `You cannot edit this channel!`,
-        type: 'editreply'
-    }, interaction);
-
-    client.succNormal({
-        text: `The channel was succesfully unlocked!`,
-        fields: [
-            {
-                name: `📘┆Channel`,
-                value: `${channel} (${channel.name})`
-            }
-        ],
-        type: 'editreply'
-    }, interaction);
-
-    channel.permissionOverwrites.edit(interaction.guild.roles.cache.find(x => x.name === '@everyone'), {
-        Connect: true
-    });
+        channel.permissionOverwrites.edit(interaction.guild.roles.cache.find(x => x.name === '@everyone'), {
+            Connect: true
+        });
+    }
 }
 
- 

@@ -2,11 +2,11 @@ const Discord = require('discord.js');
 
 module.exports = async (client, interaction, args) => {
   let verifLevels = {
-    "NONE": "None",
-    "LOW": "Low",
-    "MEDIUM": "Medium",
-    "HIGH": "(╯°□°）╯︵  ┻━┻",
-    "VERY_HIGH": "┻━┻ミヽ(ಠ益ಠ)ノ彡┻━┻"
+    "0": "None",
+    "1": "Low",
+    "2": "Medium",
+    "3": "(╯°□°）╯︵  ┻━┻",
+    "4": "┻━┻ミヽ(ಠ益ಠ)ノ彡┻━┻"
   }
 
   let region = {
@@ -28,10 +28,10 @@ module.exports = async (client, interaction, args) => {
   }
 
   let tier = {
-    "TIER_1": `1`,
-    "TIER_2": `2`,
-    "TIER_3": `3`,
-    "NONE": `0`,
+     "0": "None",
+    "1": "TIER 1",
+    "2": "TIER 2",
+    "3": "**TIER 3**"
   }
 
   const members = await interaction.guild.members.fetch();
@@ -64,7 +64,7 @@ module.exports = async (client, interaction, args) => {
       },
       {
         name: "Boost tier: ",
-        value: `Tier ${tier[interaction.guild.premiumTier] || 'None'}`,
+        value: `${tier[interaction.guild.premiumTier]}`,
         inline: true
       },
       {

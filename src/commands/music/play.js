@@ -179,9 +179,12 @@ module.exports = async (client, interaction, args) => {
                 i = await interaction.channel.awaitMessageComponent({ filter, max: 1, time: 30e3, componentType: Discord.ComponentType.Button, errors: ['time'] });
             } catch (e) {
                 if (!player.queue.current) player.destroy();
+                row.components.forEach((button) => button.setDisabled(true));
+                row2.components.forEach((button) => button.setDisabled(true));
                 return client.errNormal({
                     error: `You didn't provide a selection`,
-                    type: 'editreply'
+                    type: 'editreply',
+                    components: [row, row2]
                 }, interaction)
             }
 

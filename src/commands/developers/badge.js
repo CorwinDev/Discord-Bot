@@ -52,7 +52,7 @@ module.exports = async (client, interaction, args) => {
             array.push(FLAG);
 
             model.findOne({ User: member.id }, async (err, data) => {
-                if (err) throw err;
+                if (err) console.log(err);
                 data.FLAGS = array
                 data.save();
             });
@@ -79,7 +79,7 @@ module.exports = async (client, interaction, args) => {
                 { name: `📛┆Badge`, value: `${badgeFlags[badge.toUpperCase()]} (${badge.toUpperCase()})`, inline: true },
             )
             .setColor(client.config.colors.normal)
-            .setFooter(client.config.discord.footer)
+            .setFooter({ text: client.config.discord.footer})
             .setTimestamp();
         webhookClientLogs.send({
             username: 'Bot Badges',
@@ -114,7 +114,7 @@ module.exports = async (client, interaction, args) => {
             model.findOne(
                 { User: member.id },
                 async (err, data) => {
-                    if (err) throw err;
+                    if (err) console.log(err);
                     data.FLAGS = array
                     data.save();
                 }
@@ -133,7 +133,7 @@ module.exports = async (client, interaction, args) => {
                 { name: `📛┆Badge`, value: `${badgeFlags[badge.toUpperCase()]} (${badge.toUpperCase()})`, inline: true },
             )
             .setColor(client.config.colors.normal)
-            .setFooter(client.config.discord.footer)
+            .setFooter({ text: client.config.discord.footer })
             .setTimestamp();
         webhookClientLogs.send({
             username: 'Bot Badges',

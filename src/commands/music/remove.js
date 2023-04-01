@@ -30,7 +30,7 @@ module.exports = async (client, interaction, args) => {
     player.queue.remove((parseInt(number)) - 1)
 
     client.succNormal({ 
-        text: `Removed **${name}** from the queue`,
+        text: `Removed **${targetSong.title}** from the queue`,
         type: 'editreply'
     }, interaction);
 }

@@ -1,11 +1,10 @@
 const Discord = require('discord.js');
 
 const BlackList = require("../../database/models/blacklist");
-const { blacklistedWords } = require("../../Collection");
 
 module.exports = async (client) => {
-    client.on('messageCreate', async (message) => {
-        if (message.channel.type === 'DM') return;
+    client.on(Discord.Events.MessageCreate, async (message) => {
+        if (message.channel.type === Discord.ChannelType.DM) return;
 
         try {
             BlackList.findOne({ Guild: message.guild.id }, async (err, data) => {
@@ -18,7 +17,7 @@ module.exports = async (client) => {
                 await Promise.all(
                     splittedMsg.map((content) => {
                         try {
-                            if (blacklistedWords.get(message.guild.id).includes(content.toLowerCase())) deleting = true;
+                            if (data.Words.includes(content.toLowerCase())) deleting = true;
                         }
                         catch { }
                     })
@@ -31,11 +30,8 @@ module.exports = async (client) => {
         catch { }
     }).setMaxListeners(0);
 
-    client.on('messageUpdate', async (oldMessage, newMessage) => {
-        if (oldMessage.content === newMessage.content) {
-            return;
-        }
-
+    client.on(Discord.Events.MessageUpdate, async (oldMessage, newMessage) => {
+        if (oldMessage.content === newMessage.content || newMessage.channel.type === Discord.ChannelType.DM) return;
         try {
             BlackList.findOne({ Guild: oldMessage.guild.id }, async (err, data) => {
             if (data) {
@@ -47,7 +43,7 @@ module.exports = async (client) => {
                 await Promise.all(
                     splittedMsg.map((content) => {
                         try {
-                            if (blacklistedWords.get(newMessage.guild.id).includes(content.toLowerCase())) deleting = true;
+                            if (data.Words.includes(content.toLowerCase())) deleting = true;
                         }
                         catch { }
                     })

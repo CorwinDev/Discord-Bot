@@ -1,7 +1,6 @@
 const Discord = require('discord.js');
 
 const Schema = require("../../database/models/blacklist");
-const { blacklistedWords } = require("../../Collection");
 
 module.exports = async (client, interaction, args) => {
     const word = interaction.options.getString('word');
@@ -14,17 +13,15 @@ module.exports = async (client, interaction, args) => {
                     type: 'editreply' 
                 }, interaction);
             }
+            if(!data.Words) data.Words = [];
             data.Words.push(word);
             data.save();
-            blacklistedWords.get(interaction.guild.id).push(word);
         }
         else {
             new Schema({
                 Guild: interaction.guild.id,
                 Words: word
             }).save();
-
-            blacklistedWords.set(interaction.guild.id, [word]);
         }
     })
 

@@ -53,7 +53,7 @@ module.exports = (client) => {
             });
 
         } catch (error) {
-            throw error;
+            console.log(error);
         }
     })();
 }

@@ -8,7 +8,11 @@ module.exports = async (client) => {
     //----------------------------------------------------------------//
     //                         Permissions                            //
     //----------------------------------------------------------------//
-
+    // All bitfields to name
+    client.bitfieldToName = function (bitfield) {
+        const permissions = new Discord.PermissionsBitField(bitfield);
+        return permissions.toArray();
+    }
     client.checkPerms = async function ({
         flags: flags,
         perms: perms
@@ -16,7 +20,7 @@ module.exports = async (client) => {
         for (let i = 0; i < flags.length; i++) {
             if (!interaction.member.permissions.has(flags[i])) {
                 client.errMissingPerms({
-                    perms: perms[i],
+                    perms: client.bitfieldToName(flags[i]) || flags[i],
                     type: 'editreply'
                 }, interaction);
 
@@ -24,7 +28,7 @@ module.exports = async (client) => {
             }
             if (!interaction.guild.members.me.permissions.has(flags[i])) {
                 client.errNoPerms({
-                    perms: perms[i],
+                    perms: client.bitfieldToName(flags[i]) || flags[i],
                     type: 'editreply'
                 }, interaction);
 
@@ -32,7 +36,6 @@ module.exports = async (client) => {
             }
         }
     }
-
     client.checkBotPerms = async function ({
         flags: flags,
         perms: perms
@@ -40,7 +43,7 @@ module.exports = async (client) => {
         for (let i = 0; i < flags.length; i++) {
              if (!interaction.guild.members.me.permissions.has(flags[i])) {
                 client.errNoPerms({
-                    perms: perms[i],
+                    perms: client.bitfieldToName(flags[i]) || flags[i],
                     type: 'editreply'
                 }, interaction);
 
@@ -48,7 +51,6 @@ module.exports = async (client) => {
             }
         }
     }
-
     client.checkUserPerms = async function ({
         flags: flags,
         perms: perms
@@ -56,7 +58,7 @@ module.exports = async (client) => {
         for (let i = 0; i < flags.length; i++) {
             if (!interaction.member.permissions.has(flags[i])) {
                 client.errMissingPerms({
-                    perms: perms[i],
+                    perms: client.bitfieldToName(flags[i]) || flags[i],
                     type: 'editreply'
                 }, interaction);
 
@@ -96,13 +98,12 @@ module.exports = async (client) => {
     }
 
     client.checkVoice = async function (guild, channel) {
-        const data = VoiceSchema.findOne({ Guild: guild.id, Channel: channel.id });
-
+        const data = await VoiceSchema.findOne({ Guild: guild.id, Channel: channel.id });
         if (data) {
-            return false;
+            return true;
         }
         else {
-            return true;
+            return false;
         }
     }
 
@@ -195,7 +196,7 @@ module.exports = async (client) => {
     }
 
     client.generateActivity = function (id, name, channel, interaction) {
-        fetch(`https://discord.com/api/v8/channels/${channel.id}/invites`, {
+        fetch(`https://discord.com/api/v10/channels/${channel.id}/invites`, {
             method: "POST",
             body: JSON.stringify({
                 max_age: 86400,

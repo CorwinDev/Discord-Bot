@@ -203,7 +203,7 @@ module.exports = async (client, interaction, args) => {
                             error: "Do the setup!",
                             type: type
                         }, interaction);
-                        throw err;
+                        console.log(err);
                     }
                 }
                 else {

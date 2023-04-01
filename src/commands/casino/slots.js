@@ -9,7 +9,7 @@ module.exports = async (client, interaction, args) => {
 
     Schema.findOne({ Guild: interaction.guild.id, User: user.id }, async (err, data) => {
         if (data) {
-            let money = parseInt(args[0]);
+            let money = parseInt(interaction.options.getNumber('amount'));
             let win = false;
 
             if (!money) return client.errUsage({ usage: "slots [amount]", type: 'editreply' }, interaction);

@@ -32,7 +32,7 @@ module.exports = {
      */
 
     run: async (client, interaction, args) => {
-
+        await interaction.deferReply({ fetchReply: true });
         model.findOne({ User: interaction.user.id }, async (err, data) => {
             if (data && data.FLAGS.includes("DEVELOPER")) {
 

@@ -1,7 +1,6 @@
 const Discord = require('discord.js');
 
 const Schema = require("../../database/models/blacklist");
-const { blacklistedWords } = require("../../Collection");
 
 module.exports = async (client, interaction, args) => {
     const word = interaction.options.getString('word');
@@ -21,8 +20,6 @@ module.exports = async (client, interaction, args) => {
                 Guild: interaction.guild.id,
                 Words: filtered
             });
-
-            blacklistedWords.set(interaction.guild.id, filtered)
 
             client.succNormal({
                 text: `Word is removed from the blacklist!`,

@@ -36,6 +36,10 @@ module.exports = async (client, oldEvent, newEvent) => {
                 name: `> Creator`,
                 value: `- <@!${newEvent.creatorId}> (${newEvent.creatorId})`
             },
+            {
+                name: `> Timestamp`,
+                value: `- <t:${Math.floor(Date.now() / 1000)}:R>`
+            }
         ]
     }, logsChannel).catch(() => { })
 };

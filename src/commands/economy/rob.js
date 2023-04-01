@@ -30,7 +30,7 @@ module.exports = async (client, interaction, args) => {
                         Schema.findOne({ Guild: interaction.guild.id, User: user.id }, async (err, targetData) => {
                             if (targetData) {
                                 var targetMoney = targetData.Money;
-                                if (targetData = undefined || !targetData || targetData.Money == 0 || targetData.Money < 0) {
+                                if (targetData = undefined || !targetData || targetMoney == 0 || targetMoney < 0) {
                                     return client.errNormal({ error: `${user.username} does not have anything you can rob!`, type: 'editreply' }, interaction);
                                 }
 
@@ -80,7 +80,7 @@ module.exports = async (client, interaction, args) => {
                                 }, interaction);
                             }
                             else {
-                                return client.errNormal({ error: `${user.user.username} does not have anything you can rob!`, type: 'editreply' }, interaction);
+                                return client.errNormal({ error: `${user.username} does not have anything you can rob!`, type: 'editreply' }, interaction);
                             }
                         })
                     }

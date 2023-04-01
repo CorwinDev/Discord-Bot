@@ -121,6 +121,7 @@ module.exports = {
      */
 
     run: async (client, interaction, args) => {
+        await interaction.deferReply({ fetchReply: true });
         client.checkBotPerms({
             flags: [Discord.PermissionsBitField.Flags.Connect, Discord.PermissionsBitField.Flags.Speak],
             perms: [Discord.PermissionsBitField.Flags.Connect, Discord.PermissionsBitField.Flags.Speak]

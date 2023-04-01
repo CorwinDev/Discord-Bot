@@ -44,7 +44,7 @@ module.exports = async (client, guild) => {
         let defaultChannel = "";
         guild.channels.cache.forEach((channel) => {
             if (channel.type == Discord.ChannelType.GuildText && defaultChannel == "") {
-                if (channel.permissionsFor(guild.me).has("SEND_MESSAGES")) {
+                if (channel.permissionsFor(guild.members.me).has(Discord.PermissionFlagsBits.SendMessages)) {
                     defaultChannel = channel;
                 }
             }
@@ -65,7 +65,7 @@ module.exports = async (client, guild) => {
 
         client.embed({
             title: "Thanks for inviting the bot!",
-            image: "https://cdn.discordapp.com/attachments/843487478881976381/874694194474668052/Bot_banner_invite.jpg",
+            image: "https://cdn.discordapp.com/attachments/843487478881976381/874694194474668052/bot_banner_invite.jpg",
             fields: [{
                 name: "❓┆How to setup?",
                 value: 'The default prefix = \`/\` \nTo run setups with Bot run \`/setup\`',
@@ -73,7 +73,7 @@ module.exports = async (client, guild) => {
             },
             {
                 name: "☎️┆I need help what now?",
-                value: `You can DM <@534398298002292739> for support or joining the [[Support server]](${client.config.discord.serverInvite})`,
+                value: `You can DM <@755297485328482356> for support or joining the [[Support server]](${client.config.discord.serverInvite})`,
                 inline: false,
             },
             {
@@ -91,7 +91,7 @@ module.exports = async (client, guild) => {
         }, defaultChannel)
     }
     catch (err) {
-        throw err;
+        console.log(err);
     }
 
 

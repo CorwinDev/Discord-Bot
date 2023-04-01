@@ -7,7 +7,7 @@ module.exports = async (client, interaction, args) => {
     })
 
     const output = new Discord.AttachmentBuilder(Buffer.from(list), { name: 'servers.txt'});
-    interaction.editreply({ files: [output] });
+    interaction.editReply({ files: [output] });
 }
 
  

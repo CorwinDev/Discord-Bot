@@ -1,7 +1,7 @@
 const Discord = require('discord.js');
 
 module.exports = async (client) => {
-    client.on('interactionCreate', async (interaction) => {
+    client.on(Discord.Events.InteractionCreate, async (interaction) => {
         if (!interaction.isStringSelectMenu()) return;
 
         if (interaction.customId == "Bot-linkspanel") {
@@ -25,12 +25,6 @@ module.exports = async (client) => {
                                     description: `Invite Bot to your server`,
                                     emoji: "📨",
                                     value: "invite-linkspanel",
-                                },
-                                {
-                                    label: `Invite Bot 2`,
-                                    description: `Invite Bot 2 to your server`,
-                                    emoji: "📕",
-                                    value: "invite2-linkspanel",
                                 },
                                 {
                                     label: `Community Server`,
@@ -65,7 +59,7 @@ module.exports = async (client) => {
                 }, interaction.message)
             }
         }
-    }).setMaxListeners(0);
+    })
 }
 
  

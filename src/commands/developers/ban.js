@@ -3,15 +3,22 @@ const Discord = require('discord.js');
 const Schema = require('../../database/models/userBans');
 
 const webhookClientLogs = new Discord.WebhookClient({
-    id: "",
-    token: "",
+  id: "",
+  token: "",
 });
 
 module.exports = async (client, interaction, args) => {
     const boolean = interaction.options.getBoolean('new');
     const member = interaction.options.getUser('user');
-
+  
     if (boolean == true) {
+        if (member.id === interaction.user.id) { // add the check here
+            return client.errNormal({
+                error: `You cannot ban yourself from the bot`,
+                type: `editreply`
+            }, interaction);
+        }
+
         Schema.findOne({ User: member.id }, async (err, data) => {
             if (data) {
                 return client.errNormal({
@@ -36,7 +43,7 @@ module.exports = async (client, interaction, args) => {
                         { name: "👤┆Banned By", value: `${interaction.user} (${interaction.user.tag})`, inline: true },
                     )
                     .setColor(client.config.colors.normal)
-                    .setFooter(client.config.discord.footer)
+                    .setFooter({ text: client.config.discord.footer })
                     .setTimestamp();
                 webhookClientLogs.send({
                     username: 'Bot Bans',
@@ -61,7 +68,7 @@ module.exports = async (client, interaction, args) => {
                             { name: "👤┆Unbanned By", value: `${interaction.user} (${interaction.user.tag})`, inline: true },
                         )
                         .setColor(client.config.colors.normal)
-                        .setFooter(client.config.discord.footer)
+                        .setFooter({ text: client.config.discord.footer })
                         .setTimestamp();
                     webhookClientLogs.send({
                         username: 'Bot Bans',
@@ -79,4 +86,3 @@ module.exports = async (client, interaction, args) => {
     }
 }
 
- 

@@ -1,6 +1,7 @@
 const { CommandInteraction, Client } = require('discord.js');
 const { SlashCommandBuilder } = require('discord.js');
 const Discord = require('discord.js');
+const Schema = require("../../database/models/functions");
 
 module.exports = {
     data: new SlashCommandBuilder()
@@ -63,6 +64,13 @@ module.exports = {
      */
 
     run: async (client, interaction, args) => {
+        const guild = await Schema.findOne({ Guild: interaction.guild.id });
+        if (!guild.Levels) return client.errNormal({
+            error: `The level system is disabled!`,
+            type: 'ephemeral'
+        }, interaction);
+
+        await interaction.deferReply({ fetchReply: true });
         client.loadSubcommands(client, interaction, args);
     },
 };

@@ -12,20 +12,17 @@ module.exports = async (client, reaction, user) => {
       
     if (reaction.message.author.id === user.id)
       return client.errNormal({
-        error: `You cannot star your own messages`,
-        type: "ephemeral",
-      }, reaction.message);
+        error: `You cannot star your own messages\n\nMessage: ${reaction.message.cleanContent}`,
+      }, client.users.cache.get(user.id));
 
     if (reaction.message.author.bot) return client.errNormal({
-      error: `You cannot star bot messages`,
-      type: "ephemeral",
-    }, reaction.message);
+      error: `You cannot star bot messages\n\nMessage: ${reaction.message.cleanContent}`,
+    }, client.users.cache.get(user.id));
 
     const starboardChannel = reaction.message.guild.channels.cache.get(data.Channel);
     if (!starboardChannel) return client.errNormal({
       error: `No star channel found! Run the channel setup`,
-      type: 'ephemeral'
-    }, reaction.message);
+    }, client.users.cache.get(user.id));
 
     const fetch = await starboardChannel.messages.fetch({ limit: 100 });
     const stars = fetch.find(m =>
@@ -38,8 +35,6 @@ module.exports = async (client, reaction, user) => {
       const foundStar = stars.embeds[0];
       const image = reaction.message.attachments.size > 0 ? await extension(reaction, reaction.message.attachments.first()?.url) : "";
       const starMsg = await starboardChannel.messages.fetch(stars.id);
-      starMsg.delete();
-
       client.embed({
         title: `⭐・Starboard`,
         desc: foundStar.description,
@@ -62,7 +57,8 @@ module.exports = async (client, reaction, user) => {
           }
         ],
         footer: `${client.config.discord.footer} | ${reaction.message.id}`,
-      }, starboardChannel)
+        type: 'edit'
+      }, starMsg)
     }
     if (!stars) {
       const image = reaction.message.attachments.size > 0 ? await extension(reaction, reaction.message.attachments.first()?.url) : "";

@@ -189,7 +189,7 @@ module.exports = async (client) => {
         },
     ];
 
-    client.on('interactionCreate', async (interaction) => {
+    client.on(Discord.Events.InteractionCreate, async (interaction) => {
         if (!interaction.isStringSelectMenu()) return;
 
         if (interaction.customId == "Bot-helppanel") {

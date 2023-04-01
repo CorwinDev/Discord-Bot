@@ -58,7 +58,7 @@ module.exports = async (client, member) => {
                 })
             }
             else {
-                client.users.fetch(inviteData.inviteUser).then(async (user) => {
+                client.users.fetch(inviteData.User).then(async (user) => {
 
                     const channel = member.guild.channels.cache.get(channelData.Channel)
 

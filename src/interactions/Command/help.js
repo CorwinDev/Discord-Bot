@@ -16,6 +16,7 @@ module.exports = {
      */
 
     run: async (client, interaction, args) => {
+        await interaction.deferReply({ fetchReply: true });
         const row = new Discord.ActionRowBuilder()
             .addComponents(
                 new Discord.StringSelectMenuBuilder()

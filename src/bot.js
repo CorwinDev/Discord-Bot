@@ -62,8 +62,6 @@ if (clientID && clientSecret) {
             new Spotify({
                 clientID,
                 clientSecret,
-                playlistLimit: 100,
-                albumLimit: 100
             })
         ],
         nodes: [
@@ -115,49 +113,15 @@ client.config = require('./config/bot');
 client.changelogs = require('./config/changelogs');
 client.emotes = require("./config/emojis.json");
 client.webhooks = require("./config/webhooks.json");
+const webHooksArray = ['startLogs', 'shardLogs', 'errorLogs', 'dmLogs', 'voiceLogs', 'serverLogs', 'serverLogs2', 'commandLogs', 'consoleLogs', 'warnLogs', 'voiceErrorLogs', 'creditLogs', 'evalLogs', 'interactionLogs'];
+// Check if .env webhook_id and webhook_token are set
 if (process.env.WEBHOOK_ID && process.env.WEBHOOK_TOKEN) {
-    client.webhooks.startLogs.id = process.env.WEBHOOK_ID;
-    client.webhooks.startLogs.token = process.env.WEBHOOK_TOKEN;
-
-    client.webhooks.shardLogs.id = process.env.WEBHOOK_ID;
-    client.webhooks.shardLogs.token = process.env.WEBHOOK_TOKEN;
-
-    client.webhooks.errorLogs.id = process.env.WEBHOOK_ID;
-    client.webhooks.errorLogs.token = process.env.WEBHOOK_TOKEN;
-
-    client.webhooks.dmLogs.id = process.env.WEBHOOK_ID;
-    client.webhooks.dmLogs.token = process.env.WEBHOOK_TOKEN;
-
-    client.webhooks.voiceLogs.id = process.env.WEBHOOK_ID;
-    client.webhooks.voiceLogs.token = process.env.WEBHOOK_TOKEN;
-
-    client.webhooks.serverLogs.id = process.env.WEBHOOK_ID;
-    client.webhooks.serverLogs.token = process.env.WEBHOOK_TOKEN;
-
-    client.webhooks.serverLogs2.id = process.env.WEBHOOK_ID;
-    client.webhooks.serverLogs2.token = process.env.WEBHOOK_TOKEN;
-
-    client.webhooks.commandLogs.id = process.env.WEBHOOK_ID;
-    client.webhooks.commandLogs.token = process.env.WEBHOOK_TOKEN;
-
-    client.webhooks.consoleLogs.id = process.env.WEBHOOK_ID;
-    client.webhooks.consoleLogs.token = process.env.WEBHOOK_TOKEN;
-
-    client.webhooks.warnLogs.id = process.env.WEBHOOK_ID;
-    client.webhooks.warnLogs.token = process.env.WEBHOOK_TOKEN;
-
-    client.webhooks.voiceErrorLogs.id = process.env.WEBHOOK_ID;
-    client.webhooks.voiceErrorLogs.token = process.env.WEBHOOK_TOKEN;
-
-    client.webhooks.creditLogs.id = process.env.WEBHOOK_ID;
-    client.webhooks.creditLogs.token = process.env.WEBHOOK_TOKEN;
-
-    client.webhooks.evalLogs.id = process.env.WEBHOOK_ID;
-    client.webhooks.evalLogs.token = process.env.WEBHOOK_TOKEN;
-
-    client.webhooks.interactionLogs.id = process.env.WEBHOOK_ID;
-    client.webhooks.interactionLogs.token = process.env.WEBHOOK_TOKEN;
+    for (const webhookName of webHooksArray) {
+        client.webhooks[webhookName].id = process.env.WEBHOOK_ID;
+        client.webhooks[webhookName].token = process.env.WEBHOOK_TOKEN;
+    }
 }
+
 client.commands = new Discord.Collection();
 client.playerManager = new Map();
 client.triviaManager = new Map();
@@ -187,6 +151,7 @@ process.on('unhandledRejection', error => {
     console.error('Unhandled promise rejection:', error);
     if (error) if (error.length > 950) error = error.slice(0, 950) + '... view console for details';
     if (error.stack) if (error.stack.length > 950) error.stack = error.stack.slice(0, 950) + '... view console for details';
+    if(!error.stack) return
     const embed = new Discord.EmbedBuilder()
         .setTitle(`🚨・Unhandled promise rejection`)
         .addFields([
@@ -204,11 +169,13 @@ process.on('unhandledRejection', error => {
         username: 'Bot Logs',
         embeds: [embed],
     }).catch(() => {
+        console.log('Error sending unhandledRejection to webhook')
         console.log(error)
     })
 });
 
 process.on('warning', warn => {
+    console.warn("Warning:", warn);
     const embed = new Discord.EmbedBuilder()
         .setTitle(`🚨・New warning found`)
         .addFields([
@@ -222,11 +189,16 @@ process.on('warning', warn => {
         username: 'Bot Logs',
         embeds: [embed],
     }).catch(() => {
-
+        console.log('Error sending warning to webhook')
+        console.log(warn)
     })
 });
 
-client.on('shardError', error => {
+client.on(Discord.ShardEvents.Error, error => {
+    console.log(error)
+    if (error) if (error.length > 950) error = error.slice(0, 950) + '... view console for details';
+    if (error.stack) if (error.stack.length > 950) error.stack = error.stack.slice(0, 950) + '... view console for details';
+    if (!error.stack) return
     const embed = new Discord.EmbedBuilder()
         .setTitle(`🚨・A websocket connection encountered an error`)
         .addFields([
@@ -245,4 +217,3 @@ client.on('shardError', error => {
         embeds: [embed],
     });
 });
-

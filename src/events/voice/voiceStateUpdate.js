@@ -1,4 +1,4 @@
-const discord = require('discord.js');
+const Discord = require('discord.js');
 const voiceSchema = require("../../database/models/voice");
 const channelSchema = require("../../database/models/voiceChannels");
 
@@ -88,9 +88,13 @@ module.exports = (client, oldState, newState) => {
                     let channelName = data.ChannelName;
                     channelName = channelName.replace(`{emoji}`, "🔊")
                     channelName = channelName.replace(`{channel name}`, `Voice ${data.ChannelCount}`)
+                    channelName = channelName.replace(`{channel count}`, `${data.ChannelCount}`)
+                    channelName = channelName.replace(`{member}`, `${user.username}`)
+                    channelName = channelName.replace(`{member tag}`, `${user.tag}`)
 
-                    const channel = await newState.guild.channels.create("⌛", {
-                        type: "GUILD_VOICE",
+                    const channel = await newState.guild.channels.create({
+                        name: "⌛",
+                        type:  Discord.ChannelType.GuildVoice,
                         parent: data.Category,
                     });
 

@@ -1,27 +1,27 @@
 const Discord = require('discord.js');
 
 module.exports = (client, player, track) => {
-    let row = new Discord.MessageActionRow()
+    let row = new Discord.ActionRowBuilder()
         .addComponents(
-            new Discord.MessageButton()
+            new Discord.ButtonBuilder()
                 .setEmoji(client.emotes.music.previous)
                 .setCustomId("Bot-musicprev")
-                .setStyle("SECONDARY"),
+                .setStyle(Discord.ButtonStyle.Secondary),
 
-            new Discord.MessageButton()
+            new Discord.ButtonBuilder()
                 .setEmoji(client.emotes.music.pause)
                 .setCustomId("Bot-musicpause")
-                .setStyle("SECONDARY"),
+                .setStyle(Discord.ButtonStyle.Secondary),
 
-            new Discord.MessageButton()
+            new Discord.ButtonBuilder()
                 .setEmoji(client.emotes.music.stop)
                 .setCustomId("Bot-musicstop")
-                .setStyle("SECONDARY"),
+                .setStyle(Discord.ButtonStyle.Secondary),
 
-            new Discord.MessageButton()
+            new Discord.ButtonBuilder()
                 .setEmoji(client.emotes.music.next)
                 .setCustomId("Bot-musicnext")
-                .setStyle("SECONDARY"),
+                .setStyle(Discord.ButtonStyle.Secondary),
         );
 
     const channel = client.channels.cache.get(player.textChannel);
@@ -29,21 +29,21 @@ module.exports = (client, player, track) => {
     client.embed({
         title: `${client.emotes.normal.music}・${track.title}`,
         url: track.uri,
-        desc: `Musique lancée dans <#${player.voiceChannel}>!`,
+        desc: `Music started in <#${player.voiceChannel}>!`,
         thumbnail: track.thumbnail,
         fields: [
             {
-                name: `👤┆Demandée par`,
+                name: `👤┆Requested By`,
                 value: `${track.requester}`,
                 inline: true
             },
             {
-                name: `${client.emotes.normal.clock}┆Fin`,
-                value: `Terminée <t:${((Date.now() / 1000) + (track.duration / 1000)).toFixed(0)}:R>`,
+                name: `${client.emotes.normal.clock}┆Ends at`,
+                value: `<t:${((Date.now() / 1000) + (track.duration / 1000)).toFixed(0)}:f>`,
                 inline: true
             },
             {
-                name: `🎬┆Auteur`,
+                name: `🎬┆Author`,
                 value: `${track.author}`,
                 inline: true
             }

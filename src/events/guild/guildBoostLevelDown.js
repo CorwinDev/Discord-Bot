@@ -15,6 +15,10 @@ module.exports = async (client, guild, oldLevel, newLevel) => {
             {
                 name: `> New level`,
                 value: `- ${newLevel}`
+            },
+            {
+                name: `> Timestamp`,
+                value: `- <t:${Math.floor(Date.now() / 1000)}:R>`
             }
         ]
     }, logsChannel).catch(() => { })

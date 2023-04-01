@@ -1,17 +1,16 @@
-/*
 const Discord = require('discord.js');
 
 module.exports = async (client, interaction, args) => {
-    let row = new Discord.MessageActionRow()
+    let row = new Discord.ActionRowBuilder()
         .addComponents(
-            new Discord.MessageButton()
+            new Discord.ButtonBuilder()
                 .setLabel("Support server")
                 .setURL(client.config.discord.serverInvite)
-                .setStyle("LINK"),
+                .setStyle(Discord.ButtonStyle.Link),
         );
 
     client.embed({
-        title: `<:uo_BotSupport:1015565238017470514>・Support`,
+        title: `❓・Support`,
         desc: `Make your server even better with Bot!`,
         image: "https://cdn.discordapp.com/attachments/843487478881976381/874694194474668052/Bot_banner_invite.jpg",
         url: client.config.discord.serverInvite,
@@ -20,4 +19,4 @@ module.exports = async (client, interaction, args) => {
     }, interaction)
 }
 
- */
+ 

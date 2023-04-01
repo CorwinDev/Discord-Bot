@@ -3,14 +3,9 @@ const Discord = require('discord.js');
 const Schema = require("../../database/models/stats");
 
 module.exports = async (client, interaction, args) => {
-    let Emojis = "";
     let EmojiCount = 0;
     let Animated = 0;
     let OverallEmojis = 0;
-
-    function Emoji(id) {
-        return client.emojis.cache.get(id).toString();
-    }
 
     interaction.guild.emojis.cache.forEach((emoji) => {
         OverallEmojis++;
@@ -25,10 +20,11 @@ module.exports = async (client, interaction, args) => {
     channelName = channelName.replace(`{emoji}`, "🤡")
     channelName = channelName.replace(`{name}`, `Animated Emojis: ${Animated || '0'}`)
 
-    await interaction.guild.channels.create(channelName, {
-        type: 'GUILD_VOICE', permissionOverwrites: [
+    await interaction.guild.channels.create({
+        name: channelName,
+        type:  Discord.ChannelType.GuildVoice, permissionOverwrites: [
             {
-                deny: 'CONNECT',
+                deny: [Discord.PermissionsBitField.Flags.Connect],
                 id: interaction.guild.id
             },
         ],

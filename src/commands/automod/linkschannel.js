@@ -11,7 +11,7 @@ module.exports = async (client, interaction, args) => {
             if (data) {
                 if (data.Channels.includes(channel.id)) {
                     return client.errNormal({
-                        error: `Ce canal ${channel} est déjà dans la base de données!`,
+                        error: `The channel ${channel} is already in the database!`,
                         type: 'editreply'
                     }, interaction);
                 }
@@ -28,10 +28,10 @@ module.exports = async (client, interaction, args) => {
         })
 
         client.succNormal({
-            text: `Le Canal a été ajouté à la liste blanche !`,
+            text: `Channel has been added to the whitelist!`,
             fields: [
                 {
-                    name: `<:uo_BotEvent:1015565719330627584> ┆ Canal`,
+                    name: `📘┆Channel`,
                     value: `${channel} (${channel.name})`
                 }
             ],
@@ -43,7 +43,7 @@ module.exports = async (client, interaction, args) => {
             if (data) {
                 if (!data.Channels.includes(channel.id)) {
                     return client.errNormal({
-                        error: `Ce canal ${channel} n'existe pas dans la base de données !`,
+                        error: `The channel ${channel} doesn't exist in the database!`,
                         type: 'editreply'
                     }, interaction);
                 }
@@ -57,10 +57,10 @@ module.exports = async (client, interaction, args) => {
 
 
                 client.succNormal({
-                    text: `Le canal a été retiré de la liste blanche !`,
+                    text: `Channel has been removed from the whitelist!`,
                     fields: [
                         {
-                            name: `<:uo_BotEvent:1015565719330627584> ┆ Canal`,
+                            name: `📘┆Channel`,
                             value: `${channel} (${channel.name})`
                         }
                     ],
@@ -69,7 +69,7 @@ module.exports = async (client, interaction, args) => {
             }
             else {
                 return client.errNormal({
-                    error: `Ce serveur ne possède pas de données !`,
+                    error: `This guild has not data!`,
                     type: 'editreply'
                 }, interaction);
             }

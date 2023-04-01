@@ -20,7 +20,7 @@ module.exports = async (client, interaction, args) => {
     }
     else {
         client.errNormal({ 
-            error: "Pas de données trouvées !",
+            error: "No data found!",
             type: 'editreply' 
         }, interaction)
     }

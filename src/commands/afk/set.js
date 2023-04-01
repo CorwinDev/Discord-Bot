@@ -8,7 +8,7 @@ module.exports = async (client, interaction, args) => {
     Schema.findOne({ Guild: interaction.guild.id, User: interaction.user.id }, async (err, data) => {
         if (data) {
             return client.errNormal({ 
-                error: `Tu es déjà afk!`,
+                error: `You're already afk!`,
                 type: 'editreply' 
             }, interaction);
         }
@@ -24,12 +24,12 @@ module.exports = async (client, interaction, args) => {
             }
 
             client.succNormal({ 
-                text: `Ton status AFK a été activé avec succès !`,
-                type: 'ephemeral'
+                text: `Your AFK has been set up successfully`,
+                type: 'ephemeraledit'
             }, interaction);
 
             client.embed({ 
-                desc: `${interaction.user} est maintenant inactif! **Raison:** ${reason}` 
+                desc: `${interaction.user} is now afk! **Reason:** ${reason}` 
             }, interaction.channel)
         }
     })

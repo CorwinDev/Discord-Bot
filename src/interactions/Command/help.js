@@ -1,5 +1,5 @@
 const { CommandInteraction, Client } = require('discord.js');
-const { SlashCommandBuilder } = require('@discordjs/builders');
+const { SlashCommandBuilder } = require('discord.js');
 const Discord = require('discord.js');
 const moment = require("moment");
 require("moment-duration-format");
@@ -16,11 +16,12 @@ module.exports = {
      */
 
     run: async (client, interaction, args) => {
-        const row = new Discord.MessageActionRow()
+        await interaction.deferReply({ fetchReply: true });
+        const row = new Discord.ActionRowBuilder()
             .addComponents(
-                new Discord.MessageSelectMenu()
+                new Discord.StringSelectMenuBuilder()
                     .setCustomId('Bot-helppanel')
-                    .setPlaceholder('❌ ┆ Nothing selected')
+                    .setPlaceholder('❌┆Nothing selected')
                     .addOptions([
                         {
                             label: `Commands`,
@@ -50,21 +51,21 @@ module.exports = {
             );
 
         return client.embed({
-            title: `<:uo_info:1015553303242883112>・Help panel`,
+            title: `❓・Help panel`,
             desc: `Welcome to Bot's help panel! We have made a small overview to help you! Make a choice via the menu below`,
             image: "https://cdn.discordapp.com/attachments/843487478881976381/874694194474668052/Bot_banner_invite.jpg",
             fields: [
                 {
-                    name: `<:uo_BotSupport:1015565238017470514> ┆ Menu doesn't work?`,
+                    name: `❌┆Menu doesn't work?`,
                     value: `Try resending the command. If you get no reaction, make sure you report the bug!`
                 },
                 {
-                    name: `<:uo_BotSupport:1015565238017470514>┆ Found a bug?`,
+                    name: `🪲┆Found a bug?`,
                     value: `Report this with \`/report bug\``
                 },
                 {
-                    name: `<:to_space:1012038751729491968> ┆ Links`,
-                    value: `[Invite](${client.config.discord.botInvite}) | [Vote](https://top.gg/bot/960193514656919652/vote)`
+                    name: `🔗┆Links`,
+                    value: `[Website](https://corwindev.nl/) | [Invite](${client.config.discord.botInvite}) | [Vote](https://top.gg/bot/798144456528363550/vote)`
                 },
             ],
             components: [row],

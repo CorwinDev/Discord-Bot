@@ -43,6 +43,10 @@ module.exports = async (client, event) => {
             {
                 name: `> Location type`,
                 value: `- ${locations[event.entityType]}`
+            },
+            {
+                name: `> Timestamp`,
+                value: `- <t:${Math.floor(Date.now() / 1000)}:R>`
             }
         ]
     }, logsChannel).catch(() => { })

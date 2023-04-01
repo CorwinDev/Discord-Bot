@@ -19,6 +19,10 @@ module.exports = async (client, guild, afkChannel) => {
             {
                 name: `> ID`,
                 value: `- ${afkChannel.id}`
+            },
+            {
+                name: `> Timestamp`,
+                value: `- <t:${Math.floor(afkChannel.createdTimestamp / 1000)}:R>`
             }
         ]
     }, logsChannel).catch(() => { })

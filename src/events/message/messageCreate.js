@@ -11,8 +11,14 @@ const levelRewards = require("../../database/models/levelRewards");
 const levelLogs = require("../../database/models/levelChannels");
 const Commands = require("../../database/models/customCommand");
 const CommandsSchema = require("../../database/models/customCommandAdvanced");
-const list = require('../../bot.js');
+const fetch = require("node-fetch");
 
+/**
+ * 
+ * @param {Discord.Client} client 
+ * @param {Discord.Message} message 
+ * @returns 
+ */
 module.exports = async (client, message) => {
   const dmlog = new Discord.WebhookClient({
     id: client.webhooks.dmLogs.id,
@@ -21,64 +27,26 @@ module.exports = async (client, message) => {
 
   if (message.author.bot) return;
 
-  if (message.channel.type === "DM") {
-    let embedLogs = new Discord.MessageEmbed()
+  if (message.channel.type === Discord.ChannelType.DM) {
+    let embedLogs = new Discord.EmbedBuilder()
       .setTitle(`💬・New DM message!`)
       .setDescription(`Bot has received a new DM message!`)
-      .addField("👤┆Send By", `${message.author} (${message.author.tag})`, true)
-      .addField(`💬┆Message`, `${message.content || "None"}`, true)
+      .addFields(
+        { name: "👤┆Send By", value: `${message.author} (${message.author.tag})`, inline: true },
+        { name: `💬┆Message`, value: `${message.content || "None"}`, inline: true },
+      )
       .setColor(client.config.colors.normal)
       .setTimestamp();
 
     if (message.attachments.size > 0)
-      embedLogs.addField(
-        `📃┆Attachments`,
-        `${message.attachments.first()?.url}`,
-        false
-      );
+      embedLogs.addFields(
+        { name: `📃┆Attachments`, value: `${message.attachments.first()?.url}`, inline: false },
+      )
     return dmlog.send({
       username: "Bot DM",
       embeds: [embedLogs],
     });
   }
-    // Triggers
-    messageStripped = message.content.replace(/[.,\/#!$%\^&\*;:{}=\-_`~()]/g,"");
-    for (let i = 0; i < list.trigger.length ; i++) {
-        // Status active ?
-        if (list.trigger[i].Active) {
-          
-            // Regex flags ?
-            console.log(messageStripped);
-            if (list.trigger[i].RegexFlags != "") {
-            var Regext = new RegExp(list.trigger[i].Regex,list.trigger[i].RegexFlags);
-            } else {
-            var Regext = list.trigger[i].Regex;
-            };
-
-            // Check filter regex
-            const args = messageStripped.match(Regext);
-            if(args != null) {
-                console.log(">> " + Regext);
-                console.log(">> " + list.trigger[i].Response);
-                console.log(list.trigger[i].Mention);
-                // Reply active ?
-                message.reply({
-                    content: list.trigger[i].Response,
-                    allowedMentions: {
-                        repliedUser: list.trigger[i].Mention
-                    }
-                });
-    
-                // Deleting active ?
-                if (list.trigger[i].Deleting) {
-                    message.delete({ timeout: 1000 });
-                }
-                
-            }  
-          }
-        
-    }
-      
 
   // Levels
   Functions.findOne({ Guild: message.guild.id }, async (err, data) => {
@@ -131,7 +99,7 @@ module.exports = async (client, message) => {
                 await client.channels.cache
                   .get(levelData.Channel)
                   .send({ content: levelMessage })
-                  .catch(() => {});
+                  .catch(() => { });
               } else {
                 await message.channel.send({ content: levelMessage });
               }
@@ -146,7 +114,7 @@ module.exports = async (client, message) => {
                   .send({
                     content: `**GG** <@!${message.author.id}>, you are now level **${user.level}**`,
                   })
-                  .catch(() => {});
+                  .catch(() => { });
               } else {
                 message.channel.send({
                   content: `**GG** <@!${message.author.id}>, you are now level **${user.level}**`,
@@ -166,7 +134,7 @@ module.exports = async (client, message) => {
                 message.guild.members.cache
                   .get(message.author.id)
                   .roles.add(data.Role)
-                  .catch((e) => {});
+                  .catch((e) => { });
               }
             }
           );
@@ -191,7 +159,7 @@ module.exports = async (client, message) => {
                 message.guild.members.cache
                   .get(message.author.id)
                   .roles.add(data.Role);
-              } catch {}
+              } catch { }
             }
           }
         );
@@ -230,7 +198,7 @@ module.exports = async (client, message) => {
 
         if (message.member.displayName.startsWith(`[AFK] `)) {
           let name = message.member.displayName.replace(`[AFK] `, ``);
-          message.member.setNickname(name).catch((e) => {});
+          message.member.setNickname(name).catch((e) => { });
         }
       }
     }
@@ -259,35 +227,63 @@ module.exports = async (client, message) => {
   chatBotSchema.findOne({ Guild: message.guild.id }, async (err, data) => {
     if (!data) return;
     if (message.channel.id !== data.Channel) return;
-
-    try {
-      const input = message;
-      try {
-        fetch(
-          `https://api.monkedev.com/fun/chat?msg=${encodeURIComponent(input)}`
-        )
-          .catch(() => {})
-          .then((res) => res.json())
-          .catch(() => {})
-          .then(async (json) => {
-            if (json) {
-              if (
-                json.response !== " " ||
-                json.response !== undefined ||
-                json.response !== "" ||
-                json.response !== null
-              ) {
-                try {
-                  return message
-                    .reply({ content: json.response })
-                    .catch(() => {});
-                } catch {}
-              }
-            }
+    if (process.env.OPENAI) {
+      fetch(
+        `https://api.openai.com/v1/chat/completions`,
+        {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+            'Authorization': 'Bearer ' + process.env.OPENAI,
+          },
+          body: JSON.stringify({
+            'model': 'gpt-3.5-turbo',
+            'messages': [{
+              'role': 'user',
+              'content': message.content
+            }]
           })
-          .catch(() => {});
-      } catch {}
-    } catch {}
+        }
+      )
+        .catch(() => {
+        })
+        .then((res) => {
+          res.json().then((data) => {
+            if(data.error) return;
+            message.reply({ content: data.choices[0].message.content });
+          });
+        });
+    } else {
+      try {
+        const input = message;
+        try {
+          fetch(
+            `https://api.coreware.nl/fun/chat?msg=${encodeURIComponent(input)}&uid=${message.author.id}`,
+          )
+            .catch(() => { console.log })
+            .then((res) => res.json())
+            .catch(() => { console.log})
+            .then(async (json) => {
+              console.log(json);
+              if (json) {
+                if (
+                  json.response !== " " ||
+                  json.response !== undefined ||
+                  json.response !== "" ||
+                  json.response !== null
+                ) {
+                  try {
+                    return message
+                      .reply({ content: json.response })
+                      .catch(() => { });
+                  } catch { }
+                }
+              }
+            })
+            .catch(() => { });
+        } catch { }
+      } catch { }
+    }
   });
 
   // Sticky messages
@@ -299,7 +295,7 @@ module.exports = async (client, message) => {
 
         const lastStickyMessage = await message.channel.messages
           .fetch(data.LastMessage)
-          .catch(() => {});
+          .catch(() => { });
         if (!lastStickyMessage) return;
         await lastStickyMessage.delete({ timeout: 1000 });
 
@@ -312,7 +308,7 @@ module.exports = async (client, message) => {
         data.save();
       }
     );
-  } catch {}
+  } catch { }
 
   // Prefix
   var guildSettings = await Functions.findOne({ Guild: message.guild.id });
@@ -340,5 +336,100 @@ module.exports = async (client, message) => {
     var prefix = guildSettings.Prefix;
   }
 
+  const escapeRegex = (str) => str.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
+  const prefixRegex = new RegExp(
+    `^(<@!?${client.user.id}>|${escapeRegex(prefix)})\\s*`
+  );
+
+  if (!prefixRegex.test(message.content.toLowerCase())) return;
+  const [, matchedPrefix] = message.content.toLowerCase().match(prefixRegex);
+
+  const args = message.content.slice(matchedPrefix.length).trim().split(/ +/g);
+  const command = args.shift().toLowerCase();
+
+  if (
+    message.mentions.users.first() &&
+    message.mentions.users.first().id == client.user.id &&
+    command.length === 0
+  ) {
+    let row = new Discord.ActionRowBuilder().addComponents(
+      new Discord.ButtonBuilder()
+        .setLabel("Invite")
+        .setURL(
+          client.config.discord.botInvite
+        )
+        .setStyle(Discord.ButtonStyle.Link),
+
+      new Discord.ButtonBuilder()
+        .setLabel("Support server")
+        .setURL(client.config.discord.serverInvite)
+        .setStyle(Discord.ButtonStyle.Link)
+    );
+
+    client
+      .embed(
+        {
+          title: "Hi, i'm Bot",
+          desc: `Use with commands via Discord ${client.emotes.normal.slash} commands`,
+          fields: [
+            {
+              name: "📨┆Invite me",
+              value: `Invite Bot in your own server! [Click here](${client.config.discord.botInvite})`,
+            },
+            {
+              name: "❓┇I don't see any slash commands",
+              value:
+                "The bot may not have permissions for this. Open the invite link again and select your server. The bot then gets the correct permissions",
+            },
+            {
+              name: "❓┆Need support?",
+              value: `For questions you can join our [support server](${client.config.discord.serverInvite})!`,
+            },
+            {
+              name: "🐞┆Found a bug?",
+              value: `Report all bugs via: \`/report bug\`!`,
+            },
+          ],
+          components: [row],
+        },
+        message.channel
+      )
+      .catch(() => { });
+  }
+
+  const cmd = await Commands.findOne({
+    Guild: message.guild.id,
+    Name: command,
+  });
+  if (cmd) {
+    return message.channel.send({ content: cmdx.Responce });
+  }
+
+  const cmdx = await CommandsSchema.findOne({
+    Guild: message.guild.id,
+    Name: command,
+  });
+  if (cmdx) {
+    if (cmdx.Action == "Normal") {
+      return message.channel.send({ content: cmdx.Responce });
+    } else if (cmdx.Action == "Embed") {
+      return client.simpleEmbed(
+        {
+          desc: `${cmdx.Responce}`,
+        },
+        message.channel
+      );
+    } else if (cmdx.Action == "DM") {
+      return message.author.send({ content: cmdx.Responce }).catch((e) => {
+        client.errNormal(
+          {
+            error: "I can't DM you, maybe you have DM turned off!",
+          },
+          message.channel
+        );
+      });
+    }
+  }
 };
+
 

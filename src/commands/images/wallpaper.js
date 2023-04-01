@@ -1,16 +1,9 @@
-const hdqwalls = require("hdqwalls-wrapper");
-
+const fetch = require("node-fetch")
 module.exports = async (client, interaction, args) => {
-
+    var images = []
     const query = interaction.options.getString('name');
 
-    const image = await hdqwalls(query);
-
-    client.embed({
-        title: `🖼・Your wallpaper`,
-        image: image[0],
-        type: 'editreply'
-    }, interaction)
+    // Use FREE API 
+    
 }
 
- 

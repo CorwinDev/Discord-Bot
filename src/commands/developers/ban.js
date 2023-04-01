@@ -3,15 +3,22 @@ const Discord = require('discord.js');
 const Schema = require('../../database/models/userBans');
 
 const webhookClientLogs = new Discord.WebhookClient({
-    id: "",
-    token: "",
+  id: "",
+  token: "",
 });
 
 module.exports = async (client, interaction, args) => {
     const boolean = interaction.options.getBoolean('new');
     const member = interaction.options.getUser('user');
-
+  
     if (boolean == true) {
+        if (member.id === interaction.user.id) { // add the check here
+            return client.errNormal({
+                error: `You cannot ban yourself from the bot`,
+                type: `editreply`
+            }, interaction);
+        }
+
         Schema.findOne({ User: member.id }, async (err, data) => {
             if (data) {
                 return client.errNormal({
@@ -29,12 +36,14 @@ module.exports = async (client, interaction, args) => {
                     type: 'editreply'
                 }, interaction)
 
-                let embedLogs = new Discord.MessageEmbed()
+                let embedLogs = new Discord.EmbedBuilder()
                     .setTitle(`🔨・Ban added`)
                     .setDescription(`<@!${member.id}> (${member.id}) banned from the bot`)
-                    .addField('👤┆Banned By', `${interaction.user} (${interaction.user.tag})`, true)
+                    .addFields(
+                        { name: "👤┆Banned By", value: `${interaction.user} (${interaction.user.tag})`, inline: true },
+                    )
                     .setColor(client.config.colors.normal)
-                    .setFooter(client.config.discord.footer)
+                    .setFooter({ text: client.config.discord.footer })
                     .setTimestamp();
                 webhookClientLogs.send({
                     username: 'Bot Bans',
@@ -52,12 +61,14 @@ module.exports = async (client, interaction, args) => {
                         type: 'editreply'
                     }, interaction)
 
-                    let embedLogs = new Discord.MessageEmbed()
+                    let embedLogs = new Discord.EmbedBuilder()
                         .setTitle(`🔨・Ban removed`)
                         .setDescription(`<@!${member.id}> (${member.id}) unbanned from the bot`)
-                        .addField('👤┆Unbanned By', `${interaction.user} (${interaction.user.tag})`, true)
+                        .addFields(
+                            { name: "👤┆Unbanned By", value: `${interaction.user} (${interaction.user.tag})`, inline: true },
+                        )
                         .setColor(client.config.colors.normal)
-                        .setFooter(client.config.discord.footer)
+                        .setFooter({ text: client.config.discord.footer })
                         .setTimestamp();
                     webhookClientLogs.send({
                         username: 'Bot Bans',
@@ -75,4 +86,3 @@ module.exports = async (client, interaction, args) => {
     }
 }
 
- 

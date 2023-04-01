@@ -5,7 +5,7 @@ module.exports = async (client, interaction, args) => {
 
     Schema.findOne({ User: interaction.user.id }, async (err, data) => {
         if (data) {
-            const menu = new Discord.MessageSelectMenu()
+            const menu = new Discord.StringSelectMenuBuilder()
                 .setCustomId('gender-setup')
                 .setPlaceholder('❌┆Nothing selected')
                 .addOptions(
@@ -26,7 +26,7 @@ module.exports = async (client, interaction, args) => {
                     }
                 );
 
-            const row = new Discord.MessageActionRow()
+            const row = new Discord.ActionRowBuilder()
                 .addComponents(menu)
 
             client.embed({
@@ -36,21 +36,16 @@ module.exports = async (client, interaction, args) => {
             }, interaction).then(msg => {
                 const filter = i => i.user.id === interaction.user.id;
 
-                interaction.channel.awaitMessageComponent({ filter, max: 1, componentType: 'SELECT_MENU' }).then(async i => {
+                interaction.channel.awaitMessageComponent({ filter, max: 1, componentType: Discord.ComponentType.StringSelect }).then(i => {
                     if (i.customId == 'gender-setup') {
                         data.Gender = i.values[0];
                         data.save();
 
-                        client.api.interactions(i.id, i.token).callback.post({
-                            data: {
-                                type: 4,
-                                data: {
-                                    content: `Your gender is set`,
-                                    embeds: [],
-                                    flags: 64,
-                                }
-                            }
-                        });
+                        client.succNormal({
+                            text: "Set your gender to " + i.values[0],
+                            type: 'editreply',
+                            components: [],
+                        }, interaction);
                     }
                 })
             })

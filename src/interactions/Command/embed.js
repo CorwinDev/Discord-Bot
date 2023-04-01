@@ -1,6 +1,6 @@
 const { CommandInteraction, Client } = require("discord.js");
-const { SlashCommandBuilder } = require("@discordjs/builders");
-const { ChannelType } = require("discord-api-types/v9");
+const { SlashCommandBuilder } = require("discord.js");
+const { ChannelType } = require("discord.js");
 const Discord = require("discord.js");
 
 module.exports = {
@@ -12,7 +12,7 @@ module.exports = {
         .setName("channel")
         .setDescription("Channel where the embed should be")
         .setRequired(true)
-        .addChannelType(ChannelType.GuildText)
+        .addChannelTypes(ChannelType.GuildText)
     ),
   /**
    * @param {Client} client
@@ -21,18 +21,19 @@ module.exports = {
    */
 
   run: async (client, interaction, args) => {
+    await interaction.deferReply({ fetchReply: true });
     const perms = await client.checkPerms(
       {
-        flags: [Discord.Permissions.FLAGS.MANAGE_MESSAGES],
-        perms: ["MANAGE_MESSAGES"],
+        flags: [Discord.PermissionsBitField.Flags.ManageMessages],
+        perms: [Discord.PermissionsBitField.Flags.ManageMessages],
       },
       interaction
     );
 
     if (perms == false) return;
 
-    let row = new Discord.MessageActionRow().addComponents(
-      new Discord.MessageSelectMenu()
+    let row = new Discord.ActionRowBuilder().addComponents(
+      new Discord.StringSelectMenuBuilder()
         .setCustomId("embedSelect")
         .setPlaceholder("Nothing selected")
         .addOptions([
@@ -93,15 +94,15 @@ module.exports = {
         ])
     );
 
-    let row2 = new Discord.MessageActionRow().addComponents(
-      new Discord.MessageButton()
+    let row2 = new Discord.ActionRowBuilder().addComponents(
+      new Discord.ButtonBuilder()
         .setCustomId("send_embed")
         .setEmoji("✅")
         .setLabel("Send embed")
-        .setStyle("SUCCESS")
+        .setStyle(Discord.ButtonStyle.Success)
     );
 
-    let embed = new Discord.MessageEmbed().setDescription(
+    let embed = new Discord.EmbedBuilder().setDescription(
       `Please select some options`
     );
 
@@ -115,10 +116,6 @@ module.exports = {
     collector.on("collect", async (i) => {
       if (i.customId === "embedSelect") {
         i.deferUpdate();
-        const embedData = i.message.embeds[0];
-        if (embedData.description == "Please select some options") {
-          embed.setDescription(``);
-        }
 
         if (i.values == "title_embed") {
           interaction.channel
@@ -135,7 +132,7 @@ module.exports = {
                 })
                 .then(async (collected) => {
                   message.delete({ timeout: 1000 });
-                  collected.first().delete({ timeout: 1000 });
+                  collected.delete({ timeout: 1000 });
 
                   embed.setTitle(`${collected.first().content}`);
                   await interaction.editReply({ embeds: [embed] });
@@ -158,7 +155,7 @@ module.exports = {
                 })
                 .then(async (collected) => {
                   message.delete({ timeout: 1000 });
-                  collected.first().delete({ timeout: 1000 });
+                  collected.delete({ timeout: 1000 });
 
                   embed.setDescription(`${collected.first().content}`);
                   await interaction.editReply({ embeds: [embed] });
@@ -181,7 +178,7 @@ module.exports = {
                 })
                 .then(async (collected) => {
                   message.delete({ timeout: 1000 });
-                  collected.first().delete({ timeout: 1000 });
+                  collected.delete({ timeout: 1000 });
 
                   embed.setAuthor({
                     name: `${collected.first().content}`,
@@ -207,7 +204,7 @@ module.exports = {
                 })
                 .then(async (collected) => {
                   message.delete({ timeout: 1000 });
-                  collected.first().delete({ timeout: 1000 });
+                  collected.delete({ timeout: 1000 });
 
                   embed.setFooter({
                     text: `${collected.first().content}`,
@@ -232,7 +229,7 @@ module.exports = {
                 })
                 .then(async (collected) => {
                   message.delete({ timeout: 1000 });
-                  collected.first().delete({ timeout: 1000 });
+                  collected.delete({ timeout: 1000 });
 
                   if (
                     !collected.first().content.includes("http://") &&
@@ -267,7 +264,7 @@ module.exports = {
                 })
                 .then(async (collected) => {
                   message.delete({ timeout: 1000 });
-                  collected.first().delete({ timeout: 1000 });
+                  collected.delete({ timeout: 1000 });
 
                   if (
                     !collected.first().content.includes("http://") &&
@@ -297,7 +294,7 @@ module.exports = {
                 })
                 .then(async (collected) => {
                   message.delete({ timeout: 1000 });
-                  collected.first().delete({ timeout: 1000 });
+                  collected.delete({ timeout: 1000 });
 
                   if (
                     !collected.first().content.includes("http://") &&
@@ -314,7 +311,7 @@ module.exports = {
 
         if (i.values == "color_embed") {
           interaction.channel
-            .send({ content: "Please enter a color" })
+            .send({ content: "Please enter a color. e.g. #FF0000" })
             .then((message) => {
               const filterMessage = (m) =>
                 m.author.id === interaction.user.id && !m.author.bot;
@@ -327,7 +324,7 @@ module.exports = {
                 })
                 .then(async (collected) => {
                   message.delete({ timeout: 1000 });
-                  collected.first().delete({ timeout: 1000 });
+                  collected.delete({ timeout: 1000 });
 
                   embed.setColor(`${collected.first().content}`);
                   await interaction.editReply({ embeds: [embed] });
@@ -344,7 +341,8 @@ module.exports = {
           );
 
         channel
-          .createWebhook(interaction.guild.name, {
+          .createWebhook({
+            name: interaction.guild.name,
             avatar: interaction.guild.iconURL(),
           })
           .then(async (_webhook) => {

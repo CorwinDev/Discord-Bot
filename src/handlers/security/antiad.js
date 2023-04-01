@@ -4,19 +4,18 @@ const Schema = require("../../database/models/functions");
 const Schema2 = require("../../database/models/channelList");
 
 module.exports = (client) => {
-    client.on('messageCreate', async (message) => {
-        if (message.channel.type === 'DM') return;
-
+    client.on(Discord.Events.MessageCreate, async (message) => {
+        if (message.channel.type === Discord.ChannelType.DM || message.author.bot) return;
         Schema.findOne({ Guild: message.guild.id }, async (err, data) => {
             if (data) {
                 if (data.AntiInvite == true) {
-                    const { guild, member, content } = message
+                    const { content } = message
 
                     const code = content.split('discord.gg/')[1]
                     if (code) {
                         Schema2.findOne({ Guild: message.guild.id }, async (err, data2) => {
                             if (data2) {
-                                if (data2.Channels.includes(message.channel.id) || message.member.permissions.has(Discord.Permissions.FLAGS.MANAGE_MESSAGES)) {
+                                if (data2.Channels.includes(message.channel.id) || message.member.permissions.has(Discord.PermissionsBitField.Flags.ManageMessages)) {
                                     return;
                                 }
 
@@ -30,6 +29,7 @@ module.exports = (client) => {
                                 }, message.channel)
                             }
                             else {
+                                if (message.member.permissions.has(Discord.PermissionsBitField.Flags.ManageMessages)) return;
                                 message.delete();
 
                                 client.embed({
@@ -43,12 +43,12 @@ module.exports = (client) => {
                     }
                 }
                 else if (data.AntiLinks == true) {
-                    const { guild, member, content } = message
+                    const { content } = message
 
                     if (content.includes('http://') || content.includes('https://') || content.includes('www.')) {
                         Schema2.findOne({ Guild: message.guild.id }, async (err, data2) => {
                             if (data2) {
-                                if (data2.Channels.includes(message.channel.id) || message.member.permissions.has(Discord.Permissions.FLAGS.MANAGE_MESSAGES)) {
+                                if (data2.Channels.includes(message.channel.id) || message.member.permissions.has(Discord.PermissionsBitField.Flags.ManageMessages)) {
                                     return;
                                 }
 
@@ -62,6 +62,7 @@ module.exports = (client) => {
                                 }, message.channel)
                             }
                             else {
+                                if (message.member.permissions.has(Discord.PermissionsBitField.Flags.ManageMessages)) return;
                                 message.delete();
                                
                                 client.embed({
@@ -78,44 +79,57 @@ module.exports = (client) => {
         })
     }).setMaxListeners(0);
 
-    client.on('messageUpdate', async (oldMessage, newMessage) => {
-        if (oldMessage.content === newMessage.content) {
-            return;
-        }
+    client.on(Discord.Events.MessageUpdate, async (oldMessage, newMessage) => {
+        if (oldMessage.content === newMessage.content || newMessage.channel.type === Discord.ChannelType.DM) return;
 
         Schema.findOne({ Guild: newMessage.guild.id }, async (err, data) => {
             if (data) {
                 if (data.AntiInvite == true) {
-                    const { guild, member, content } = newMessage
+                    const { content } = newMessage
 
                     const code = content.split('discord.gg/')[1]
                     if (code) {
                         Schema2.findOne({ Guild: newMessage.guild.id }, async (err, data2) => {
                             if (data2) {
-                                if (data2.Channels.includes(newMessage.channel.id) || newMessage.member.permissions.has(Discord.Permissions.FLAGS.MANAGE_MESSAGES)) {
+                                if (data2.Channels.includes(newMessage.channel.id) || newMessage.member.permissions.has(Discord.PermissionsBitField.Flags.ManageMessages)) {
                                     return;
                                 }
 
                                 newMessage.delete();
-                                let error = new Discord.MessageEmbed()
+                                let error = new Discord.EmbedBuilder()
                                     .setTitle(`${client.emotes.normal.error}・Moderator`)
                                     .setAuthor(client.user.username, client.user.avatarURL())
                                     .setDescription(`Discord links are not allowed in this server!`)
                                     .setColor(client.config.colors.error)
-                                    .setFooter(client.config.discord.footer)
+                                    .setFooter({ text: client.config.discord.footer })
                                     .setTimestamp();
-                                newMessage.channel.send({ content: `${newMessage.author}`, embeds: [error] })
+                                var msg = newMessage.channel.send({ content: `${newMessage.author}`, embeds: [error] })
+                                setTimeout(() => {
+                                    try{
+                                        msg.delete();
+                                    } catch (e) {
+                                        return;
+                                    }
+                                }, 5000)
                             }
                             else {
+                                if (newMessage.member.permissions.has(Discord.PermissionsBitField.Flags.ManageMessages)) return;
                                 newMessage.delete();
-                                let error = new Discord.MessageEmbed()
+                                let error = new Discord.EmbedBuilder()
                                     .setTitle(`${client.emotes.normal.error}・Moderator`)
                                     .setAuthor(client.user.username, client.user.avatarURL())
                                     .setDescription(`Discord links are not allowed in this server!`)
                                     .setColor(client.config.colors.error)
-                                    .setFooter(client.config.discord.footer)
+                                    .setFooter({ text: client.config.discord.footer })
                                     .setTimestamp();
-                                newMessage.channel.send({ content: `${newMessage.author}`, embeds: [error] })
+                                var msg = newMessage.channel.send({ content: `${newMessage.author}`, embeds: [error] })
+                                setTimeout(() => {
+                                    try {
+                                        msg.delete();
+                                    } catch (e) {
+                                        return;
+                                    }
+                                }, 5000)
                             }
                         })
                     }
@@ -126,30 +140,45 @@ module.exports = (client) => {
                     if (content.includes('http://') || content.includes('https://') || content.includes('www.')) {
                         Schema2.findOne({ Guild: newMessage.guild.id }, async (err, data2) => {
                             if (data2) {
-                                if (data2.Channels.includes(newMessage.channel.id) || newMessage.member.permissions.has(Discord.Permissions.FLAGS.MANAGE_MESSAGES)) {
+                                if (data2.Channels.includes(newMessage.channel.id) || newMessage.member.permissions.has(Discord.PermissionsBitField.Flags.ManageMessages)) {
                                     return;
                                 }
 
                                 newMessage.delete();
-                                var error = new Discord.MessageEmbed()
+                                var error = new Discord.EmbedBuilder()
                                     .setTitle(`${client.emotes.normal.error}・Moderator`)
                                     .setAuthor(client.user.username, client.user.avatarURL())
                                     .setDescription(`Links are not allowed in this server!`)
                                     .setColor(client.config.colors.error)
-                                    .setFooter(client.config.discord.footer)
+                                    .setFooter({ text: client.config.discord.footer })
                                     .setTimestamp();
-                                newMessage.channel.send({ content: `${newMessage.author}`, embeds: [error] })
+                                var msg = newMessage.channel.send({ content: `${newMessage.author}`, embeds: [error] })
+                                setTimeout(() => {
+                                    try {
+                                        msg.delete();
+                                    } catch (e) {
+                                        return;
+                                    }
+                                }, 5000)
                             }
                             else {
+                                if (newMessage.member.permissions.has(Discord.PermissionsBitField.Flags.ManageMessages)) return;
                                 newMessage.delete();
-                                var error = new Discord.MessageEmbed()
+                                var error = new Discord.EmbedBuilder()
                                     .setTitle(`${client.emotes.normal.error}・Moderator`)
                                     .setAuthor(client.user.username, client.user.avatarURL())
                                     .setDescription(`Links are not allowed in this server!`)
                                     .setColor(client.config.colors.error)
-                                    .setFooter(client.config.discord.footer)
+                                    .setFooter({ text: client.config.discord.footer })
                                     .setTimestamp();
-                                newMessage.channel.send({ content: `${newMessage.author}`, embeds: [error] })
+                                var msg = newMessage.channel.send({ content: `${newMessage.author}`, embeds: [error] })
+                                setTimeout(() => {
+                                    try {
+                                        msg.delete();
+                                    } catch (e) {
+                                        return;
+                                    }
+                                }, 5000)
                             }
                         })
                     }

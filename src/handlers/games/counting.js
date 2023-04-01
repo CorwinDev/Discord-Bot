@@ -6,12 +6,12 @@ const count = require("../../database/models/count");
 module.exports = async (client) => {
   client
     .on("messageCreate", async (message) => {
-      if (message.author.bot || message.channel.type === "DM") return;
+      if (message.author.bot || message.channel.type === Discord.ChannelType.DM) return;
 
       if (
         isNaN(message.content) ||
         message.attachments.size > 0 ||
-        message.type == "PINS_ADD"
+        message.type == Discord.MessageType.ChannelPinnedMessage
       )
         return;
 
@@ -39,7 +39,7 @@ module.exports = async (client) => {
             return message.react(client.emotes.normal.error);
           } catch (error) {
             message.react(client.emotes.normal.error);
-            throw error;
+            console.log(error);
           }
         } else {
           if (message.content == countData.Count) {
@@ -63,7 +63,7 @@ module.exports = async (client) => {
               return message.react(client.emotes.normal.error);
             } catch (error) {
               message.react(client.emotes.normal.error);
-              throw error;
+              console.log(error)
             }
           }
         }

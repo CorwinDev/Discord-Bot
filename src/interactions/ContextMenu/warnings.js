@@ -1,5 +1,5 @@
 const { CommandInteraction, Client } = require('discord.js');
-const { ContextMenuCommandBuilder } = require('@discordjs/builders');
+const { ContextMenuCommandBuilder } = require('discord.js');
 const Discord = require('discord.js');
 
 const Schema = require("../../database/models/warnings");
@@ -14,28 +14,42 @@ module.exports = {
      * @param {CommandInteraction} interaction
      * @param {String[]} args
      */
-
     run: async (client, interaction, args) => {
         const perms = await client.checkPerms({
-            flags: [Discord.Permissions.FLAGS.MANAGE_MESSAGES],
-            perms: ["MANAGE_MESSAGES"]
+            flags: [Discord.PermissionsBitField.Flags.ManageMessages],
+            perms: [Discord.PermissionsBitField.Flags.ManageMessages]
         }, interaction)
 
-        if (perms == false) return;
+        if (perms == false){
+            client.errNormal({
+                error: "You don't have the required permissions to use this command!",
+                type: 'ephemeral'
+            }, interaction);
+            return;
+        }
+        await interaction.deferReply({ ephemeral: false });
 
         const member = interaction.guild.members.cache.get(interaction.targetId);
 
         Schema.findOne({ Guild: interaction.guild.id, User: member.id }, async (err, data) => {
             if (data) {
+                var fields = [];
+                data.Warnings.forEach(element => {
+                    fields.push({
+                        name: "Warning **" + element.Case + "**",
+                        value: "Reason: " + element.Reason + "\nModerator <@!" + element.Moderator + ">",
+                        inline: true
+                    })
+                });
                 client.embed({
                     title: `${client.emotes.normal.error}・Warnings`,
-                    desc: `The warnings of **${member.tag}**`,
+                    desc: `The warnings of **${member.user.tag}**`,
                     fields: [
                         {
                             name: "Total",
-                            value: `${data.Warns}`,
-                            innline: false
-                        }
+                            value: `${data.Warnings.length}`,
+                        },
+                        ...fields
                     ],
                     type: 'editreply'
                 }, interaction)
@@ -43,14 +57,7 @@ module.exports = {
             else {
                 client.embed({
                     title: `${client.emotes.normal.error}・Warnings`,
-                    desc: `The warnings of **${member.tag}**`,
-                    fields: [
-                        {
-                            name: "Total",
-                            value: "0",
-                            innline: false
-                        }
-                    ],
+                    desc: `User ${member.user.tag} has no warnings!`,
                     type: 'editreply'
                 }, interaction)
             }

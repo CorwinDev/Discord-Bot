@@ -6,8 +6,8 @@ module.exports = async (client, interaction, args) => {
     const data = await ticketSchema.findOne({ Guild: interaction.guild.id });
 
     const perms = await client.checkUserPerms({
-        flags: [Discord.Permissions.FLAGS.MANAGE_MESSAGES],
-        perms: ["MANAGE_MESSAGES"]
+        flags: [Discord.PermissionsBitField.Flags.ManageMessages],
+        perms: [Discord.PermissionsBitField.Flags.ManageMessages]
     }, interaction)
 
     if (perms == false) return;
@@ -23,7 +23,7 @@ module.exports = async (client, interaction, args) => {
 
         if (interaction.channel.parentId == ticketCategory.id) {
             let user = interaction.options.getUser('user');
-            interaction.channel.permissionOverwrites.edit(user.id, { VIEW_CHANNEL: true, SEND_MESSAGES: true });
+            interaction.channel.permissionOverwrites.edit(user.id, { ViewChannel: true, SendMessages: true });
 
             return client.simpleEmbed({
                 desc: `Added ${user}`,

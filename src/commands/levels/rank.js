@@ -10,11 +10,14 @@ module.exports = async (client, interaction, args) => {
     if (data && data.Levels == true) {
         const target = interaction.options.getUser('user') || interaction.user;
         const user = await client.fetchLevels(target.id, interaction.guild.id);
-
+        if(!user || !user.xp) return client.errNormal({
+            error: "This user has no levels!",
+            type: 'editreply'
+        }, interaction);
         let xpRequired = client.xpFor(user.level + 1);
 
         const rankCard = new Canvacord.Rank()
-            .setAvatar(target.displayAvatarURL({ dynamic: false, format: 'png' }))
+            .setAvatar(target.displayAvatarURL({ dynamic: false, extension: 'png' }))
             .setRequiredXP(xpRequired)
             .setCurrentXP(user.xp)
             .setLevel(user.level)
@@ -26,7 +29,7 @@ module.exports = async (client, interaction, args) => {
 
         rankCard.build()
             .then(data => {
-                const attachment = new Discord.MessageAttachment(data, "RankCard.png");
+                const attachment = new Discord.AttachmentBuilder(data, { name: "RankCard.png" });
                 interaction.editReply({ files: [attachment] });
             });
     }
@@ -38,4 +41,3 @@ module.exports = async (client, interaction, args) => {
     }
 }
 
- 

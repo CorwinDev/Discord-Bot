@@ -7,22 +7,22 @@ const store = require("../../database/models/economyStore");
 module.exports = async (client, interaction, args) => {
 
     client.checkPerms({
-        flags: [Discord.Permissions.FLAGS.ADMINISTRATOR],
-        perms: ["ADMINISTRATOR"]
+        flags: [Discord.PermissionsBitField.Flags.Administrator],
+        perms: [Discord.PermissionsBitField.Flags.Administrator]
     }, interaction)
 
 
-    const row = new Discord.MessageActionRow() 
+    const row = new Discord.ActionRowBuilder() 
         .addComponents(
-            new Discord.MessageButton()
+            new Discord.ButtonBuilder()
                 .setCustomId('eco_go')
                 .setEmoji('✅')
-                .setStyle('SUCCESS'),
+                .setStyle(Discord.ButtonStyle.Success),
 
-            new Discord.MessageButton()
+            new Discord.ButtonBuilder()
                 .setCustomId('eco_stop')
                 .setEmoji('❌')
-                .setStyle('DANGER'),
+                .setStyle(Discord.ButtonStyle.Danger),
         );
 
     client.embed({
@@ -34,7 +34,7 @@ module.exports = async (client, interaction, args) => {
 
     const filter = i => i.user.id === interaction.user.id;
 
-    interaction.channel.awaitMessageComponent({ filter, componentType: 'BUTTON', time: 60000 }).then(async i => {
+    interaction.channel.awaitMessageComponent({ filter, componentType: Discord.ComponentType.Button, time: 60000 }).then(async i => {
         if (i.customId == "eco_go") {
             var remove = await Schema.deleteMany({ Guild: interaction.guild.id });
             var remove2 = await Schema2.deleteMany({ Guild: interaction.guild.id });

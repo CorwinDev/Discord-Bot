@@ -5,12 +5,12 @@ module.exports = async (client, interaction, args) => {
 
     const member = interaction.options.getUser('user');
 
-    const userAvatar = member.displayAvatarURL({ dynamic: false, size: 1024, format: 'png' });
+    const userAvatar = member.displayAvatarURL({ dynamic: false, size: 1024, extension: 'png' });
 
     const image = await pop.clown(userAvatar);
-    let attach = new Discord.MessageAttachment(image, "clown.png");
-    
-    interaction.editreply({ files: [attach] })
+    let attach = new Discord.AttachmentBuilder(image, { name: "clown.png" });
+
+    const embed = client.templateEmbed().setImage("attachment://clown.png");
+    interaction.editReply({ files: [attach], embeds: [embed] });
 }
 
- 

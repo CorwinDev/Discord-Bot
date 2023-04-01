@@ -1,10 +1,10 @@
-const discord = require('discord.js');
+const Discord = require('discord.js');
 
 const Schema = require("../../database/models/guessWord");
 
 module.exports = async (client) => {
-  client.on('messageCreate', async (message) => {
-    if (message.author.bot || message.channel.type === 'DM') return;
+  client.on(Discord.Events.MessageCreate, async (message) => {
+    if (message.author.bot || message.channel.type === Discord.ChannelType.DM) return;
 
     let wordList = client.config.wordList;
     wordList = wordList.split("\n");

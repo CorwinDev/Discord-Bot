@@ -5,17 +5,17 @@ module.exports = async (client, interaction, args) => {
 
     const channel = interaction.member.voice.channel;
     if (!channel) return client.errNormal({
-        error: `Tu n'es pas dans un canal vocal !`,
+        error: `You're not in a voice channel!`,
         type: 'editreply'
     }, interaction);
 
     if (player && (channel.id !== player?.voiceChannel)) return client.errNormal({
-        error: `Tu n'es pas dans le même canal vocal que moi !`,
+        error: `You're not in the same voice channel!`,
         type: 'editreply'
     }, interaction);
 
     if (!player || !player.queue.current) return client.errNormal({
-        error: "Il n'y a pas de musiques jouées dans ce serveur",
+        error: "There are no songs playing in this server",
         type: 'editreply'
     }, interaction);
 
@@ -24,7 +24,7 @@ module.exports = async (client, interaction, args) => {
     player.skipto(parseInt(number))
 
     client.succNormal({ 
-        text: `La musique a été passée jusqu'à la position **${number}**`, 
+        text: `Skipped the music to **${number}**`, 
         type: 'editreply'
     }, interaction);
 }

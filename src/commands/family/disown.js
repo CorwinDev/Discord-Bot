@@ -4,17 +4,17 @@ const Schema = require("../../database/models/family");
 
 module.exports = async (client, interaction, args) => {
 
-    const target = interaction.options.getUser('membre');
+    const target = interaction.options.getUser('user');
     const author = interaction.user;
     const guild = { Guild: interaction.guild.id };
 
     if (author.id == target.id) return client.errNormal({
-        error: "Tu ne peux pas te renier toi-même",
+        error: "You cannot disown yourself",
         type: 'editreply'
     }, interaction);
 
     if (target.bot) return client.errNormal({
-        error: "Tu ne peux pas renier un robot",
+        error: "You cannot disown a bot",
         type: 'editreply'
     }, interaction);
 
@@ -22,11 +22,9 @@ module.exports = async (client, interaction, args) => {
         if (data) {
             Schema.findOne({ Guild: interaction.guild.id, User: data.Parent }, async (err, data2) => {
                 if (data2) {
-                    client.embed({ title: `👪・Renié`, desc: `${author} a renié <@!${data.Parent}>`, type: 'editreply' }, interaction);
-                    let tempArray = data.Parent;
-                    let filteredArray = tempArray.filter(val => val !== target.id);
-                    
-                    data.Parent = filteredArray;
+                    client.embed({ title: `👪・Disowned`, desc: `${author} has disowned <@!${data.Parent}>`, type: 'editreply' }, interaction);
+
+                    data.Parent = null;
                     data.save();
                 }
             })
@@ -34,8 +32,8 @@ module.exports = async (client, interaction, args) => {
         else {
             Schema.findOne({ Guild: interaction.guild.id, User: author.id }, async (err, data) => {
                 if (data) {
-                    if (data.Children.includes(target.id)) {
-                        const filtered = data.Children.filter((user) => user !== target.id);
+                    if (data.Children.includes(target.username)) {
+                        const filtered = data.Children.filter((user) => user !== target.username);
 
                         await Schema.findOneAndUpdate(guild, {
                             Guild: interaction.guild.id,
@@ -45,22 +43,19 @@ module.exports = async (client, interaction, args) => {
 
                         Schema.findOne({ Guild: interaction.guild.id, Parent: author.id }, async (err, data) => {
                             if (data) {
-                                let tempArray = data.Parent;
-                                let filteredArray = tempArray.filter(val => val !== target.id);
-
-                                data.Parent = filteredArray;
+                                data.Parent = null;
                                 data.save();
                             }
                         })
 
-                        client.embed({ title: `👪・Renié`, desc: `${author} a renié <@!${target.id}>`, type: 'editreply' }, interaction);
+                        client.embed({ title: `👪・Disowned`, desc: `${author} has disowned <@!${target.id}>`, type: 'editreply' }, interaction);
                     }
                     else {
-                        client.errNormal({ error: "Tu n'as pas d'enfants/parents pour le moment", type: 'editreply' }, interaction);
+                        client.errNormal({ error: "You have no children/parents at the moment", type: 'editreply' }, interaction);
                     }
                 }
                 else {
-                    client.errNormal({ error: "Tu n'as pas d'enfants/parents pour le moment", type: 'editreply' }, interaction);
+                    client.errNormal({ error: "You have no children/parents at the moment", type: 'editreply' }, interaction);
                 }
             })
         }

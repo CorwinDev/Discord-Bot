@@ -1,6 +1,6 @@
 const { CommandInteraction, Client } = require('discord.js');
-const { SlashCommandBuilder } = require('@discordjs/builders');
-const { ChannelType } = require('discord-api-types/v9');
+const { SlashCommandBuilder } = require('discord.js');
+const { ChannelType } = require('discord.js');
 const Discord = require('discord.js');
 
 module.exports = {
@@ -48,7 +48,7 @@ module.exports = {
             subcommand
                 .setName('lock')
                 .setDescription('Lock a channel')
-                .addChannelOption(option => option.setName('channel').setDescription('Select a channel').addChannelType(ChannelType.GuildText))
+                .addChannelOption(option => option.setName('channel').setDescription('Select a channel').addChannelTypes(ChannelType.GuildText))
         )
         .addSubcommand(subcommand =>
             subcommand
@@ -87,7 +87,7 @@ module.exports = {
             subcommand
                 .setName('unlock')
                 .setDescription('Unlock a channel')
-                .addChannelOption(option => option.setName('channel').setDescription('Select a channel').addChannelType(ChannelType.GuildText))
+                .addChannelOption(option => option.setName('channel').setDescription('Select a channel').addChannelTypes(ChannelType.GuildText))
         )
         .addSubcommand(subcommand =>
             subcommand
@@ -105,12 +105,14 @@ module.exports = {
                 .setName('warn')
                 .setDescription('Warn a user')
                 .addUserOption(option => option.setName('user').setDescription('Select a user').setRequired(true))
+                .addStringOption(option => option.setName('reason').setDescription('The reason for the warn').setRequired(true))
         )
         .addSubcommand(subcommand =>
             subcommand
                 .setName('unwarn')
                 .setDescription('Unwarn a user')
                 .addUserOption(option => option.setName('user').setDescription('Select a user').setRequired(true))
+                .addIntegerOption(option => option.setName('case').setDescription('Give a case number').setRequired(true))
         )
         .addSubcommand(subcommand =>
             subcommand
@@ -127,6 +129,7 @@ module.exports = {
      */
 
     run: async (client, interaction, args) => {
+        await interaction.deferReply({ fetchReply: true });
         client.loadSubcommands(client, interaction, args);
     },
 };

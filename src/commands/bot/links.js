@@ -1,37 +1,35 @@
-/* Pas nécessaire -Pierre
-
 const Discord = require('discord.js');
 
 module.exports = async (client, interaction, args) => {
-    const row = new Discord.MessageActionRow()
+    const row = new Discord.ActionRowBuilder()
         .addComponents(
-            new Discord.MessageSelectMenu()
+            new Discord.StringSelectMenuBuilder()
                 .setCustomId('Bot-linkspanel')
-                .setPlaceholder('❌ ┆ Aucune sélection')
+                .setPlaceholder('❌┆Nothing selected')
                 .addOptions([
                     {
-                        label: `Serveur support`,
+                        label: `Support server`,
                         description: `Join the suppport server`,
                         emoji: "❓",
                         value: "support-linkspanel",
                     },
                     {
-                        label: `Inviter le bot`,
+                        label: `Invite Bot`,
                         description: `Invite Bot to your server`,
                         emoji: "📨",
                         value: "invite-linkspanel",
-                    },
-                    {
-                        label: `Invite Bot 2`,
-                        description: `Invite Bot 2 to your server`,
-                        emoji: "📕",
-                        value: "invite2-linkspanel",
                     },
                     {
                         label: `Community Server`,
                         description: `Join the community server!`,
                         emoji: "🌍",
                         value: "community-linkspanel",
+                    },
+                    {
+                        label: `Top.gg`,
+                        description: `Show the top.gg link`,
+                        emoji: "📃",
+                        value: "top.gg-linkspanel",
                     },
                 ]),
         );
@@ -45,4 +43,4 @@ module.exports = async (client, interaction, args) => {
     }, interaction)
 }
 
-*/
+ 

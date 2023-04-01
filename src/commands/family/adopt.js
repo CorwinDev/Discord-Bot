@@ -4,16 +4,16 @@ const Schema = require("../../database/models/family");
 
 module.exports = async (client, interaction, args) => {
 
-    const target = interaction.options.getUser('membre');
+    const target = interaction.options.getUser('user');
     const author = interaction.user;
 
     if (author.id == target.id) return client.errNormal({
-        error: "Tu ne peux pas t'adopter toi-même",
+        error: "You cannot adopt yourself",
         type: 'editreply'
     }, interaction);
 
     if (target.bot) return client.errNormal({
-        error: "Tu ne peux pas adopter un robot",
+        error: "You cannot adopt a bot",
         type: 'editreply'
     }, interaction);
 
@@ -23,98 +23,94 @@ module.exports = async (client, interaction, args) => {
 
     if (familyMember || familyMember2 || familyMember3) {
         return client.errNormal({
-            error: `Tu ne peux pas adopter un membre de ta famille !`,
+            error: `You cannot adopt a family member!`,
             type: 'editreply'
         }, interaction);
     }
 
-    const checkAdopt = await Schema.findOne({ Guild: interaction.guild.id, Children: target.id });
+    const checkAdopt = await Schema.findOne({ Guild: interaction.guild.id, Children: target.username });
     if (checkAdopt) {
         return client.errNormal({
-            error: `Cette personne a déjà été adoptée !`,
+            error: `This user has already been adopted`,
             type: 'editreply'
         }, interaction);
     }
 
-    const row = new Discord.MessageActionRow()
+    const row = new Discord.ActionRowBuilder()
         .addComponents(
-            new Discord.MessageButton()
+            new Discord.ButtonBuilder()
                 .setCustomId('adopt_yes')
                 .setEmoji('✅')
-                .setStyle('SUCCESS'),
+                .setStyle(Discord.ButtonStyle.Success),
 
-            new Discord.MessageButton()
+            new Discord.ButtonBuilder()
                 .setCustomId('adopt_deny')
                 .setEmoji('❌')
-                .setStyle('SECONDARY'),
+                .setStyle(Discord.ButtonStyle.Danger),
         );
 
     client.embed({
         title: `👪・Adoption`,
-        desc: `${author} a demandé d'adopter ${target} ! \n${target}, clique sur un des boutons`,
+        desc: `${author} has ${target} asked to adopt him! \n${target} click on one of the buttons`,
         components: [row],
         content: `${target}`,
-        image: 'https://media2.giphy.com/media/y7XmH8QgILhS5tXCCk/giphy.gif',
         type: 'editreply',
     }, interaction)
 
     const filter = i => i.user.id === target.id;
 
-    interaction.channel.awaitMessageComponent({ filter, componentType: 'BUTTON', time: 60000 }).then(async i => {
+    interaction.channel.awaitMessageComponent({ filter, componentType: Discord.ComponentType.Button, time: 60000 }).then(async i => {
         if (i.customId == "adopt_yes") {
 
             Schema.findOne({ Guild: interaction.guild.id, User: author.id }, async (err, data) => {
                 if (data) {
-                    data.Children.push(target.id);
+                    data.Children.push(target.username);
                     data.save();
                 }
                 else {
                     new Schema({
                         Guild: interaction.guild.id,
                         User: author.id,
-                        Children: target.id
+                        Children: target.username
                     }).save();
                 }
             })
 
             Schema.findOne({ Guild: interaction.guild.id, User: target.id }, async (err, data) => {
                 if (data) {
-                    data.Parent.push(author.id);
+                    data.Parent.push(author.username);
                     data.save();
                 }
                 else {
                     new Schema({
                         Guild: interaction.guild.id,
                         User: target.id,
-                        Parent: author.id
+                        Parent: author.username
                     }).save();
                 }
             })
 
             client.embed({
-                title: `👪・Adoption acceptée`,
-                desc: `${author} est maintenant l'heureux parent de ${target}! 🎉`,
+                title: `👪・Adoption - Approved`,
+                desc: `${author} is now the proud parent of ${target}! 🎉`,
                 components: [],
-                image: 'https://media1.giphy.com/media/xUySTUZ8A2RJBQitEc/giphy.gif',
                 type: 'editreply'
             }, interaction);
         }
 
         if (i.customId == "adopt_deny") {
             client.embed({
-                title: `👪・Adoption refusée`,
-                desc: `${target} ne veut pas être adopté.e par ${author}`,
+                title: `👪・Adoption - Denied`,
+                desc: `${target} don't want to be adopted by ${author}`,
                 components: [],
-                image: 'https://media0.giphy.com/media/ISOckXUybVfQ4/giphy.gif',
                 type: 'editreply'
             }, interaction);
         }
     }).catch(() => {
         client.embed({
-            title: `👪・Adoption refusée`,
-            desc: `${target} n'a pas répondu ! L'adoption a été annulée`,
+            title: `👪・Adoption - Denied`,
+            desc: `${target} has not answered anything! The adoption is canceled`,
             components: [],
-            image: 'https://media.tenor.com/-Rngjigx2HAAAAAd/alone.gif',
             type: 'editreply'
         }, interaction);
     });

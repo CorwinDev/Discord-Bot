@@ -1,16 +1,16 @@
 const Discord = require('discord.js');
 
 module.exports = async (client) => {
-    client.on('interactionCreate', async (interaction) => {
-        if (!interaction.isSelectMenu()) return;
+    client.on(Discord.Events.InteractionCreate, async (interaction) => {
+        if (!interaction.isStringSelectMenu()) return;
 
         if (interaction.customId == "Bot-linkspanel") {
             if (interaction.values == "community-linkspanel") {
                 interaction.deferUpdate();
 
-                const row2 = new Discord.MessageActionRow()
+                const row2 = new Discord.ActionRowBuilder()
                     .addComponents(
-                        new Discord.MessageSelectMenu()
+                        new Discord.StringSelectMenuBuilder()
                             .setCustomId('Bot-linkspanel')
                             .setPlaceholder('❌┆Nothing selected')
                             .addOptions([
@@ -27,12 +27,6 @@ module.exports = async (client) => {
                                     value: "invite-linkspanel",
                                 },
                                 {
-                                    label: `Invite Bot 2`,
-                                    description: `Invite Bot 2 to your server`,
-                                    emoji: "📕",
-                                    value: "invite2-linkspanel",
-                                },
-                                {
                                     label: `Community Server`,
                                     description: `Join the community server!`,
                                     emoji: "🌍",
@@ -47,13 +41,13 @@ module.exports = async (client) => {
                             ]),
                     );
 
-                let row = new Discord.MessageActionRow()
+                let row = new Discord.ActionRowBuilder()
                     .addComponents(
 
-                        new Discord.MessageButton()
+                        new Discord.ButtonBuilder()
                             .setLabel("Community Server")
                             .setURL("https://discord.gg/jf6ZkpgsXF")
-                            .setStyle("LINK"),
+                            .setStyle(Discord.ButtonStyle.Link),
                     );
 
                 client.embed({
@@ -66,7 +60,7 @@ module.exports = async (client) => {
                 }, interaction.message)
             }
         }
-    }).setMaxListeners(0);
+    })
 }
 
  

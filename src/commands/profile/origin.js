@@ -22,7 +22,7 @@ module.exports = async (client, interaction, args) => {
             }, interaction);
         }
         else {
-            return client.errNormal({ text: "No profile found! Open a profile with createprofile", type: 'editreply' }, interaction);
+            return client.errNormal({ error: "No profile found! Open a profile with createprofile", type:'editreply' }, interaction);
         }
     })
 }

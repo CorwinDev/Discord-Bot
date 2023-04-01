@@ -1,6 +1,13 @@
 const discord = require('discord.js');
 
-module.exports = async (client, user, mod) => {
+/**
+ * @param {discord.Client} client 
+ * @param {discord.GuildMember} user 
+ * @param {discord.User} mod 
+ * @param {string} reason 
+ * @returns
+ */
+module.exports = async (client, user, mod, reason) => {
     const logsChannel = await client.getLogs(user.guild.id);
     if (!logsChannel) return;
 
@@ -23,7 +30,13 @@ module.exports = async (client, user, mod) => {
             {
                 name: `> Moderator`,
                 value: `${mod} (${mod.id})`
+            },
+            {
+                name: `> Reason`,
+                value: `${reason}`
             }
         ]
-    }, logsChannel).catch(() => { })
+    }, logsChannel).catch(() => {
+        console.log
+     })
 };

@@ -7,7 +7,7 @@ module.exports = async (client, interaction, args) => {
     const role = interaction.options.getRole('role');
     const emoji = interaction.options.getString('emoji');
 
-    const parsedEmoji = Discord.Util.parseEmoji(emoji);
+    const parsedEmoji = Discord.parseEmoji(emoji);
     if (!parsedEmoji) return client.errNormal({
         error: `Emoji not found in this server!`,
         type: 'editreply'

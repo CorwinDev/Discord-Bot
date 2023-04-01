@@ -1,5 +1,5 @@
 const { CommandInteraction, Client } = require('discord.js');
-const { SlashCommandBuilder } = require('@discordjs/builders');
+const { SlashCommandBuilder } = require('discord.js');
 const Discord = require('discord.js');
 
 module.exports = {
@@ -82,7 +82,7 @@ module.exports = {
                 .setDescription('Keep track of your current time zone')
                 .addStringOption(option =>
                     option.setName('timezone')
-                        .setDescription('Description with your report')
+                        .setDescription('The timezone you want to set (e.g. Europe/Amsterdam)')
                         .setRequired(true)
                 )
         )
@@ -95,9 +95,10 @@ module.exports = {
      */
 
     run: async (client, interaction, args) => {
+        await interaction.deferReply({ fetchReply: true });
         const perms = await client.checkPerms({
-            flags: [Discord.Permissions.FLAGS.MANAGE_CHANNELS],
-            perms: ["MANAGE_CHANNELS"]
+            flags: [Discord.PermissionsBitField.Flags.ManageChannels],
+            perms: [Discord.PermissionsBitField.Flags.ManageChannels]
         }, interaction)
 
         if (perms == false) return;

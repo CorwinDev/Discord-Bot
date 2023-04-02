@@ -7,24 +7,24 @@ const Schema = require("../../database/models/music");
 module.exports = {
     data: new SlashCommandBuilder()
         .setName('custom-commands')
-        .setDescription('Create some custom commands')
+        .setDescription('Créer des commandes personnalisées')
         .addSubcommand(subcommand =>
             subcommand
                 .setName('help')
-                .setDescription('Get information about the custom commands category'),
+                .setDescription('Obtenez des informations sur la catégorie des commandes personnalisées'),
         )
         .addSubcommand(subcommand =>
             subcommand
                 .setName('add')
-                .setDescription('Create a custom command')
-                .addStringOption(option => option.setName('command').setDescription('The name of the command').setRequired(true))
-                .addStringOption(option => option.setName('text').setDescription('The response of the command').setRequired(true)),
+                .setDescription('Créer une commande personnalisée')
+                .addStringOption(option => option.setName('command').setDescription('Le nom de la commande').setRequired(true))
+                .addStringOption(option => option.setName('text').setDescription('La réponse de la commande').setRequired(true)),
         )
         .addSubcommand(subcommand =>
             subcommand
                 .setName('delete')
-                .setDescription('Delete a custom command')
-                .addStringOption(option => option.setName('command').setDescription('The name of the command').setRequired(true)),
+                .setDescription('Supprimer une commande personnalisée')
+                .addStringOption(option => option.setName('commande').setDescription('Le nom de la commande').setRequired(true)),
         )
     ,
 

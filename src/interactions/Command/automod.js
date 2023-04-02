@@ -6,65 +6,65 @@ const Discord = require('discord.js');
 module.exports = {
     data: new SlashCommandBuilder()
         .setName('automod')
-        .setDescription('Manage the auto mod')
+        .setDescription('Gérer le mod automatique')
         .addSubcommand(subcommand =>
             subcommand
                 .setName('help')
-                .setDescription('Get information about the auto setup commands')
+                .setDescription('Obtenez des informations sur les commandes de configuration automatique')
         )
         .addSubcommand(subcommand =>
             subcommand
                 .setName('antiinvite')
-                .setDescription('Enable/disable antiinvite')
+                .setDescription('Activer / désactiver l\'anti invite')
                 .addBooleanOption(option => option.setName('active').setDescription('Select a boolean').setRequired(true))
         )
         .addSubcommand(subcommand =>
             subcommand
                 .setName('antilinks')
-                .setDescription('Enable/disable antilinks')
+                .setDescription('Activer / désactiver l\'anti liens')
                 .addBooleanOption(option => option.setName('active').setDescription('Select a boolean').setRequired(true))
         )
         .addSubcommand(subcommand =>
             subcommand
                 .setName('antispam')
-                .setDescription('Enable/disable antispam')
+                .setDescription('Activer / désactiver l\'antispam')
                 .addBooleanOption(option => option.setName('active').setDescription('Select a boolean').setRequired(true))
         )
         .addSubcommand(subcommand =>
             subcommand
                 .setName('linkschannel')
-                .setDescription('Add a channel that is allowed to send links')
+                .setDescription('Ajouter un canal autorisé à envoyer des liens')
                 .addStringOption(option =>
                     option.setName('type')
-                        .setDescription('What do you want to do with the channel?')
+                        .setDescription('Que voulez-vous faire avec la chaîne?')
                         .setRequired(true)
                         .addChoices(
-                            { name: 'Add', value: 'add' },
-                            { name: 'Remove', value: 'remove' }
+                            { name: 'Ajouter', value: 'add' },
+                            { name: 'Retirer', value: 'remove' }
                         )
                 )
-                .addChannelOption(option => option.setName('channel').setDescription('Select a channel').setRequired(true).addChannelTypes(ChannelType.GuildText))
+                .addChannelOption(option => option.setName('channel').setDescription('Sélectionnez un canal').setRequired(true).addChannelTypes(ChannelType.GuildText))
         )
         .addSubcommandGroup(group =>
             group
                 .setName('blacklist')
-                .setDescription('Manage the blacklist')
+                .setDescription('Gérer la liste noire')
                 .addSubcommand(subcommand =>
                     subcommand
                         .setName('display')
-                        .setDescription('Show the whole blacklist')
+                        .setDescription('Montrer toute la liste noire')
                 )
                 .addSubcommand(subcommand =>
                     subcommand
                         .setName('add')
-                        .setDescription('Add a word to the blacklist')
-                        .addStringOption(option => option.setName('word').setDescription('The word for the blacklist').setRequired(true))
+                        .setDescription('Ajoutez un mot à la liste noire')
+                        .addStringOption(option => option.setName('word').setDescription('Le mot pour la liste noire').setRequired(true))
                 )
                 .addSubcommand(subcommand =>
                     subcommand
                         .setName('remove')
-                        .setDescription('Remove a word from the blacklist')
-                        .addStringOption(option => option.setName('word').setDescription('The word for the blacklist').setRequired(true))
+                        .setDescription('Supprimer un mot de la liste noire')
+                        .addStringOption(option => option.setName('word').setDescription('Le mot pour la liste noire').setRequired(true))
                 )
         )
     ,

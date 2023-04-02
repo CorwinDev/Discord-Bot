@@ -148,20 +148,20 @@ fs.readdirSync('./src/handlers').forEach((dir) => {
 client.login(process.env.DISCORD_TOKEN);
 
 process.on('unhandledRejection', error => {
-    console.error('Unhandled promise rejection:', error);
-    if (error) if (error.length > 950) error = error.slice(0, 950) + '... view console for details';
-    if (error.stack) if (error.stack.length > 950) error.stack = error.stack.slice(0, 950) + '... view console for details';
+    console.error('Rejet de promesse non géandée:', error);
+    if (error) if (error.length > 950) error = error.slice(0, 950) + '... Afficher la console pour plus de détails';
+    if (error.stack) if (error.stack.length > 950) error.stack = error.stack.slice(0, 950) + '... Afficher la console pour plus de détails';
     if(!error.stack) return
     const embed = new Discord.EmbedBuilder()
-        .setTitle(`🚨・Unhandled promise rejection`)
+        .setTitle(`🚨・Rejet de promesse non géandée`)
         .addFields([
             {
-                name: "Error",
-                value: error ? Discord.codeBlock(error) : "No error",
+                name: "Erreur",
+                value: error ? Discord.codeBlock(error) : "Pas d'erreur",
             },
             {
-                name: "Stack error",
-                value: error.stack ? Discord.codeBlock(error.stack) : "No stack error",
+                name: "Erreur de pile",
+                value: error.stack ? Discord.codeBlock(error.stack) : "Aucune erreur de pile",
             }
         ])
         .setColor(client.config.colors.normal)

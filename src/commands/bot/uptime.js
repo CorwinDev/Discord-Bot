@@ -7,16 +7,16 @@ module.exports = async (client, interaction, args) => {
     const upvalue = (Date.now() / 1000 - client.uptime / 1000).toFixed(0);
 
     client.embed({
-        title: `${client.emotes.normal.arrowUp}・Uptime`,
-        desc: `See the uptime of Bot`,
+        title: `${client.emotes.normal.arrowUp}・Durée de la baisse`,
+        desc: `Voir le temps de disponibilité du bot`,
         fields: [
             {
-                name: "⌛┇Uptime",
+                name: "⌛┇Durée de la baisse",
                 value: `${duration}`,
                 inline: true
             },
             {
-                name: "⏰┇Up Since",
+                name: "⏰┇Depuis",
                 value: `<t:${upvalue}>`,
                 inline: true
             }

@@ -6,10 +6,10 @@ const axios = require('axios');
 const { version } = require('.././package.json');
 axios.get('https://api.github.com/repos/CorwinDev/Discord-Bot/releases/latest').then(res => {
     if (res.data.tag_name !== version) {
-        console.log(chalk.red.bgYellow(`Your bot is not up to date! Please update to the latest version!`, version + ' -> ' + res.data.tag_name));
+        console.log(chalk.red.bgYellow(`Votre bot n'est pas à jour!Veuillez mettre à jour la dernière version!`, version + ' -> ' + res.data.tag_name));
     }
 }).catch(err => {
-    console.log(chalk.red.bgYellow(`Failed to check if bot is up to date!`));
+    console.log(chalk.red.bgYellow(`Impossible de vérifier si Bot est à jour!`));
 });
 
 
@@ -45,19 +45,19 @@ if (process.env.TOPGG_TOKEN) {
     AutoPoster(process.env.TOPGG_TOKEN, manager);
 }
 console.clear();
-console.log(chalk.blue(chalk.bold(`System`)), (chalk.white(`>>`)), (chalk.green(`Starting up`)), (chalk.white(`...`)))
+console.log(chalk.blue(chalk.bold(`Système`)), (chalk.white(`>>`)), (chalk.green(`Démarrage`)), (chalk.white(`...`)))
 console.log(`\u001b[0m`)
 console.log(chalk.red(`© CorwinDev | 2021 - ${new Date().getFullYear()}`))
-console.log(chalk.red(`All rights reserved`))
+console.log(chalk.red(`Tous les droits sont réservés`))
 console.log(`\u001b[0m`)
 console.log(`\u001b[0m`)
-console.log(chalk.blue(chalk.bold(`System`)), (chalk.white(`>>`)), chalk.red(`Version ${require(`${process.cwd()}/package.json`).version}`), (chalk.green(`loaded`)))
+console.log(chalk.blue(chalk.bold(`Système`)), (chalk.white(`>>`)), chalk.red(`Version ${require(`${process.cwd()}/package.json`).version}`), (chalk.green(`loaded`)))
 console.log(`\u001b[0m`);
 
 manager.on('shardCreate', shard => {
     let embed = new Discord.EmbedBuilder()
-        .setTitle(`🆙・Launching shard`)
-        .setDescription(`A shard has just been launched`)
+        .setTitle(`🆙・Lancement du Fragment`)
+        .setDescription(`Un fragment vient d'être lancé`)
         .setFields([
             {
                 name: "🆔┆ID",
@@ -65,23 +65,23 @@ manager.on('shardCreate', shard => {
                 inline: true
             },
             {
-                name: `📃┆State`,
-                value: `Starting up...`,
+                name: `📃┆État`,
+                value: `Démarrage...`,
                 inline: true
             }
         ])
         .setColor(config.colors.normal)
     startLogs.send({
-        username: 'Bot Logs',
+        username: 'Journaux de bot',
         embeds: [embed],
     });
 
-    console.log(chalk.blue(chalk.bold(`System`)), (chalk.white(`>>`)), (chalk.green(`Starting`)), chalk.red(`Shard #${shard.id + 1}`), (chalk.white(`...`)))
+    console.log(chalk.blue(chalk.bold(`Système`)), (chalk.white(`>>`)), (chalk.green(`Démarrage`)), chalk.red(`Fragment #${shard.id + 1}`), (chalk.white(`...`)))
     console.log(`\u001b[0m`);
 
     shard.on("death", (process) => {
         const embed = new Discord.EmbedBuilder()
-            .setTitle(`🚨・Closing shard ${shard.id + 1}/${manager.totalShards} unexpectedly`)
+            .setTitle(`🚨・Fermeture du Fragment ${shard.id + 1}/${manager.totalShards} de façon inattendue`)
             .setFields([
                 {
                     name: "🆔┆ID",
@@ -96,14 +96,14 @@ manager.on('shardCreate', shard => {
 
         if (process.exitCode === null) {
             const embed = new Discord.EmbedBuilder()
-                .setTitle(`🚨・Shard ${shard.id + 1}/${manager.totalShards} exited with NULL error code!`)
+                .setTitle(`🚨・Fragment ${shard.id + 1}/${manager.totalShards} Sortie avec le code d'erreur nul!`)
                 .setFields([
                     {
                         name: "PID",
                         value: `\`${process.pid}\``,
                     },
                     {
-                        name: "Exit code",
+                        name: "Code de sortie",
                         value: `\`${process.exitCode}\``,
                     }
                 ])
@@ -117,8 +117,8 @@ manager.on('shardCreate', shard => {
 
     shard.on("shardDisconnect", (event) => {
         const embed = new Discord.EmbedBuilder()
-            .setTitle(`🚨・Shard ${shard.id + 1}/${manager.totalShards} disconnected`)
-            .setDescription("Dumping socket close event...")
+            .setTitle(`🚨・Shard ${shard.id + 1}/${manager.totalShards} débranché`)
+            .setDescription("Événement de fermeture de socket de décharge...")
             .setColor(config.colors.normal)
         shardLogs.send({
             username: 'Bot Logs',
@@ -128,7 +128,7 @@ manager.on('shardCreate', shard => {
 
     shard.on("shardReconnecting", () => {
         const embed = new Discord.EmbedBuilder()
-            .setTitle(`🚨・Reconnecting shard ${shard.id + 1}/${manager.totalShards}`)
+            .setTitle(`🚨・Reconnexion du Fragment ${shard.id + 1}/${manager.totalShards}`)
             .setColor(config.colors.normal)
         shardLogs.send({
             username: 'Bot Logs',

@@ -30,10 +30,10 @@ module.exports = async (client, interaction, args) => {
         }
 
         client.succNormal({
-            text: `Verify panel has been successfully created`,
+            text: `Vérifier que le panneau a été créé avec succès`,
             fields: [
                 {
-                    name: `📘┆Channel`,
+                    name: `📘┆Canal`,
                     value: `${channel} (${channel.name})`,
                     inline: true
                 },
@@ -55,8 +55,8 @@ module.exports = async (client, interaction, args) => {
             );
 
         client.embed({
-            title: `${interaction.guild.name}・verify`,
-            desc: `Click on the button to verify yourself`,
+            title: `${interaction.guild.name}・vérifier`,
+            desc: `Cliquez sur le bouton pour vous vérifier`,
             components: [row]
         }, channel)
     }

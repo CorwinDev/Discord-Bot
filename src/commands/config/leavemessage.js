@@ -41,7 +41,7 @@ module.exports = async (client, interaction, args) => {
                 data.save();
 
                 client.succNormal({
-                    text: `Leave message deleted!`,
+                    text: `Laissez le message supprimé!`,
                     type: 'editreply'
                 }, interaction);
             }
@@ -61,7 +61,7 @@ module.exports = async (client, interaction, args) => {
             }
 
             client.succNormal({
-                text: `The leave message has been set successfully`,
+                text: `Le message de congé a été défini avec succès`,
                 fields: [
                     {
                         name: `💬┆Message`,

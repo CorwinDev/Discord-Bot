@@ -41,7 +41,7 @@ module.exports = async (client, interaction, args) => {
                 data.save();
 
                 client.succNormal({
-                    text: `Welcome message deleted!`,
+                    text: `Message de bienvenue supprimé!`,
                     type: 'editreply'
                 }, interaction);
             }
@@ -61,7 +61,7 @@ module.exports = async (client, interaction, args) => {
             }
 
             client.succNormal({
-                text: `The welcome message has been set successfully`,
+                text: `Le message de bienvenue a été défini avec succès`,
                 fields: [
                     {
                         name: `💬┆Message`,

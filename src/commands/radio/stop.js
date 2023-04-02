@@ -8,22 +8,22 @@ module.exports = async (client, interaction, args) => {
     });
 
     let channel = interaction.member.voice ? interaction.member.voice.channel : null;
-    if (!channel) return client.errNormal({ error: `The channel does not exist!`, type: 'editreply' }, interaction);
+    if (!channel) return client.errNormal({ error: `Le canal n'existe pas!`, type: 'editreply' }, interaction);
 
     client.radioStop(channel);
 
     var remove = await Schema.deleteOne({ Guild: interaction.guild.id });
 
     client.embed({
-        title: `📻・Radio stopped`,
-        desc: `Radio has stopped successfully \nTo make the bot join do: \`rplay\``,
+        title: `📻・La radio s'est arrêtée`,
+        desc: `La radio a cessé avec succès \ nPour faire rejoindre le bot: \`rplay\``,
         fields: [{
-            name: "👤┆Stopped By",
+            name: "👤┆Arreté par",
             value: `${interaction.user} (${interaction.user.tag})`,
             inline: true
         },
         {
-            name: "📺┆Channel",
+            name: "📺┆Canal",
             value: `${channel} (${channel.name})`,
             inline: true
         }
@@ -32,12 +32,12 @@ module.exports = async (client, interaction, args) => {
     }, interaction)
 
     let embed = new Discord.EmbedBuilder()
-        .setTitle(`📻・Radio stopped`)
-        .setDescription(`_______________ \n\nRadio has stopped successfully`)
+        .setTitle(`📻・La radio s'est arrêtée`)
+        .setDescription(`_______________ \n\nLa radio s'est arrêtée avec succès`)
         .addFields(
-            { name: "👤┆Stopped By", value: `${interaction.user} (${interaction.user.tag})`, inline: true },
-            { name: "📺┆Channel", value: `${channel} (${channel.name})`, inline: true },
-            { name: "⚙️┆Guild", value: `${interaction.guild.name} (${interaction.guild.id})`, inline: true },
+            { name: "👤┆Arreté par", value: `${interaction.user} (${interaction.user.tag})`, inline: true },
+            { name: "📺┆Canal", value: `${channel} (${channel.name})`, inline: true },
+            { name: "⚙️┆Serveur", value: `${interaction.guild.name} (${interaction.guild.id})`, inline: true },
         )
         .setColor(client.config.colors.normal)
         .setTimestamp();

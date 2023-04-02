@@ -9,19 +9,19 @@ module.exports = async (client, interaction, args) => {
     const feedback = interaction.options.getString('feedback');
 
     const embed = new Discord.EmbedBuilder()
-        .setTitle(`📝・New feedback!`)
+        .setTitle(`📝・Nouveaux commentaires!`)
         .addFields(
             { name: "User", value: `${interaction.user} (${interaction.user.tag})`, inline: true },
         )
         .setDescription(`${feedback}`)
         .setColor(client.config.colors.normal)
     webhookClient.send({
-        username: 'Bot Feedback',
+        username: 'Rétroaction des robots',
         embeds: [embed],
     });
 
     client.succNormal({ 
-        text: `Feedback successfully sent to the developers`,
+        text: `Les commentaires ont été envoyés avec succès aux développeurs`,
         type: 'editreply'
     }, interaction);
 }

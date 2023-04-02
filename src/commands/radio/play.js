@@ -8,7 +8,7 @@ module.exports = async (client, interaction, args) => {
     });
 
     let channel = interaction.member.voice ? interaction.member.voice.channel : null;
-    if (!channel) return client.errNormal({ text: `The channel does not exist!`, type: 'editreply' }, interaction);
+    if (!channel) return client.errNormal({ text: `Le canal n'existe pas!`, type: 'editreply' }, interaction);
 
     client.radioStart(channel);
 
@@ -26,20 +26,20 @@ module.exports = async (client, interaction, args) => {
     })
 
     client.embed({
-        title: `📻・Started radio`,
-        desc: `Radio has started successfully \nTo make the bot leave do: \`rleave\``,
+        title: `📻・Démarré la radio`,
+        desc: `La radio a commencé avec succès \ nto faire partir le bot: \`rleave\``,
         fields: [{
-            name: "👤┆Started By",
+            name: "👤┆Commencé par",
             value: `${interaction.user} (${interaction.user.tag})`,
             inline: true
         },
         {
-            name: "📺┆Channel",
+            name: "📺┆Canal",
             value: `${channel} (${channel.name})`,
             inline: true
         },
         {
-            name: "🎶┆Radio Station",
+            name: "🎶┆Station de radio",
             value: `[Radio 538](https://www.538.nl/)`,
             inline: true
         },
@@ -48,12 +48,12 @@ module.exports = async (client, interaction, args) => {
     }, interaction)
 
     let embed = new Discord.EmbedBuilder()
-        .setTitle(`📻・Started radio`)
-        .setDescription(`_______________ \n\nRadio has started successfully`)
+        .setTitle(`📻・Démarré la radio`)
+        .setDescription(`_______________ \n\nLa radio a commencé avec succès`)
         .addFields(
-            { name: "👤┆Started By", value: `${interaction.user} (${interaction.user.tag})`, inline: true },
-            { name: "📺┆Channel", value: `${channel} (${channel.name})`, inline: true },
-            { name: "⚙️┆Guild", value: `${interaction.guild.name} (${interaction.guild.id})`, inline: true },
+            { name: "👤┆Commencé par", value: `${interaction.user} (${interaction.user.tag})`, inline: true },
+            { name: "📺┆Canal", value: `${channel} (${channel.name})`, inline: true },
+            { name: "⚙️┆Serveur", value: `${interaction.guild.name} (${interaction.guild.id})`, inline: true },
         )
         .setColor(client.config.colors.normal)
         .setTimestamp();

@@ -5,25 +5,25 @@ const Discord = require('discord.js');
 module.exports = {
     data: new SlashCommandBuilder()
         .setName('announcement')
-        .setDescription('Manage the server announcements')
+        .setDescription('Gérer les annonces du serveur')
         .addSubcommand(subcommand =>
             subcommand
                 .setName('help')
-                .setDescription('Get information about the announcement category commands')
+                .setDescription('Obtenez des informations sur les commandes de la catégorie d\'annonce')
         )
         .addSubcommand(subcommand =>
             subcommand
                 .setName('create')
-                .setDescription('Make an announcement')
-                .addChannelOption(option => option.setName('channel').setDescription('Select a channel').setRequired(true).addChannelTypes(ChannelType.GuildText).addChannelTypes(ChannelType.GuildNews))
-                .addStringOption(option => option.setName('message').setDescription('Your announcement message').setRequired(true)),
+                .setDescription('Faire une annonce')
+                .addChannelOption(option => option.setName('channel').setDescription('Sélectionnez un canal').setRequired(true).addChannelTypes(ChannelType.GuildText).addChannelTypes(ChannelType.GuildNews))
+                .addStringOption(option => option.setName('message').setDescription('Votre message d\'annonce').setRequired(true)),
         )
         .addSubcommand(subcommand =>
             subcommand
                 .setName('edit')
-                .setDescription('Edit an announcement')
-                .addStringOption(option => option.setName('id').setDescription('ID of the announcement you want to change').setRequired(true))
-                .addStringOption(option => option.setName('message').setDescription('Your announcement message').setRequired(true)),
+                .setDescription('Modifier une annonce')
+                .addStringOption(option => option.setName('id').setDescription('ID de l\'annonce que vous souhaitez changer').setRequired(true))
+                .addStringOption(option => option.setName('message').setDescription('Votre message d\'annonce').setRequired(true)),
         )
     ,
 

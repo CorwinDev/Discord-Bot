@@ -5,40 +5,40 @@ const Discord = require('discord.js');
 module.exports = {
     data: new SlashCommandBuilder()
         .setName('autosetup')
-        .setDescription('Let the bot setup automatically')
+        .setDescription('Laissez la configuration du bot automatiquement')
         .addSubcommand(subcommand =>
             subcommand
                 .setName('help')
-                .setDescription('Get information about the auto setup commands')
+                .setDescription('Obtenez des informations sur les commandes de configuration automatique')
         )
         .addSubcommand(subcommand =>
             subcommand
                 .setName('logs')
-                .setDescription('Set the logs from the server')
+                .setDescription('Définissez les journaux du serveur')
                 .addStringOption(option =>
                     option.setName('setup')
-                        .setDescription('The setup that you want')
+                        .setDescription('La configuration que vous voulez')
                         .setRequired(true)
                         .addChoices(
-                            { name: 'Server logs', value: 'serverLogs' },
-                            { name: 'Level logs', value: 'levelLogs' },
-                            { name: 'Boost logs', value: 'boostLogs' }
+                            { name: 'Journaux des serveurs', value: 'serverLogs' },
+                            { name: 'Journaux de niveau', value: 'levelLogs' },
+                            { name: 'Boost les journaux', value: 'boostLogs' }
                         )
                 )
         )
         .addSubcommand(subcommand =>
             subcommand
                 .setName('fun')
-                .setDescription('Set the fun channels from the server')
+                .setDescription('Définissez les canaux amusants du serveur')
                 .addStringOption(option =>
                     option.setName('setup')
-                        .setDescription('The setup that you want')
+                        .setDescription('La configuration que vous voulez')
                         .setRequired(true)
                         .addChoices(
-                            { name: 'Birthdays', value: 'birthdays' },
-                            { name: 'Chatbot', value: 'chatbot' },
-                            { name: 'Reviews', value: 'reviews' },
-                            { name: 'Suggestions', value: 'suggestions' },
+                            { name: 'Anniversaires', value: 'birthdays' },
+                            { name: 'chatbot', value: 'chatbot' },
+                            { name: 'Commentaires', value: 'reviews' },
+                            { name: 'suggestions', value: 'suggestions' },
                             { name: 'Starboard', value: 'starboard' }
                         )
                 )
@@ -46,43 +46,43 @@ module.exports = {
         .addSubcommand(subcommand =>
             subcommand
                 .setName('games')
-                .setDescription('Set the game channels from the server')
+                .setDescription('Définissez les canaux de jeu du serveur')
                 .addStringOption(option =>
                     option.setName('setup')
-                        .setDescription('The setup that you want')
+                        .setDescription('La configuration que vous voulez')
                         .setRequired(true)
                         .addChoices(
-                            { name: 'Counting', value: 'counting' },
-                            { name: 'Guess the number', value: 'gtn' },
-                            { name: 'Guess the word', value: 'gtw' },
-                            { name: 'Word snake', value: 'wordsnake' }
+                            { name: 'Compte', value: 'counting' },
+                            { name: 'Devinez le nombre', value: 'gtn' },
+                            { name: 'Devinez le mot', value: 'gtw' },
+                            { name: 'Mot Snake', value: 'wordsnake' }
                         )
                 )
         )
         .addSubcommand(subcommand =>
             subcommand
                 .setName('welcome')
-                .setDescription('Setup the welcome system')
+                .setDescription('Configurer le système de bienvenue')
                 .addStringOption(option =>
                     option.setName('setup')
-                        .setDescription('The setup that you want')
+                        .setDescription('La configuration que vous voulez')
                         .setRequired(true)
                         .addChoices(
-                            { name: 'Welcome channel', value: 'welcomechannel' },
-                            { name: 'Welcome role', value: 'welcomerole' },
-                            { name: 'Leave channnel', value: 'leavechannel' }
+                            { name: 'Canal de bienvenue', value: 'welcomechannel' },
+                            { name: 'Rôle de bienvenue', value: 'welcomerole' },
+                            { name: 'Quitter le canal', value: 'leavechannel' }
                         )
                 )
         )
         .addSubcommand(subcommand =>
             subcommand
                 .setName('customvoice')
-                .setDescription('Set the custom voice channels from the server')
+                .setDescription('Définissez les canaux vocaux personnalisés du serveur')
         )
         .addSubcommand(subcommand =>
             subcommand
                 .setName('ticketpanel')
-                .setDescription('Set the ticket panel from the server')
+                .setDescription('Définissez le panneau de ticket du serveur')
         )
     ,
 

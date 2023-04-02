@@ -2,21 +2,21 @@ const Discord = require('discord.js');
 
 module.exports = async (client, interaction, args) => {
     client.embed({
-        title: `📘・Owner information`,
+        title: `📘・Information du propriétaire`,
         desc: `____________________________`,
         thumbnail: client.user.avatarURL({ dynamic: true, size: 1024 }),
         fields: [{
-            name: "👑┆Owner name",
+            name: "👑┆Le nom du propriétaire",
             value: `Corwin`,
             inline: true,
         },
         {
-            name: "🏷┆Discord tag",
+            name: "🏷┆Étiquette de discorde",
             value: `</Corwin>#0001`,
             inline: true,
         },
         {
-            name: "🏢┆Organization",
+            name: "🏢┆Organisation",
             value: `CoreWare`,
             inline: true,
         },

@@ -6,10 +6,10 @@ const axios = require('axios');
 const { version } = require('.././package.json');
 axios.get('https://api.github.com/repos/CorwinDev/Discord-Bot/releases/latest').then(res => {
     if (res.data.tag_name !== version) {
-        console.log(chalk.red.bgYellow(`Votre bot n'est pas à jour!Veuillez mettre à jour la dernière version!`, version + ' -> ' + res.data.tag_name));
+        console.log(chalk.red.bgYellow(`Votre bot n'est pas à jour! Veuillez mettre à jour la dernière version!`, version + ' -> ' + res.data.tag_name));
     }
 }).catch(err => {
-    console.log(chalk.red.bgYellow(`Impossible de vérifier si Bot est à jour!`));
+    console.log(chalk.red.bgYellow(`Impossible de vérifier si Le Friturier est à jour!`));
 });
 
 
@@ -47,8 +47,6 @@ if (process.env.TOPGG_TOKEN) {
 console.clear();
 console.log(chalk.blue(chalk.bold(`Système`)), (chalk.white(`>>`)), (chalk.green(`Démarrage`)), (chalk.white(`...`)))
 console.log(`\u001b[0m`)
-console.log(chalk.red(`© CorwinDev | 2021 - ${new Date().getFullYear()}`))
-console.log(chalk.red(`Tous les droits sont réservés`))
 console.log(`\u001b[0m`)
 console.log(`\u001b[0m`)
 console.log(chalk.blue(chalk.bold(`Système`)), (chalk.white(`>>`)), chalk.red(`Version ${require(`${process.cwd()}/package.json`).version}`), (chalk.green(`loaded`)))
@@ -96,7 +94,7 @@ manager.on('shardCreate', shard => {
 
         if (process.exitCode === null) {
             const embed = new Discord.EmbedBuilder()
-                .setTitle(`🚨・Fragment ${shard.id + 1}/${manager.totalShards} Sortie avec le code d'erreur nul!`)
+                .setTitle(`🚨・Fragment ${shard.id + 1}/${manager.totalShards} Sortie avec le code d'erreur null!`)
                 .setFields([
                     {
                         name: "PID",

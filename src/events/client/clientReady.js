@@ -13,8 +13,8 @@ module.exports = async (client) => {
     console.log(chalk.blue(chalk.bold(`Bot`)), (chalk.white(`>>`)), chalk.green(`Started on`), chalk.red(`${client.guilds.cache.size}`), chalk.green(`servers!`))
 
     let embed = new Discord.EmbedBuilder()
-        .setTitle(`🆙・Finishing shard`)
-        .setDescription(`A shard just finished`)
+        .setTitle(`🆙・Finition Shard`)
+        .setDescription(`Un éclat vient de terminer`)
         .addFields(
             { name: "🆔┆ID", value: `${client.shard.ids[0] + 1}/${client.options.shardCount}`, inline: true },
             { name: "📃┆State", value: `Ready`, inline: true },
@@ -28,6 +28,18 @@ module.exports = async (client) => {
     setInterval(async function () {
         const promises = [
             client.shard.fetchClientValues('guilds.cache.size'),
+        ];
+        const activities = [
+            { name: `League of Legends`, type: 0 },
+            { name: `vec ta mère`, type: 0 },
+            { name: `si aucune rebellion ne se forme`, type: 3 },
+            { name: `le crépitement de la friture`, type: 2 },
+            { name: `si Eliott fait pas de bêtises`, type: 3 },
+            { name: `si ça joue à LoL`, type: 3 },
+            { name: `si Thomas est toujours aussi beau aujourd'hui`, type: 3 },
+            { name: `si Lisa casse pas les couilles`, type: 3 },
+            { name: `si Diana ne s'est pas trompé de micro (encore)`, type: 2 },
+            { name: `si le Megapack est en live`, type: 3 },
         ];
         return Promise.all(promises)
             .then(results => {

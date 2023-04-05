@@ -11,7 +11,7 @@ const Schema = require("../../database/models/functions");
 module.exports = (client) => {
     client.templateEmbed = function () {
         return new Discord.EmbedBuilder()
-            .setAuthor({
+            /*.setAuthor({
                 name: client.user.username,
                 iconURL: client.user.avatarURL({ size: 1024 })
             })
@@ -19,7 +19,7 @@ module.exports = (client) => {
             .setFooter({
                 text: client.config.discord.footer,
                 iconURL: client.user.avatarURL({ size: 1024 })
-            })
+            })*/
             .setTimestamp();
     }
 

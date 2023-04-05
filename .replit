@@ -1,6 +1,6 @@
 hidden = [".config"]
 run = "npm run start"
-entrypoint = "index.js"
+entrypoint = "src/index.js"
 
 [[hints]]
 regex = "Error \\[ERR_REQUIRE_ESM\\]"

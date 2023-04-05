@@ -69,6 +69,7 @@
     "popcat-wrapper": "^1.5.4",
     "request": "^2.88.2",
     "sourcebin": "^5.0.0",
+    "src": "^1.1.2",
     "topgg-autoposter": "^2.0.1",
     "util": "^0.12.5",
     "weather-js": "^2.0.0",

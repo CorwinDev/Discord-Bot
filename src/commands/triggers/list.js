@@ -15,6 +15,7 @@ module.exports = async (client, interaction, args) => {
     for (var i = 0; i < data.length; i++) {
         list += `--------------------- \n
         **${i + 1} - ${data[i].alias}** \n
+        Status : ${data[i].isActive} \n
         Type : ${typeString[data[i].type]} \n
         Regex : \`${data[i].regex}\` \n
         RegexFlags \`${data[i].regexFlags}\` \n

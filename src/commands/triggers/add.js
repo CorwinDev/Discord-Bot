@@ -8,7 +8,7 @@ module.exports = async (client, interaction, args) => {
     }
     var alias = interaction.options.getString('alias').toLowerCase();
     var type = interaction.options.getString('type');
-    var typeString = ["blank","Répond","Répond puis supprime","Supprime","Ajoute une réaction"];
+    var typeString = ["✖️","Répond","Répond puis supprime","Supprime","Ajoute une réaction"];
     var regex = interaction.options.getString('regex');
     if (regexFlags == null) {
         var regexFlags = interaction.options.getString('regexflags');
@@ -45,8 +45,8 @@ module.exports = async (client, interaction, args) => {
     var previousTriggers = [{
         isActive: "✖️",
         alias: "✖️",
-        type: "✖️",
-        regex: "🎫: ✖️",
+        type: 0,
+        regex: "✖️",
         regexFlags: "✖️",
         response: "✖️",
         mention: "✖️",
@@ -57,7 +57,7 @@ module.exports = async (client, interaction, args) => {
     Schema.findOne({ Guild: interaction.guild.id }, async (err, data) => {
         if (data) {
             const existingTriggerIndex = data.Triggers.findIndex(trigger => trigger.alias === alias);
-            previousTriggers[0].isActive = data.Triggers[existingTriggerIndex].isActive;
+            /*previousTriggers[0].isActive = data.Triggers[existingTriggerIndex].isActive;
             previousTriggers[0].alias = data.Triggers[existingTriggerIndex].alias;
             previousTriggers[0].type = data.Triggers[existingTriggerIndex].type;
             previousTriggers[0].regex = data.Triggers[existingTriggerIndex].regex;
@@ -65,7 +65,7 @@ module.exports = async (client, interaction, args) => {
             previousTriggers[0].response = data.Triggers[existingTriggerIndex].response;
             previousTriggers[0].mention = data.Triggers[existingTriggerIndex].mention;
             previousTriggers[0].replied = data.Triggers[existingTriggerIndex].replied;
-            previousTriggers[0].emotes = data.Triggers[existingTriggerIndex].emotes;
+            previousTriggers[0].emotes = data.Triggers[existingTriggerIndex].emotes;*/
 
             if (existingTriggerIndex >= 0) {
                 data.Triggers[existingTriggerIndex] = {

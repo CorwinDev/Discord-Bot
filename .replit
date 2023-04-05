@@ -1,5 +1,6 @@
 hidden = [".config"]
 run = "npm run start"
+entrypoint = "index.js"
 
 [[hints]]
 regex = "Error \\[ERR_REQUIRE_ESM\\]"
@@ -74,3 +75,9 @@ pattern = "**/{*.js,*.jsx,*.ts,*.tsx}"
 
 [languages.javascript.languageServer]
 start = "typescript-language-server --stdio"
+
+[interpreter]
+command = ["prybar-nodejs", "-q", "--ps1", "\u0001\u001B[33m\u0002\u0001\u001B[00m\u0002 ", "-i"]
+
+[deployment]
+run = ["sh", "-c", "node index.js"]

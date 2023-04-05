@@ -42,9 +42,31 @@ module.exports = async (client, interaction, args) => {
     if (timeDeletion == null) {
         timeDeletion = 1000;
     };
+    var previousTriggers = [{
+        isActive: "✖️",
+        alias: "✖️",
+        type: "✖️",
+        regex: "🎫: ✖️",
+        regexFlags: "✖️",
+        response: "✖️",
+        mention: "✖️",
+        replied: "✖️",
+        emotes: "✖️"
+      }];
+
     Schema.findOne({ Guild: interaction.guild.id }, async (err, data) => {
         if (data) {
             const existingTriggerIndex = data.Triggers.findIndex(trigger => trigger.alias === alias);
+            previousTriggers[0].isActive = data.Triggers[existingTriggerIndex].isActive;
+            previousTriggers[0].alias = data.Triggers[existingTriggerIndex].alias;
+            previousTriggers[0].type = data.Triggers[existingTriggerIndex].type;
+            previousTriggers[0].regex = data.Triggers[existingTriggerIndex].regex;
+            previousTriggers[0].regexFlags = data.Triggers[existingTriggerIndex].regexFlags;
+            previousTriggers[0].response = data.Triggers[existingTriggerIndex].response;
+            previousTriggers[0].mention = data.Triggers[existingTriggerIndex].mention;
+            previousTriggers[0].replied = data.Triggers[existingTriggerIndex].replied;
+            previousTriggers[0].emotes = data.Triggers[existingTriggerIndex].emotes;
+
             if (existingTriggerIndex >= 0) {
                 data.Triggers[existingTriggerIndex] = {
                     isActive: isActive,
@@ -106,7 +128,62 @@ module.exports = async (client, interaction, args) => {
         fields: [
             {
                 name: `💬┆ Trigger`,
-                value: `${alias}`
+                value: `**${alias}**`
+            },{
+                name: `💬┆ Paramètres précédents`,
+                value: ` `
+            },
+            {
+                name: `Alias`,
+                value: `\`${previousTriggers[0].alias}\``
+            },
+            {
+                name: `Type`,
+                value: `\`${typeString[previousTriggers[0].type]}\``
+            },
+            {
+                name: `Regex & flags`,
+                value: `🎫\`${previousTriggers[0].regex}\` 🎌\`${previousTriggers[0].regexFlags}\``
+            },
+            {
+                name: `Réponse`,
+                value: `\`${previousTriggers[0].response}\``
+            },
+            {
+                name: `Emotes`,
+                value: `\`${previousTriggers[0].emotes}\``
+            },
+            {
+                name: `Additionnels`,
+                value: `Mentionne : \`${previousTriggers[0].mention}\` ` + `Message suivi : \`${previousTriggers[0].replied}\``
+            },
+            {
+                name: `💬┆ Nouveaux paramètres`,
+                value: ` `
+            },
+            {
+                name: `Alias`,
+                value: `\`${alias}\``
+            },
+            {
+                name: `Type`,
+                value: `\`${typeString[type]}\``
+            },
+            {
+                name: `Regex & flags`,
+                value: `🎫\`${regex}\` 🎌\`${regexFlags}\``
+            },
+            {
+                name: `Réponse`,
+                value: `\`${response}\``
+            },
+            {
+                name: `Emotes`,
+                value: `\`${emotes}\``
+            },
+            {
+                name: `Additionnels`,
+                value: `Mentionne : \`${mention}\` ` + `Message suivi : \`${replied}\``
             }
         ],
         type: 'editreply'

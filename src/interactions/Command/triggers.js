@@ -60,6 +60,15 @@ module.exports = {
                 .setName('remove')
                 .setDescription('Retirer un trigger')
                 .addStringOption(option => option.setName('alias').setDescription('Alias du trigger').setRequired(true))
+        )
+        .addSubcommand(subcommand =>
+            subcommand
+                .setName('list')
+                .setDescription('Voir tous les triggers')
+        ).addSubcommand(subcommand =>
+            subcommand
+                .setName('documentation')
+                .setDescription('Documentation sur comment faire un triggers')
         ),
 
     /** 
@@ -70,8 +79,15 @@ module.exports = {
 
     run: async (client, interaction, args) => {
         await interaction.deferReply({ fetchReply: true });
+        const perms = await client.checkUserPerms({
+            flags: [Discord.PermissionsBitField.Flags.ManageMessages],
+            perms: [Discord.PermissionsBitField.Flags.ManageMessages]
+        }, interaction)
+
+        if (perms == false) return;
+
         client.loadSubcommands(client, interaction, args);
-    }
+    },
 };
 
  

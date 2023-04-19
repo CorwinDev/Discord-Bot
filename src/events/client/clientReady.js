@@ -49,15 +49,17 @@ module.exports = async (client) => {
                     statuttext = process.env.DISCORD_STATUS.split(', ');
                 } else {
                     statuttext = [
-                        `・❓┆/help`,
-                        `・💻┆${totalGuilds} servers`,
-                        `・📨┆discord.gg/corwindev`,
-                        `・🎉┆400+ commands`,
-                        `・🏷️┆Version ${require(`${process.cwd()}/package.json`).version}`
+                        { name: `League of Legends`, type: Discord.ActivityType.Competing },
+                        { name: `si aucune rebellion ne se forme`, type: Discord.ActivityType.Watching },
+                        { name: `le crépitement de la friture`, type: Discord.ActivityType.Listening },
+                        { name: `si Eliott fait pas de bêtises`, type: Discord.ActivityType.Watching },
+                        { name: `si ça joue à LoL`, type: Discord.ActivityType.Watching },
+                        { name: `si Thomas est toujours aussi beau aujourd'hui`, type: Discord.ActivityType.Watching },
+                        { name: `${totalGuilds} serveurs`, type: Discord.ActivityType.Watching}
                     ];
                 }
                 const randomText = statuttext[Math.floor(Math.random() * statuttext.length)];
-                client.user.setPresence({ activities: [{ name: randomText, type: Discord.ActivityType.Playing }], status: 'online' });
+                client.user.setPresence({ activities: [{ name: randomText.name, type: randomText.type }], status: 'online' });
             })
     }, 50000)
 

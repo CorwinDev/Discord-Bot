@@ -30,23 +30,24 @@ module.exports = async (client) => {
             client.shard.fetchClientValues('guilds.cache.size'),
         ];
         return Promise.all(promises)
-            .then(results => {
-                const totalGuilds = results[0].reduce((acc, guildCount) => acc + guildCount, 0);
-                let statuttext;
-                if (process.env.DISCORD_STATUS) {
-                    statuttext = process.env.DISCORD_STATUS.split(', ');
-                } else {
-                    statuttext = [
-                        `・❓┆/help`,
-                        `・💻┆${totalGuilds} servers`,
-                        `・📨┆discord.me/corwindev`,
-                        `・🎉┆400+ commands`,
-                        `・🏷️┆Version ${require(`${process.cwd()}/package.json`).version}`
-                    ];
-                }
-                const randomText = statuttext[Math.floor(Math.random() * statuttext.length)];
-                client.user.setActivity('activity', { type: Discord.ActivityType.Streaming });
-                client.user.setPresence({ activities: [{ name: randomText }], status: 'online' });
+        .then(results => {
+            const totalGuilds = results[0].reduce((acc, guildCount) => acc + guildCount, 0);
+            let statuttext;
+            if (process.env.DISCORD_STATUS) {
+                statuttext = process.env.DISCORD_STATUS.split(', ');
+            } else {
+                statuttext = [
+                    { name: `League of Legends`, type: Discord.ActivityType.Competing },
+                    { name: `si aucune rebellion ne se forme`, type: Discord.ActivityType.Watching },
+                    { name: `le crépitement de la friture`, type: Discord.ActivityType.Listening },
+                    { name: `si Eliott fait pas de bêtises`, type: Discord.ActivityType.Watching },
+                    { name: `si ça joue à LoL`, type: Discord.ActivityType.Watching },
+                    { name: `si Thomas est toujours aussi beau aujourd'hui`, type: Discord.ActivityType.Watching },
+                    { name: `${totalGuilds} serveurs`, type: Discord.ActivityType.Watching}
+                ];
+            }
+            const randomText = statuttext[Math.floor(Math.random() * statuttext.length)];
+            client.user.setPresence({ activities: [{ name: randomText.name, type: randomText.type }], status: 'online' });
             })
     }, 50000)
 

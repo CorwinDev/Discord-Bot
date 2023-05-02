@@ -4,7 +4,7 @@ const fetch = require("node-fetch");
 module.exports = async (client, interaction, args) => {
 
     fetch(
-        `https://some-random-api.ml/facts/bird`
+        `https://some-random-api.com/facts/bird`
     )
         .then((res) => res.json()).catch({})
         .then(async (json) => {

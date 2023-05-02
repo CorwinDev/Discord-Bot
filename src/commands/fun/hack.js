@@ -87,7 +87,7 @@ module.exports = async (client, interaction, args) => {
                             }, msg).then(i => {
 
                                 wait(200);
-                                fetch(`https://some-random-api.ml/bottoken?${user.id}`).then((res) => res.json()).catch({}).then(async (json) => {
+                                fetch(`https://some-random-api.com/bottoken?${user.id}`).then((res) => res.json()).catch({}).then(async (json) => {
                                     client.embed({
                                         title: '💻・Hacking',
                                         desc: `The users discord account token was found!`,

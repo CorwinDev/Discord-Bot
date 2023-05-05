@@ -47,7 +47,7 @@ If you like this repository, feel free to leave a star ⭐ to motivate me!
 - [x] Slash Commands 
 - [x] Upto date with Discord.js v14
 - [x] Automod
-- [X] Custom Commands
+- [x] Custom Commands
 - [x] Music Commands
 - [x] Tickets
 - [x] Utility Commands
@@ -71,7 +71,7 @@ If you like this repository, feel free to leave a star ⭐ to motivate me!
 - Discord Token. Get it from [Discord Developers Portal](https://discord.com/developers/applications)
 - Mongo Database URL. Get it from [MongoDB](https://cloud.mongodb.com/v2/635277bf9f5c7b5620db28a4#clusters)
 - Giphy API Token. Get it from [Giphy Developers Portal](https://developers.giphy.com/)
-- APi Key for OpenAi `for ai chatbot`. Get it from [OpenAi Developers Portal](https://beta.openai.com/account/api-keys)
+- OpenAI API Key `for ai chatbot`. Get it from [OpenAi Developers Portal](https://beta.openai.com/account/api-keys)
 - ClientID `for loading slash commands.`
 - Spotify client ID `for spotify support` [Click here to get](https://developer.spotify.com/dashboard/login)
 - Spotify client Secret `for spotify support` [Click here to get](https://developer.spotify.com/dashboard/login)

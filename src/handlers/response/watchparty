@@ -1,0 +1,192 @@
+const Discord = require('discord.js');
+module.exports = async (client) => {
+    const regex = {
+        teleparty: /\bhttps?:\/\/redirect\.teleparty\.com\/join\/[a-f0-9]+\b/i,
+        primeparty: /\bhttps?:\/\/(?:www\.)?(?:watchparty\.amazon|primevideo\.com)\/(?:[\w-]+\/)*amzn1\.dv\.wp\.room\.[\w-]+\b/i,
+        watchpartyme: /\bhttps?:\/\/www\.watchparty\.me\/#[\w-]+\b/i,
+        disneyparty: /\bhttps?:\/\/www\.disneyplus\.com(?:\/\w{2}-\w{2})?\/groupwatch\/[\w-]+\b/i,
+        imgUrl: /(https?:\/\/.*\.(?:png|webp|jpg|jpeg|gif))/i
+    };
+    client.on(Discord.Events.MessageCreate, async (message) => {
+        if (message.channel.type === Discord.ChannelType.DM) return;
+        if (message.author.bot) return;
+        console.log(message);
+        console.log(message.author);
+        try {
+            // Check if the message contains a Teleparty URL
+            var support = "";
+            var watchparty = false;
+            var icon = "";
+            var cleanedMessage = message.content;
+            var color = 0xff0000;
+            var fields = [{
+              "name": "",
+              "value": ""
+            }];
+            var imageUrl = "";
+            if(regex.imgUrl.test(message.content)) {
+              var urlMatched = message.content.match(regex.imgUrl)
+              cleanedMessage = cleanedMessage.replace(regex.imgUrl, ``);
+              imageUrl = urlMatched[0];
+            }
+            const firstAttachment = message.attachments.first();
+            if (firstAttachment) {
+              imageUrl = firstAttachment.url
+            }
+
+            const teleparty = message.content.match(regex.teleparty);
+            if (teleparty)  {
+              support = "Teleparty";
+              url = teleparty[0];
+              watchparty = true;
+              icon = "https://play-lh.googleusercontent.com/5AJ3dpVdbd1S73OJxh-WQXAkWvz79cHBQa-i2h9DbMb1OcwgID-1I5SpHTwmhl1-Trc";
+              cleanedMessage = cleanedMessage.replace(regex.teleparty, `[\[lien\]](${url})`);
+              messageOnlyLink = regex.teleparty.test(cleanedMessage);
+              color = 0xE50914;
+            };
+            const primeparty = message.content.match(regex.primeparty);
+            if (primeparty) {
+              support = "Prime Video";
+              url = primeparty[0];
+              watchparty = true;
+              icon = "https://store-images.s-microsoft.com/image/apps.42667.14618985536919905.4b30e4f3-f7a1-4421-840c-2cc97b10e8e0.e2d07496-243f-458a-b5ef-e3249f7bb71f";
+              cleanedMessage = cleanedMessage.replace(regex.primeparty, `[\[lien\]](${url})`);
+              messageOnlyLink = regex.primeparty.test(cleanedMessage);
+              color = 0x00A8E1;
+            };
+            const disneyparty = message.content.match(regex.disneyparty);
+            if (disneyparty) {
+              support = "Disney+";
+              url = disneyparty[0];
+              watchparty = true;
+              icon = "https://seeklogo.com/images/D/disney-logo-9649A88458-seeklogo.com.png";
+              cleanedMessage = cleanedMessage.replace(regex.disneyparty, `[\[lien\]](${url})`);
+              messageOnlyLink = regex.disneyparty.test(cleanedMessage);
+              color = 0x153866;
+            };
+            const watchpartyme = message.content.match(regex.watchpartyme);
+            if (watchpartyme) {
+              support = "Watchparty.me";
+              url = watchpartyme[0];
+              watchparty = true;
+              icon = "https://www.saashub.com/images/app/service_logos/183/j18sqik9nu3s/large.png?1626896447";
+              cleanedMessage = cleanedMessage.replace(regex.watchpartyme, `[\[lien\]](${url})`);
+              messageOnlyLink = regex.watchpartyme.test(cleanedMessage);
+              color = 0xff0000;
+            };
+
+            if (true) {
+              fields = [{
+                "name": ``,
+                "value": `> ${cleanedMessage}`
+              }]
+            }
+            if (watchparty) {
+                /* Construct the embed message
+                const embed = new Discord.EmbedBuilder()
+                    .setTitle('Invitation Watch Party')
+                    .setDescription(`**${message.author}** t'a invité à une Watch Party sur ${support}!`)
+                    .setTimestamp();
+                // Send the message with the embed and button
+                const row = new Discord.ActionRowBuilder()
+                    .addComponents(
+                        new Discord.ButtonBuilder()
+                        .setLabel('Rejoindre la Watch Party')
+                        .setStyle(5)
+                        .setURL(match[0]),
+                    );
+                const replyOptions = {
+                    allowedMentions: { repliedUser: true },
+                    components: [row],
+                };*/
+                embed = {
+                  "channel_id": message.channel_id,
+                  "content": "",
+                  "tts": false,
+                  "attachments": message.attachments[0],
+                  "components": [
+                    {
+                      "type": 1,
+                      "components": [
+                        {
+                          "style": 5,
+                          "label": `Rejoindre la Watch Party`,
+                          "url": url,
+                          "disabled": false,
+                          "type": 2
+                        }
+                      ]
+                    }
+                  ],
+                  "embeds": [
+                    {
+                      "type": "rich",
+                      "title": ``,
+                      "description": `\n\n**${message.author}** t'a invité à regarder sur **${support}** !`,
+                      "color": color,
+                      "fields": fields,
+                      "author": {
+                        "name": "Watch Party",
+                        "icon_url": `https://cdn.discordapp.com/avatars/${message.author.id}/${message.author.avatar}.webp`
+                      },
+                      "image": {
+                        "url": imageUrl,
+                        "height": 0,
+                        "width": 0
+                      },
+                      "thumbnail": {
+                        "url": icon,
+                        "height": 1,
+                        "width": 1
+                      }
+                    }
+                  ]
+                };
+                message.channel.send(embed);
+                // Delete the original message
+                message.delete({ timeout: 5000 });
+            }
+        } catch (err) {
+            console.error(err);
+        }
+    }).setMaxListeners(0);
+
+
+    /*client.on(Discord.Events.MessageUpdate, async (oldMessage, newMessage) => {
+        if (!oldMessage || !newMessage || oldMessage.content === newMessage.content || newMessage.channel.type === Discord.ChannelType.DM) return;
+      
+        try {
+          const triggers = await Triggers.findOne({ Guild: newMessage.guild.id });
+          if (!triggers) return;
+      
+          for (const trigger of triggers.Triggers) {
+            if (!trigger.isActive) continue;
+      
+            const regex = new RegExp(trigger.regex, trigger.regexFlags);
+            if (regex.test(newMessage.content)) {
+              const response = trigger.response.replace(/{{user}}/g, `<@${newMessage.author.id}>`);
+              const emotes = trigger.emotes ? trigger.emotes : {};
+      
+              const replyOptions = {
+                allowedMentions: { repliedUser: trigger.mention },
+              };
+      
+              const messageOptions = {
+                reply: replyOptions,
+                emotes,
+              };
+      
+              if (!newMessage.author.bot) { // added this check
+                if (trigger.type === 1) {
+                  newMessage.reply(response, messageOptions);
+                } else if (trigger.type === 2) {
+                  newMessage.channel.send(response, messageOptions);
+                }
+              }
+            }
+          }
+        } catch (err) {
+          console.error(err);
+        }
+      }).setMaxListeners(0);*/
+};

@@ -133,7 +133,7 @@ module.exports = {
       };
     interaction.followUp(embed);
     m.delete();
-    //message.delete({ timeout: 5000 })
+    message.delete({ timeout: 5000 })
   });
 
   collector.on('end', collected => {

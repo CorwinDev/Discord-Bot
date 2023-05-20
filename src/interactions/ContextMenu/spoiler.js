@@ -1,5 +1,6 @@
 const { CommandInteraction, Client } = require('discord.js');
 const { ContextMenuCommandBuilder } = require('discord.js');
+const { PermissionsBitField } = require('discord.js');
 const Discord = require('discord.js');
 const fs = require('fs');
 const https = require('https');
@@ -18,7 +19,7 @@ module.exports = {
     const message = args[0].message;
     const user = interaction.member.user;
     const member = interaction.member;
-    if (!member.permissions.has('MANAGE_MESSAGES')) {
+    if (!interaction.guild.members.me.permissions.has(PermissionsBitField.Flags.ManageMessages)) {
       return interaction.reply({ content: 'You do not have the required permissions to use this command.', ephemeral: true });
     }
     await interaction.reply({
@@ -48,7 +49,7 @@ module.exports = {
 
     collector.on('collect', async m => {
       if (m.content.trim().toLowerCase() === 'annuler') {
-        interaction.followUp({ content: 'Message spoiler annulé', ephemeral: true });
+        interaction.editReply({ content: 'Message spoiler annulé', ephemeral: true });
         m.delete();
         return;
       }
@@ -133,7 +134,7 @@ module.exports = {
       };
     interaction.followUp(embed);
     m.delete();
-    //message.delete({ timeout: 5000 })
+    message.delete({ timeout: 5000 })
   });
 
   collector.on('end', collected => {

@@ -18,7 +18,7 @@ module.exports = {
     const message = args[0].message;
     const user = interaction.member.user;
     const member = interaction.member;
-    if (!member.permissions.has('MANAGE_MESSAGES')) {
+    if (!interaction.guild.members.me.permissions.has(PermissionsBitField.Flags.ManageMessages)) {
       return interaction.reply({ content: 'You do not have the required permissions to use this command.', ephemeral: true });
     }
     await interaction.reply({

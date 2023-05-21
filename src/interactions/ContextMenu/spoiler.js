@@ -22,7 +22,7 @@ module.exports = {
     if (!interaction.guild.members.me.permissions.has(PermissionsBitField.Flags.ManageMessages)) {
       return interaction.reply({ content: 'You do not have the required permissions to use this command.', ephemeral: true });
     }
-    await interaction.reply({
+    await interaction.channel.send({
       "content": ' ',
       "ephemeral": true,
       "embeds": [
@@ -49,7 +49,7 @@ module.exports = {
 
     collector.on('collect', async m => {
       if (m.content.trim().toLowerCase() === 'annuler') {
-        interaction.editReply({ content: 'Message spoiler annulé', ephemeral: true });
+        interaction.channel.send({ content: 'Message spoiler annulé', ephemeral: true });
         m.delete();
         return;
       }
@@ -132,7 +132,7 @@ module.exports = {
           }
         ]*/
       };
-    interaction.editReply(embed);
+    interaction.followUp(embed);
     m.delete();
     message.delete({ timeout: 5000 })
   });

@@ -49,7 +49,7 @@ module.exports = {
 
     collector.on('collect', async m => {
       if (m.content.trim().toLowerCase() === 'annuler') {
-        interaction.followUp({ content: 'Message spoiler annulé', ephemeral: true });
+        interaction.editReply({ content: 'Message spoiler annulé', ephemeral: true });
         m.delete();
         return;
       }
@@ -132,7 +132,7 @@ module.exports = {
           }
         ]*/
       };
-    interaction.followUp(embed);
+    interaction.editReply(embed);
     m.delete();
     message.delete({ timeout: 5000 })
   });

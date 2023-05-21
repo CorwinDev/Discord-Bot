@@ -1,5 +1,6 @@
 const { CommandInteraction, Client } = require('discord.js');
 const { ContextMenuCommandBuilder } = require('discord.js');
+const { PermissionsBitField } = require('discord.js');
 const Discord = require('discord.js');
 const fs = require('fs');
 const https = require('https');

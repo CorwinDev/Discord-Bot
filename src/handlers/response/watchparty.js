@@ -55,8 +55,18 @@ module.exports = async (client) => {
             }
 
             function axiosHtml(url, selector) {
+              //return undefined;
+              // Create a new Axios instance
+              const instance = axios.create({
+                headers: {
+                  'Cache-Control': 'no-cache',
+                  'Pragma': 'no-cache',
+                  'Expires': '0',
+                },
+              });
+            
               return new Promise((resolve, reject) => {
-                axios.get(url)
+                instance.get(url)
                   .then(response => {
                     const html = response.data;
                     const $ = cheerio.load(html);
@@ -68,8 +78,12 @@ module.exports = async (client) => {
                     }
                   })
                   .catch(error => {
-                    reject(error);
-
+                    console.log("Axios Function : " + error);
+                    if (error.response && error.response.status === 404) {
+                      reject(undefined);
+                    } else {
+                      reject("An error occurred: " + error);
+                    }
                   });
               });
             }
@@ -100,20 +114,20 @@ module.exports = async (client) => {
                         Netflix
             */
             if (support == "netflix") {
-              try {
-                const titleResult = await axiosHtml("https://www.netflix.com/watch/" + videoId, 'h1.title-title');
-                const title = titleResult.text;
-                const errorCode = titleResult.error;
-              
-                if (errorCode) {
-                  console.log("Une erreur s'est produite lors de la requête :", errorCode);
-                } else {
-                  if (title != undefined) titleFound = true;
+              async function netflix() {
+                try {
+                  title = await axiosHtml("https://www.netflix.com/be-fr/title/" + videoId, 'h1.title-title');
+                  if (title != undefined) {
+                    titleFound = true;
+                  } else {
+                    titleFound = false;
+                  }
+                } catch (error) {
+                  console.log(error);
+                  titleFound = false;
                 }
-              } catch (error) {
-                console.log("Une erreur s'est produite :", error);
               }
-              
+              await netflix();
               cleanedMessage = cleanedMessage.replace(regex.teleparty, `[\[lien\]](${url})`);
               messageOnlyLink = regex.teleparty.test(cleanedMessage);
 
@@ -129,20 +143,20 @@ module.exports = async (client) => {
             if (message.content.match(regex.primeparty) || support == "amazon") {
               if (support == "amazon") {
                 // Teleparty watchparty
-                try {
-                  const titleResult = await axiosHtml("https://www.primevideo.com/dp/" + videoId, 'h1[data-automation-id="title"]');
-                  const title = titleResult.text;
-                  const errorCode = titleResult.error;
-                
-                  if (errorCode) {
-                    console.log("Une erreur s'est produite lors de la requête :", errorCode);
-                  } else {
-                    if (title != undefined) titleFound = true;
+                async function primevideo() {
+                  try {
+                    title = await axiosHtml("https://www.primevideo.com/dp/" + videoId, 'h1[data-automation-id="title"]');
+                    if (title != undefined) {
+                      titleFound = true;
+                    } else {
+                      titleFound = false;
+                    }
+                  } catch (error) {
+                    console.log(error);
+                    titleFound = false;
                   }
-                } catch (error) {
-                  console.log("Une erreur s'est produite :", error);
                 }
-
+                await primevideo();
               } else {
                 // Native watchparty
                 url = message.content.match(regex.primeparty)[0];
@@ -153,9 +167,7 @@ module.exports = async (client) => {
                 messageOnlyLink = regex.primeparty.test(cleanedMessage);
               }
               if (title != undefined) titleFound = true;
-              console.log(title);
               
-
               // Streaming platform parameters
               support = "Prime Video";
               icon = "https://store-images.s-microsoft.com/image/apps.42667.14618985536919905.4b30e4f3-f7a1-4421-840c-2cc97b10e8e0.e2d07496-243f-458a-b5ef-e3249f7bb71f";
@@ -170,20 +182,21 @@ module.exports = async (client) => {
               
               if (support == "disney") {
                 // Teleparty watchparty
-                try {
-                  const titleResult = await axiosHtml("https://www.disneyplus.com/fr-fr/video/" + videoId, 'h1.h3.padding--bottom-6.padding--right-6.text-color--primary');
-                  const title = titleResult.text;
-                  const errorCode = titleResult.error;
-                
-                  if (errorCode) {
-                    console.log("Une erreur s'est produite lors de la requête :", errorCode);
-                  } else {
-                    if (title != undefined) titleFound = true;
+                async function disney() {
+                  try {
+                    title = await axiosHtml("https://www.disneyplus.com/fr-fr/video/" + videoId, 'h1.h3.padding--bottom-6.padding--right-6.text-color--primary');
+                    if (title != undefined) {
+                      titleFound = true;
+                    } else {
+                      titleFound = false;
+                    }
+                  } catch (error) {
+                    console.log(error);
+                    titleFound = false;
                   }
-                } catch (error) {
-                  console.log("Une erreur s'est produite :", error);
                 }
-
+                
+                await disney();
               } else {
                 // Native watchparty
                 url = message.content.match(regex.disneyparty)[0];
@@ -236,7 +249,6 @@ module.exports = async (client) => {
             
                 if(titleFound) {
                   var embedDescription = `\n\n**${message.author}** t'a invité à regarder **${title}** sur **${support}** !`;
-                  
                 } else {
                   var embedDescription = `\n\n**${message.author}** t'a invité à regarder sur **${support}** !`;
                 }
@@ -250,7 +262,7 @@ module.exports = async (client) => {
                 /*
                           Logs
                 */
-               console.log(titleFound ? `Watchparty de ${message.author.username} sur ${support} pour ${title}` : `par ${message.author} sur ${support}`);
+               console.log(`Watchparty de ${message.author.username} sur ${support} pour ${title}`);
 
 
                 embed = {

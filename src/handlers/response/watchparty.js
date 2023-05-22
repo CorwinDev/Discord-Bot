@@ -55,6 +55,7 @@ module.exports = async (client) => {
             }
 
             function axiosHtml(url, selector) {
+              return undefined;
               return new Promise((resolve, reject) => {
                 axios.get(url)
                   .then(response => {

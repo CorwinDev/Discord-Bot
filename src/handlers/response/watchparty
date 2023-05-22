@@ -68,7 +68,8 @@ module.exports = async (client) => {
                     }
                   })
                   .catch(error => {
-                    reject("Une erreur s'est produite : " + error);
+                    reject(error);
+
                   });
               });
             }
@@ -99,8 +100,19 @@ module.exports = async (client) => {
                         Netflix
             */
             if (support == "netflix") {
-              title = await axiosHtml("https://www.netflix.com/watch/" + videoId, 'h1.title-title');
-              if (title != undefined) titleFound = true;
+              try {
+                const titleResult = await axiosHtml("https://www.netflix.com/watch/" + videoId, 'h1.title-title');
+                const title = titleResult.text;
+                const errorCode = titleResult.error;
+              
+                if (errorCode) {
+                  console.log("Une erreur s'est produite lors de la requête :", errorCode);
+                } else {
+                  if (title != undefined) titleFound = true;
+                }
+              } catch (error) {
+                console.log("Une erreur s'est produite :", error);
+              }
               
               cleanedMessage = cleanedMessage.replace(regex.teleparty, `[\[lien\]](${url})`);
               messageOnlyLink = regex.teleparty.test(cleanedMessage);
@@ -117,7 +129,20 @@ module.exports = async (client) => {
             if (message.content.match(regex.primeparty) || support == "amazon") {
               if (support == "amazon") {
                 // Teleparty watchparty
-                title = await axiosHtml("https://www.primevideo.com/dp/" + videoId, 'h1[data-automation-id="title"]');
+                try {
+                  const titleResult = await axiosHtml("https://www.primevideo.com/dp/" + videoId, 'h1[data-automation-id="title"]');
+                  const title = titleResult.text;
+                  const errorCode = titleResult.error;
+                
+                  if (errorCode) {
+                    console.log("Une erreur s'est produite lors de la requête :", errorCode);
+                  } else {
+                    if (title != undefined) titleFound = true;
+                  }
+                } catch (error) {
+                  console.log("Une erreur s'est produite :", error);
+                }
+
               } else {
                 // Native watchparty
                 url = message.content.match(regex.primeparty)[0];
@@ -145,9 +170,20 @@ module.exports = async (client) => {
               
               if (support == "disney") {
                 // Teleparty watchparty
-                title = await axiosHtml("https://www.disneyplus.com/fr-fr/video/" + videoId, 'h1.h3.padding--bottom-6.padding--right-6.text-color--primary');
-                if (title != undefined) titleFound = true;
-                console.log(title);
+                try {
+                  const titleResult = await axiosHtml("https://www.disneyplus.com/fr-fr/video/" + videoId, 'h1.h3.padding--bottom-6.padding--right-6.text-color--primary');
+                  const title = titleResult.text;
+                  const errorCode = titleResult.error;
+                
+                  if (errorCode) {
+                    console.log("Une erreur s'est produite lors de la requête :", errorCode);
+                  } else {
+                    if (title != undefined) titleFound = true;
+                  }
+                } catch (error) {
+                  console.log("Une erreur s'est produite :", error);
+                }
+
               } else {
                 // Native watchparty
                 url = message.content.match(regex.disneyparty)[0];

@@ -100,6 +100,7 @@ module.exports = async (client) => {
             */
             if (support == "netflix") {
               title = await axiosHtml("https://www.netflix.com/watch/" + videoId, 'h1.title-title');
+              console.log(title.error);
               if (title != undefined) titleFound = true;
               
               cleanedMessage = cleanedMessage.replace(regex.teleparty, `[\[lien\]](${url})`);

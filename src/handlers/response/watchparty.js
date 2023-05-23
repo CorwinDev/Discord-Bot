@@ -57,7 +57,14 @@ module.exports = async (client) => {
             function axiosHtml(url, selector) {
               //return undefined;
               return new Promise((resolve, reject) => {
-                axios.get(url)
+                axios.get(url, {
+                  // query URL without using browser cache
+                  headers: {
+                    'Cache-Control': 'no-cache',
+                    'Pragma': 'no-cache',
+                    'Expires': '0',
+                  },
+                })
                   .then(response => {
                     const html = response.data;
                     const $ = cheerio.load(html);

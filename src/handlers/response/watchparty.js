@@ -112,7 +112,15 @@ module.exports = async (client) => {
                         Netflix
             */
             if (support == "netflix") {
-              title = await axiosHtml("https://www.netflix.com/be-fr/title/" + videoId, 'h1.title-title');
+              try {
+                title = await axiosHtml("https://www.netflix.com/be-fr/title/" + videoId, 'h1.title-title');
+              } catch (error) {
+                if (error.includes("Error 404")) {
+                  title = undefined;
+                } else {
+                  throw error;
+                }
+              }
               if (title != undefined) titleFound = true;
               
               cleanedMessage = cleanedMessage.replace(regex.teleparty, `[\[lien\]](${url})`);
@@ -130,7 +138,15 @@ module.exports = async (client) => {
             if (message.content.match(regex.primeparty) || support == "amazon") {
               if (support == "amazon") {
                 // Teleparty watchparty
-                title = await axiosHtml("https://www.primevideo.com/dp/" + videoId, 'h1[data-automation-id="title"]');
+                try {
+                  title = await axiosHtml("https://www.primevideo.com/dp/" + videoId, 'h1[data-automation-id="title"]');
+                } catch (error) {
+                  if (error.includes("Error 404")) {
+                    title = undefined;
+                  } else {
+                    throw error;
+                  }
+                }
               } else {
                 // Native watchparty
                 url = message.content.match(regex.primeparty)[0];
@@ -158,7 +174,15 @@ module.exports = async (client) => {
               
               if (support == "disney") {
                 // Teleparty watchparty
-                title = await axiosHtml("https://www.disneyplus.com/fr-fr/video/" + videoId, 'h1.h3.padding--bottom-6.padding--right-6.text-color--primary');
+                try {
+                  title = await axiosHtml("https://www.disneyplus.com/fr-fr/video/" + videoId, 'h1.h3.padding--bottom-6.padding--right-6.text-color--primary');
+                } catch (error) {
+                  if (error.includes("Error 404")) {
+                    title = undefined;
+                  } else {
+                    throw error;
+                  }
+                }
                 if (title != undefined) titleFound = true;
                 console.log(title);
               } else {

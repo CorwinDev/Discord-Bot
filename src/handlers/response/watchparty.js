@@ -55,16 +55,17 @@ module.exports = async (client) => {
             }
 
             function axiosHtml(url, selector) {
-              //return undefined;
+              // Create a new Axios instance
+              const instance = axios.create({
+                headers: {
+                  'Cache-Control': 'no-cache',
+                  'Pragma': 'no-cache',
+                  'Expires': '0',
+                },
+              });
+            
               return new Promise((resolve, reject) => {
-                axios.get(url, {
-                  // query URL without using browser cache
-                  headers: {
-                    'Cache-Control': 'no-cache',
-                    'Pragma': 'no-cache',
-                    'Expires': '0',
-                  },
-                })
+                instance.get(url)
                   .then(response => {
                     const html = response.data;
                     const $ = cheerio.load(html);
@@ -76,7 +77,11 @@ module.exports = async (client) => {
                     }
                   })
                   .catch(error => {
-                    reject("Une erreur s'est produite : " + error);
+                    if (error.response && error.response.status === 404) {
+                      reject(undefined);
+                    } else {
+                      reject("An error occurred: " + error);
+                    }
                   });
               });
             }

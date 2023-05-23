@@ -55,7 +55,7 @@ module.exports = async (client) => {
             }
 
             function axiosHtml(url, selector) {
-              return undefined;
+              //return undefined;
               return new Promise((resolve, reject) => {
                 axios.get(url)
                   .then(response => {
@@ -100,7 +100,7 @@ module.exports = async (client) => {
                         Netflix
             */
             if (support == "netflix") {
-              title = await axiosHtml("https://www.netflix.com/watch/" + videoId, 'h1.title-title');
+              title = await axiosHtml("https://www.netflix.com/be-fr/title/" + videoId, 'h1.title-title');
               if (title != undefined) titleFound = true;
               
               cleanedMessage = cleanedMessage.replace(regex.teleparty, `[\[lien\]](${url})`);

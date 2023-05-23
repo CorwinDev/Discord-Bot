@@ -115,7 +115,7 @@ module.exports = async (client) => {
               try {
                 title = await axiosHtml("https://www.netflix.com/be-fr/title/" + videoId, 'h1.title-title');
               } catch (error) {
-                if (error.toString().includes("Error 404")) {
+                if (error && error.toString().includes("Error 404")) {
                   title = undefined;
                 } else {
                   throw error;
@@ -141,7 +141,7 @@ module.exports = async (client) => {
                 try {
                   title = await axiosHtml("https://www.primevideo.com/dp/" + videoId, 'h1[data-automation-id="title"]');
                 } catch (error) {
-                  if (error.toString().includes("Error 404")) {
+                  if (error && error.toString().includes("Error 404")) {
                     title = undefined;
                   } else {
                     throw error;
@@ -177,7 +177,7 @@ module.exports = async (client) => {
                 try {
                   title = await axiosHtml("https://www.disneyplus.com/fr-fr/video/" + videoId, 'h1.h3.padding--bottom-6.padding--right-6.text-color--primary');
                 } catch (error) {
-                  if (error.toString().includes("Error 404")) {
+                  if (error && error.toString().includes("Error 404")) {
                     title = undefined;
                   } else {
                     throw error;

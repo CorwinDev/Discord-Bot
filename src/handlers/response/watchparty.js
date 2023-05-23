@@ -55,6 +55,7 @@ module.exports = async (client) => {
             }
 
             function axiosHtml(url, selector) {
+              return undefined;
               // Create a new Axios instance
               const instance = axios.create({
                 headers: {
@@ -77,6 +78,7 @@ module.exports = async (client) => {
                     }
                   })
                   .catch(error => {
+                    console.log("Axios Function : " + error);
                     if (error.response && error.response.status === 404) {
                       reject(undefined);
                     } else {
@@ -143,6 +145,7 @@ module.exports = async (client) => {
                 } catch (error) {
                   if (error && error.toString().includes("Error 404")) {
                     title = undefined;
+                    console.log(error);
                   } else {
                     throw error;
                   }
@@ -157,9 +160,7 @@ module.exports = async (client) => {
                 messageOnlyLink = regex.primeparty.test(cleanedMessage);
               }
               if (title != undefined) titleFound = true;
-              console.log(title);
               
-
               // Streaming platform parameters
               support = "Prime Video";
               icon = "https://store-images.s-microsoft.com/image/apps.42667.14618985536919905.4b30e4f3-f7a1-4421-840c-2cc97b10e8e0.e2d07496-243f-458a-b5ef-e3249f7bb71f";
@@ -184,7 +185,6 @@ module.exports = async (client) => {
                   }
                 }
                 if (title != undefined) titleFound = true;
-                console.log(title);
               } else {
                 // Native watchparty
                 url = message.content.match(regex.disneyparty)[0];
@@ -237,7 +237,6 @@ module.exports = async (client) => {
             
                 if(titleFound) {
                   var embedDescription = `\n\n**${message.author}** t'a invité à regarder **${title}** sur **${support}** !`;
-                  
                 } else {
                   var embedDescription = `\n\n**${message.author}** t'a invité à regarder sur **${support}** !`;
                 }
@@ -251,7 +250,7 @@ module.exports = async (client) => {
                 /*
                           Logs
                 */
-               console.log(titleFound ? `Watchparty de ${message.author.username} sur ${support} pour ${title}` : `par ${message.author} sur ${support}`);
+               console.log(`Watchparty de ${message.author.username} sur ${support} pour ${title}`);
 
 
                 embed = {

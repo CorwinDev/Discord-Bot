@@ -220,7 +220,7 @@ module.exports = async (client) => {
                         Watchparty.me
             */
             if (message.content.match(regex.watchpartyme)) {
-              url = watchpartyme[0];
+              url = message.content.match(regex.watchpartyme)[0];
               cleanedMessage = cleanedMessage.replace(regex.watchpartyme, `[\[lien\]](${url})`);
               messageOnlyLink = regex.watchpartyme.test(cleanedMessage);
 

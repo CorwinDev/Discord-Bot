@@ -117,14 +117,15 @@ module.exports = async (client) => {
               async function netflix() {
                 try {
                   title = await axiosHtml("https://www.netflix.com/be-fr/title/" + videoId, 'h1.title-title');
-                } catch (error) {
-                  if (error && error.toString().includes("Error 404")) {
-                    title = undefined;
+                  if (title != undefined) {
+                    titleFound = true;
                   } else {
-                    throw error;
+                    titleFound = false;
                   }
+                } catch (error) {
+                  console.log(error);
+                  titleFound = false;
                 }
-                if (title != undefined) titleFound = true;
               }
               await netflix();
               cleanedMessage = cleanedMessage.replace(regex.teleparty, `[\[lien\]](${url})`);
@@ -145,13 +146,14 @@ module.exports = async (client) => {
                 async function primevideo() {
                   try {
                     title = await axiosHtml("https://www.primevideo.com/dp/" + videoId, 'h1[data-automation-id="title"]');
-                  } catch (error) {
-                    if (error && error.toString().includes("Error 404")) {
-                      title = undefined;
-                      console.log(error);
+                    if (title != undefined) {
+                      titleFound = true;
                     } else {
-                      throw error;
+                      titleFound = false;
                     }
+                  } catch (error) {
+                    console.log(error);
+                    titleFound = false;
                   }
                 }
                 await primevideo();
@@ -183,15 +185,17 @@ module.exports = async (client) => {
                 async function disney() {
                   try {
                     title = await axiosHtml("https://www.disneyplus.com/fr-fr/video/" + videoId, 'h1.h3.padding--bottom-6.padding--right-6.text-color--primary');
-                  } catch (error) {
-                    if (error && error.toString().includes("Error 404")) {
-                      title = undefined;
+                    if (title != undefined) {
+                      titleFound = true;
                     } else {
-                      throw error;
+                      titleFound = false;
                     }
+                  } catch (error) {
+                    console.log(error);
+                    titleFound = false;
                   }
-                  if (title != undefined) titleFound = true;
                 }
+                
                 await disney();
               } else {
                 // Native watchparty

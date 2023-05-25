@@ -1,5 +1,6 @@
 const Discord = require('discord.js');
 const axios = require('axios');
+axios.defaults.baseURL = 'http://localhost:8080';
 const cheerio = require('cheerio');
 const https = require('https');
 module.exports = async (client) => {
@@ -55,7 +56,7 @@ module.exports = async (client) => {
             }
 
             function axiosHtml(url, selector) {
-              return undefined;
+              //return undefined;
               // Create a new Axios instance
               const instance = axios.create({
                 headers: {

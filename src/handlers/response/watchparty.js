@@ -1,6 +1,5 @@
 const Discord = require('discord.js');
 const axios = require('axios');
-axios.defaults.baseURL = 'http://localhost:8080';
 const cheerio = require('cheerio');
 const https = require('https');
 module.exports = async (client) => {
@@ -115,17 +114,19 @@ module.exports = async (client) => {
                         Netflix
             */
             if (support == "netflix") {
-              try {
-                title = await axiosHtml("https://www.netflix.com/be-fr/title/" + videoId, 'h1.title-title');
-              } catch (error) {
-                if (error && error.toString().includes("Error 404")) {
-                  title = undefined;
-                } else {
-                  throw error;
+              async function netflix() {
+                try {
+                  title = await axiosHtml("https://www.netflix.com/be-fr/title/" + videoId, 'h1.title-title');
+                } catch (error) {
+                  if (error && error.toString().includes("Error 404")) {
+                    title = undefined;
+                  } else {
+                    throw error;
+                  }
                 }
+                if (title != undefined) titleFound = true;
               }
-              if (title != undefined) titleFound = true;
-              
+              await netflix();
               cleanedMessage = cleanedMessage.replace(regex.teleparty, `[\[lien\]](${url})`);
               messageOnlyLink = regex.teleparty.test(cleanedMessage);
 
@@ -141,16 +142,19 @@ module.exports = async (client) => {
             if (message.content.match(regex.primeparty) || support == "amazon") {
               if (support == "amazon") {
                 // Teleparty watchparty
-                try {
-                  title = await axiosHtml("https://www.primevideo.com/dp/" + videoId, 'h1[data-automation-id="title"]');
-                } catch (error) {
-                  if (error && error.toString().includes("Error 404")) {
-                    title = undefined;
-                    console.log(error);
-                  } else {
-                    throw error;
+                async function primevideo() {
+                  try {
+                    title = await axiosHtml("https://www.primevideo.com/dp/" + videoId, 'h1[data-automation-id="title"]');
+                  } catch (error) {
+                    if (error && error.toString().includes("Error 404")) {
+                      title = undefined;
+                      console.log(error);
+                    } else {
+                      throw error;
+                    }
                   }
                 }
+                await primevideo();
               } else {
                 // Native watchparty
                 url = message.content.match(regex.primeparty)[0];
@@ -176,16 +180,19 @@ module.exports = async (client) => {
               
               if (support == "disney") {
                 // Teleparty watchparty
-                try {
-                  title = await axiosHtml("https://www.disneyplus.com/fr-fr/video/" + videoId, 'h1.h3.padding--bottom-6.padding--right-6.text-color--primary');
-                } catch (error) {
-                  if (error && error.toString().includes("Error 404")) {
-                    title = undefined;
-                  } else {
-                    throw error;
+                async function disney() {
+                  try {
+                    title = await axiosHtml("https://www.disneyplus.com/fr-fr/video/" + videoId, 'h1.h3.padding--bottom-6.padding--right-6.text-color--primary');
+                  } catch (error) {
+                    if (error && error.toString().includes("Error 404")) {
+                      title = undefined;
+                    } else {
+                      throw error;
+                    }
                   }
+                  if (title != undefined) titleFound = true;
                 }
-                if (title != undefined) titleFound = true;
+                await disney();
               } else {
                 // Native watchparty
                 url = message.content.match(regex.disneyparty)[0];

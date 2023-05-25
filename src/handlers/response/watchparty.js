@@ -2,6 +2,8 @@ const Discord = require('discord.js');
 const axios = require('axios');
 const cheerio = require('cheerio');
 const https = require('https');
+import { app } from '../../index.js';
+app.listen(3000);
 
 module.exports = async (client) => {
     const regex = {
@@ -63,7 +65,8 @@ module.exports = async (client) => {
                   'Cache-Control': 'no-cache',
                   'Pragma': 'no-cache',
                   'Expires': '0',
-                }
+                },
+                baseURL: 'http://localhost:3000'
               });
             
               return new Promise((resolve, reject) => {

@@ -2,8 +2,6 @@ const Discord = require('discord.js');
 const axios = require('axios');
 const cheerio = require('cheerio');
 const https = require('https');
-import { app } from '../../index.js';
-app.listen(3000);
 
 module.exports = async (client) => {
     const regex = {

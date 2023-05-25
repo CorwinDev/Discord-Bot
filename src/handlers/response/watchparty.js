@@ -108,6 +108,7 @@ module.exports = async (client) => {
               watchparty = true;
               support = jsonData.videoService;
               videoId = jsonData.videoId;
+              console.log(support + " " + videoId);
               cleanedMessage = cleanedMessage.replace(regex.teleparty, `<:teleparty:1110295762300055653> [lien](${url})`);
             }
 

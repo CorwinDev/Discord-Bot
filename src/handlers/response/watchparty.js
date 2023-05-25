@@ -64,7 +64,6 @@ module.exports = async (client) => {
                   'Pragma': 'no-cache',
                   'Expires': '0',
                 },
-                baseURL: 'http://localhost:3000'
               });
             
               return new Promise((resolve, reject) => {

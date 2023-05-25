@@ -220,6 +220,7 @@ module.exports = async (client) => {
                         Watchparty.me
             */
             if (message.content.match(regex.watchpartyme)) {
+              url = watchpartyme[0];
               cleanedMessage = cleanedMessage.replace(regex.watchpartyme, `[\[lien\]](${url})`);
               messageOnlyLink = regex.watchpartyme.test(cleanedMessage);
 
@@ -228,7 +229,7 @@ module.exports = async (client) => {
               icon = "https://www.saashub.com/images/app/service_logos/183/j18sqik9nu3s/large.png?1626896447";
               color = 0xff0000;
               watchparty = true;
-              url = watchpartyme[0];
+              
             };
 
 

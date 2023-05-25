@@ -9,6 +9,8 @@ app.get('/', (req, res) => {
 
 app.listen(3000)
 
+export { app };
+
 const axios = require('axios');
 // Check if is up to date
 const { version } = require('.././package.json');

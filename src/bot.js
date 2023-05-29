@@ -71,6 +71,16 @@ if (clientID && clientSecret) {
                 password: process.env.LAVALINK_PASSWORD || "CorwinDev",
                 secure: Boolean(process.env.LAVALINK_SECURE) || false
             },
+            {
+                host: "lavalink.techpoint.world",
+                port: 80,
+                password: "techpoint"
+            },
+            {
+                host: "149.56.20.224",
+                port: 19155,
+                password: "Techpoint"
+            },
         ],
         send(id, payload) {
             const guild = client.guilds.cache.get(id);

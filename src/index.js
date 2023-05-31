@@ -1,12 +1,13 @@
 const Discord = require('discord.js');
 const chalk = require('chalk');
 require('dotenv').config('./.env');
+const path = require('path');
 const express = require('express');
 const app = express();
-app.get('/', (req, res) => {
-  res.send('This bot is running CorwinDev\'s  <a href="https://github.com/CorwinDev/Discord-Bot">Discord-Bot</a>')
-})
-
+app.use(express.static(path.join(__dirname,'public')));
+app.use('/public',(req,res,next)=>{
+res.sendFile(path.join(__dirname,'text.html'));
+});
 app.listen(3000)
 
 const axios = require('axios');

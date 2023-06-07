@@ -20,7 +20,7 @@ module.exports = {
     const user = interaction.member.user;
     const member = interaction.member;
     if (!interaction.guild.members.me.permissions.has(PermissionsBitField.Flags.ManageMessages)) {
-      return interaction.reply({ content: 'You do not have the required permissions to use this command.', ephemeral: true });
+      return interaction.reply({ content: 'Tu ne possèdes pas la permission requise \`Gérer les messages\` pour effectuer cette action ', ephemeral: true });
     }
     await interaction.reply({
       "content": ' ',
@@ -48,7 +48,7 @@ module.exports = {
 
     collector.on('collect', async m => {
       if (m.content.trim().toLowerCase() === 'annuler') {
-        interaction.editReply({ content: 'Message spoiler annulé', ephemeral: true });
+        interaction.editReply({ content: 'Tu as annulé la mise en spoiler du message !', ephemeral: true });
         m.delete();
         return;
       }

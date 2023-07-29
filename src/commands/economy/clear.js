@@ -6,10 +6,12 @@ const store = require("../../database/models/economyStore");
 
 module.exports = async (client, interaction, args) => {
 
-    client.checkPerms({
-        flags: [Discord.PermissionsBitField.Flags.Administrator],
-        perms: [Discord.PermissionsBitField.Flags.Administrator]
-    }, interaction)
+  const perms = await client.checkPerms({
+    flags: [Discord.PermissionsBitField.Flags.Administrator],
+    perms: [Discord.PermissionsBitField.Flags.Administrator]
+  }, interaction)
+
+  if (perms == false) return;
 
 
     const row = new Discord.ActionRowBuilder() 

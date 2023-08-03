@@ -11,8 +11,8 @@ module.exports = async (client, oldChannel, newChannel) => {
     if (!logsChannel) return;
 
     client.embed({
-        title: `📖・Thread created`,
-        desc: `A thread has been created`,
+        title: `📖・Thread updated`,
+        desc: `A thread has been updated`,
         fields: [
             {
                 name: `> Old name`,

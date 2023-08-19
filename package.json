@@ -1,6 +1,6 @@
 {
   "name": "discordbot",
-  "version": "10.0.0",
+  "version": "10.0.1",
   "description": "Discord Bot is a bot with which you can run your entire server! With no less than 400+ commands",
   "main": "./src/index.js",
   "scripts": {

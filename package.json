@@ -39,7 +39,7 @@
     "discord.js": "^14.8.0",
     "dompurify": "^3.0.1",
     "dotenv": "^16.0.3",
-    "erela.js": "^2.4.0",
+    "erela.js": "github:Tomato6966/erela.js",
     "erela.js-apple": "^1.2.6",
     "erela.js-deezer": "^1.0.7",
     "erela.js-facebook": "^1.0.4",

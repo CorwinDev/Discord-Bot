@@ -6,7 +6,7 @@ const https = require('https');
 module.exports = async (client) => {
     const regex = {
         teleparty: /\bhttps?:\/\/redirect\.teleparty\.com\/join\/[a-f0-9]+\b/i,
-        primeparty: /\bhttps?:\/\/(?:www\.)?(?:watchparty\.amazon|primevideo\.com)\/(?:[\w-]+\/)*amzn1\.dv\.wp\.room\.[\w-]+\b/i,
+        primeparty: /\b(?:https?:\/\/(?:www\.)?primevideo\.com\/watchparty\/amzn1\.dv\.wp\.room\.[a-f\d-]+|https?:\/\/watchparty\.amazon\/[a-z\d]+)\b/gim,
         primeparty2: /\bhttps:\/\/www\.primevideo\.com\/watchparty\//i,
         watchpartyme: /\bhttps:\/\/www\.watchparty\.me\/watch\//i,
         disneyparty: /\bhttps?:\/\/www\.disneyplus\.com(?:\/\w{2}-\w{2})?\/groupwatch\/[\w-]+\b/i,
@@ -88,10 +88,6 @@ module.exports = async (client) => {
                   });
               });
             }
-
-            
-
-
             /*
                         Teleparty
             */
@@ -260,19 +256,32 @@ module.exports = async (client) => {
                     "value": `> ${cleanedMessage}`
                   }]
                 };
-                
-                /*
-                          Logs
-                */
-               console.log(`Watchparty de ${message.author.username} sur ${support} pour ${title}`);
+                if (teleparty) {
+                  var components = [
+                    {
+                      "type": 1,
+                      "components": [
+                        {
+                          "style": 5,
+                          "label": `Rejoindre la Watch Party`,
+                          "url": url,
+                          "disabled": false,
+                          "type": 2
+                        },
+                        {
+                          "style": 5,
+                          "label": `Installer Teleparty`,
+                          "url": "https://chrome.google.com/webstore/detail/netflix-party-is-now-tele/oocalimimngaihdkbihfgmpkcpnmlaoa",
+                          "disabled": false,
+                          "type": 2
+                        }
+                      ]
+                    }
+                  ]
 
 
-                embed = {
-                  "channel_id": message.channel_id,
-                  "content": "",
-                  "tts": false,
-                  "attachments": message.attachments[0],
-                  "components": [
+                } else {
+                  var components = [
                     {
                       "type": 1,
                       "components": [
@@ -285,7 +294,22 @@ module.exports = async (client) => {
                         }
                       ]
                     }
-                  ],
+                  ]
+                }
+
+
+                /*
+                          Logs
+                */
+               console.log(`Watchparty de ${message.author.username} sur ${support} pour ${title}`);
+                
+
+                embed = {
+                  "channel_id": message.channel_id,
+                  "content": "",
+                  "tts": false,
+                  "attachments": message.attachments[0],
+                  "components": components,
                   "embeds": [
                     {
                       "type": "rich",

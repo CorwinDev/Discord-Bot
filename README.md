@@ -74,7 +74,7 @@ If you like this repository, feel free to leave a star ⭐ to motivate me!
 - Mongo Database URL. Get it from [MongoDB](https://cloud.mongodb.com/v2/635277bf9f5c7b5620db28a4#clusters)
 - Giphy API Token. Get it from [Giphy Developers Portal](https://developers.giphy.com/)
 - OpenAI API Key `for ai chatbot`. Get it from [OpenAi Developers Portal](https://beta.openai.com/account/api-keys)
-- ClientID `for loading slash commands.`
+- ClientID `for loading slash commands.` [Discord Developers Portal](https://discord.com/developers/applications)
 - Spotify client ID `for spotify support` [Click here to get](https://developer.spotify.com/dashboard/login)
 - Spotify client Secret `for spotify support` [Click here to get](https://developer.spotify.com/dashboard/login)
 
@@ -105,7 +105,7 @@ node src/index.js
 > How to get access to Developers Commands? You will have to set them up via MongoDB or run the below command.
 
 ```bash
-npm run add-dev YOUR_ID
+npm run add-dev YOUR_Discord_ID
 ```
 # Donate
 

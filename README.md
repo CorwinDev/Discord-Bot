@@ -56,6 +56,8 @@ If you like this repository, feel free to leave a star ⭐ to motivate me!
 - [x] Family
 - [x] Giveaways 
 - [x] Easy to use
+- [x] Customizable
+- [x] And much more
 - [x] Don't wanna host it yourself? [Use our public bot](https://discord.com/api/oauth2/authorize?client_id=860390761307439114&permissions=8&scope=bot%20applications.commands)
 ## <img src="https://cdn.discordapp.com/emojis/1028680849195020308.png" width="25px" height="25px">》Screenshots
 <br />

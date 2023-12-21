@@ -3,20 +3,20 @@ const Discord = require('discord.js');
 module.exports = async (client, interaction, args) => {
     if (!interaction.member.voice.channel) return client.errNormal({
         error: `You're not in a voice channel!`,
-        type: 'ephemeraledit'
+        type: 'editreply'
     }, interaction);
 
     let channel = interaction.member.voice ? interaction.member.voice.channel : null;
     if (!channel) return client.errNormal({
         error: `The channel does not exist!`,
-        type: 'ephemeraledit'
+        type: 'editreply'
     }, interaction);
 
     let player = client.player.players.get(interaction.guild.id);
 
     if (player && (channel.id !== player?.voiceChannel)) return client.errNormal({
         error: `You are not in the same voice channel!`,
-        type: 'ephemeraledit'
+        type: 'editreply'
     }, interaction);
 
     if (!player) {
@@ -29,7 +29,7 @@ module.exports = async (client, interaction, args) => {
 
         if (!channel.joinable) return client.errNormal({
             error: `That channel isn\'t joinable`,
-            type: 'ephemeraledit'
+            type: 'editreply'
         }, interaction);
         player.connect()
 
@@ -47,7 +47,7 @@ module.exports = async (client, interaction, args) => {
 
     client.simpleEmbed({
         desc: `🔎┆Searching...`,
-        type: 'ephemeraledit'
+        type: 'editreply'
     }, interaction)
 
     const res = await player.search(query, interaction.user);
@@ -56,7 +56,7 @@ module.exports = async (client, interaction, args) => {
         if (!player.queue.current) player.destroy();
         return client.errNormal({
             error: `Error getting music. Please try again in a few minutes`,
-            type: 'ephemeraledit'
+            type: 'editreply'
         }, interaction);
     }
 
@@ -65,7 +65,7 @@ module.exports = async (client, interaction, args) => {
             if (!player.queue.current) player.destroy()
             await client.errNormal({
                 error: `No music was found`,
-                type: 'ephemeraledit'
+                type: 'editreply'
             }, interaction);
             break;
         }
@@ -172,7 +172,7 @@ module.exports = async (client, interaction, args) => {
                     }
                 ],
                 components: [row, row2],
-                type: 'ephemeraledit'
+                type: 'editreply'
             }, interaction)
 
             try {
@@ -183,7 +183,7 @@ module.exports = async (client, interaction, args) => {
                 row2.components.forEach((button) => button.setDisabled(true));
                 return client.errNormal({
                     error: `You didn't provide a selection`,
-                    type: 'ephemeraledit',
+                    type: 'editreply',
                     components: [row, row2]
                 }, interaction)
             }
@@ -200,7 +200,7 @@ module.exports = async (client, interaction, args) => {
             const index = Number(first) - 1;
             if (index < 0 || index > max - 1) return client.errNormal({
                 error: `The number you provided too small or too big (1-${max})`,
-                type: 'ephemeraledit'
+                type: 'editreply'
             }, interaction)
 
             const track = res.tracks[index];

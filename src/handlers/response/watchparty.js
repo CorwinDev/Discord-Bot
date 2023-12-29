@@ -105,7 +105,7 @@ module.exports = async (client) => {
               support = jsonData.videoService;
               videoId = jsonData.videoId;
               console.log(support + " " + videoId);
-              cleanedMessage = cleanedMessage.replace(regex.teleparty, `<:teleparty:1110295762300055653>`);
+              cleanedMessage = cleanedMessage.replace(regex.teleparty, `via <:teleparty:1110295762300055653>`);
               messageOnlyLink = regex.teleparty.test(cleanedMessage);
             }
 

@@ -2,11 +2,12 @@ const Discord = require('discord.js');
 const axios = require('axios');
 const cheerio = require('cheerio');
 const https = require('https');
+const cookieParser = require('set-cookie-parser');
 
 module.exports = async (client) => {
     const regex = {
         teleparty: /\bhttps?:\/\/redirect\.teleparty\.com\/join\/[a-f0-9]+\b/i,
-        primeparty: /\b(?:https?:\/\/(?:www\.)?primevideo\.com\/watchparty\/amzn1\.dv\.wp\.room\.[a-f\d-]+|https?:\/\/watchparty\.amazon\/[a-z\d]+)\b/gim,
+        primeparty: /\bhttps:\/\/(www\.)?(primevideo\.com\/-\/fr\/watchparty\/amzn1\.dv\.wp\.room\.[\w-]+|watchparty\.amazon\/[\w-]+)$/gim,
         primeparty2: /\bhttps:\/\/www\.primevideo\.com\/watchparty\//i,
         watchpartyme: /\bhttps:\/\/www\.watchparty\.me\/watch\//i,
         disneyparty: /\bhttps?:\/\/www\.disneyplus\.com(?:\/\w{2}-\w{2})?\/groupwatch\/[\w-]+\b/i,
@@ -55,6 +56,70 @@ module.exports = async (client) => {
               });
             }
 
+            async function getCookies() {
+              try {
+                  const response = await axios.get('https://www.netflix.com/');
+                  
+                  if (!response.headers['set-cookie']) {
+                      throw new Error('No cookies in the response.');
+                  }
+          
+                  const cookies = cookieParser.parse(response.headers['set-cookie']);
+                  return cookies.map(cookie => `${cookie.name}=${cookie.value}`).join('; ');
+              } catch (error) {
+                  console.error('Error fetching cookies:', error.message);
+                  return null;
+              }
+          }
+          
+          async function get_build() {
+              const buildRegex = /"BUILD_IDENTIFIER":"([a-z0-9]+)"/;
+          
+              try {
+                  const cookies = await getCookies();
+          
+                  if (!cookies) {
+                      throw new Error('Failed to retrieve cookies.');
+                  }
+          
+                  const headers = {
+                      "Connection": "keep-alive",
+                      "Upgrade-Insecure-Requests": "1",
+                      "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/84.0.4147.135 Safari/537.36",
+                      "Accept": "text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9",
+                      "Sec-Fetch-Site": "none",
+                      "Sec-Fetch-Mode": "navigate",
+                      "Sec-Fetch-Dest": "document",
+                      "Accept-Language": "en,en-US;q=0.9",
+                      "Cookie": cookies,  // Include cookies in the request
+                  };
+          
+                  const response = await axios.get("https://www.netflix.com/browse", { headers });
+          
+                  if (!response.ok) {
+                      throw new Error(`Failed to fetch data: ${response.status} ${response.statusText}`);
+                  }
+          
+                  const text = await response.text();
+                  const buildMatch = text.match(buildRegex);
+          
+                  if (!buildMatch) {
+                      console.error("Cannot get BUILD_IDENTIFIER from the response...");
+                      return null;
+                  }
+                  console.log(buildMatch[1]);
+                  return buildMatch[1];
+              } catch (error) {
+                  console.error("Error getting build identifier:", error.message);
+                  return null;
+              }
+          }
+
+            function hasAdditionalContent(message, regex) {
+              const index = message.indexOf(regex);
+              return index !== -1 && index + regex.length < message.length;
+            }
+
             function axiosHtml(url, selector) {
               //return undefined;
               // Create a new Axios instance
@@ -63,9 +128,12 @@ module.exports = async (client) => {
                   'Cache-Control': 'no-cache',
                   'Pragma': 'no-cache',
                   'Expires': '0',
+                  'Accept-Language': 'fr',
                 },
+                maxRedirects: 10,
               });
-            
+              
+              console.log(url);
               return new Promise((resolve, reject) => {
                 instance.get(url)
                   .then(response => {
@@ -105,7 +173,9 @@ module.exports = async (client) => {
               support = jsonData.videoService;
               videoId = jsonData.videoId;
               console.log(support + " " + videoId);
-              cleanedMessage = cleanedMessage.replace(regex.teleparty, `via <:teleparty:1110295762300055653>`);
+              
+              cleanedMessage = cleanedMessage.replace(regex.teleparty, `via l'extension <:teleparty:1110295762300055653>`);
+
               messageOnlyLink = regex.teleparty.test(cleanedMessage);
             }
 
@@ -115,7 +185,25 @@ module.exports = async (client) => {
             if (support == "netflix") {
               async function netflix() {
                 try {
+                  /*
+                  const buildId = await get_build();
+                  const jsonNetflix = await fetchJsonData(`https://www.netflix.com/nq/website/memberapi/${buildId}/metadata?movieid=${videoId}`);
+                  
+                  if(jsonNetflix.video.type == "show") {
+                    for (let season = 0; season < jsonNetflix.video.seasons.length; season++) {
+                      for (let episode = 0; episode < jsonNetflix.video.seasons[season].episodes; episode++) {
+                        if(jsonNetflix.video.seasons[season].episodes[episode].episodeId.match(jsonNetflix.video.currentEpisode)) {
+                          title = `${jsonNetflix.video.seasons[season].title} (S${season+1}E${episode+1})`;
+                        }
+                      }
+                    }
+
+                  } else {
+                    title = jsonNetflix.video.title;
+                  }
+                  */
                   title = await axiosHtml("https://www.netflix.com/be-fr/title/" + videoId, 'h1.title-title');
+
                   if (title != undefined) {
                     titleFound = true;
                   } else {
@@ -142,7 +230,9 @@ module.exports = async (client) => {
                 // Teleparty watchparty
                 async function primevideo() {
                   try {
-                    title = await axiosHtml("https://www.primevideo.com/dp/" + videoId, 'h1[data-automation-id="title"]');
+                    title = await axiosHtml("https://www.primevideo.com/dp/" + videoId, 'title:first');
+                    title = title.split(':');
+                    title = title[1];
                     if (title != undefined) {
                       titleFound = true;
                     } else {
@@ -160,7 +250,9 @@ module.exports = async (client) => {
                 /*if (url.match(regex.primeparty2)) {
                   title = await axiosHtml(url, 'p._36qUej.uTtQT3');
                 };*/
-                cleanedMessage = cleanedMessage.replace(regex.primeparty, `[\[lien\]](${url})`);
+                if (hasAdditionalContent(cleanedMessage, regex.primeparty)) {
+                  cleanedMessage = cleanedMessage.replace(regex.primeparty, `[\[lien\]](${url})`);
+                }
                 messageOnlyLink = regex.primeparty.test(cleanedMessage);
               }
               if (title != undefined) titleFound = true;
@@ -181,7 +273,23 @@ module.exports = async (client) => {
                 // Teleparty watchparty
                 async function disney() {
                   try {
-                    title = await axiosHtml("https://www.disneyplus.com/fr-fr/video/" + videoId, 'h1.h3.padding--bottom-6.padding--right-6.text-color--primary');
+                    //title = await axiosHtml("https://www.disneyplus.com/fr-fr/video/" + videoId, 'h1.h3.padding--bottom-6.padding--right-6.text-color--primary');
+                    const jsonDisney = await fetchJsonData("https://disney.content.edge.bamgrid.com/svc/content/DmcVideo/version/5.1/region/BE/audience/k-false,l-true/maturity/1499/language/fr-FR/contentId/" + videoId);
+                    
+                    if (jsonDisney &&
+                      jsonDisney.data &&
+                      jsonDisney.data.DmcVideo &&
+                      jsonDisney.data.DmcVideo.video &&
+                      jsonDisney.data.DmcVideo.video.text &&
+                      jsonDisney.data.DmcVideo.video.text.title &&
+                      jsonDisney.data.DmcVideo.video.text.title.full &&
+                      jsonDisney.data.DmcVideo.video.text.title.full.series &&
+                      jsonDisney.data.DmcVideo.video.text.title.full.series.default &&
+                      jsonDisney.data.DmcVideo.video.text.title.full.series.default.content !== undefined) {
+                      title = jsonDisney.data.DmcVideo.video.text.title.full.series.default.content + ` (S${jsonDisney.data.DmcVideo.video.seasonSequenceNumber}E${jsonDisney.data.DmcVideo.video.episodeSequenceNumber})`;
+                    } else {
+                      title = jsonDisney.data.DmcVideo.video.text.title.full.program.default.content;
+                    }
                     if (title != undefined) {
                       titleFound = true;
                     } else {

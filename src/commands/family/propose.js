@@ -68,7 +68,7 @@ module.exports = async (client, interaction, args) => {
 
         client.embed({
             title: `👰・Marriage proposal`,
-            desc: `${author} has ${target} asked to propose him! \n${target} click on one of the buttons`,
+            desc: `${author} has proposed to ${target}! \n${target} click on one of the buttons`,
             components: [row],
             content: `${target}`,
             type: 'editreply'

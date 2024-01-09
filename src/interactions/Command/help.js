@@ -36,12 +36,6 @@ module.exports = {
                             value: "invite-Bothelp",
                         },
                         {
-                            label: `Support server`,
-                            description: `Join the suppport server`,
-                            emoji: "❓",
-                            value: "support-Bothelp",
-                        },
-                        {
                             label: `Changelogs`,
                             description: `Show the bot changelogs`,
                             emoji: "📃",
@@ -57,15 +51,11 @@ module.exports = {
             fields: [
                 {
                     name: `❌┆Menu doesn't work?`,
-                    value: `Try resending the command. If you get no reaction, make sure you report the bug!`
-                },
-                {
-                    name: `🪲┆Found a bug?`,
-                    value: `Report this with \`/report bug\``
+                    value: `Try resending the command. If you get no reaction, make sure you report it!`
                 },
                 {
                     name: `🔗┆Links`,
-                    value: `[Website](https://corwindev.nl/) | [Invite](${client.config.discord.botInvite}) | [Vote](https://top.gg/bot/798144456528363550/vote)`
+                    value: `[Invite](${client.config.discord.botInvite})`
                 },
             ],
             components: [row],

@@ -369,7 +369,7 @@ module.exports = async (client, message) => {
     client
       .embed(
         {
-          title: "Hi, i'm Bot",
+          title: "Hi, I'm Linx",
           desc: `Use with commands via Discord ${client.emotes.normal.slash} commands`,
           fields: [
             {
@@ -380,14 +380,6 @@ module.exports = async (client, message) => {
               name: "❓┇I don't see any slash commands",
               value:
                 "The bot may not have permissions for this. Open the invite link again and select your server. The bot then gets the correct permissions",
-            },
-            {
-              name: "❓┆Need support?",
-              value: `For questions you can join our [support server](${client.config.discord.serverInvite})!`,
-            },
-            {
-              name: "🐞┆Found a bug?",
-              value: `Report all bugs via: \`/report bug\`!`,
             },
           ],
           components: [row],

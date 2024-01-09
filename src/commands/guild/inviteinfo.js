@@ -14,7 +14,7 @@ module.exports = async (client, interaction, args) => {
     4: `Must have a verified phone number`
   }
 
-  axios.get(`https://discord.com/api/v9/invites/${encodeURIComponent(invite)}`).catch(async () => {
+  axios.get(`https://discord.com/api/v10/invites/${encodeURIComponent(invite)}`).catch(async () => {
     return client.errNormal({
       error: "I couldn't find the server",
       type: 'editreply'

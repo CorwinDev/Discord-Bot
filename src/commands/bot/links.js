@@ -29,7 +29,7 @@ module.exports = async (client, interaction, args) => {
                         label: `Top.gg`,
                         description: `Show the top.gg link`,
                         emoji: "📃",
-                        value: "top.gg-linkspanel",
+                        value: "https://top.gg/",
                     },
                 ]),
         );

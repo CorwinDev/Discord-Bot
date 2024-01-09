@@ -36,7 +36,7 @@ module.exports = async (client) => {
                                     label: `Top.gg`,
                                     description: `Show the top.gg link`,
                                     emoji: "📃",
-                                    value: "top.gg-linkspanel",
+                                    value: "https://top.gg/",
                                 },
                             ]),
                     );
@@ -46,7 +46,7 @@ module.exports = async (client) => {
 
                         new Discord.ButtonBuilder()
                             .setLabel("Community Server")
-                            .setURL("https://discord.gg/jf6ZkpgsXF")
+                            .setURL("https://discord.com/")
                             .setStyle(Discord.ButtonStyle.Link),
                     );
 

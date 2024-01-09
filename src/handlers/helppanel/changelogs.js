@@ -53,7 +53,7 @@ module.exports = async (client) => {
                         },
                         {
                             name: "📃┆Changelogs",
-                            value: '10/12/2022 - Updated the bot to the latest version of discord.js (v14)',
+                            value: '09/01/2024 - Updated the bot to the latest version of discord.js (v14)',
                             inline: false,
                         }
                     ],

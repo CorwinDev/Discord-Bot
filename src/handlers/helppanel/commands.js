@@ -238,25 +238,12 @@ module.exports = async (client) => {
                                     emoji: "📨",
                                     value: "invite-Bothelp",
                                 },
-                                {
-                                    label: `Support server`,
-                                    description: `Join the suppport server`,
-                                    emoji: "❓",
-                                    value: "support-Bothelp",
-                                },
-                                {
-                                    label: `Changelogs`,
-                                    description: `Show the bot changelogs`,
-                                    emoji: "📃",
-                                    value: "changelogs-Bothelp",
-                                },
                             ]),
                     );
 
                 client.embed({
                     title: `❓・Help panel`,
-                    desc: `View all command categories in the bot here! \n\n[Website](https://corwindev.nl) | [Invite](${client.config.discord.botInvite}) | [Vote](https://top.gg/bot/798144456528363550/vote)`,
-                    image: "https://cdn.discordapp.com/attachments/843487478881976381/874694194474668052/Bot_banner_invite.jpg",
+                    desc: `What do you need help with bruhhh`,
                     fields: fields.slice(0, 24),
                     components: [row2, row],
                     type: 'edit'
@@ -270,7 +257,7 @@ module.exports = async (client) => {
                             if (page == 1) {
                                 client.embed({
                                     title: `❓・Help panel`,
-                                    desc: `View all command categories in the bot here! \n\n[Website](https://corwindev.nl) | [Invite](${client.config.discord.botInvite}) | [Vote](https://top.gg/bot/798144456528363550/vote)`,
+                                    desc: `What do you need help with bruhhh`,
                                     fields: fields.slice(25, 49),
                                     components: [row2, row],
                                     type: 'update'
@@ -283,7 +270,7 @@ module.exports = async (client) => {
                             if (page == 2) {
                                 client.embed({
                                     title: `❓・Help panel`,
-                                    desc: `View all command categories in the bot here! \n\n[Website](https://corwindev.nl) | [Invite](${client.config.discord.botInvite}) | [Vote](https://top.gg/bot/798144456528363550/vote)`,
+                                    desc: `What do you need help with bruhhh`,
                                     fields: fields.slice(0, 24),
                                     components: [row2, row],
                                     type: 'update'

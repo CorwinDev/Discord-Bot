@@ -22,7 +22,7 @@ module.exports = async (client, interaction, args) => {
             }, channel)
 
             client.succNormal({
-                text: `Ticket panel has been set up successfully!`,
+                text: `Ticket panel has been set up successfully! Mods will get in touch quickly`,
                 type: 'editreply'
             }, interaction);
         }

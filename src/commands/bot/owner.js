@@ -2,27 +2,27 @@ const Discord = require('discord.js');
 
 module.exports = async (client, interaction, args) => {
     client.embed({
-        title: `📘・Owner information`,
+        title: `📘・Bot Moderator`,
         desc: `____________________________`,
         thumbnail: client.user.avatarURL({ dynamic: true, size: 1024 }),
         fields: [{
-            name: "👑┆Owner name",
-            value: `Corwin`,
+            name: "🏢┆Bot Moderator",
+            value: `Bruzilla`,
             inline: true,
         },
         {
             name: "🏷┆Discord tag",
-            value: `</Corwin>#0001`,
+            value: `</Bruzilla>#6969`,
             inline: true,
         },
         {
-            name: "🏢┆Organization",
-            value: `CoreWare`,
+            name: "👑┆King",
+            value: `OuKingK`,
             inline: true,
         },
         {
-            name: "🌐┆Website",
-            value: `[https://corwindev.nl](https://corwindev.nl)`,
+            name: "🌐┆Channel",
+            value: `[https://www.youtube.com/@OUKINGKYT](https://www.youtube.com/@OUKINGKYT)`,
             inline: true,
         }],
         type: 'editreply'

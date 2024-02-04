@@ -72,6 +72,6 @@ module.exports = async (client, guild) => {
     })
 
     for (const schema of schemas) {
-        await schema.deleteMany({ guildID: guild.id });
+        await schema.deleteMany({ Guild: guild.id });
     }
 };

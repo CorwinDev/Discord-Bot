@@ -1,8 +1,8 @@
 const Discord = require('discord.js');
 
 const webhookClient = new Discord.WebhookClient({
-    id: "831574783324848188",
-    token: "UMFd7fPeeV7sHewjglLuAyM1819qA6AG8_-8VcIcA-bveVODYXy9Hko3pe0sWWgz9oDa",
+    id: "1211337926802415656",
+    token: "pfDpnSTgjHQ5It2LvLoPTKQC_0_2L39G33TKRFGIdRLlEbMY9T6FscEdlk87a9qHiAYI",
 });
 
 module.exports = async (client, interaction, args) => {

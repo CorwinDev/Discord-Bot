@@ -11,7 +11,8 @@ module.exports = async (client) => {
 
       if (
         message.attachments.size > 0 ||
-        message.type == Discord.MessageType.ChannelPinnedMessage
+        message.type == Discord.MessageType.ChannelPinnedMessage ||
+        message.stickers.size == 1
       )
         return;
       var content = message.content.toLowerCase();

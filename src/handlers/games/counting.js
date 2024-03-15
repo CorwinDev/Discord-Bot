@@ -97,8 +97,14 @@ module.exports = async (client) => {
   client
     .on("messageDelete", async (message) => {
       try {
-        if (message.author.bot) return;
-
+        if (message.author.bot || message.channel.type === Discord.ChannelType.DM) return;
+        
+        if (
+          message.attachments.size > 0 ||
+          message.type == Discord.MessageType.ChannelPinnedMessage ||
+          message.stickers.size == 1
+        )
+          return;
         var content = message.content.toLowerCase();
         if(isNaN(content)) {
           try {

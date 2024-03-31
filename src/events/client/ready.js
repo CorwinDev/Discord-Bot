@@ -24,7 +24,7 @@ module.exports = async (client) => {
         username: 'Bot Logs',
         embeds: [embed],
     });
-
+    /* Temporary
     setInterval(async function () {
         const promises = [
             client.shard.fetchClientValues('guilds.cache.size'),
@@ -50,7 +50,8 @@ module.exports = async (client) => {
             client.user.setPresence({ activities: [{ name: randomText.name, type: randomText.type }], status: 'online' });
             })
     }, 50000)
-
+    */
+    
     client.player.init(client.user.id);
 }
 

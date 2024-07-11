@@ -40,9 +40,9 @@ module.exports = async (client) => {
                     }));
                 } else {
                     statuttext = [
-                        { name: `League of Legends`, type: Discord.ActivityType.Competing },
-                        { name: `Minecraft`, type: Discord.ActivityType.Competing },
-                        { name: `Rocket League`, type: Discord.ActivityType.Competing },
+                        { name: `League of Legends`, type: Discord.ActivityType.Playing },
+                        { name: `Minecraft`, type: Discord.ActivityType.Playing },
+                        { name: `Rocket League`, type: Discord.ActivityType.Playing },
                         { name: `si aucune rebellion ne se forme`, type: Discord.ActivityType.Watching },
                         { name: `le crépitement de la friture`, type: Discord.ActivityType.Listening },
                         { name: `si Pierre fait pas de bêtises`, type: Discord.ActivityType.Watching },

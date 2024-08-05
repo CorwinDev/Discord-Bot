@@ -47,7 +47,7 @@ module.exports = async (client) => {
                         { name: `le crépitement de la friture`, type: Discord.ActivityType.Listening },
                         { name: `si Pierre fait pas de bêtises`, type: Discord.ActivityType.Watching },
                         { name: `si ça joue à LoL`, type: Discord.ActivityType.Watching },
-                        { name: `si Yumi a fini sa sieste`, type: Discord.ActivityType.Watching },
+                        { name: `si Yuumi a fini sa sieste`, type: Discord.ActivityType.Watching },
                         { name: `si Lisa a bu son camfé aujourd'hui`, type: Discord.ActivityType.Watching },
                         { name: `si Eliott et Mathieu ont ouvert le café jazz`, type: Discord.ActivityType.Watching },
                         { name: `si Davy sait toujours dessiner des bateaux`, type: Discord.ActivityType.Watching },

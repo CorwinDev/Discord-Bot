@@ -8,22 +8,22 @@ module.exports = async (client, interaction, args) => {
     });
 
     let channel = interaction.member.voice ? interaction.member.voice.channel : null;
-    if (!channel) return client.errNormal({ error: `The channel does not exist!`, type: 'editreply' }, interaction);
+    if (!channel) return client.errNormal({ error: `Le canal n'existe pas!`, type: 'editreply' }, interaction);
 
     client.radioStop(channel);
 
     var remove = await Schema.deleteOne({ Guild: interaction.guild.id });
 
     client.embed({
-        title: `📻・Radio stopped`,
-        desc: `Radio has stopped successfully \nTo make the bot join do: \`rplay\``,
+        title: `📻・La radio s'est arrêtée`,
+        desc: `La radio a cessé avec succès \ nPour faire rejoindre le bot: \`rplay\``,
         fields: [{
-            name: "👤┆Stopped By",
+            name: "👤┆Arreté par",
             value: `${interaction.user} (${interaction.user.tag})`,
             inline: true
         },
         {
-            name: "📺┆Channel",
+            name: "📺┆Canal",
             value: `${channel} (${channel.name})`,
             inline: true
         }

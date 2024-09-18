@@ -12,7 +12,7 @@ module.exports = (client) => {
 
     const commands = [];
 
-    if (client.shard.ids[0] === 0) console.log(chalk.blue(chalk.bold(`System`)), (chalk.white(`>>`)), (chalk.green(`Loading commands`)), (chalk.white(`...`)))
+    if (client.shard.ids[0] === 0) console.log(chalk.blue(chalk.bold(`Système`)), (chalk.white(`>>`)), (chalk.green(`Loading commands`)), (chalk.white(`...`)))
     if (client.shard.ids[0] === 0) console.log(`\u001b[0m`);
 
     fs.readdirSync('./src/interactions').forEach(dirs => {

@@ -5,17 +5,17 @@ module.exports = async (client, interaction, args) => {
         .addComponents(
             new Discord.StringSelectMenuBuilder()
                 .setCustomId('Bot-linkspanel')
-                .setPlaceholder('❌┆Nothing selected')
+                .setPlaceholder('❌┆Rien de sélectionné')
                 .addOptions([
                     {
-                        label: `Support server`,
-                        description: `Join the suppport server`,
+                        label: `Serveur d'assistance`,
+                        description: `Rejoignez le serveur Suppport`,
                         emoji: "❓",
                         value: "support-linkspanel",
                     },
                     {
-                        label: `Invite Bot`,
-                        description: `Invite Bot to your server`,
+                        label: `Inviter le bot`,
+                        description: `Invitez Bot sur votre serveur`,
                         emoji: "📨",
                         value: "invite-linkspanel",
                     },
@@ -27,7 +27,7 @@ module.exports = async (client, interaction, args) => {
                     },
                     {
                         label: `Top.gg`,
-                        description: `Show the top.gg link`,
+                        description: `Afficher le lien top.gg`,
                         emoji: "📃",
                         value: "top.gg-linkspanel",
                     },

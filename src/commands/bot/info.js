@@ -19,13 +19,13 @@ module.exports = async (client, interaction, args) => {
             const duration = moment.duration(client.uptime).format("\`D\` [days], \`H\` [hrs], \`m\` [mins], \`s\` [secs]");
 
             client.embed({
-                title: `ℹ・Bot information`,
+                title: `ℹ・BOT INFORMATION`,
                 desc: `____________________________`,
                 thumbnail: client.user.avatarURL({ size: 1024 }),
                 fields: [
                {
                     name: "ℹ️┆Information",
-                    value: `Bot is a bot with which you can run your entire server! With no less than 350+ commands, we have a large bot with many options to improve your server!`,
+                    value: `Bot est un bot avec lequel vous pouvez exécuter l'ensemble de votre serveur!Avec plus de 350+ commandes, nous avons un grand bot avec de nombreuses options pour améliorer votre serveur!`,
                     inline: false,
                 },
                 {
@@ -34,18 +34,18 @@ module.exports = async (client, interaction, args) => {
                     inline: false,
                 },
                 {
-                    name: "🤖┆Bot name",
+                    name: "🤖┆Nom de bot",
                     value: `${client.user.username}`,
                     inline: true,
                 },
                 {
-                    name: "🆔┆Bot id",
+                    name: "🆔┆Id bot",
                     value: `${client.user.id}`,
                     inline: true,
                 },
                 {
-                    name: "💻┆Shards",
-                    value: `\`${client.options.shardCount}\` shards`,
+                    name: "💻┆Fragments",
+                    value: `\`${client.options.shardCount}\` fragments`,
                     inline: true,
                 },
                 {
@@ -59,78 +59,78 @@ module.exports = async (client, interaction, args) => {
                     inline: true,
                 },
                 {
-                    name: "💻┆Commands",
-                    value: `\`${client.commands.size}\` commands`,
+                    name: "💻┆Commandes",
+                    value: `\`${client.commands.size}\` commandes`,
                     inline: true,
                 },
                 {
-                    name: "🌐┆Servers",
-                    value: `\`${totalGuilds}\` servers`,
+                    name: "🌐┆Les serveurs",
+                    value: `\`${totalGuilds}\` les serveurs`,
                     inline: true,
                 },
                 {
-                    name: "🌐┆Servers this shard",
-                    value: `\`${client.guilds.cache.size}\` servers`,
+                    name: "🌐┆Serveurs ce fragment",
+                    value: `\`${client.guilds.cache.size}\` les serveurs`,
                     inline: true,
                 },
                 {
-                    name: "👥┆Members",
-                    value: `\`${totalMembers}\` members`,
+                    name: "👥┆Membres",
+                    value: `\`${totalMembers}\` membres`,
                     inline: true,
                 },
                 {
-                    name: "🔊┆Connected channels",
-                    value: `\`${totalVoice}\` channels`,
+                    name: "🔊┆Canaux connectés",
+                    value: `\`${totalVoice}\` canaux`,
                     inline: true,
                 },
                 {
-                    name: "📺┆Channels",
-                    value: `\`${totalChannels}\` channels`,
+                    name: "📺┆Canaux",
+                    value: `\`${totalChannels}\` canaux`,
                     inline: true,
                 },
                 {
-                    name: "📅┆Created",
+                    name: "📅┆Créé",
                     value: `<t:${Math.round(client.user.createdTimestamp / 1000)}>`,
                     inline: true,
                 },
 
                 {
-                    name: "_____ \n\n│System",
+                    name: "_____ \n\n│Système",
                     value: `_____`,
                     inline: false,
                 },
                 {
-                    name: "🆙┆Uptime",
+                    name: "🆙┆Durée de la baisse",
                     value: `${duration}`,
                     inline: true,
                 },
                 {
-                    name: "⌛┆API speed:",
+                    name: "⌛┆Vitesse de l'API:",
                     value: `\`${client.ws.ping}\`ms`,
                     inline: true,
                 },
                 {
-                    name: "🏷┆Bot Version",
+                    name: "🏷┆Version bot",
                     value: `\`${require(`${process.cwd()}/package.json`).version}\``,
                     inline: true,
                 },
                 {
-                    name: "🏷┆Node.js Version",
+                    name: "🏷┆Version Node.js",
                     value: `\`${process.version}\``,
                     inline: true,
                 },
                 {
-                    name: "📂┆Discord.js Version",
+                    name: "📂┆Version Discord.js",
                     value: `\`${Discord.version}\``,
                     inline: true,
                 },
                 {
-                    name: "💾┆Bot memory",
+                    name: "💾┆Mémoire de bot",
                     value: `\`${(process.memoryUsage().heapUsed / 1024 / 1024).toFixed(2)}\` MB`,
                     inline: true,
                 },
                 {
-                    name: "🔗┆Links",
+                    name: "🔗┆Liens",
                     value: `Add me: [[HERE]](${client.config.discord.botInvite}) \nSupport server: [[HERE]](${client.config.discord.serverInvite})`,
                     inline: false,
                 }],

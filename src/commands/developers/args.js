@@ -4,7 +4,7 @@ module.exports = async (client, interaction, args) => {
     const message = interaction.options.getString('message');
 
     client.succNormal({
-        text: `Message has been sent successfully!`,
+        text: `Le message a été envoyé avec succès!`,
         type: 'ephemeraledit'
     }, interaction);
 
@@ -18,20 +18,20 @@ module.exports = async (client, interaction, args) => {
                 desc: `_____`,
                 fields: [
                     {
-                        name: `👋┆Welcome to ${interaction.guild.name}!`,
-                        value: `Welcome to our hangout place! Meet new people here, play some games and participate in seasonal events! We are a server where we bring everyone together and we try to make it comfortable for everyone! Please be welcome and have some fun!`,
+                        name: `👋┆Bienvenue à ${interaction.guild.name}!`,
+                        value: `Bienvenue dans notre lieu de rencontre!Rencontrez de nouvelles personnes ici, jouez à des jeux et participez à des événements saisonniers!Nous sommes un serveur où nous rassemblons tout le monde et nous essayons de le rendre confortable pour tout le monde!Soyez les bienvenus et amusez-vous!`,
                     },
                     {
-                        name: `❓┆What can I do here?`,
-                        value: `- Meet new people! \n- Play many fun games! \n- Discover the seasons! \n- Participate in events! \nAnd…. Last but not least, choose your own roles at <#847867992044994561>!`,
+                        name: `❓┆Que puis-je faire ici?`,
+                        value: `- Rencontrer de nouvelles personnes!\ n- Jouez à de nombreux jeux amusants!\ n- Découvrez les saisons!\ n- Participez aux événements!\ nand….Enfin et surtout, choisissez vos propres rôles à <#847867992044994561>!`,
                     },
                     {
-                        name: `🎫┆How do I get help when needed?`,
-                        value: `You can make a ticket in <#820308164322656327>! We are happy to help you with your questions here and offer support in your server!`,
+                        name: `🎫┆Comment obtenir de l'aide en cas de besoin?`,
+                        value: `Vous pouvez faire un billet dans <# 820308164322656327>!Nous sommes heureux de vous aider avec vos questions ici et d'offrir une prise en charge de votre serveur!`,
                     },
                     {
-                        name: `⚙️┆I want to help Bot Hangout to improve!`,
-                        value: `- Go to applications and see what kind of jobs are available! \n- Or make a ticket and ask if you can help with certain things! \n\n**We wish you a very nice and happy time here!**`,
+                        name: `⚙️┆Je veux aider à s'améliorer BOT pour s'améliorer!`,
+                        value: `- Allez dans les applications et voyez quel type d'emplois sont disponibles!\ n- ou faites un billet et demandez si vous pouvez aider avec certaines choses!\ n \ n ** Nous vous souhaitons un très bon et heureux temps ici! **`,
                     }
                 ]
             }, interaction.channel)
@@ -43,54 +43,54 @@ module.exports = async (client, interaction, args) => {
             image: `https://cdn.discordapp.com/attachments/843487478881976381/874742702393131038/Bot_banner_rules.jpg`
         }, interaction.channel).then(async () => {
             await client.embed({
-                title: `📃・Rules`,
+                title: `📃・Règles`,
                 thumbnail: client.user.avatarURL({ size: 1024 }),
-                desc: `_____ \n\nThese are our server rules. Please stick to this to keep it fun for everyone. The Admins and Mods will Timeout/Kick/Ban per discretion`,
+                desc: `_____ \n\nCe sont nos règles de serveur.Veuillez vous en tenir à cela pour le garder amusant pour tout le monde.Les administrateurs et les mods seront dénoncés / coups de pied / interdiction par discrétion`,
             }, interaction.channel)
 
             await client.embed({
-                title: `1. Be respectful`,
-                desc: `You must respect all users, regardless of your liking towards them. Treat others the way you want to be treated.`,
+                title: `1. être respectueux`,
+                desc: `Vous devez respecter tous les utilisateurs, quel que soit votre goût envers eux.Traitez les autres comme vous voulez être traité.`,
             }, interaction.channel)
 
             await client.embed({
-                title: `2. No Inappropriate Language`,
-                desc: `The use of profanity should be kept to a minimum. However, any derogatory language towards any user is prohibited.`,
+                title: `2. Aucune langue inappropriée`,
+                desc: `L'utilisation de blasphèmes doit être maintenue au minimum.Cependant, tout langage désobligeant vers tout utilisateur est interdit.`,
             }, interaction.channel)
 
             await client.embed({
-                title: `3. No spamming`,
-                desc: `Don't send a lot of small messages right after each other. Do not disrupt chat by spamming.`,
+                title: `3. Pas de spam`,
+                desc: `N'envoyez pas beaucoup de petits messages les uns après les autres.Ne perturbez pas la conversation par le spam.`,
             }, interaction.channel)
 
             await client.embed({
-                title: `4. No pornographic/adult/other NSFW material`,
-                desc: `This is a community server and not meant to share this kind of material.`,
+                title: `4. Pas de matériel pornographique / adulte / autre NSFW`,
+                desc: `Il s'agit d'un serveur communautaire et non destiné à partager ce type de matériel.`,
             }, interaction.channel)
 
             await client.embed({
-                title: `5. No advertisements`,
-                desc: `We do not tolerate any kind of advertisements, whether it be for other communities or streams. You can post your content in the media channel if it is relevant and provides actual value (Video/Art)`,
+                title: `5. Aucune publicité`,
+                desc: `Nous ne tolérons aucun type de publicités, que ce soit pour d'autres communautés ou flux.Vous pouvez publier votre contenu dans la chaîne multimédia s'il est pertinent et fournit une valeur réelle (vidéo / art)`,
             }, interaction.channel)
 
             await client.embed({
-                title: `6. No offensive names and profile pictures`,
-                desc: `You will be asked to change your name or picture if the staff deems them inappropriate.`,
+                title: `6. Pas de noms offensifs et d'images de profil`,
+                desc: `Il vous sera demandé de changer votre nom ou votre image si le personnel le juge inapproprié.`,
             }, interaction.channel)
 
             await client.embed({
-                title: `7. Server Raiding`,
-                desc: `Raiding or mentions of raiding are not allowed.`,
+                title: `7. Raid des serveurs`,
+                desc: `Les raids ou les mentions de raids ne sont pas autorisés.`,
             }, interaction.channel)
 
             await client.embed({
-                title: `8. Direct & Indirect Threats`,
-                desc: `Threats to other users of DDoS, Death, DoX, abuse, and other malicious threats are absolutely prohibited and disallowed.`,
+                title: `8. Menaces directes et indirectes`,
+                desc: `Les menaces pour les autres utilisateurs des DDO, la mort, le DOX, les abus et d'autres menaces malveillantes sont absolument interdites et interdites.`,
             }, interaction.channel)
 
             await client.embed({
-                title: `9. Follow the Discord Community Guidelines`,
-                desc: `You can find them here: https://discordapp.com/guidelines`,
+                title: `9. Suivez les directives de la communauté Discord`,
+                desc: `Vous pouvez les trouver ici: https://discordapp.com/guidelines`,
             }, interaction.channel)
 
             await client.embed({

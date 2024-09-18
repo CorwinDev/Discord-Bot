@@ -14,8 +14,8 @@ module.exports = async (client, interaction, args) => {
             type: Discord.ChannelType.GuildText
         }).then((ch) => {
             client.embed({
-                title: `🔢・Counting`,
-                desc: `This is the start of counting! The first number is **1**`
+                title: `🔢・Compte`,
+                desc: `C'est le début du comptage!Le premier numéro est ** 1 **`
             }, ch)
 
             client.createChannelSetup(Counting, ch, interaction)
@@ -28,8 +28,8 @@ module.exports = async (client, interaction, args) => {
             type: Discord.ChannelType.GuildText
         }).then((ch) => {
             client.embed({
-                title: `🔢・Guess the number`,
-                desc: `Guess the number between **1** and **10.000**!`
+                title: `🔢・Devinez le nombre`,
+                desc: `Devinez le nombre entre ** 1 ** et ** 10.000 **!`
             }, ch)
 
             client.createChannelSetup(GTN, ch, interaction)
@@ -45,11 +45,11 @@ module.exports = async (client, interaction, args) => {
             var shuffled = word.split('').sort(function () { return 0.5 - Math.random() }).join('');
 
             client.embed({
-                title: `💬・Guess the word`,
-                desc: `Put the letters in the right position!`,
+                title: `💬・Devinez le mot`,
+                desc: `Mettez les lettres dans la bonne position!`,
                 fields: [
                     {
-                        name: `🔀┆Word`,
+                        name: `🔀┆Mot`,
                         value: `${shuffled.toLowerCase()}`
                     }
                 ],

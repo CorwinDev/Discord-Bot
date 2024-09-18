@@ -27,8 +27,30 @@ const client = new Discord.Client({
         Discord.Partials.Reaction,
         Discord.Partials.User,
         Discord.Partials.GuildScheduledEvent
+        Discord.Partials.Channel,
+        Discord.Partials.GuildMember,
+        Discord.Partials.Message,
+        Discord.Partials.Reaction,
+        Discord.Partials.User,
+        Discord.Partials.GuildScheduledEvent
     ],
     intents: [
+        Discord.GatewayIntentBits.Guilds,
+        Discord.GatewayIntentBits.GuildMembers,
+        Discord.GatewayIntentBits.GuildBans,
+        Discord.GatewayIntentBits.GuildEmojisAndStickers,
+        Discord.GatewayIntentBits.GuildIntegrations,
+        Discord.GatewayIntentBits.GuildWebhooks,
+        Discord.GatewayIntentBits.GuildInvites,
+        Discord.GatewayIntentBits.GuildVoiceStates,
+        Discord.GatewayIntentBits.GuildMessages,
+        Discord.GatewayIntentBits.GuildMessageReactions,
+        Discord.GatewayIntentBits.GuildMessageTyping,
+        Discord.GatewayIntentBits.DirectMessages,
+        Discord.GatewayIntentBits.DirectMessageReactions,
+        Discord.GatewayIntentBits.DirectMessageTyping,
+        Discord.GatewayIntentBits.GuildScheduledEvents,
+        Discord.GatewayIntentBits.MessageContent
         Discord.GatewayIntentBits.Guilds,
         Discord.GatewayIntentBits.GuildMembers,
         Discord.GatewayIntentBits.GuildBans,
@@ -129,6 +151,15 @@ if (process.env.WEBHOOK_ID && process.env.WEBHOOK_TOKEN) {
     }
 }
 
+const webHooksArray = ['startLogs', 'shardLogs', 'errorLogs', 'dmLogs', 'voiceLogs', 'serverLogs', 'serverLogs2', 'commandLogs', 'consoleLogs', 'warnLogs', 'voiceErrorLogs', 'creditLogs', 'evalLogs', 'interactionLogs'];
+// Check if .env webhook_id and webhook_token are set
+if (process.env.WEBHOOK_ID && process.env.WEBHOOK_TOKEN) {
+    for (const webhookName of webHooksArray) {
+        client.webhooks[webhookName].id = process.env.WEBHOOK_ID;
+        client.webhooks[webhookName].token = process.env.WEBHOOK_TOKEN;
+    }
+}
+
 client.commands = new Discord.Collection();
 client.playerManager = new Map();
 client.triviaManager = new Map();
@@ -193,7 +224,7 @@ process.on('warning', warn => {
         ])
         .setColor(client.config.colors.normal)
     warnLogs.send({
-        username: 'Bot Logs',
+        username: 'Logs',
         embeds: [embed],
     }).catch(() => {
         console.log('Error sending warning to webhook')
@@ -220,7 +251,7 @@ client.on(Discord.ShardEvents.Error, error => {
         ])
         .setColor(client.config.colors.normal)
     consoleLogs.send({
-        username: 'Bot Logs',
+        username: 'Logs',
         embeds: [embed],
     });
 });

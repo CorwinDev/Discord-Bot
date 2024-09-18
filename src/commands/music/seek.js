@@ -7,17 +7,17 @@ module.exports = async (client, interaction, args) => {
 
     const channel = interaction.member.voice.channel;
     if (!channel) return client.errNormal({
-        error: `You're not in a voice channel!`,
+        error: `Vous n'êtes pas dans un canal vocal!`,
         type: 'editreply'
     }, interaction);
 
     if (player && (channel.id !== player?.voiceChannel)) return client.errNormal({
-        error: `You're not in the same voice channel!`,
+        error: `Vous n'êtes pas dans le même canal vocal!`,
         type: 'editreply'
     }, interaction);
 
     if (!player || !player.queue.current) return client.errNormal({
-        error: "There are no songs playing in this server",
+        error: "Il n'y a pas de chansons qui jouent dans ce serveur",
         type: 'editreply'
     }, interaction);
 
@@ -30,10 +30,10 @@ module.exports = async (client, interaction, args) => {
     const bar = await createProgressBar(musicLength, nowTime);
 
     client.succNormal({
-        text: `Seeked song to: ${format(Number(number) * 1000)}`,
+        text: `Cherché la chanson à: ${format(Number(number) * 1000)}`,
         fields: [
             {
-                name: `${client.emotes.normal.music}┆Progress`,
+                name: `${client.emotes.normal.music}┆Progrès`,
                 value: `${new Date(player.position).toISOString().slice(11, 19)} ┃ ` +
                     bar +
                     ` ┃ ${new Date(player.queue.current.duration).toISOString().slice(11, 19)}`,

@@ -22,7 +22,7 @@ module.exports = async (client, interaction, args) => {
         Schema.findOne({ User: member.id }, async (err, data) => {
             if (data) {
                 return client.errNormal({
-                    error: `<@!${member.id}> (${member.id}) has already been banned from the bot`,
+                    error: `<@!${member.id}> (${member.id}) a déjà été banni du bot`,
                     type: `editreply`
                 }, interaction);
             }
@@ -32,7 +32,7 @@ module.exports = async (client, interaction, args) => {
                 }).save();
 
                 client.succNormal({
-                    text: `<@!${member.id}> (${member.id}) banned from the bot`,
+                    text: `<@!${member.id}> (${member.id}) Interdiction du bot`,
                     type: 'editreply'
                 }, interaction)
 
@@ -46,7 +46,7 @@ module.exports = async (client, interaction, args) => {
                     .setFooter({ text: client.config.discord.footer })
                     .setTimestamp();
                 webhookClientLogs.send({
-                    username: 'Bot Bans',
+                    username: 'Interdictions de bot',
                     embeds: [embedLogs],
                 });
             }
@@ -57,7 +57,7 @@ module.exports = async (client, interaction, args) => {
             if (data) {
                 Schema.findOneAndDelete({ User: member.id }).then(() => {
                     client.succNormal({
-                        text: `<@!${member.id}> (${member.id}) unbanned from the bot`,
+                        text: `<@!${member.id}> (${member.id}) UNCANNÉ DU BOT`,
                         type: 'editreply'
                     }, interaction)
 
@@ -71,7 +71,7 @@ module.exports = async (client, interaction, args) => {
                         .setFooter({ text: client.config.discord.footer })
                         .setTimestamp();
                     webhookClientLogs.send({
-                        username: 'Bot Bans',
+                        username: 'Interdictions de bot',
                         embeds: [embedLogs],
                     });
                 })

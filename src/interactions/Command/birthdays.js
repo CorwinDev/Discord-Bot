@@ -5,33 +5,33 @@ const Discord = require('discord.js');
 module.exports = {
     data: new SlashCommandBuilder()
         .setName('birthdays')
-        .setDescription('View or register a birthday')
+        .setDescription('Afficher ou enregistrer un anniversaire')
         .addSubcommand(subcommand =>
             subcommand
                 .setName('help')
-                .setDescription('Get information about the birthdays category commands')
+                .setDescription('Obtenez des informations sur les commandes de la catégorie des anniversaires')
         )
         .addSubcommand(subcommand =>
             subcommand
                 .setName('check')
-                .setDescription('Check your birthday')
+                .setDescription('Vérifiez votre anniversaire')
         )
         .addSubcommand(subcommand =>
             subcommand
                 .setName('delete')
-                .setDescription('Delete your birthday')
+                .setDescription('Supprimez votre anniversaire')
         )
         .addSubcommand(subcommand =>
             subcommand
                 .setName('list')
-                .setDescription('Get to see all birthdays')
+                .setDescription('Venez voir tous les anniversaires')
         )
         .addSubcommand(subcommand =>
             subcommand
                 .setName('set')
-                .setDescription('Set your birthday')
-                .addNumberOption(option => option.setName('day').setDescription('The day number that is your birthday').setRequired(true))
-                .addNumberOption(option => option.setName('month').setDescription('The month number that is your birthday').setRequired(true))
+                .setDescription('Définissez votre anniversaire')
+                .addNumberOption(option => option.setName('day').setDescription('Le numéro de jour qui est votre anniversaire').setRequired(true))
+                .addNumberOption(option => option.setName('month').setDescription('Le numéro de mois qui est votre anniversaire').setRequired(true))
         )
     ,
 

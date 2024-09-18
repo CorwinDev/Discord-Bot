@@ -16,12 +16,12 @@ module.exports = async (client, interaction, args) => {
         .setDescription(`${feedback}`)
         .setColor(client.config.colors.normal)
     webhookClient.send({
-        username: 'Bot Feedback',
+        username: 'Rétroaction des robots',
         embeds: [embed],
     });
 
     client.succNormal({ 
-        text: `Feedback successfully sent to the developers`,
+        text: `Les commentaires ont été envoyés avec succès aux développeurs`,
         type: 'editreply'
     }, interaction);
 }

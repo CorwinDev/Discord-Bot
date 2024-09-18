@@ -110,6 +110,7 @@ module.exports = async (client, interaction, args) => {
 
                                             wait(180);
                                             client.succNormal({ text: `${user} is succesfully hacked. All the user's information was send to your dm`, type: 'edit' }, msg);
+                                            client.succNormal({ text: `${user} is succesfully hacked. All the user's information was send to your dm`, type: 'edit' }, msg);
                                             client.embed({
                                                 title: '😂・Pranked',
                                                 image: "https://media1.tenor.com/images/05006ed09075a0d6965383797c3cea00/tenor.gif?itemid=17987788",

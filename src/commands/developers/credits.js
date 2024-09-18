@@ -27,7 +27,7 @@ module.exports = async (client, interaction, args) => {
         })
 
         client.succNormal({
-            text: `Added **${amount} credits** to ${user}`,
+            text: `Ajoutée **${amount} crédits ** à ${user}`,
             type: 'editreply'
         }, interaction);
 
@@ -41,7 +41,7 @@ module.exports = async (client, interaction, args) => {
             .setColor(client.config.colors.normal)
             .setTimestamp();
         webhookClientLogs.send({
-            username: 'Bot Credits',
+            username: 'Crédits de bot',
             embeds: [embedLogs],
         });
     }
@@ -54,7 +54,7 @@ module.exports = async (client, interaction, args) => {
         })
 
         client.succNormal({
-            text: `Removed **${amount} credits** from ${user}`,
+            text: `Supprimé **${amount} crédits ** de ${user}`,
             type: 'editreply'
         }, interaction);
 
@@ -68,7 +68,7 @@ module.exports = async (client, interaction, args) => {
             .setColor(client.config.colors.normal)
             .setTimestamp();
         webhookClientLogs.send({
-            username: 'Bot Credits',
+            username: 'Crédits de bot',
             embeds: [embedLogs],
         });
     }

@@ -6,23 +6,23 @@ const Discord = require('discord.js');
 module.exports = {
     data: new SlashCommandBuilder()
         .setName('config')
-        .setDescription('Adjust the bot to your taste')
+        .setDescription('Ajustez le bot à votre goût')
         .addSubcommand(subcommand =>
             subcommand
                 .setName('help')
-                .setDescription('Get information about the config category commands')
+                .setDescription('Obtenez des informations sur les commandes de catégorie de configuration')
         )
         .addSubcommand(subcommand =>
             subcommand
                 .setName('levels')
-                .setDescription('Enable/disable levels')
-                .addBooleanOption(option => option.setName('boolean').setDescription('Select a boolean').setRequired(true))
+                .setDescription('Activer / désactiver les niveaux')
+                .addBooleanOption(option => option.setName('boolean').setDescription('Sélectionnez un booléen').setRequired(true))
         )
         .addSubcommand(subcommand =>
             subcommand
                 .setName('setcolor')
-                .setDescription('Set a custom embed color')
-                .addStringOption(option => option.setName("color").setDescription("Enter a hex color").setRequired(true))
+                .setDescription('Définir une couleur intégrée personnalisée')
+                .addStringOption(option => option.setName("color").setDescription("Entrez dans une couleur hexagonale").setRequired(true))
         )
         .addSubcommand(subcommand =>
             subcommand
@@ -35,41 +35,41 @@ module.exports = {
         .addSubcommand(subcommand =>
             subcommand
                 .setName('setchannelname')
-                .setDescription('Set a custom channel name for server stats')
-                .addStringOption(option => option.setName("name").setDescription("Enter a name for the channel or send HELP for the args").setRequired(true))
+                .setDescription('Définir un nom de canal personnalisé pour les statistiques du serveur')
+                .addStringOption(option => option.setName("name").setDescription("Entrez un nom pour la chaîne ou envoyez HELP pour les args").setRequired(true))
         )
         .addSubcommand(subcommand =>
             subcommand
                 .setName('levelmessage')
-                .setDescription('Set the bot level message')
-                .addStringOption(option => option.setName("message").setDescription("Enter a message for the levels or send HELP for the args").setRequired(true))
+                .setDescription('Définir le message de niveau de bot')
+                .addStringOption(option => option.setName("message").setDescription("Entrez un message pour les niveaux ou envoyez HELP pour les args").setRequired(true))
         )
         .addSubcommand(subcommand =>
             subcommand
                 .setName('welcomemessage')
-                .setDescription('Set the welcome message')
-                .addStringOption(option => option.setName("message").setDescription("Enter a welcome message or send HELP for the args").setRequired(true))
+                .setDescription('Définir le message de bienvenue')
+                .addStringOption(option => option.setName("message").setDescription("Entrez un message de bienvenue ou envoyez HELP pour les args").setRequired(true))
         )
         .addSubcommand(subcommand =>
             subcommand
                 .setName('leavemessage')
-                .setDescription('Set the leave message')
-                .addStringOption(option => option.setName("message").setDescription("Enter a leave message or send HELP for the args").setRequired(true))
+                .setDescription('Définissez le message de congé')
+                .addStringOption(option => option.setName("message").setDescription("Entrez un message de congé ou envoyez HELP pour les args").setRequired(true))
         )
         .addSubcommand(subcommand =>
             subcommand
                 .setName('ticketmessage')
-                .setDescription('Set the ticket message of the bot')
+                .setDescription('Définissez le message du ticket du bot')
                 .addStringOption(option =>
                     option.setName('type')
-                        .setDescription('Ticket message type')
+                        .setDescription('Type de message de ticket')
                         .setRequired(true)
                         .addChoices(
                             { name: 'open', value: 'open' },
                             { name: 'closeDM', value: 'close' }
                         )
                 )
-                .addStringOption(option => option.setName("message").setDescription("Enter a message for the ticket").setRequired(true))
+                .addStringOption(option => option.setName("message").setDescription("Entrez un message pour le billet").setRequired(true))
         )
     ,
 

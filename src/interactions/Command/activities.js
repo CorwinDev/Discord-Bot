@@ -5,10 +5,10 @@ const Discord = require('discord.js');
 module.exports = {
     data: new SlashCommandBuilder()
         .setName('activities')
-        .setDescription('Start a activity')
+        .setDescription('Démarrer une activité')
         .addStringOption(option =>
             option.setName('activity')
-                .setDescription('The activity that you want')
+                .setDescription('L\'activité que vous voulez')
                 .setRequired(true)
                 .addChoices(
                     { name: 'Betrayal.io', value: 'betrayal' },
@@ -39,7 +39,7 @@ module.exports = {
 
         const channel = interaction.member.voice.channel;
         if (!channel) return client.errNormal({ 
-            error: `You're not in a voice channel!`, 
+            error: `Vous n'êtes pas dans un canal vocal!`, 
             type: 'editreply' 
         }, interaction);
 

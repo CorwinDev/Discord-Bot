@@ -18,7 +18,7 @@ module.exports = async (client, interaction, args) => {
 
     if (choice == "welcomerole") {
         interaction.guild.roles.create({
-            name: 'Member',
+            name: 'Membre',
             color: client.config.colors.normal
         }).then((rl) => {
             client.createRoleSetup(welcomeRole, rl, interaction)

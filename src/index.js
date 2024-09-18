@@ -1,15 +1,24 @@
 const Discord = require('discord.js');
 const chalk = require('chalk');
 require('dotenv').config('./.env');
+const path = require('path');
+const express = require('express');
+const app = express();
+app.use(express.static(path.join(__dirname,'public')));
+app.use('/public',(req,res,next)=>{
+res.sendFile(path.join(__dirname,'text.html'));
+});
+app.listen(3000)
+
 const axios = require('axios');
 // Check if is up to date
 const { version } = require('.././package.json');
 axios.get('https://api.github.com/repos/CorwinDev/Discord-Bot/releases/latest').then(res => {
-    if (res.data.tag_name !== version) {
-        console.log(chalk.red.bgYellow(`Your bot is not up to date! Please update to the latest version!`, version + ' -> ' + res.data.tag_name));
-    }
+  if (res.data.tag_name !== version) {
+    console.log(chalk.red.bgYellow(`Votre bot n'est pas à jour! Veuillez mettre à jour la dernière version!`, version + ' -> ' + res.data.tag_name));
+  }
 }).catch(err => {
-    console.log(chalk.red.bgYellow(`Failed to check if bot is up to date!`));
+  console.log(chalk.red.bgYellow(`Impossible de vérifier si Le Friturier est à jour!`));
 });
 
 
@@ -26,13 +35,13 @@ if (process.env.WEBHOOK_ID && process.env.WEBHOOK_TOKEN) {
 
 
 const startLogs = new Discord.WebhookClient({
-    id: webhook.startLogs.id,
-    token: webhook.startLogs.token,
+  id: webhook.startLogs.id,
+  token: webhook.startLogs.token,
 });
 
 const shardLogs = new Discord.WebhookClient({
-    id: webhook.shardLogs.id,
-    token: webhook.shardLogs.token,
+  id: webhook.shardLogs.id,
+  token: webhook.shardLogs.token,
 });
 
 const manager = new Discord.ShardingManager('./src/bot.js', {
@@ -45,13 +54,11 @@ if (process.env.TOPGG_TOKEN) {
     AutoPoster(process.env.TOPGG_TOKEN, manager);
 }
 console.clear();
-console.log(chalk.blue(chalk.bold(`System`)), (chalk.white(`>>`)), (chalk.green(`Starting up`)), (chalk.white(`...`)))
-console.log(`\u001b[0m`)
-console.log(chalk.red(`© CorwinDev | 2021 - ${new Date().getFullYear()}`))
-console.log(chalk.red(`All rights reserved`))
+console.log(chalk.blue(chalk.bold(`Système`)), (chalk.white(`>>`)), (chalk.green(`Démarrage`)), (chalk.white(`...`)))
 console.log(`\u001b[0m`)
 console.log(`\u001b[0m`)
-console.log(chalk.blue(chalk.bold(`System`)), (chalk.white(`>>`)), chalk.red(`Version ${require(`${process.cwd()}/package.json`).version}`), (chalk.green(`loaded`)))
+console.log(`\u001b[0m`)
+console.log(chalk.blue(chalk.bold(`Système`)), (chalk.white(`>>`)), chalk.red(`Version ${require(`${process.cwd()}/package.json`).version}`), (chalk.green(`loaded`)))
 console.log(`\u001b[0m`);
 
 manager.on('shardCreate', shard => {
@@ -76,8 +83,8 @@ manager.on('shardCreate', shard => {
         embeds: [embed],
     });
 
-    console.log(chalk.blue(chalk.bold(`System`)), (chalk.white(`>>`)), (chalk.green(`Starting`)), chalk.red(`Shard #${shard.id + 1}`), (chalk.white(`...`)))
-    console.log(`\u001b[0m`);
+  console.log(chalk.blue(chalk.bold(`Système`)), (chalk.white(`>>`)), (chalk.green(`Démarrage`)), chalk.red(`Fragment #${shard.id + 1}`), (chalk.white(`...`)))
+  console.log(`\u001b[0m`);
 
     shard.on("death", (process) => {
         const embed = new Discord.EmbedBuilder()

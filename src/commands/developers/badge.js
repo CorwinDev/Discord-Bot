@@ -35,14 +35,14 @@ module.exports = async (client, interaction, args) => {
     let Badges = await model.findOne({ User: member.id });
 
     if (!badgeFlags[badge.toUpperCase()]) return client.errNormal({
-        error: `I can't find that badge`,
+        error: `Je ne trouve pas ce badge`,
         type: `editreply`
     }, interaction);
 
     if (boolean == true) {
         if (Badges) {
             if (Badges.FLAGS.includes(badge.toUpperCase())) return client.errNormal({
-                error: `This users already has that badge!`,
+                error: `Ces utilisateurs ont déjà ce badge!`,
                 type: `editreply`
             }, interaction);
 
@@ -58,7 +58,7 @@ module.exports = async (client, interaction, args) => {
             });
 
             client.succNormal({
-                text: `Added the ${badgeFlags[badge.toUpperCase()]} (${badge.toUpperCase()}) badge!`,
+                text: `Ajouté le ${badgeFlags[badge.toUpperCase()]} (${badge.toUpperCase()}) badge!`,
                 type: `editreply`
             }, interaction);
         } else {
@@ -66,7 +66,7 @@ module.exports = async (client, interaction, args) => {
             await newSettings.save().catch(() => { });
 
             client.succNormal({
-                text: `Added the ${badgeFlags[badge.toUpperCase()]} (${badge.toUpperCase()}) badge!`,
+                text: `Ajouté le ${badgeFlags[badge.toUpperCase()]} (${badge.toUpperCase()}) badge!`,
                 type: `editreply`
             }, interaction)
         }
@@ -82,7 +82,7 @@ module.exports = async (client, interaction, args) => {
             .setFooter({ text: client.config.discord.footer})
             .setTimestamp();
         webhookClientLogs.send({
-            username: 'Bot Badges',
+            username: 'Badges bot',
             embeds: [embedLogs],
         });
     }
@@ -120,7 +120,7 @@ module.exports = async (client, interaction, args) => {
                 }
             );
             client.succNormal({
-                text: `Removed the ${badgeFlags[badge.toUpperCase()]} (${badge.toUpperCase()}) badge!`,
+                text: `Enlevé le ${badgeFlags[badge.toUpperCase()]} (${badge.toUpperCase()}) badge!`,
                 type: 'editreply'
             }, interaction);
         }
@@ -136,7 +136,7 @@ module.exports = async (client, interaction, args) => {
             .setFooter({ text: client.config.discord.footer })
             .setTimestamp();
         webhookClientLogs.send({
-            username: 'Bot Badges',
+            username: 'Badges bot',
             embeds: [embedLogs],
         });
     }

@@ -98,8 +98,6 @@ module.exports = {
         const perms = await client.checkUserPerms({
             flags: [Discord.PermissionsBitField.Flags.Administrator],
             perms: [Discord.PermissionsBitField.Flags.Administrator]
-            flags: [Discord.PermissionsBitField.Flags.Administrator],
-            perms: [Discord.PermissionsBitField.Flags.Administrator]
         }, interaction)
 
         if (perms == false) return;

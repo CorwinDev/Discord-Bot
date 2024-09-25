@@ -59,15 +59,15 @@ if (clientID && clientSecret) {
         ],
         nodes: [
             {
-                host: process.env.LAVALINK_HOST || "lava-v3.ajieblogs.eu.org",
-                port: parseInt(process.env.LAVALINK_PORT) || 443,
-                password: process.env.LAVALINK_PASSWORD || "https://dsc.gg/ajidevserver",
-                secure: Boolean(process.env.LAVALINK_SECURE) || true
+                host: process.env.LAVALINK_HOST || "Your-LavaLink-Here",
+                port: parseInt(process.env.LAVALINK_PORT) || port,
+                password: process.env.LAVALINK_PASSWORD || "Your-LavaLink-Password-Here",
+                secure: Boolean(process.env.LAVALINK_SECURE) || " "true" for ssl enabled and "false" for diabled "
             },
             {
-                host: "lava-v3.ajieblogs.eu.org",
-                port: 443,
-                password: "https://dsc.gg/ajidevserver"
+                host: "Your-LavaLink-Here",
+                port: port,
+                password: "Your-LavaLink-Password-Here"
             },
         ],
         send(id, payload) {
@@ -85,10 +85,10 @@ if (clientID && clientSecret) {
         ],
         nodes: [
             {
-                host: process.env.LAVALINK_HOST || "lava.link",
-                port: parseInt(process.env.LAVALINK_PORT) || 80,
-                password: process.env.LAVALINK_PASSWORD || "CorwinDev",
-                secure: Boolean(process.env.LAVALINK_SECURE) || false
+                host: process.env.LAVALINK_HOST || "Your-Other-LavaLink-Here",
+                port: parseInt(process.env.LAVALINK_PORT) || port,
+                password: process.env.LAVALINK_PASSWORD || "Your-LavaLink-Password-Here",
+                secure: Boolean(process.env.LAVALINK_SECURE) || " "true" for ssl enabled and "false" for diabled "
             },
         ],
         send(id, payload) {

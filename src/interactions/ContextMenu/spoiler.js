@@ -72,8 +72,8 @@ module.exports = {
   
           // Rename the file
           fs.renameSync(tempFilePath, newFilePath);
-          const guild = client.guilds.cache.get('355051708503687168'); // Replace with your guild ID
-          const channel = guild.channels.cache.get('819916307951648839'); // Replace with your channel ID
+          const guild = client.guilds.cache.get('418464488619245568'); // Replace with your guild ID
+          const channel = guild.channels.cache.get('1225140754729402378'); // Replace with your channel ID
           
           // Upload the renamed file to Discord
         const uploadedMessage = await channel.send({

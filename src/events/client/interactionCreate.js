@@ -75,51 +75,45 @@ module.exports = async (client, interaction) => {
         })
     }
 
-    // Verify system
+    // Verify system with Math Captcha Modal
     if (interaction.isButton() && interaction.customId == "Bot_verify") {
         const data = await verify.findOne({ Guild: interaction.guild.id, Channel: interaction.channel.id });
         if (data) {
-            let captcha = new Captcha();
+            // Generate a simple math question
+            let num1 = Math.floor(Math.random() * 10) + 1;
+            let num2 = Math.floor(Math.random() * 10) + 1;
+            let correctAnswer = num1 + num2;
 
-            try {
-                var image = new Discord.AttachmentBuilder(captcha.JPEGStream, {name:"captcha.jpeg"});
+            // Create a modal
+            const modal = new Discord.ModalBuilder()
+                .setCustomId('math_verify')
+                .setTitle('Verify Yourself')
+                .addComponents(
+                    new Discord.ActionRowBuilder().addComponents(
+                        new Discord.TextInputBuilder()
+                            .setCustomId('math_answer')
+                            .setLabel(`What is ${num1} + ${num2}?`)
+                            .setStyle(Discord.TextInputStyle.Short)
+                    )
+                );
 
-                interaction.reply({ files: [image], fetchReply: true }).then(function (msg) {
-                    const filter = s => s.author.id == interaction.user.id;
+            await interaction.showModal(modal);
+            
+            const filter = (i) => i.customId === 'math_verify' && i.user.id === interaction.user.id;
+            interaction.awaitModalSubmit({ filter, time: 60000 })
+                .then(async modalInteraction => {
+                    let userAnswer = parseInt(modalInteraction.fields.getTextInputValue('math_answer'));
 
-                    interaction.channel.awaitMessages({ filter, max: 1 }).then(response => {
-                        if (response.first().content === captcha.value) {
-                            response.first().delete();
-                            msg.delete();
-
-                            client.succNormal({
-                                text: "You have been successfully verified!"
-                            }, interaction.user).catch(error => { })
-
-                            var verifyUser = interaction.guild.members.cache.get(interaction.user.id);
-                            verifyUser.roles.add(data.Role);
-                        }
-                        else {
-                            response.first().delete();
-                            msg.delete();
-
-                            client.errNormal({
-                                error: "You have answered the captcha incorrectly!",
-                                type: 'editreply'
-                            }, interaction).then(msgError => {
-                                setTimeout(() => {
-                                    msgError.delete();
-                                }, 2000)
-                            })
-                        }
-                    })
+                    if (userAnswer === correctAnswer) {
+                        let verifyUser = interaction.guild.members.cache.get(interaction.user.id);
+                        verifyUser.roles.add(data.Role);
+                        await modalInteraction.reply({ content: "✅ You have been successfully verified!", ephemeral: true });
+                    } else {
+                        await modalInteraction.reply({ content: "❌ Incorrect answer! Please try again.", ephemeral: true });
+                    }
                 })
-            }
-            catch (error) {
-                console.log(error)
-            }
-        }
-        else {
+                .catch(err => console.error(err));
+        } else {
             client.errNormal({
                 error: "Verify is disabled in this server! Or you are using the wrong channel!",
                 type: 'ephemeral'

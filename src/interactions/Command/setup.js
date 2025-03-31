@@ -35,10 +35,21 @@ module.exports = {
         )
         .addSubcommand(subcommand =>
             subcommand
-                .setName('customvoice')
-                .setDescription('Setup the custom voice channels')
+                .setName('customvoice')  // Changed from 'customvoices' to 'customvoice'
+                .setDescription('Setup the custom voice channels system')
                 .addChannelOption(option => option.setName('category').setDescription('Select a category where the channels come in').setRequired(true).addChannelTypes(ChannelType.GuildCategory))
-                .addStringOption(option => option.setName('channelname').setDescription('The template for the channel names').setRequired(true))
+                .addChannelOption(option => option.setName('channel').setDescription('Select the creation channel').setRequired(true).addChannelTypes(ChannelType.GuildVoice))
+                .addStringOption(option => 
+                    option.setName('theme')
+                    .setDescription('Select the theme for voice channels')
+                    .setRequired(true)
+                    .addChoices(
+                        { name: 'Default', value: 'default' },
+                        { name: 'Ocean Theme', value: 'ocean' },
+                        { name: 'Gaming Theme', value: 'gaming' },
+                        { name: 'April Fools', value: 'aprilfools' }
+                    )
+                )
         )
         .addSubcommand(subcommand =>
             subcommand

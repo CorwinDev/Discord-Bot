@@ -64,17 +64,17 @@ module.exports = async (client, oldState, newState) => {
             
             if (voiceData.Theme === 'aprilfools') {
                 const voiceChannelNames = [
-                    "⇢᲼🐟 Le poisson",
-                    "⇢᲼🐠・Le poisson rouge",
-                    "⇢᲼🐡・Le poisson lune",
-                    "⇢᲼🦈・Le requin",
-                    "⇢᲼🐙・La pieuvre",
-                    "⇢᲼🦞・Le homard",
-                    "⇢᲼🦐・La crevette",
-                    "⇢᲼🦀・Le crabe",
-                    "⇢᲼🦑・Le calamar",
-                    "⇢᲼🐬・Le dauphin",
-                    "⇢᲼🐳・La baleine",
+                    "🐟 Le poisson",
+                    "🐠・Le poisson rouge",
+                    "🐡・Le poisson lune",
+                    "🦈・Le requin",
+                    "🐙・La pieuvre",
+                    "🦞・Le homard",
+                    "🦐・La crevette",
+                    "🦀・Le crabe",
+                    "🦑・Le calamar",
+                    "🐬・Le dauphin",
+                    "🐳・La baleine",
                 ];
 
                 // Récupérer tous les noms de canaux existants dans la catégorie
@@ -101,15 +101,17 @@ module.exports = async (client, oldState, newState) => {
             }
 
             try {
+                const category = newState.guild.channels.cache.get(voiceData.Category);
+                
+                // Créer le nouveau salon avec les permissions de la catégorie
                 const newChannel = await newState.guild.channels.create({
                     name: channelName,
                     type: Discord.ChannelType.GuildVoice,
                     parent: voiceData.Category,
                     permissionOverwrites: [
-                        {
-                            id: newState.guild.id,
-                            allow: [Discord.PermissionsBitField.Flags.ViewChannel],
-                        },
+                        // Copier toutes les permissions de la catégorie
+                        ...Array.from(category.permissionOverwrites.cache.values()),
+                        // Ajouter les permissions spécifiques pour le créateur
                         {
                             id: user.id,
                             allow: [

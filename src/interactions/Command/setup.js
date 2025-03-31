@@ -14,6 +14,18 @@ module.exports = {
         )
         .addSubcommand(subcommand =>
             subcommand
+                .setName('channelsorter')
+                .setDescription('Setup automatic channel sorting in a category')
+                .addChannelOption(option => 
+                    option
+                        .setName('category')
+                        .setDescription('Select a category to enable automatic channel sorting')
+                        .setRequired(true)
+                        .addChannelTypes(ChannelType.GuildCategory)
+                )
+        )
+        .addSubcommand(subcommand =>
+            subcommand
                 .setName('tickets')
                 .setDescription('Setup the tickets')
                 .addChannelOption(option => option.setName('category').setDescription('Select a category where the tickets should come in').setRequired(true).addChannelTypes(ChannelType.GuildCategory))
@@ -131,7 +143,8 @@ module.exports = {
                             { name: 'Welcome channel', value: 'welcomechannel' },
                             { name: 'Leave channel', value: 'leavechannel' },
                             { name: 'Welcome role', value: 'welcomerole' },
-                            { name: 'Word snake', value: 'wordsnake' }
+                            { name: 'Word snake', value: 'wordsnake' },
+                            { name: 'Channel sorter', value: 'channelsorter' },
                         )
                 )
         )

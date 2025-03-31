@@ -1,7 +1,10 @@
 const Discord = require('discord.js');
 const chalk = require('chalk');
+const Schema = require('../../database/models/channelActivity');
 
 module.exports = async (client) => {
+    const channelSorter = require('../../handlers/functions/channelSorter')(client);
+
     const startLogs = new Discord.WebhookClient({
         id: client.webhooks.startLogs.id,
         token: client.webhooks.startLogs.token,
@@ -27,6 +30,12 @@ module.exports = async (client) => {
     setInterval(async function () {
         const promises = [
             client.shard.fetchClientValues('guilds.cache.size'),
+            // Ajout du tri des salons comme nouvelle promesse
+            Schema.find({ IsActive: true }).then(configs => 
+                Promise.all(configs.map(config => 
+                    channelSorter.sortChannels(client, config.Guild, config.Category)
+                ))
+            )
         ];
         return Promise.all(promises)
             .then(results => {

@@ -10,6 +10,10 @@ module.exports = {
             subcommand
                 .setName('help')
                 .setDescription('Obtenez des informations sur les commandes de configuration automatique')
+        ).addSubcommand(subcommand =>
+            subcommand
+                .setName('aprilfools')
+                .setDescription('Paramètre le poisson d\'avril')
         )
         .addSubcommand(subcommand =>
             subcommand
@@ -91,17 +95,15 @@ module.exports = {
      * @param {CommandInteraction} interaction
      * @param {String[]} args
      */
-
     run: async (client, interaction, args) => {
-        await interaction.deferReply({ fetchReply: true });
         await interaction.deferReply({ fetchReply: true });
         const perms = await client.checkUserPerms({
             flags: [Discord.PermissionsBitField.Flags.Administrator],
             perms: [Discord.PermissionsBitField.Flags.Administrator]
-        }, interaction)
+        }, interaction);
 
         if (perms == false) return;
-
+        
         client.loadSubcommands(client, interaction, args);
     },
 };

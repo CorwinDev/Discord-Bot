@@ -1,13 +1,33 @@
 const Discord = require('discord.js');
 const chalk = require('chalk');
 const Schema = require('../../database/models/channelActivity');
+const { model: AnnouncementChannels, clearOldEventsFromDatabase } = require('../../database/models/announcement-channels');
+const { ReminderManager, createManager } = require('../../handlers/functions/eventReminders');
 
 module.exports = async (client) => {
     const channelSorter = require('../../handlers/functions/channelSorter')(client);
+    const reminderManager = createManager();
 
     const startLogs = new Discord.WebhookClient({
         id: client.webhooks.startLogs.id,
         token: client.webhooks.startLogs.token,
+    });
+
+    // Nettoyage des anciens événements
+    console.log(chalk.blue(chalk.bold(`System`)), (chalk.white(`>>`)), chalk.green(`Starting event cleanup...`));
+    try {
+        const result = await clearOldEventsFromDatabase(client);
+        console.log(chalk.blue(chalk.bold(`System`)), (chalk.white(`>>`)), chalk.green(`Event cleanup completed successfully`));
+    } catch (error) {
+        console.error(chalk.blue(chalk.bold(`System`)), (chalk.white(`>>`)), chalk.red(`Error during event cleanup:`));
+        console.error(error);
+    }
+
+    // Vérification immédiate des rappels au démarrage
+    console.log(chalk.blue(chalk.bold(`System`)), (chalk.white(`>>`)), chalk.green(`Vérification des rappels ...`));
+    await reminderManager.checkEventReminders(client).catch(error => {
+        console.log(chalk.blue(chalk.bold(`System`)), (chalk.white(`>>`)), chalk.red(`Erreur lors de la vérification initiale des rappels:`));
+        console.error(error);
     });
 
     console.log(`\u001b[0m`);
@@ -27,6 +47,7 @@ module.exports = async (client) => {
         embeds: [embed],
     });
 
+
     setInterval(async function () {
         const promises = [
             client.shard.fetchClientValues('guilds.cache.size'),
@@ -35,7 +56,9 @@ module.exports = async (client) => {
                 Promise.all(configs.map(config => 
                     channelSorter.sortChannels(client, config.Guild, config.Category)
                 ))
-            )
+            ),
+            // Vérification des rappels d'événements
+            reminderManager.checkEventReminders(client)
         ];
         return Promise.all(promises)
             .then(results => {
@@ -87,7 +110,7 @@ module.exports = async (client) => {
                 }
             })
             .catch(error => {
-                console.error('Error fetching guild sizes:', error);
+                console.error('Error in interval:', error);
             });
     }, 50000);
 

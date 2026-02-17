@@ -6,7 +6,7 @@ module.exports = async (client, invite) => {
 
     client.embed({
         title: `📨・Invite created`,
-        desc: `An invite has been created`,
+        desc: `A invite has been created`,
         fields: [
             {
                 name: `> Code`,

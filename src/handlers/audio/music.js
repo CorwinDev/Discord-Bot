@@ -229,7 +229,7 @@ module.exports = (client) => {
                 player.play(player.queue.previous)
             }
         }
-    });
+    }).setMaxListeners(0);
 }
 
  

@@ -55,5 +55,5 @@ module.exports = async (client) => {
         return message.react(client.emotes.normal.error);
       }
     }
-  });
+  }).setMaxListeners(0);
 }

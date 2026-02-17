@@ -45,6 +45,6 @@ module.exports = (client) => {
 
     for (const file of events) {
         const event = require(`../../events/giveaway/${file}`);
-        manager.on(file.split(".")[0], event.bind(null, client));
+        manager.on(file.split(".")[0], event.bind(null, client)).setMaxListeners(0);
     };
 }

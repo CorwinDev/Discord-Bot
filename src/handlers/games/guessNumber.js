@@ -51,5 +51,5 @@ module.exports = async (client) => {
         return message.react(client.emotes.normal.arrowUp);
       }
     }
-  });
+  }).setMaxListeners(0);
 }

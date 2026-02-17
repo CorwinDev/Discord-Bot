@@ -59,7 +59,7 @@ module.exports = async (client) => {
                 }, interaction.message)
             }
         }
-    }).setMaxListeners(0);
+    });
 }
 
  

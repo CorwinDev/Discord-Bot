@@ -28,7 +28,7 @@ module.exports = async (client) => {
         })
         }
         catch { }
-    }).setMaxListeners(0);
+    });
 
     client.on(Discord.Events.MessageUpdate, async (oldMessage, newMessage) => {
         if (oldMessage.content === newMessage.content || newMessage.channel.type === Discord.ChannelType.DM) return;
@@ -54,5 +54,5 @@ module.exports = async (client) => {
         })
         }
         catch { }
-    }).setMaxListeners(0);
+    });
 }

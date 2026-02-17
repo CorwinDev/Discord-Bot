@@ -109,7 +109,7 @@ const events = fs.readdirSync(`./src/events/music`).filter(files => files.endsWi
 
 for (const file of events) {
     const event = require(`./events/music/${file}`);
-    client.player.on(file.split(".")[0], event.bind(null, client)).setMaxListeners(0);
+    client.player.on(file.split(".")[0], event.bind(null, client));
 };
 
 // Connect to database

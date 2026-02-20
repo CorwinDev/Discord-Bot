@@ -53,23 +53,15 @@ async function createProgressBar(total, current, size = 10, line = '▬', slider
         const percentage = current / total;
         const progress = Math.round((size * percentage));
 
-        if (progress > 1 && progress < 10) {
+        if (progress < 1) {
+            return [slider + line.repeat(9)];
+        } else if (progress > 9) {
+            return [line.repeat(9) + slider];
+        } else {
             const emptyProgress = size - progress;
             const progressText = line.repeat(progress).replace(/.$/, slider);
             const emptyProgressText = line.repeat(emptyProgress);
-            const bar = progressText + emptyProgressText;
-            return [bar];
-        }
-        else if (progress < 1 || progress == 1) {
-            const emptyProgressText = line.repeat(9);
-            const bar = "🔘" + emptyProgressText;
-            return [bar];
-        }
-
-        else if (progress > 10 || progress == 10) {
-            const emptyProgressText = line.repeat(9);
-            const bar = emptyProgressText + "🔘";
-            return [bar];
+            return [progressText + emptyProgressText];
         }
     }
 }
@@ -79,11 +71,10 @@ function format(millis) {
         var h = Math.floor(millis / 3600000),
             m = Math.floor(millis / 60000),
             s = ((millis % 60000) / 1000).toFixed(0);
-        if (h < 1) return (m < 10 ? "0" : "") + m + ":" + (s < 10 ? "0" : "") + s ;
+        if (h < 1) return (m < 10 ? "0" : "") + m + ":" + (s < 10 ? "0" : "") + s;
         else return (h < 10 ? "0" : "") + h + ":" + (m < 10 ? "0" : "") + m + ":" + (s < 10 ? "0" : "") + s;
     } catch (e) {
         console.log(String(e.stack).bgRed)
     }
 }
 
- 

@@ -96,10 +96,10 @@ module.exports = async (client, message) => {
 
             try {
               if (levelData) {
-                await client.channels.cache
-                  .get(levelData.Channel)
-                  .send({ content: levelMessage })
-                  .catch(() => { });
+                const channel = client.channels.cache.get(levelData.Channel);
+                if (channel) {
+                  await channel.send({ content: levelMessage });
+                } else console.error("Channel not found");
               } else {
                 await message.channel.send({ content: levelMessage });
               }
@@ -109,12 +109,12 @@ module.exports = async (client, message) => {
           } else {
             try {
               if (levelData) {
-                await client.channels.cache
-                  .get(levelData.Channel)
-                  .send({
+                const channel = client.channels.cache.get(levelData.Channel);
+                if (channel) {
+                  await channel.send({
                     content: `**GG** <@!${message.author.id}>, you are now level **${user.level}**`,
                   })
-                  .catch(() => { });
+                }
               } else {
                 message.channel.send({
                   content: `**GG** <@!${message.author.id}>, you are now level **${user.level}**`,
@@ -134,7 +134,7 @@ module.exports = async (client, message) => {
                 message.guild.members.cache
                   .get(message.author.id)
                   .roles.add(data.Role)
-                  .catch((e) => { });
+                  .catch((e) => console.log(e));
               }
             }
           );
@@ -198,7 +198,7 @@ module.exports = async (client, message) => {
 
         if (message.member.displayName.startsWith(`[AFK] `)) {
           let name = message.member.displayName.replace(`[AFK] `, ``);
-          message.member.setNickname(name).catch((e) => { });
+          message.member.setNickname(name).catch((e) => console.log(e));
         }
       }
     }
@@ -245,8 +245,7 @@ module.exports = async (client, message) => {
           })
         }
       )
-        .catch(() => {
-        })
+        .catch((e) => console.log(e))
         .then((res) => {
           res.json().then((data) => {
             if(data.error) return;
@@ -255,34 +254,29 @@ module.exports = async (client, message) => {
         });
     } else {
       try {
-        const input = message;
+        const input = message.content;
         try {
           fetch(
             `https://api.coreware.nl/fun/chat?msg=${encodeURIComponent(input)}&uid=${message.author.id}`,
           )
-            .catch(() => { console.log })
+            .catch((e) => { console.log(e) })
             .then((res) => res.json())
-            .catch(() => { console.log})
+            .catch((e) => { console.log(e) })
             .then(async (json) => {
               console.log(json);
               if (json) {
-                if (
-                  json.response !== " " ||
-                  json.response !== undefined ||
-                  json.response !== "" ||
-                  json.response !== null
-                ) {
+                if (json.response && json.response.trim() !== "") {
                   try {
                     return message
                       .reply({ content: json.response })
-                      .catch(() => { });
-                  } catch { }
+                      .catch((e) => console.log(e));
+                  } catch (err) { console.error("Error description:", err); }
                 }
               }
             })
-            .catch(() => { });
-        } catch { }
-      } catch { }
+            .catch((err) => console.error("Error:", err));
+        } catch (err) { console.error("Error:", err); }
+      } catch (err) { console.error("Error:", err); }
     }
   });
 
@@ -295,10 +289,11 @@ module.exports = async (client, message) => {
 
         const lastStickyMessage = await message.channel.messages
           .fetch(data.LastMessage)
-          .catch(() => { });
+          .catch((e) => console.log(e));
         if (!lastStickyMessage) return;
-        await lastStickyMessage.delete({ timeout: 1000 });
-
+        setTimeout(() => {
+          lastStickyMessage.delete().catch(console.error);
+        }, 1000);
         const newMessage = await client.simpleEmbed(
           { desc: `${data.Content}` },
           message.channel
@@ -331,7 +326,7 @@ module.exports = async (client, message) => {
   }
 
   if (!guildSettings || !guildSettings.Prefix) {
-    var prefix = client.config.Discord.prefix;
+    var prefix = client.config.discord.prefix;
   } else {
     var prefix = guildSettings.Prefix;
   }
@@ -394,7 +389,7 @@ module.exports = async (client, message) => {
         },
         message.channel
       )
-      .catch(() => { });
+      .catch((e) => console.log(e));
   }
 
   const cmd = await Commands.findOne({
@@ -402,7 +397,7 @@ module.exports = async (client, message) => {
     Name: command,
   });
   if (cmd) {
-    return message.channel.send({ content: cmdx.Responce });
+    return message.channel.send({ content: cmd.Responce });
   }
 
   const cmdx = await CommandsSchema.findOne({

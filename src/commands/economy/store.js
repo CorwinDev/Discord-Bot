@@ -3,7 +3,7 @@ const Discord = require('discord.js');
 const store = require("../../database/models/economyStore");
 
 module.exports = async (client, interaction, args, message) => {
-    store.find({ Guild: interaction.guild.id }, async (err, storeData) => {
+    store.find({ Guild: interaction.guild.id }).then(async (storeData ) => {
         if (storeData && storeData.length > 0) {
             const lb = storeData.map(e => `**<@&${e.Role}>** - ${client.emotes.economy.coins} $${e.Amount} \n**To buy:** \`buy ${e.Role}\``);
 

@@ -83,7 +83,7 @@ module.exports = {
      */
 
     run: async (client, interaction, args) => {
-        model.findOne({ User: interaction.user.id }, async (err, data) => {
+        model.findOne({ User: interaction.user.id }).then(async (async data => {
             if (data && data.FLAGS.includes("DEVELOPER")) {
                 await interaction.deferReply({ fetchReply: true });
                 client.loadSubcommands(client, interaction, args);
@@ -93,7 +93,7 @@ module.exports = {
                     type: 'ephemeral'
                 }, interaction)
             }
-        })
+        }))
     },
 };
 

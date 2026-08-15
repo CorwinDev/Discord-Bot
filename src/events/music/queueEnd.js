@@ -1,10 +1,13 @@
-const Discord = require('discord.js');
+const Discord = require("discord.js");
 
 module.exports = (client, player, track) => {
-    player.destroy(player.guild.id);
+  player.destroy();
 
-    const channel = client.channels.cache.get(player.textChannel);
-    client.errNormal({
-        error: "Queue is empty, Leaving voice channel"
-    }, channel)
+  const channel = client.channels.cache.get(player.textId);
+  client.errNormal(
+    {
+      error: "Queue is empty, Leaving voice channel",
+    },
+    channel,
+  );
 };

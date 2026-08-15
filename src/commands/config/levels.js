@@ -1,33 +1,39 @@
-const Discord = require('discord.js');
+const Discord = require("discord.js");
 
 const Schema = require("../../database/models/functions");
 
+/**
+ * @type {import("../../typings.d").Command}
+ */
 module.exports = async (client, interaction, args) => {
-    const perms = await client.checkUserPerms({
-        flags: [Discord.PermissionsBitField.Flags.ManageMessages],
-        perms: [Discord.PermissionsBitField.Flags.ManageMessages]
-    }, interaction)
+  const perms = await client.checkUserPerms(
+    {
+      flags: [Discord.PermissionsBitField.Flags.ManageMessages],
+      perms: [Discord.PermissionsBitField.Flags.ManageMessages],
+    },
+    interaction,
+  );
 
-    if (perms == false) return;
+  if (perms == false) return;
 
-    const boolean = interaction.options.getBoolean('boolean');
+  const boolean = interaction.options.getBoolean("boolean");
 
-    const data = await Schema.findOne({ Guild: interaction.guild.id });
-    if (data) {
-        data.Levels = boolean;
-        data.save();
-    }
-    else {
-        new Schema({
-            Guild: interaction.guild.id,
-            Levels: boolean,
-        }).save();
-    }
+  const data = await Schema.findOne({ Guild: interaction.guild.id });
+  if (data) {
+    data.Levels = boolean;
+    data.save();
+  } else {
+    new Schema({
+      Guild: interaction.guild.id,
+      Levels: boolean,
+    }).save();
+  }
 
-    client.succNormal({
-        text: `Levels is now **${boolean ? 'enabled' : 'disabled'}** in this guild`,
-        type: 'editreply'
-    }, interaction);
-}
-
- 
+  client.succNormal(
+    {
+      text: `Levels is now **${boolean ? "enabled" : "disabled"}** in this guild`,
+      type: "editreply",
+    },
+    interaction,
+  );
+};

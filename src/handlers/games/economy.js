@@ -5,7 +5,7 @@ const itemSchema = require("../../database/models/economyItems");
 
 module.exports = async (client) => {
     client.addMoney = async function (interaction, user, amount) {
-        Schema.findOne({ Guild: interaction.guild.id, User: user.id }, async (err, data) => {
+        Schema.findOne({ Guild: interaction.guild.id, User: user.id }).then(async (data => {
             if (data) {
                 data.Money += amount;
                 data.save();
@@ -18,11 +18,11 @@ module.exports = async (client) => {
                     Bank: 0
                 }).save();
             }
-        })
+        }))
     }
 
     client.removeMoney = async function (interaction, user, amount) {
-        Schema.findOne({ Guild: interaction.guild.id, User: user.id }, async (err, data) => {
+        Schema.findOne({ Guild: interaction.guild.id, User: user.id }).then(async (data => {
             if (data) {
                 data.Money -= amount;
                 data.save();
@@ -30,7 +30,7 @@ module.exports = async (client) => {
             else {
                 client.errNormal(`User has no ${client.emotes.economy.coins}!`, interaction.channel);
             }
-        })
+        }))
     }
 
     client.buyItem = async function (interaction, user, item) {

@@ -69,7 +69,7 @@ module.exports = {
             }
         });
 
-        Schema.findOne({ Guild: interaction.guild.id, User: member.id }, async (err, data) => {
+        Schema.findOne({ Guild: interaction.guild.id, User: member.id }).then(async (data => {
             if (data) {
                 data.Warnings.push({
                     Moderator: interaction.user.id,
@@ -91,7 +91,7 @@ module.exports = {
                     }]
                 }).save();
             }
-        })
+        }));
 
         client.embed({
             title: `🔨・Warn`,

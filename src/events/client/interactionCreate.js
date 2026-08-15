@@ -9,7 +9,7 @@ const CommandsSchema = require("../../database/models/customCommandAdvanced");
 module.exports = async (client, interaction) => {
     // Commands
     if (interaction.isCommand() || interaction.isUserContextMenuCommand()) {
-        banSchema.findOne({ User: interaction.user.id }, async (err, data) => {
+        banSchema.findOne({ User: interaction.user.id }).then(async (data) => {
             if (data) {
                 return client.errNormal({
                     error: "You have been banned by the developers of this bot",
@@ -132,7 +132,7 @@ module.exports = async (client, interaction) => {
         var buttonID = interaction.customId.split("-");
 
         if (buttonID[0] == "reaction_button") {
-            reactionSchema.findOne({ Message: interaction.message.id }, async (err, data) => {
+            reactionSchema.findOne({ Message: interaction.message.id }).then(async (data ) => {
                 if (!data) return;
 
                 const [roleid] = data.Roles[buttonID[1]];
@@ -154,9 +154,7 @@ module.exports = async (client, interaction) => {
     // Reaction roles select
     if (interaction.isStringSelectMenu()) {
         if (interaction.customId == "reaction_select") {
-            reactionSchema.findOne(
-                { Message: interaction.message.id },
-                async (err, data) => {
+            reactionSchema.findOne({ Message: interaction.message.id }).then(async (data) => {
                     if (!data) return;
 
                     let roles = "";

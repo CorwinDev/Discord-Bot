@@ -32,7 +32,7 @@ module.exports = {
 
         const member = interaction.guild.members.cache.get(interaction.targetId);
 
-        Schema.findOne({ Guild: interaction.guild.id, User: member.id }, async (err, data) => {
+        Schema.findOne({ Guild: interaction.guild.id, User: member.id }).then(async (data => {
             if (data) {
                 const menu = new Discord.StringSelectMenuBuilder()
                     .setCustomId('unwarn')
@@ -98,6 +98,6 @@ module.exports = {
                     type: 'ephemeraledit'
                 }, interaction);
             }
-        })
-    },
+        }))
+    }
 };

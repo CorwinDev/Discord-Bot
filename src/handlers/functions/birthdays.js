@@ -54,7 +54,7 @@ module.exports = (client) => {
 
                 const finalGuild = client.guilds.cache.get(Guild)
                 if (finalGuild) {
-                    birthdayChannel.findOne({ Guild: finalGuild.id }, async (err, data) => {
+                    birthdayChannel.findOne({ Guild: finalGuild.id }).then(async (data => {
                         if (data) {
                             const channel = finalGuild.channels.cache.get(data.Channel);
                             
@@ -63,7 +63,7 @@ module.exports = (client) => {
                                 desc: `Happy birthday to <@!${User}>!`
                             }, channel)
                         }
-                    })
+                    }))
                 }
             }
         }

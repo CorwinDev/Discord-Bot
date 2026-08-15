@@ -31,7 +31,7 @@ module.exports = {
 
         const member = interaction.guild.members.cache.get(interaction.targetId);
 
-        Schema.findOne({ Guild: interaction.guild.id, User: member.id }, async (err, data) => {
+        Schema.findOne({ Guild: interaction.guild.id, User: member.id }).then(async (data => {
             if (data) {
                 var fields = [];
                 data.Warnings.forEach(element => {
@@ -61,7 +61,7 @@ module.exports = {
                     type: 'editreply'
                 }, interaction)
             }
-        })
+        }))
     },
 };
 

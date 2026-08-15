@@ -1,48 +1,63 @@
-const Discord = require('discord.js');
+const Discord = require("discord.js");
 const lyricsFinder = require("lyrics-finder");
 
+/**
+ * @type {import("../../typings.d").Command}
+ */
 module.exports = async (client, interaction, args) => {
-    let search = "";
+  let search = "";
 
-        const player = client.player.players.get(interaction.guild.id);
+  const player = client.player.players.get(interaction.guild.id);
 
-        const channel = interaction.member.voice.channel;
-        if (!channel) return client.errNormal({
-            error: `You're not in a voice channel!`,
-            type: 'editreply'
-        }, interaction);
+  const channel = interaction.member.voice.channel;
+  if (!channel)
+    return client.errNormal(
+      {
+        error: `You're not in a voice channel!`,
+        type: "editreply",
+      },
+      interaction,
+    );
 
-        if (player && (channel.id !== player?.voiceChannel)) return client.errNormal({
-            error: `You're not in the same voice channel!`,
-            type: 'editreply'
-        }, interaction);
+  if (player && channel.id !== player?.voiceId)
+    return client.errNormal(
+      {
+        error: `You're not in the same voice channel!`,
+        type: "editreply",
+      },
+      interaction,
+    );
 
-        if (!player || !player.queue.current) return client.errNormal({
-            error: "There are no songs playing in this server",
-            type: 'editreply'
-        }, interaction);
+  if (!player || !player.queue.current)
+    return client.errNormal(
+      {
+        error: "There are no songs playing in this server",
+        type: "editreply",
+      },
+      interaction,
+    );
 
-        if (!interaction.options.getString('song')) {
-            search = player.queue.current.title;
-        }
-        else {
-            search = interaction.options.getString('song');
-        }
+  if (!interaction.options.getString("song")) {
+    search = player.queue.current.title;
+  } else {
+    search = interaction.options.getString("song");
+  }
 
-        let lyrics = "";
+  let lyrics = "";
 
-        try {
-            lyrics = await lyricsFinder(search, "");
-            if (!lyrics) lyrics = `No lyrics found for ${search} :x:`;
-        } catch (error) {
-            lyrics = `No lyrics found for ${search} :x:`;
-        }
+  try {
+    lyrics = await lyricsFinder(search, "");
+    if (!lyrics) lyrics = `No lyrics found for ${search} :x:`;
+  } catch (error) {
+    lyrics = `No lyrics found for ${search} :x:`;
+  }
 
-        client.embed({
-            title: `${client.emotes.normal.music}・Lyrics For ${search}`,
-            desc: lyrics,
-            type: 'editreply'
-        }, interaction)
-}
-
- 
+  client.embed(
+    {
+      title: `${client.emotes.normal.music}・Lyrics For ${search}`,
+      desc: lyrics,
+      type: "editreply",
+    },
+    interaction,
+  );
+};

@@ -1,39 +1,54 @@
-const Discord = require('discord.js');
+const Discord = require("discord.js");
 
+/**
+ * @type {import("../../typings.d").Command}
+ */
 module.exports = async (client, interaction, args) => {
-    const perms = await client.checkBotPerms({
-        flags: [Discord.PermissionsBitField.Flags.ManageChannels],
-        perms: [Discord.PermissionsBitField.Flags.ManageChannels]
-    }, interaction)
+  const perms = await client.checkBotPerms(
+    {
+      flags: [Discord.PermissionsBitField.Flags.ManageChannels],
+      perms: [Discord.PermissionsBitField.Flags.ManageChannels],
+    },
+    interaction,
+  );
 
-    if (perms == false) return;
+  if (perms == false) return;
 
-    let limit = interaction.options.getNumber('limit');
+  let limit = interaction.options.getNumber("limit");
 
-    const channel = interaction.member.voice.channel;
-    if (!channel) return client.errNormal({
+  const channel = interaction.member.voice.channel;
+  if (!channel)
+    return client.errNormal(
+      {
         error: `You're not in a voice channel!`,
-        type: 'editreply'
-    }, interaction);
-    var checkVoice = await client.checkVoice(interaction.guild, channel);
-    if (!checkVoice) {
-        return client.errNormal({
-            error: `You cannot edit this channel!`,
-            type: 'editreply'
-        }, interaction);
-    } else {
-        channel.setUserLimit(limit);
+        type: "editreply",
+      },
+      interaction,
+    );
+  var checkVoice = await client.checkVoice(interaction.guild, channel);
+  if (!checkVoice) {
+    return client.errNormal(
+      {
+        error: `You cannot edit this channel!`,
+        type: "editreply",
+      },
+      interaction,
+    );
+  } else {
+    channel.setUserLimit(limit);
 
-        client.succNormal({
-            text: `The channel limit was to \`${limit}\`!`,
-            fields: [
-                {
-                    name: `📘┆Channel`,
-                    value: `${channel} (${channel.name})`
-                }
-            ],
-            type: 'editreply'
-        }, interaction);
-    }
-}
-
+    client.succNormal(
+      {
+        text: `The channel limit was to \`${limit}\`!`,
+        fields: [
+          {
+            name: `📘┆Channel`,
+            value: `${channel} (${channel.name})`,
+          },
+        ],
+        type: "editreply",
+      },
+      interaction,
+    );
+  }
+};

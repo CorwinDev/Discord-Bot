@@ -1,6 +1,6 @@
 module.exports = (client) => {
     client.createChannelSetup = async function (Schema, channel, interaction) {
-        Schema.findOne({ Guild: interaction.guild.id }, async (err, data) => {
+        Schema.findOne({ Guild: interaction.guild.id }).then(async (data => {
             if (data) {
                 data.Channel = channel.id;
                 data.save();
@@ -11,7 +11,7 @@ module.exports = (client) => {
                     Channel: channel.id
                 }).save();
             }
-        });
+        }));
 
         client.succNormal({
             text: `Channel has been set up successfully!`,
@@ -26,7 +26,7 @@ module.exports = (client) => {
     }
 
     client.createRoleSetup = async function (Schema, role, interaction) {
-        Schema.findOne({ Guild: interaction.guild.id }, async (err, data) => {
+        Schema.findOne({ Guild: interaction.guild.id }).then(async (data => {
             if (data) {
                 data.Role = role.id;
                 data.save();
@@ -37,7 +37,7 @@ module.exports = (client) => {
                     Role: role.id
                 }).save();
             }
-        });
+        }));
 
         client.succNormal({
             text: `Role has been set up successfully!`,

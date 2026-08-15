@@ -28,7 +28,7 @@ module.exports = async (client, member, invite, inviter) => {
             joinMessage = joinMessage.replace(`{guild:name}`, member.guild.name)
             joinMessage = joinMessage.replace(`{guild:members}`, member.guild.memberCount)
 
-            welcomeSchema.findOne({ Guild: member.guild.id }, async (err, channelData) => {
+            welcomeSchema.findOne({ Guild: member.guild.id }).then(async (channelData ) => {
                 if (channelData) {
 
                     var channel = member.guild.channels.cache.get(channelData.Channel)
@@ -40,7 +40,7 @@ module.exports = async (client, member, invite, inviter) => {
                 }
             })
         } else {
-            welcomeSchema.findOne({ Guild: member.guild.id }, async (err, channelData) => {
+            welcomeSchema.findOne({ Guild: member.guild.id }).then(async (channelData ) => {
                 if (channelData) {
 
                     var channel = member.guild.channels.cache.get(channelData.Channel)
@@ -78,7 +78,7 @@ module.exports = async (client, member, invite, inviter) => {
                 joinMessage = joinMessage.replace(`{guild:name}`, member.guild.name)
                 joinMessage = joinMessage.replace(`{guild:members}`, member.guild.memberCount)
 
-                welcomeSchema.findOne({ Guild: member.guild.id }, async (err, channelData) => {
+                welcomeSchema.findOne({ Guild: member.guild.id }).then(async (channelData ) => {
                     if (channelData) {
 
                         var channel = member.guild.channels.cache.get(channelData.Channel)
@@ -91,7 +91,7 @@ module.exports = async (client, member, invite, inviter) => {
                 })
             }
             else {
-                welcomeSchema.findOne({ Guild: member.guild.id }, async (err, channelData) => {
+                welcomeSchema.findOne({ Guild: member.guild.id }).then(async (channelData ) => {
                     if (channelData) {
 
                         var channel = member.guild.channels.cache.get(channelData.Channel)
@@ -104,7 +104,7 @@ module.exports = async (client, member, invite, inviter) => {
                 })
             }
 
-            rewards.findOne({ Guild: member.guild.id, Invites: data.Invites }, async (err, data) => {
+            rewards.findOne({ Guild: member.guild.id, Invites: data.Invites }).then(async (data ) => {
                 if (data) {
                     try {
                         var role = member.guild.roles.cache.get(data.Role);
@@ -140,7 +140,7 @@ module.exports = async (client, member, invite, inviter) => {
                 joinMessage = joinMessage.replace(`{guild:name}`, member.guild.name)
                 joinMessage = joinMessage.replace(`{guild:members}`, member.guild.memberCount)
 
-                welcomeSchema.findOne({ Guild: member.guild.id }, async (err, channelData) => {
+                welcomeSchema.findOne({ Guild: member.guild.id }).then(async (channelData ) => {
                     if (channelData) {
 
                         var channel = member.guild.channels.cache.get(channelData.Channel)
@@ -153,7 +153,7 @@ module.exports = async (client, member, invite, inviter) => {
                 })
             }
             else {
-                welcomeSchema.findOne({ Guild: member.guild.id }, async (err, channelData) => {
+                welcomeSchema.findOne({ Guild: member.guild.id }).then(async (channelData ) => {
                     if (channelData) {
 
                         var channel = member.guild.channels.cache.get(channelData.Channel)
@@ -167,7 +167,7 @@ module.exports = async (client, member, invite, inviter) => {
             }
         }
 
-        invitedBy.findOne({ Guild: member.guild.id }, async (err, data2) => {
+        invitedBy.findOne({ Guild: member.guild.id }).then(async (data2 ) => {
             if (data2) {
                 data2.inviteUser = inviter.id,
                     data2.User = member.id

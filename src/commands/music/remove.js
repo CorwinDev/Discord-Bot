@@ -1,38 +1,58 @@
-const Discord = require('discord.js');
+const Discord = require("discord.js");
 
+/**
+ * @type {import("../../typings.d").Command}
+ */
 module.exports = async (client, interaction, args) => {
-    const player = client.player.players.get(interaction.guild.id);
-    
-    const channel = interaction.member.voice.channel;
-    if (!channel) return client.errNormal({
+  const player = client.player.players.get(interaction.guild.id);
+
+  const channel = interaction.member.voice.channel;
+  if (!channel)
+    return client.errNormal(
+      {
         error: `You're not in a voice channel!`,
-        type: 'editreply'
-    }, interaction);
+        type: "editreply",
+      },
+      interaction,
+    );
 
-    if (player && (channel.id !== player?.voiceChannel)) return client.errNormal({
+  if (player && channel.id !== player?.voiceId)
+    return client.errNormal(
+      {
         error: `You're not in the same voice channel!`,
-        type: 'editreply'
-    }, interaction);
+        type: "editreply",
+      },
+      interaction,
+    );
 
-    if (!player || !player.queue.current) return client.errNormal({
+  if (!player || !player.queue.current)
+    return client.errNormal(
+      {
         error: "There are no songs playing in this server",
-        type: 'editreply'
-    }, interaction);
+        type: "editreply",
+      },
+      interaction,
+    );
 
-    let number = interaction.options.getNumber('number');
+  let number = interaction.options.getNumber("number");
 
-    if (number > player.queue.size) return client.errNormal({
+  if (number > player.queue.size)
+    return client.errNormal(
+      {
         error: `The queue doesn't have that much songs`,
-        type: 'editreply'
-    }, interaction);
+        type: "editreply",
+      },
+      interaction,
+    );
 
-    const targetSong = player.queue[parseInt(number - 1)]
-    player.queue.remove((parseInt(number)) - 1)
+  const targetSong = player.queue[parseInt(number - 1)];
+  player.queue.remove(parseInt(number) - 1);
 
-    client.succNormal({ 
-        text: `Removed **${targetSong.title}** from the queue`,
-        type: 'editreply'
-    }, interaction);
-}
-
- 
+  client.succNormal(
+    {
+      text: `Removed **${targetSong.title}** from the queue`,
+      type: "editreply",
+    },
+    interaction,
+  );
+};

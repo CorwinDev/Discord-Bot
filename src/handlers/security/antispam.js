@@ -11,7 +11,7 @@ module.exports = async (client) => {
     client.on(Discord.Events.MessageCreate, async (message) => {
         if (message.author.bot || message.channel.type === Discord.ChannelType.DM) return;
 
-        Schema.findOne({ Guild: message.guild.id }, async (err, data) => {
+        Schema.findOne({ Guild: message.guild.id }).then(async (data) => {
             if (data) {
                 if (data.AntiSpam == true) {
                     if (usersMap.has(message.author.id)) {

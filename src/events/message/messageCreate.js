@@ -49,7 +49,7 @@ module.exports = async (client, message) => {
   }
 
   // Levels
-  Functions.findOne({ Guild: message.guild.id }, async (err, data) => {
+  Functions.findOne({ Guild: message.guild.id }).then(async (data) => {
     if (data) {
       if (data.Levels == true) {
         const randomXP = Math.floor(Math.random() * 9) + 1;
@@ -127,9 +127,7 @@ module.exports = async (client, message) => {
             }
           }
 
-          levelRewards.findOne(
-            { Guild: message.guild.id, Level: user.level },
-            async (err, data) => {
+          levelRewards.findOne({ Guild: message.guild.id, Level: user.level }).then(async (data) => {
               if (data) {
                 message.guild.members.cache
                   .get(message.author.id)
@@ -144,16 +142,12 @@ module.exports = async (client, message) => {
   });
 
   // Message tracker system
-  messagesSchema.findOne(
-    { Guild: message.guild.id, User: message.author.id },
-    async (err, data) => {
+  messagesSchema.findOne({ Guild: message.guild.id, User: message.author.id }).then(async (data) => {
       if (data) {
         data.Messages += 1;
         data.save();
 
-        messageRewards.findOne(
-          { Guild: message.guild.id, Messages: data.Messages },
-          async (err, data) => {
+        messageRewards.findOne({ Guild: message.guild.id, Messages: data.Messages }).then(async (data) => {
             if (data) {
               try {
                 message.guild.members.cache
@@ -174,9 +168,7 @@ module.exports = async (client, message) => {
   );
 
   // AFK system
-  afk.findOne(
-    { Guild: message.guild.id, User: message.author.id },
-    async (err, data) => {
+  afk.findOne({ Guild: message.guild.id, User: message.author.id }).then(async (data) => {
       if (data) {
         await afk.deleteOne({
           Guild: message.guild.id,
@@ -209,9 +201,7 @@ module.exports = async (client, message) => {
       !message.content.includes("@here") &&
       !message.content.includes("@everyone")
     ) {
-      afk.findOne(
-        { Guild: message.guild.id, User: u.id },
-        async (err, data) => {
+      afk.findOne({ Guild: message.guild.id, User: u.id }).then(async (data) => {
           if (data) {
             client.simpleEmbed(
               { desc: `${u} is currently afk! **Reason:** ${data.Message}` },
@@ -224,7 +214,7 @@ module.exports = async (client, message) => {
   });
 
   // Chat bot
-  chatBotSchema.findOne({ Guild: message.guild.id }, async (err, data) => {
+  chatBotSchema.findOne({ Guild: message.guild.id }).then(async (data) => {
     if (!data) return;
     if (message.channel.id !== data.Channel) return;
     if (process.env.OPENAI) {
@@ -288,9 +278,7 @@ module.exports = async (client, message) => {
 
   // Sticky messages
   try {
-    Schema.findOne(
-      { Guild: message.guild.id, Channel: message.channel.id },
-      async (err, data) => {
+    Schema.findOne({ Guild: message.guild.id, Channel: message.channel.id }).then(async (data) => {
         if (!data) return;
 
         const lastStickyMessage = await message.channel.messages
@@ -322,10 +310,10 @@ module.exports = async (client, message) => {
   }
 
   if (!guildSettings || !guildSettings.Prefix) {
-    Functions.findOne({ Guild: message.guild.id }, async (err, data) => {
+    Functions.findOne({ Guild: message.guild.id }).then(async (data => {
       data.Prefix = client.config.discord.prefix;
       data.save();
-    });
+    }));
 
     guildSettings = await Functions.findOne({ Guild: message.guild.id });
   }

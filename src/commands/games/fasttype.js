@@ -1,10 +1,9 @@
-const Discord = require('discord.js');
-const ms = require('ms');
+const Discord = require("discord.js");
+const ms = require("ms");
 
 let timeLength = 50000;
 module.exports = async (client, interaction, args) => {
-
-    let list = `Because we were lost, we had to go back the way we came.
+  let list = `Because we were lost, we had to go back the way we came.
     He's in a boy band which doesn't make much sense for a snake.
     A dead duck doesn't fly backward.
     Don't piss in my garden and tell me you're trying to help my plants grow.
@@ -55,80 +54,100 @@ module.exports = async (client, interaction, args) => {
     The waitress was not amused when he ordered green eggs and ham.
     All you need to do is pick up the pen and begin.`;
 
-    async function start() {
-        const inGame = new Set();
-        const filter = m => m.author.id === interaction.user.id;
-        if (inGame.has(interaction.user.id)) return;
-        inGame.add(interaction.user.id);
-        var i;
-        for (i = 0; i < 25; i++) {
-            const time = Date.now();
+  async function start() {
+    const inGame = new Set();
+    const filter = (m) => m.author.id === interaction.user.id;
+    if (inGame.has(interaction.user.id)) return;
+    inGame.add(interaction.user.id);
+    var i;
+    for (i = 0; i < 25; i++) {
+      const time = Date.now();
 
-            list = list.split("\n");
-            let sentenceList = list[Math.floor(Math.random() * list.length)];
+      list = list.split("\n");
+      let sentenceList = list[Math.floor(Math.random() * list.length)];
 
-            let sentence = '';
-            let ogSentence = sentenceList.toLowerCase().replace("    ", "");
+      let sentence = "";
+      let ogSentence = sentenceList.toLowerCase().replace("    ", "");
 
-            ogSentence.split(' ').forEach(argument => {
-                sentence += '`' + argument.split('').join(' ') + '` '
-            });
+      ogSentence.split(" ").forEach((argument) => {
+        sentence += "`" + argument.split("").join(" ") + "` ";
+      });
 
-            await client.embed({
-                title: `💬・FastType`,
-                desc: `Type the below in ${ms(timeLength, { long: true })}! \n${sentence}`,
-                type: 'editreply'
-            }, interaction)
+      await client.embed(
+        {
+          title: `💬・FastType`,
+          desc: `Type the below in ${ms(timeLength, { long: true })}! \n${sentence}`,
+          type: "editreply",
+        },
+        interaction,
+      );
 
-            try {
-                var msg = await interaction.channel.awaitMessages({
-                    filter,
-                    max: 1,
-                    time: timeLength,
-                    errors: ['time']
-                });
-            } catch (ex) {
-                client.errNormal({
-                    error: "Time\'s up!",
-                    type: 'editreply'
-                }, interaction)
-                inGame.delete(interaction.user.id)
-                break;
-            }
+      try {
+        var msg = await interaction.channel.awaitMessages({
+          filter,
+          max: 1,
+          time: timeLength,
+          errors: ["time"],
+        });
+      } catch (ex) {
+        client.errNormal(
+          {
+            error: "Time\'s up!",
+            type: "editreply",
+          },
+          interaction,
+        );
+        inGame.delete(interaction.user.id);
+        break;
+      }
 
-            if (['cancel', 'end'].includes(msg.first().content.toLowerCase().trim())) {
-                msg.first().delete();
-                client.succNormal({
-                    text: "Ended!",
-                    type: 'editreply'
-                }, interaction)
-                inGame.delete(interaction.user.id)
-                break
-            } else if (msg.first().content.toLowerCase().trim() === ogSentence.toLowerCase()) {
-                msg.first().delete();
-                client.succNormal({
-                    text: `You did it in ${ms(Date.now() - time, { long: true })}!`,
-                    type: 'editreply'
-                }, interaction)
-                break;
-            } else {
-                client.errNormal({
-                    error: "Unfortunately you didn't succeed!",
-                    type: 'editreply'
-                }, interaction)
-                inGame.delete(interaction.user.id)
-                break;
-            }
+      if (
+        ["cancel", "end"].includes(msg.first().content.toLowerCase().trim())
+      ) {
+        msg.first().delete();
+        client.succNormal(
+          {
+            text: "Ended!",
+            type: "editreply",
+          },
+          interaction,
+        );
+        inGame.delete(interaction.user.id);
+        break;
+      } else if (
+        msg.first().content.toLowerCase().trim() === ogSentence.toLowerCase()
+      ) {
+        msg.first().delete();
+        client.succNormal(
+          {
+            text: `You did it in ${ms(Date.now() - time, { long: true })}!`,
+            type: "editreply",
+          },
+          interaction,
+        );
+        break;
+      } else {
+        client.errNormal(
+          {
+            error: "Unfortunately you didn't succeed!",
+            type: "editreply",
+          },
+          interaction,
+        );
+        inGame.delete(interaction.user.id);
+        break;
+      }
 
-            if (i === 25) {
-                client.succNormal({ text: `You did it!`, type: 'editreply' }, interaction)
-                inGame.delete(interaction.user.id)
-                break
-            }
-        }
+      if (i === 25) {
+        client.succNormal(
+          { text: `You did it!`, type: "editreply" },
+          interaction,
+        );
+        inGame.delete(interaction.user.id);
+        break;
+      }
     }
+  }
 
-    start()
-}
-
- 
+  start();
+};

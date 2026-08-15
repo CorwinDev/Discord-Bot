@@ -60,7 +60,7 @@ module.exports = {
 
         const user = interaction.guild.members.cache.get(interaction.targetId);
 
-        Schema.findOne({ User: user.id }, async (err, data) => {
+        Schema.findOne({ User: user.id }).then(async (data) => {
             if (data) {
                 await interaction.deferReply({ fetchReply: true });
                 let Badges = await model.findOne({ User: user.id });

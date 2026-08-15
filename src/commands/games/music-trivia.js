@@ -7,6 +7,9 @@ const {
 const fs = require('fs');
 const TriviaPlayer = require('../../assets/utils/TriviaPlayer.js');
 
+/**
+ * @type {import("../../typings.d").Command}
+ */
 module.exports = async (client, interaction, args) => {
 
     const number = interaction.options.getNumber('number');

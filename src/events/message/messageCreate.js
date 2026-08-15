@@ -75,12 +75,14 @@ module.exports = async (client, message) => {
             message.guild.id,
           );
 
-          const levelData = await levelLogs.findOne({
-            Guild: message.guild.id,
-          });
-          const messageData = await messageSchema.findOne({
-            Guild: message.guild.id,
-          });
+          const levelData = await levelLogs
+            .findOne({ Guild: message.guild.id })
+            .cache("60 seconds")
+            .exec();
+          const messageData = await messageSchema
+            .findOne({ Guild: message.guild.id })
+            .cache("60 seconds")
+            .exec();
 
           if (messageData) {
             var levelMessage = messageData.Message;
@@ -139,6 +141,8 @@ module.exports = async (client, message) => {
 
           levelRewards
             .findOne({ Guild: message.guild.id, Level: user.level })
+            .cache("60 seconds")
+            .exec()
             .then(async (data) => {
               if (data) {
                 message.guild.members.cache
@@ -229,7 +233,11 @@ module.exports = async (client, message) => {
   });
 
   // Chat bot
-  chatBotSchema.findOne({ Guild: message.guild.id }).then(async (data) => {
+  chatBotSchema
+    .findOne({ Guild: message.guild.id })
+    .cache("60 seconds")
+    .exec()
+    .then(async (data) => {
     if (!data) return;
     if (message.channel.id !== data.Channel) return;
     if (process.env.OPENAI) {
@@ -405,7 +413,9 @@ module.exports = async (client, message) => {
   const cmd = await Commands.findOne({
     Guild: message.guild.id,
     Name: command,
-  });
+  })
+    .cache("60 seconds")
+    .exec();
   if (cmd) {
     return message.channel.send({ content: cmdx.Responce });
   }
@@ -413,7 +423,9 @@ module.exports = async (client, message) => {
   const cmdx = await CommandsSchema.findOne({
     Guild: message.guild.id,
     Name: command,
-  });
+  })
+    .cache("60 seconds")
+    .exec();
   if (cmdx) {
     if (cmdx.Action == "Normal") {
       return message.channel.send({ content: cmdx.Responce });

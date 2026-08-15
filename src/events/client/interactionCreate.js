@@ -22,7 +22,7 @@ module.exports = async (client, interaction) => {
                     const cmdd = await Commands.findOne({
                         Guild: interaction.guild.id,
                         Name: interaction.commandName,
-                    });
+                    }).cache("60 seconds").exec();
                     if (cmdd) {
                         return interaction.channel.send({ content: cmdd.Responce });
                     }
@@ -30,7 +30,7 @@ module.exports = async (client, interaction) => {
                     const cmdx = await CommandsSchema.findOne({
                         Guild: interaction.guild.id,
                         Name: interaction.commandName,
-                    });
+                    }).cache("60 seconds").exec();
                     if (cmdx) {
                         // Remove interaction
                         if (cmdx.Action == "Normal") {

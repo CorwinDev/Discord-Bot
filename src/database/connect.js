@@ -1,5 +1,12 @@
 const mongoose = require("mongoose");
 const chalk = require("chalk");
+const cache = require("ts-cache-mongoose");
+
+cache.init(mongoose, {
+  engine: "memory",
+  defaultTTL: "60 seconds",
+  maxEntries: 5000,
+});
 
 async function connect() {
   mongoose.set("strictQuery", false);

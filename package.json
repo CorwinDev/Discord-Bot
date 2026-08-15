@@ -65,9 +65,10 @@
     "node-fetch": "^2.6.6",
     "parse-ms": "^2.1.0",
     "popcat-wrapper": "^1.5.4",
-    "sourcebin": "^5.0.0",
     "shoukaku": "^4.3.0",
+    "sourcebin": "^5.0.0",
     "topgg-autoposter": "^2.0.1",
+    "ts-cache-mongoose": "^2.2.1",
     "util": "^0.12.5",
     "weather-js": "^2.0.0",
     "ytdl-core": "^4.11.2"

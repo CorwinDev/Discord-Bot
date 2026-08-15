@@ -62,7 +62,7 @@ module.exports = {
 
         Schema.findOne({ User: user.id }).then(async (data) => {
             if (data) {
-                await interaction.deferReply({ fetchReply: true });
+                await interaction.deferReply({ withResponse: true });
                 let Badges = await model.findOne({ User: user.id });
 
                 let credits = 0;

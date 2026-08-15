@@ -6,7 +6,7 @@ module.exports = async (client) => {
   client.on(Discord.Events.MessageCreate, async (message) => {
     if (message.author.bot || message.channel.type === Discord.ChannelType.DM) return;
 
-    Schema.findOne({ Guild: message.guild.id, Channel: message.channel.id }).then(async (data => {
+    Schema.findOne({ Guild: message.guild.id, Channel: message.channel.id }).then(async (data) => {
       if (data) {
         try {
           if (!data.lastWord || data.lastWord == " ") {
@@ -39,6 +39,6 @@ module.exports = async (client) => {
           console.log(err);
         }
       }
-    }))
+    })
   }).setMaxListeners(0);
 }

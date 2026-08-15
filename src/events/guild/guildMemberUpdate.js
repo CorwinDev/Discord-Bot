@@ -9,6 +9,9 @@ const Discord = require('discord.js');
  */
 module.exports = async (client, oldMember, newMember) => {
     if (!oldMember || !newMember) return;
+    if(oldMember.partial) await oldMember.fetch();
+    if(newMember.partial) await newMember.fetch();
+
     const removedRoles = oldMember.roles.cache.filter(role => !newMember.roles.cache.has(role.id));
     const addedRoles = newMember.roles.cache.filter(role => !oldMember.roles.cache.has(role.id));
     if (removedRoles.size === 0 && addedRoles.size === 0 || removedRoles.size === addedRoles.size) return;    

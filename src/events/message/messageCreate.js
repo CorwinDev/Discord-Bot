@@ -75,14 +75,18 @@ module.exports = async (client, message) => {
             message.guild.id,
           );
 
-          const levelData = await levelLogs
-            .findOne({ Guild: message.guild.id })
-            .cache("60 seconds")
-            .exec();
-          const messageData = await messageSchema
-            .findOne({ Guild: message.guild.id })
-            .cache("60 seconds")
-            .exec();
+          const [levelData, messageData] = await Promise.all([
+            levelLogs
+              .findOne({ Guild: message.guild.id })
+              .lean()
+              .cache("60 seconds")
+              .exec(),
+            messageSchema
+              .findOne({ Guild: message.guild.id })
+              .lean()
+              .cache("60 seconds")
+              .exec(),
+          ]);
 
           if (messageData) {
             var levelMessage = messageData.Message;
@@ -141,6 +145,7 @@ module.exports = async (client, message) => {
 
           levelRewards
             .findOne({ Guild: message.guild.id, Level: user.level })
+            .lean()
             .cache("60 seconds")
             .exec()
             .then(async (data) => {
@@ -166,6 +171,7 @@ module.exports = async (client, message) => {
 
         messageRewards
           .findOne({ Guild: message.guild.id, Messages: data.Messages })
+          .lean()
           .then(async (data) => {
             if (data) {
               try {
@@ -235,71 +241,38 @@ module.exports = async (client, message) => {
   // Chat bot
   chatBotSchema
     .findOne({ Guild: message.guild.id })
+    .lean()
     .cache("60 seconds")
     .exec()
     .then(async (data) => {
-    if (!data) return;
-    if (message.channel.id !== data.Channel) return;
-    if (process.env.OPENAI) {
-      fetch(`https://api.openai.com/v1/chat/completions`, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: "Bearer " + process.env.OPENAI,
-        },
-        body: JSON.stringify({
-          model: "gpt-3.5-turbo",
-          messages: [
-            {
-              role: "user",
-              content: message.content,
-            },
-          ],
-        }),
-      })
-        .catch(() => {})
-        .then((res) => {
-          res.json().then((data) => {
-            if (data.error) return;
-            message.reply({ content: data.choices[0].message.content });
+      if (!data) return;
+      if (message.channel.id !== data.Channel) return;
+      if (process.env.OPENAI) {
+        fetch(`https://api.openai.com/v1/chat/completions`, {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: "Bearer " + process.env.OPENAI,
+          },
+          body: JSON.stringify({
+            model: "gpt-3.5-turbo",
+            messages: [
+              {
+                role: "user",
+                content: message.content,
+              },
+            ],
+          }),
+        })
+          .catch(() => {})
+          .then((res) => {
+            res.json().then((data) => {
+              if (data.error) return;
+              message.reply({ content: data.choices[0].message.content });
+            });
           });
-        });
-    } else {
-      try {
-        const input = message;
-        try {
-          fetch(
-            `https://api.coreware.nl/fun/chat?msg=${encodeURIComponent(input)}&uid=${message.author.id}`,
-          )
-            .catch(() => {
-              console.log;
-            })
-            .then((res) => res.json())
-            .catch(() => {
-              console.log;
-            })
-            .then(async (json) => {
-              console.log(json);
-              if (json) {
-                if (
-                  json.response !== " " ||
-                  json.response !== undefined ||
-                  json.response !== "" ||
-                  json.response !== null
-                ) {
-                  try {
-                    return message
-                      .reply({ content: json.response })
-                      .catch(() => {});
-                  } catch {}
-                }
-              }
-            })
-            .catch(() => {});
-        } catch {}
-      } catch {}
-    }
-  });
+      }
+    });
 
   // Sticky messages
   try {
@@ -414,16 +387,18 @@ module.exports = async (client, message) => {
     Guild: message.guild.id,
     Name: command,
   })
+    .lean()
     .cache("60 seconds")
     .exec();
   if (cmd) {
-    return message.channel.send({ content: cmdx.Responce });
+    return message.channel.send({ content: cmd.Responce });
   }
 
   const cmdx = await CommandsSchema.findOne({
     Guild: message.guild.id,
     Name: command,
   })
+    .lean()
     .cache("60 seconds")
     .exec();
   if (cmdx) {

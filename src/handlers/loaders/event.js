@@ -2,6 +2,10 @@ const chalk = require('chalk');
 const fs = require('fs');
 const Discord = require('discord.js');
 
+/**
+ * 
+ * @param {import('../../typings.d').Client} client 
+ */
 module.exports = (client) => {
 
     if (client.shard.ids[0] === 0) console.log(`\u001b[0m`);
@@ -18,9 +22,9 @@ module.exports = (client) => {
             const eventName = file.split(".")[0];
             const eventUpperCase = eventName.charAt(0).toUpperCase() + eventName.slice(1);
             if(Discord.Events[eventUpperCase] === undefined){
-                client.on(eventName, event.bind(null, client)).setMaxListeners(0);
+                client.on(eventName, event.bind(null, client));
             }else {
-            client.on(Discord.Events[eventUpperCase], event.bind(null, client)).setMaxListeners(0);
+                client.on(Discord.Events[eventUpperCase], event.bind(null, client));
             }
         };
     });

@@ -38,7 +38,8 @@ const shardLogs = new Discord.WebhookClient({
 const manager = new Discord.ShardingManager('./src/bot.js', {
     totalShards: 'auto',
     token: process.env.DISCORD_TOKEN,
-    respawn: true
+    respawn: true,
+    execArgv: ['--trace-warnings'],
 });
 if (process.env.TOPGG_TOKEN) {
     const { AutoPoster } = require('topgg-autoposter');

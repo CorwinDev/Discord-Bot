@@ -29,7 +29,7 @@
     "canvas": "^3.0.0"
   },
   "author": "CorwinDev",
-  "license": "ISC",
+  "license": "MIT",
   "dependencies": {
     "@discordjs/voice": "^0.16.0",
     "@haileybot/captcha-generator": "^1.7.0",
@@ -38,7 +38,7 @@
     "axios": "^1.2.2",
     "canvacord": "^5.4.8",
     "chalk": "^4.1.2",
-    "discord-giveaways": "^6.0.1",
+    "deepmerge-ts": "^8.0.1",
     "discord-image-generation": "^1.4.23",
     "discord.js": "^14.8.0",
     "dompurify": "^3.0.1",
@@ -65,6 +65,7 @@
     "node-fetch": "^2.6.6",
     "parse-ms": "^2.1.0",
     "popcat-wrapper": "^1.5.4",
+    "serialize-javascript": "^7.1.0",
     "shoukaku": "^4.3.0",
     "sourcebin": "^5.0.0",
     "topgg-autoposter": "^2.0.1",

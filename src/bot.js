@@ -56,8 +56,11 @@ client.player = new Kazagumo(
   [
     {
       name: "Lavalink 1",
-      url: (process.env.LAVALINK_HOST ?? "lavalinkv4.serenetia.com") + ":" + (process.env.LAVALINK_PORT ?? 80),
-      auth: (process.env.LAVALINK_PASSWORD ?? "https://seretia.link/discord"),
+      url:
+        (process.env.LAVALINK_HOST ?? "lavalinkv4.serenetia.com") +
+        ":" +
+        (process.env.LAVALINK_PORT ?? 80),
+      auth: process.env.LAVALINK_PASSWORD ?? "https://seretia.link/discord",
       secure: false,
     },
   ],
@@ -69,22 +72,16 @@ client.player = new Kazagumo(
 );
 
 const musicEvents = {
-  playerStart: require("./events/music/trackStart"),
-  playerEmpty: require("./events/music/queueEnd"),
-  playerMoved: require("./events/music/playerMove"),
-  playerClosed: require("./events/music/playerDisconnect"),
+  playerStart: require("./music/trackStart"),
+  playerEmpty: require("./music/queueEnd"),
+  playerMoved: require("./music/playerMove"),
+  playerClosed: require("./music/playerDisconnect"),
+  ready: require("./music/ready"),
+  error: require("./music/error"),
 };
 for (const [name, event] of Object.entries(musicEvents)) {
-  client.player.on(name, event.bind(null, client)).setMaxListeners(0);
+  client.player.on(name, event.bind(null, client));
 }
-client.player.shoukaku.on(
-  "ready",
-  require("./events/music/ready").bind(null, client),
-);
-client.player.shoukaku.on(
-  "error",
-  require("./events/music/error").bind(null, client),
-);
 
 // Connect to database
 require("./database/connect")();

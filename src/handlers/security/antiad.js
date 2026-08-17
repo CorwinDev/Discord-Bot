@@ -117,7 +117,7 @@ module.exports = (client) => {
         }
       });
     })
-    .setMaxListeners(0);
+    ;
 
   client
     .on(Discord.Events.MessageUpdate, async (oldMessage, newMessage) => {
@@ -272,5 +272,5 @@ module.exports = (client) => {
         }
       });
     })
-    .setMaxListeners(0);
+    ;
 };

@@ -1,7 +1,6 @@
 const Discord = require("discord.js");
 
-module.exports = (client, player, track) => {
-  console.log(player);
+module.exports = (client, player) => {
   player.destroy();
 
   const channel = client.channels.cache.get(player.textId);

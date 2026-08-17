@@ -1,5 +1,11 @@
 const discord = require('discord.js');
 
+/**
+ * 
+ * @param {import('../../typings.d').Client} client 
+ * @param {discord.Invite} invite 
+ * @returns 
+ */
 module.exports = async (client, invite) => {
     const logsChannel = await client.getLogs(invite.guild.id);
     if (!logsChannel) return;
@@ -14,7 +20,7 @@ module.exports = async (client, invite) => {
             },
             {
                 name: `> Inviter`,
-                value: `- ${invite.inviter} (${invite.inviter.tag})`
+                value: invite.inviter ? `- ${invite.inviter} (${invite.inviter.tag})` : `- Unknown`
             },
             {
                 name: `> Timestamp`,

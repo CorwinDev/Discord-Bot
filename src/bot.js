@@ -61,7 +61,7 @@ client.player = new Kazagumo(
         ":" +
         (process.env.LAVALINK_PORT ?? 80),
       auth: process.env.LAVALINK_PASSWORD ?? "https://seretia.link/discord",
-      secure: false,
+      secure: process.env.LAVALINK_SECURE === "true" ? true : false,
     },
   ],
   {
@@ -76,12 +76,12 @@ const musicEvents = {
   playerEmpty: require("./music/queueEnd"),
   playerMoved: require("./music/playerMove"),
   playerClosed: require("./music/playerDisconnect"),
-  ready: require("./music/ready"),
-  error: require("./music/error"),
 };
 for (const [name, event] of Object.entries(musicEvents)) {
   client.player.on(name, event.bind(null, client));
 }
+client.player.shoukaku.on("ready", require("./music/ready").bind(null, client));
+client.player.shoukaku.on("error", require("./music/error").bind(null, client));
 
 // Connect to database
 require("./database/connect")();

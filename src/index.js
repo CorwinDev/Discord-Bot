@@ -88,9 +88,9 @@ if (process.env.TOPGG_TOKEN) {
             return (await client.application.commands.fetch()).map((command) =>
                 command.toJSON(),
             );
-        });
+        }, { shard: 0 });
 
-        await client.postCommands(commands);
+        await client.postCommands(commands[0]);
 
         await client.postStats({
             serverCount:

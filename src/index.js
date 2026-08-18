@@ -69,7 +69,7 @@ if (process.env.TOPGG_TOKEN) {
     const client = new Topgg.Api(process.env.TOPGG_TOKEN);
     setInterval(
         async () => {
-            await client.postStats({
+            await client.postMetrics({
                 serverCount:
                     (
                         await manager.broadcastEval(
@@ -92,7 +92,7 @@ if (process.env.TOPGG_TOKEN) {
 
         await client.postCommands(commands);
 
-        await client.postStats({
+        await client.postMetrics({
             serverCount:
                 (
                     await manager.broadcastEval(

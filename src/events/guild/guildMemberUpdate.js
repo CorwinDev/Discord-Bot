@@ -8,16 +8,50 @@ const Discord = require("discord.js");
 module.exports = async (client, oldMember, newMember) => {
     if (!oldMember || !newMember) return;
 
-    if (oldMember.partial) return;
+    let removedRoles;
+    let addedRoles;
 
-    // Find actual role changes
-    const removedRoles = oldMember.roles.cache.filter(
-        (role) => !newMember.roles.cache.has(role.id),
-    );
+    if (oldMember.partial) {
+        try {
+            const audit = await newMember.guild.fetchAuditLogs({
+                type: Discord.AuditLogEvent.MemberRoleUpdate,
+                limit: 10,
+            });
+            
+            const entry = audit.entries.find(
+                (e) =>
+                    e.target.id === newMember.id &&
+                    e.createdTimestamp > Date.now() - 5000,
+            );
 
-    const addedRoles = newMember.roles.cache.filter(
-        (role) => !oldMember.roles.cache.has(role.id),
-    );
+            if (!entry) return;
+
+            removedRoles = entry.changes[0].old
+                ? new Discord.Collection(
+                      entry.changes[0].old.map((role) => [role.id, role]),
+                  )
+                : new Discord.Collection();
+            
+            addedRoles = entry.changes[0].new
+                ? new Discord.Collection(
+                      entry.changes[0].new.map((role) => [role.id, role]),
+                  )
+                : new Discord.Collection();
+            
+
+        } catch (err) {
+            return;
+        }
+    } else {
+        // Find actual role changes
+        removedRoles = oldMember.roles.cache.filter(
+            (role) => !newMember.roles.cache.has(role.id),
+        );
+        addedRoles = newMember.roles.cache.filter(
+            (role) => !oldMember.roles.cache.has(role.id),
+        );
+    }
+
 
     // Nothing actually changed
     if (removedRoles.size === 0 && addedRoles.size === 0) return;

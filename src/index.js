@@ -90,7 +90,7 @@ if (process.env.TOPGG_TOKEN) {
             );
         }, { shard: 0 });
 
-        await client.postCommands(commands[0]);
+        await client.postCommands(commands);
 
         await client.postStats({
             serverCount:

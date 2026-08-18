@@ -2,6 +2,7 @@ const Discord = require("discord.js");
 const chalk = require("chalk");
 require("dotenv").config();
 const axios = require("axios");
+const Topgg = require("@top-gg/sdk");
 // Check if is up to date
 const { version } = require(".././package.json");
 axios
@@ -67,6 +68,9 @@ const manager = new Discord.ShardingManager("./src/bot.js", {
 if (process.env.TOPGG_TOKEN) {
     setInterval(
         async () => {
+            /**
+             * @type {import("@top-gg/sdk").Api}
+             */
             const client = new Topgg.Api(process.env.TOPGG_TOKEN);
 
             await client.postStats({

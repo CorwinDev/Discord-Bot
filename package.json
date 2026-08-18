@@ -26,8 +26,7 @@
     "Server Stats"
   ],
   "overrides": {
-    "canvas": "^3.0.0",
-    "@top-gg/sdk": "^4.0.0"
+    "canvas": "^3.0.0"
   },
   "author": "CorwinDev",
   "license": "MIT",
@@ -71,7 +70,6 @@
     "serialize-javascript": "^7.1.0",
     "shoukaku": "^4.3.0",
     "sourcebin": "^6.0.1",
-    "topgg-autoposter": "^2.0.1",
     "ts-cache-mongoose": "^2.2.1",
     "util": "^0.12.5",
     "xml2js": "^0.6.2",

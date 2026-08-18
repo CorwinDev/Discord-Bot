@@ -12,12 +12,12 @@ module.exports = async (client, interaction, args) => {
   let row = new Discord.ActionRowBuilder().addComponents(
     new Discord.ButtonBuilder()
       .setLabel("Vote for me")
-      .setURL("https://top.gg/bot/798144456528363550/vote")
+      .setURL(`https://top.gg/bot/${process.env.BOT_ID}/vote`)
       .setStyle(Discord.ButtonStyle.Link),
   );
 
   dbl
-    .hasVoted(interaction.user.id)
+    .getVote(interaction.user.id)
     .then((voted) => {
       if (voted) {
         client.embed(

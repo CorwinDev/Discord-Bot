@@ -33,9 +33,9 @@ module.exports = async (client, interaction, args) => {
       },
       interaction,
     );
+  const trackRepeat = player.loop == 'none' ? "disabled" : "enabled";
 
-  player.setTrackRepeat(!player.trackRepeat);
-  const trackRepeat = player.trackRepeat ? "enabled" : "disabled";
+  player.setLoop(player.loop == 'none' ? 'track' : 'none');
 
   client.succNormal(
     {

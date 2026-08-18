@@ -36,16 +36,6 @@ module.exports = async (client, interaction, args) => {
       interaction,
     );
 
-  const musicLength = player.queue.current.isStream
-    ? null
-    : !player.queue.current ||
-        !player.queue.current.duration ||
-        isNaN(player.queue.current.duration)
-      ? null
-      : player.queue.current.duration;
-  const nowTime = isNaN(player.position) ? null : player.position;
-
-  const bar = await createProgressBar(musicLength, nowTime);
 
   client.embed(
     {
@@ -62,7 +52,7 @@ module.exports = async (client, interaction, args) => {
         },
         {
           name: `${client.emotes.normal.clock}┆Duration`,
-          value: `<t:${(Date.now() / 1000 + player.queue.current.duration / 1000 - nowTime / 1000).toFixed(0)}:f>`,
+          value: `<t:${(Date.now() / 1000 + player.queue.current.length / 1000 - nowTime / 1000).toFixed(0)}:f>`,
           inline: true,
         },
         {
@@ -75,7 +65,7 @@ module.exports = async (client, interaction, args) => {
           value:
             `${new Date(player.position).toISOString().slice(11, 19)} ┃ ` +
             bar +
-            ` ┃ ${new Date(player.queue.current.duration).toISOString().slice(11, 19)}`,
+            ` ┃ ${new Date(player.queue.current.length).toISOString().slice(11, 19)}`,
           inline: false,
         },
       ],

@@ -73,7 +73,7 @@ client.player = new Kazagumo(
     {
         resume: true,
         resumeTimeout: 30,
-        reconnectTries: 3,
+        reconnectTries: 5,
     },
 );
 

@@ -42,10 +42,10 @@ module.exports = async (client, interaction, args) => {
   const musicLength = player.queue.current.isStream
     ? null
     : !player.queue.current ||
-        !player.queue.current.duration ||
-        isNaN(player.queue.current.duration)
+        !player.queue.current.length ||
+        isNaN(player.queue.current.length)
       ? null
-      : player.queue.current.duration;
+      : player.queue.current.length;
   const nowTime =
     !player.position || isNaN(player.position) ? null : player.position;
 
@@ -60,7 +60,7 @@ module.exports = async (client, interaction, args) => {
           value:
             `${new Date(player.position).toISOString().slice(11, 19)} ┃ ` +
             bar +
-            ` ┃ ${new Date(player.queue.current.duration).toISOString().slice(11, 19)}`,
+            ` ┃ ${new Date(player.queue.current.length).toISOString().slice(11, 19)}`,
           inline: false,
         },
       ],

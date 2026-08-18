@@ -66,21 +66,44 @@ const manager = new Discord.ShardingManager("./src/bot.js", {
     execArgv: ["--trace-warnings"],
 });
 if (process.env.TOPGG_TOKEN) {
+    const client = new Topgg.Api(process.env.TOPGG_TOKEN);
     setInterval(
         async () => {
-            /**
-             * @type {import("@top-gg/sdk").Api}
-             */
-            const client = new Topgg.Api(process.env.TOPGG_TOKEN);
-
             await client.postStats({
-                serverCount: manager.guilds.cache.size || 0,
+                serverCount:
+                    (
+                        await manager.broadcastEval(
+                            (client) => client.guilds.cache.size,
+                        )
+                    ).reduce((a, b) => a + b, 0) || 0,
                 shardCount: manager.totalShards || 0,
             });
         },
         30 * 60 * 1000,
     );
+
+    setTimeout(async () => {
+        // Post commands
+        const commands = await manager.broadcastEval(async (client) => {
+            return (await client.application.commands.fetch()).map((command) =>
+                command.toJSON(),
+            );
+        });
+
+        await client.postCommands(commands);
+
+        await client.postStats({
+            serverCount:
+                (
+                    await manager.broadcastEval(
+                        (client) => client.guilds.cache.size,
+                    )
+                ).reduce((a, b) => a + b, 0) || 0,
+            shardCount: manager.totalShards || 0,
+        });
+    }, 10000);
 }
+
 console.clear();
 console.log(
     chalk.blue(chalk.bold(`System`)),

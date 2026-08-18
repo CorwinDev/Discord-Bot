@@ -103,5 +103,3 @@ dist
 .tern-port
 
 src/config/*
-
-package-lock.json

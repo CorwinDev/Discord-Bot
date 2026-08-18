@@ -1,4 +1,4 @@
-FROM node:20-bookworm
+FROM node:24-bookworm
 
 WORKDIR /usr/src/app
 
@@ -16,7 +16,7 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
 COPY package*.json ./
 
 # Clean cache and compile native bindings directly in the container environment
-RUN npm i && npm rebuild canvas --build-from-source
+RUN npm ci && npm rebuild canvas --build-from-source
 
 # Copy remaining source files
 COPY . .

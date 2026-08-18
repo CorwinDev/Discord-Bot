@@ -16,6 +16,8 @@ module.exports = (client) => {
             inputType: Voice.StreamType.Arbitrary,
         });
 
+        console.log(resource);
+
         player.play(resource);
 
         return Voice.entersState(player, Voice.AudioPlayerStatus.Playing, 5e3).catch(() => { });
@@ -46,9 +48,25 @@ module.exports = (client) => {
     client.radioStart = async function (channel) {
         try {
             const connection = await client.connectToChannel(channel);
-            connection.subscribe(player);
+    const resource = 
+    Voice.createAudioResource('https://streams.ilovemusic.de/iloveradio8.mp3', {
+        inlineVolume: true
+    })
+
+    const player2 = Voice.createAudioPlayer();
+    console.log(player2);
+    connection.subscribe(player2)
+    player2.play(resource)
+    player2.on('error', error => {
+        console.error('Error in audio player:', error);
+        client.emit("voiceError", error);
+    });
+    player2.on(Voice.AudioPlayerStatus.Idle, () => {
+        console.log('Audio player is idle, restarting stream...');
+        client.startStream(process.env.RADIO || "https://playerservices.streamtheworld.com/api/livestream-redirect/RADIO538");
+    });
         }
-        catch { }
+        catch (error) { console.log("Failed to connect to channel", error) }
     }
 
     client.radioStop = async function (channel) {
@@ -60,7 +78,6 @@ module.exports = (client) => {
 
         connection.destroy();
     }
-
 
     player.on('stateChange', (oldState, newState) => {
         if (newState.status === Voice.AudioPlayerStatus.Idle) {
@@ -74,22 +91,24 @@ module.exports = (client) => {
     });
 
     client.on(Discord.Events.ClientReady, async () => {
-        client.startStream(process.env.RADIO || "https://playerservices.streamtheworld.com/api/livestream-redirect/RADIO538");
         
         Schema.find().then(async (data) => {
             if (data) {
                 for (var i = 0; i < data.length; i++) {
                     try {
                         const channel = await client.channels.fetch(data[i].Channel)
-
+                        
                         if (channel) {
                             client.radioStart(channel);
                         }
                     }
-                    catch { }
+                    catch (error) {
+                        console.log("Failed to start radio in channel", data[i].Channel, error);
+                    }
                 }
             }
         })
+        // client.startStream(process.env.RADIO || "https://playerservices.streamtheworld.com/api/livestream-redirect/RADIO538");
     });
 }
 

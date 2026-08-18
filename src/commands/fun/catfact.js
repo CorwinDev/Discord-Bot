@@ -1,5 +1,4 @@
 const Discord = require("discord.js");
-const fetch = require("node-fetch");
 
 /**
  * @type {import("../../typings.d").Command}

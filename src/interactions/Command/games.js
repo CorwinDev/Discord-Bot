@@ -26,17 +26,6 @@ module.exports = {
       subcommand.setName("fasttype").setDescription("Learn to type faster"),
     )
     .addSubcommand((subcommand) =>
-      subcommand
-        .setName("music-trivia")
-        .setDescription("Play music trivia")
-        .addNumberOption((option) =>
-          option
-            .setName("number")
-            .setDescription("The amount of songs")
-            .setRequired(true),
-        ),
-    )
-    .addSubcommand((subcommand) =>
       subcommand.setName("roll").setDescription("Roll a die"),
     )
     .addSubcommand((subcommand) =>

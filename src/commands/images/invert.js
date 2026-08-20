@@ -1,15 +1,20 @@
-const Discord = require('discord.js');
+const Discord = require("discord.js");
 const pop = require("popcat-wrapper");
 
+/**
+ * @type {import("../../typings.d").Command}
+ */
 module.exports = async (client, interaction, args) => {
+  const member = interaction.options.getUser("user");
 
-    const member = interaction.options.getUser('user');
+  const userAvatar = member.displayAvatarURL({
+    dynamic: false,
+    size: 1024,
+    extension: "png",
+  });
 
-    const userAvatar = member.displayAvatarURL({ dynamic: false, size: 1024, extension: 'png' });
-
-    const image = await pop.invert(userAvatar);
-    let attach = new Discord.AttachmentBuilder(image, { name: "invert.png" });
-    const embed = client.templateEmbed().setImage('attachment://invert.png')
-    interaction.editReply({ files: [attach], embeds: [embed] })
-}
-
+  const image = await pop.invert(userAvatar);
+  let attach = new Discord.AttachmentBuilder(image, { name: "invert.png" });
+  const embed = client.templateEmbed().setImage("attachment://invert.png");
+  interaction.editReply({ files: [attach], embeds: [embed] });
+};

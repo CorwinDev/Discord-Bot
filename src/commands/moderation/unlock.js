@@ -1,29 +1,40 @@
-const Discord = require('discord.js');
+const Discord = require("discord.js");
 
+/**
+ * @type {import("../../typings.d").Command}
+ */
 module.exports = async (client, interaction, args) => {
-    const perms = await client.checkPerms({
-        flags: [Discord.PermissionsBitField.Flags.ManageChannels],
-        perms: [Discord.PermissionsBitField.Flags.ManageChannels]
-    }, interaction);
+  const perms = await client.checkPerms(
+    {
+      flags: [Discord.PermissionsBitField.Flags.ManageChannels],
+      perms: [Discord.PermissionsBitField.Flags.ManageChannels],
+    },
+    interaction,
+  );
 
-    if (perms == false) return;
+  if (perms == false) return;
 
-    const channel = interaction.options.getChannel('channel') || interaction.channel;
+  const channel =
+    interaction.options.getChannel("channel") || interaction.channel;
 
-    await channel.permissionOverwrites.edit(interaction.guild.roles.cache.find(x => x.name === '@everyone'), {
-        SendMessages: true,
-    });
+  await channel.permissionOverwrites.edit(
+    interaction.guild.roles.cache.find((x) => x.name === "@everyone"),
+    {
+      SendMessages: true,
+    },
+  );
 
-    client.succNormal({
-        text: "Channel unlocked successfully!",
-        fields: [
-            {
-                name: `📘┆Channel`,
-                value: `${channel} (${channel.name})`
-            }
-        ],
-        type: 'editreply'
-    }, interaction);
-}
-
- 
+  client.succNormal(
+    {
+      text: "Channel unlocked successfully!",
+      fields: [
+        {
+          name: `📘┆Channel`,
+          value: `${channel} (${channel.name})`,
+        },
+      ],
+      type: "editreply",
+    },
+    interaction,
+  );
+};

@@ -1,0 +1,1 @@
+Original package from: https://github.com/Androz2091/discord-giveaways

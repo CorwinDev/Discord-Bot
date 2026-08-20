@@ -7,7 +7,7 @@ module.exports = async (client) => {
         if (message.channel.type === Discord.ChannelType.DM) return;
 
         try {
-            BlackList.findOne({ Guild: message.guild.id }, async (err, data) => {
+            BlackList.findOne({ Guild: message.guild.id }).then(async (data) => {
             if (data) {
                 const lowerMsg = message.content.toLowerCase();
                 const splittedMsg = lowerMsg.split(' ');
@@ -28,12 +28,12 @@ module.exports = async (client) => {
         })
         }
         catch { }
-    }).setMaxListeners(0);
+    });
 
     client.on(Discord.Events.MessageUpdate, async (oldMessage, newMessage) => {
         if (oldMessage.content === newMessage.content || newMessage.channel.type === Discord.ChannelType.DM) return;
         try {
-            BlackList.findOne({ Guild: oldMessage.guild.id }, async (err, data) => {
+            BlackList.findOne({ Guild: oldMessage.guild.id }).then(async (data) => {
             if (data) {
                 const lowerMsg = newMessage.content.toLowerCase();
                 const splittedMsg = lowerMsg.split(' ');
@@ -54,5 +54,5 @@ module.exports = async (client) => {
         })
         }
         catch { }
-    }).setMaxListeners(0);
+    });
 }

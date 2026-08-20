@@ -12,7 +12,7 @@ module.exports = {
         .setName("channel")
         .setDescription("Channel where the embed should be")
         .setRequired(true)
-        .addChannelTypes(ChannelType.GuildText)
+        .addChannelTypes(ChannelType.GuildText),
     ),
   /**
    * @param {Client} client
@@ -21,13 +21,13 @@ module.exports = {
    */
 
   run: async (client, interaction, args) => {
-    await interaction.deferReply({ fetchReply: true });
+    await interaction.deferReply({ withResponse: true });
     const perms = await client.checkPerms(
       {
         flags: [Discord.PermissionsBitField.Flags.ManageMessages],
         perms: [Discord.PermissionsBitField.Flags.ManageMessages],
       },
-      interaction
+      interaction,
     );
 
     if (perms == false) return;
@@ -91,7 +91,7 @@ module.exports = {
             description: "Create a embed color",
             value: "color_embed",
           },
-        ])
+        ]),
     );
 
     let row2 = new Discord.ActionRowBuilder().addComponents(
@@ -99,11 +99,11 @@ module.exports = {
         .setCustomId("send_embed")
         .setEmoji("✅")
         .setLabel("Send embed")
-        .setStyle(Discord.ButtonStyle.Success)
+        .setStyle(Discord.ButtonStyle.Success),
     );
 
     let embed = new Discord.EmbedBuilder().setDescription(
-      `Please select some options`
+      `Please select some options`,
     );
 
     interaction.editReply({ embeds: [embed], components: [row, row2] });
@@ -337,7 +337,7 @@ module.exports = {
         if (!channel)
           return client.errNormal(
             { error: `Channel not found` },
-            collected.first().channel
+            collected.first().channel,
           );
 
         channel
@@ -354,7 +354,7 @@ module.exports = {
                 components: [],
                 type: "editreply",
               },
-              interaction
+              interaction,
             );
             collector.stop();
 
@@ -367,5 +367,3 @@ module.exports = {
     });
   },
 };
-
- 

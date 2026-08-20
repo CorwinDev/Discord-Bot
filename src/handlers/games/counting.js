@@ -92,7 +92,7 @@ module.exports = async (client) => {
         }
       }
     })
-    .setMaxListeners(0);
+    ;
 
   client
     .on("messageDelete", async (message) => {
@@ -135,7 +135,7 @@ module.exports = async (client) => {
         }
       } catch {}
     })
-    .setMaxListeners(0);
+    ;
 };
 
  

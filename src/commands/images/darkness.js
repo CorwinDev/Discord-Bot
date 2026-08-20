@@ -1,18 +1,23 @@
-const Discord = require('discord.js');
+const Discord = require("discord.js");
 const { Canvas } = require("canvacord");
 
+/**
+ * @type {import("../../typings.d").Command}
+ */
 module.exports = async (client, interaction, args) => {
+  const member = interaction.options.getUser("user");
 
-    const member = interaction.options.getUser('user');
+  const userAvatar = member.displayAvatarURL({
+    dynamic: false,
+    size: 1024,
+    extension: "png",
+  });
 
-    const userAvatar = member.displayAvatarURL({ dynamic: false, size: 1024, extension: 'png' });
+  const amount = 60;
 
-    const amount = 60
+  const image = await Canvas.darkness(userAvatar, amount);
+  let attach = new Discord.AttachmentBuilder(image, { name: "darkness.gif" });
 
-    const image = await Canvas.darkness(userAvatar, amount);
-    let attach = new Discord.AttachmentBuilder(image, { name: "darkness.gif" });
-
-    const embed = client.templateEmbed().setImage("attachment://darkness.gif");
-    interaction.editReply({ files: [attach], embeds: [embed] });    
-}
-
+  const embed = client.templateEmbed().setImage("attachment://darkness.gif");
+  interaction.editReply({ files: [attach], embeds: [embed] });
+};

@@ -1,8 +1,11 @@
-const Discord = require('discord.js');
+const Discord = require("discord.js");
 const axios = require("axios");
 
-const model = require('../../database/models/badge');
+const model = require("../../database/models/badge");
 
+/**
+ * @type {import("../../typings.d").Command}
+ */
 module.exports = async (client, interaction, args) => {
   let Emojis = "";
   let EmojisAnimated = "";
@@ -25,23 +28,24 @@ module.exports = async (client, interaction, args) => {
     }
   });
 
-  client.embed({
-    title: `😛・Emoji's!`,
-    desc: `${OverallEmojis} Emoji's - ${interaction.guild.name}`,
-    fields: [
-      {
-        name: `Animated [${Animated}]`,
-        value: EmojisAnimated.substr(0, 1021) + "...",
-        inline: false,
-      },
-      {
-        name: `Standard [${EmojiCount}]`,
-        value: Emojis.substr(0, 1021) + "...",
-        inline: false,
-      },
-    ],
-    type: 'editreply'
-  }, interaction)
-}
-
- 
+  client.embed(
+    {
+      title: `😛・Emoji's!`,
+      desc: `${OverallEmojis} Emoji's - ${interaction.guild.name}`,
+      fields: [
+        {
+          name: `Animated [${Animated}]`,
+          value: EmojisAnimated.substr(0, 1021) + "...",
+          inline: false,
+        },
+        {
+          name: `Standard [${EmojiCount}]`,
+          value: Emojis.substr(0, 1021) + "...",
+          inline: false,
+        },
+      ],
+      type: "editreply",
+    },
+    interaction,
+  );
+};

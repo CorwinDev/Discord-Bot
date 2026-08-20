@@ -6,7 +6,13 @@ const welcomeSchema = require("../../database/models/welcomeChannels");
 const messages = require("../../database/models/inviteMessages");
 const rewards = require("../../database/models/inviteRewards");
 
-
+/**
+ * 
+ * @param {import('../../typings.d').Client} client 
+ * @param {discord.GuildMember} member 
+ * @param {discord.Invite} invite 
+ * @param {discord.User} inviter 
+ */
 module.exports = async (client, member, invite, inviter) => {
     const messageData = await messages.findOne({ Guild: member.guild.id });
 
@@ -28,27 +34,31 @@ module.exports = async (client, member, invite, inviter) => {
             joinMessage = joinMessage.replace(`{guild:name}`, member.guild.name)
             joinMessage = joinMessage.replace(`{guild:members}`, member.guild.memberCount)
 
-            welcomeSchema.findOne({ Guild: member.guild.id }, async (err, channelData) => {
+            welcomeSchema.findOne({ Guild: member.guild.id }).then(async (channelData ) => {
                 if (channelData) {
 
                     var channel = member.guild.channels.cache.get(channelData.Channel)
 
-                    await client.embed({
-                        title: `👋・Welcome`,
-                        desc: joinMessage
-                    }, channel).catch(() => { })
+                    if (channel) {
+                        await client.embed({
+                            title: `👋・Welcome`,
+                            desc: joinMessage
+                        }, channel).catch(() => { })
+                    }
                 }
             })
         } else {
-            welcomeSchema.findOne({ Guild: member.guild.id }, async (err, channelData) => {
+            welcomeSchema.findOne({ Guild: member.guild.id }).then(async (channelData ) => {
                 if (channelData) {
 
                     var channel = member.guild.channels.cache.get(channelData.Channel)
 
-                    client.embed({
-                        title: `👋・Welcome`,
-                        desc: `I cannot trace how **${member} | ${member.user.tag}** has been joined`
-                    }, channel).catch(() => { })
+                    if (channel) {
+                        client.embed({
+                            title: `👋・Welcome`,
+                            desc: `I cannot trace how **${member} | ${member.user.tag}** has been joined`
+                        }, channel).catch(() => { })
+                    }
                 }
             })
         }
@@ -78,33 +88,37 @@ module.exports = async (client, member, invite, inviter) => {
                 joinMessage = joinMessage.replace(`{guild:name}`, member.guild.name)
                 joinMessage = joinMessage.replace(`{guild:members}`, member.guild.memberCount)
 
-                welcomeSchema.findOne({ Guild: member.guild.id }, async (err, channelData) => {
+                welcomeSchema.findOne({ Guild: member.guild.id }).then(async (channelData ) => {
                     if (channelData) {
 
                         var channel = member.guild.channels.cache.get(channelData.Channel)
 
-                        await client.embed({
-                            title: `👋・Welcome`,
-                            desc: joinMessage
-                        }, channel).catch(() => { })
+                        if (channel) {
+                            await client.embed({
+                                title: `👋・Welcome`,
+                                desc: joinMessage
+                            }, channel).catch(() => { })
+                        }
                     }
                 })
             }
             else {
-                welcomeSchema.findOne({ Guild: member.guild.id }, async (err, channelData) => {
+                welcomeSchema.findOne({ Guild: member.guild.id }).then(async (channelData ) => {
                     if (channelData) {
 
                         var channel = member.guild.channels.cache.get(channelData.Channel)
 
-                        client.embed({
-                            title: `👋・Welcome`,
-                            desc: `**${member} | ${member.user.tag}** was invited by ${inviter.tag} **(${data.Invites} invites)**`
-                        }, channel)
+                        if (channel) {
+                            client.embed({
+                                title: `👋・Welcome`,
+                                desc: `**${member} | ${member.user.tag}** was invited by ${inviter.tag} **(${data.Invites} invites)**`
+                            }, channel)
+                        }
                     }
                 })
             }
 
-            rewards.findOne({ Guild: member.guild.id, Invites: data.Invites }, async (err, data) => {
+            rewards.findOne({ Guild: member.guild.id, Invites: data.Invites }).then(async (data ) => {
                 if (data) {
                     try {
                         var role = member.guild.roles.cache.get(data.Role);
@@ -140,34 +154,38 @@ module.exports = async (client, member, invite, inviter) => {
                 joinMessage = joinMessage.replace(`{guild:name}`, member.guild.name)
                 joinMessage = joinMessage.replace(`{guild:members}`, member.guild.memberCount)
 
-                welcomeSchema.findOne({ Guild: member.guild.id }, async (err, channelData) => {
+                welcomeSchema.findOne({ Guild: member.guild.id }).then(async (channelData ) => {
                     if (channelData) {
 
                         var channel = member.guild.channels.cache.get(channelData.Channel)
 
-                        await client.embed({
-                            title: `👋・Welcome`,
-                            desc: joinMessage
-                        }, channel).catch(() => { })
+                        if (channel) {
+                            await client.embed({
+                                title: `👋・Welcome`,
+                                desc: joinMessage
+                            }, channel).catch(() => { })
+                        }
                     }
                 })
             }
             else {
-                welcomeSchema.findOne({ Guild: member.guild.id }, async (err, channelData) => {
+                welcomeSchema.findOne({ Guild: member.guild.id }).then(async (channelData ) => {
                     if (channelData) {
 
                         var channel = member.guild.channels.cache.get(channelData.Channel)
 
-                        await client.embed({
-                            title: `👋・Welcome`,
-                            desc: `**${member} | ${member.user.tag}** was invited by ${inviter.tag} **(1 invites)**`
-                        }, channel).catch(() => { })
+                        if (channel) {
+                            await client.embed({
+                                title: `👋・Welcome`,
+                                desc: `**${member} | ${member.user.tag}** was invited by ${inviter.tag} **(1 invites)**`
+                            }, channel).catch(() => { })
+                        }
                     }
                 })
             }
         }
 
-        invitedBy.findOne({ Guild: member.guild.id }, async (err, data2) => {
+        invitedBy.findOne({ Guild: member.guild.id }).then(async (data2 ) => {
             if (data2) {
                 data2.inviteUser = inviter.id,
                     data2.User = member.id

@@ -42,7 +42,6 @@ node_modules/
 jspm_packages/
 
 # TypeScript v1 declaration files
-typings/
 
 # TypeScript cache
 *.tsbuildinfo
@@ -104,5 +103,3 @@ dist
 .tern-port
 
 src/config/*
-
-package-lock.json

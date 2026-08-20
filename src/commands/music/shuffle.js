@@ -1,35 +1,55 @@
-const Discord = require('discord.js');
+const Discord = require("discord.js");
 
+/**
+ * @type {import("../../typings.d").Command}
+ */
 module.exports = async (client, interaction, args) => {
-    const player = client.player.players.get(interaction.guild.id);
-    
-    const channel = interaction.member.voice.channel;
-    if (!channel) return client.errNormal({
+  const player = client.player.players.get(interaction.guild.id);
+
+  const channel = interaction.member.voice.channel;
+  if (!channel)
+    return client.errNormal(
+      {
         error: `You're not in a voice channel!`,
-        type: 'editreply'
-    }, interaction);
+        type: "editreply",
+      },
+      interaction,
+    );
 
-    if (player && (channel.id !== player?.voiceChannel)) return client.errNormal({
+  if (player && channel.id !== player?.voiceId)
+    return client.errNormal(
+      {
         error: `You're not in the same voice channel!`,
-        type: 'editreply'
-    }, interaction);
+        type: "editreply",
+      },
+      interaction,
+    );
 
-    if (!player || !player.queue.current) return client.errNormal({
+  if (!player || !player.queue.current)
+    return client.errNormal(
+      {
         error: "There are no songs playing in this server",
-        type: 'editreply'
-    }, interaction);
+        type: "editreply",
+      },
+      interaction,
+    );
 
-    if (player.queue.size === 0) return client.errNormal({
+  if (player.queue.size === 0)
+    return client.errNormal(
+      {
         error: "Not enough song to shuffle",
-        type: 'editreply'
-    }, interaction);
+        type: "editreply",
+      },
+      interaction,
+    );
 
-    player.queue.shuffle()
+  player.queue.shuffle();
 
-    client.succNormal({
-        text: `Shuffled the queue!`,
-        type: 'editreply'
-    }, interaction);
-}
-
- 
+  client.succNormal(
+    {
+      text: `Shuffled the queue!`,
+      type: "editreply",
+    },
+    interaction,
+  );
+};

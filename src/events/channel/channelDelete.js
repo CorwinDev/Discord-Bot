@@ -42,7 +42,7 @@ module.exports = async (client, channel) => {
     }, logsChannel).catch(() => { })
 
     try {
-        ticketChannels.findOne({ Guild: channel.guild.id, channelID: channel.id }, async (err, data) => {
+        ticketChannels.findOne({ Guild: channel.guild.id, channelID: channel.id }).then(async (data ) => {
             if (data) {
                 var remove = await ticketChannels.deleteOne({ Guild: channel.guild.id, channelID: channel.id });
             }

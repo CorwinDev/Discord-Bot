@@ -1,11 +1,12 @@
-const Discord = require('discord.js');
+const Discord = require("discord.js");
 
 const welcomeRole = require("../../database/models/joinRole");
 
+/**
+ * @type {import("../../typings.d").Command}
+ */
 module.exports = async (client, interaction, args) => {
-    const role = interaction.options.getRole('role');
+  const role = interaction.options.getRole("role");
 
-    client.createRoleSetup(welcomeRole, role, interaction)
-}
-
- 
+  client.createRoleSetup(welcomeRole, role, interaction);
+};

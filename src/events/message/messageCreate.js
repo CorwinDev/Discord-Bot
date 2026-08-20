@@ -14,10 +14,10 @@ const CommandsSchema = require("../../database/models/customCommandAdvanced");
 const fetch = require("node-fetch");
 
 /**
- * 
- * @param {Discord.Client} client 
- * @param {Discord.Message} message 
- * @returns 
+ *
+ * @param {Discord.Client} client
+ * @param {Discord.Message} message
+ * @returns
  */
 module.exports = async (client, message) => {
   const dmlog = new Discord.WebhookClient({
@@ -32,313 +32,277 @@ module.exports = async (client, message) => {
       .setTitle(`💬・New DM message!`)
       .setDescription(`Bot has received a new DM message!`)
       .addFields(
-        { name: "👤┆Send By", value: `${message.author} (${message.author.tag})`, inline: true },
-        { name: `💬┆Message`, value: `${message.content || "None"}`, inline: true },
+        {
+          name: "👤┆Send By",
+          value: `${message.author} (${message.author.tag})`,
+          inline: true,
+        },
+        {
+          name: `💬┆Message`,
+          value: `${message.content || "None"}`,
+          inline: true,
+        },
       )
       .setColor(client.config.colors.normal)
       .setTimestamp();
 
     if (message.attachments.size > 0)
-      embedLogs.addFields(
-        { name: `📃┆Attachments`, value: `${message.attachments.first()?.url}`, inline: false },
-      )
+      embedLogs.addFields({
+        name: `📃┆Attachments`,
+        value: `${message.attachments.first()?.url}`,
+        inline: false,
+      });
     return dmlog.send({
       username: "Bot DM",
       embeds: [embedLogs],
     });
   }
 
+  const guildId = message.guild.id;
+  const userId = message.author.id;
+
+  const guildSettings = await Functions.findOneAndUpdate(
+    { Guild: guildId },
+    { $setOnInsert: { Prefix: client.config.discord.prefix } },
+    { new: true, upsert: true },
+  )
+    .lean()
+    .exec();
+
+  if (guildSettings && !guildSettings.Prefix) {
+    Functions.updateOne(
+      { Guild: guildId },
+      { $set: { Prefix: client.config.discord.prefix } },
+    ).catch(() => {});
+  }
+
+  const prefix = guildSettings?.Prefix || client.config.discord.prefix;
+
   // Levels
-  Functions.findOne({ Guild: message.guild.id }, async (err, data) => {
-    if (data) {
-      if (data.Levels == true) {
-        const randomXP = Math.floor(Math.random() * 9) + 1;
-        const hasLeveledUp = await client.addXP(
-          message.author.id,
-          message.guild.id,
-          randomXP
+  if (guildSettings?.Levels === true) {
+    const randomXP = Math.floor(Math.random() * 9) + 1;
+    const hasLeveledUp = await client.addXP(userId, guildId, randomXP);
+
+    if (hasLeveledUp) {
+      const user = await client.fetchLevels(userId, guildId);
+
+      const [levelData, messageData] = await Promise.all([
+        levelLogs.findOne({ Guild: guildId }).lean().cache("60 seconds").exec(),
+        messageSchema
+          .findOne({ Guild: guildId })
+          .lean()
+          .exec(),
+      ]);
+
+      if (messageData) {
+        var levelMessage = messageData.Message;
+        levelMessage = levelMessage.replace(
+          `{user:username}`,
+          message.author.username,
         );
+        levelMessage = levelMessage.replace(
+          `{user:discriminator}`,
+          message.author.discriminator,
+        );
+        levelMessage = levelMessage.replace(`{user:tag}`, message.author.tag);
+        levelMessage = levelMessage.replace(`{user:mention}`, message.author);
 
-        if (hasLeveledUp) {
-          const user = await client.fetchLevels(
-            message.author.id,
-            message.guild.id
-          );
+        levelMessage = levelMessage.replace(`{user:level}`, user.level);
+        levelMessage = levelMessage.replace(`{user:xp}`, user.xp);
 
-          const levelData = await levelLogs.findOne({
-            Guild: message.guild.id,
-          });
-          const messageData = await messageSchema.findOne({
-            Guild: message.guild.id,
-          });
-
-          if (messageData) {
-            var levelMessage = messageData.Message;
-            levelMessage = levelMessage.replace(
-              `{user:username}`,
-              message.author.username
-            );
-            levelMessage = levelMessage.replace(
-              `{user:discriminator}`,
-              message.author.discriminator
-            );
-            levelMessage = levelMessage.replace(
-              `{user:tag}`,
-              message.author.tag
-            );
-            levelMessage = levelMessage.replace(
-              `{user:mention}`,
-              message.author
-            );
-
-            levelMessage = levelMessage.replace(`{user:level}`, user.level);
-            levelMessage = levelMessage.replace(`{user:xp}`, user.xp);
-
-            try {
-              if (levelData) {
-                await client.channels.cache
-                  .get(levelData.Channel)
-                  .send({ content: levelMessage })
-                  .catch(() => { });
-              } else {
-                await message.channel.send({ content: levelMessage });
-              }
-            } catch {
-              await message.channel.send({ content: levelMessage });
-            }
+        try {
+          if (levelData) {
+            await client.channels.cache
+              .get(levelData.Channel)
+              .send({ content: levelMessage })
+              .catch(() => {});
           } else {
-            try {
-              if (levelData) {
-                await client.channels.cache
-                  .get(levelData.Channel)
-                  .send({
-                    content: `**GG** <@!${message.author.id}>, you are now level **${user.level}**`,
-                  })
-                  .catch(() => { });
-              } else {
-                message.channel.send({
-                  content: `**GG** <@!${message.author.id}>, you are now level **${user.level}**`,
-                });
-              }
-            } catch {
-              message.channel.send({
-                content: `**GG** <@!${message.author.id}>, you are now level **${user.level}**`,
-              });
-            }
+            await message.channel.send({ content: levelMessage });
           }
-
-          levelRewards.findOne(
-            { Guild: message.guild.id, Level: user.level },
-            async (err, data) => {
-              if (data) {
-                message.guild.members.cache
-                  .get(message.author.id)
-                  .roles.add(data.Role)
-                  .catch((e) => { });
-              }
-            }
-          );
+        } catch {
+          await message.channel.send({ content: levelMessage });
+        }
+      } else {
+        try {
+          if (levelData) {
+            await client.channels.cache
+              .get(levelData.Channel)
+              .send({
+                content: `**GG** <@!${userId}>, you are now level **${user.level}**`,
+              })
+              .catch(() => {});
+          } else {
+            message.channel.send({
+              content: `**GG** <@!${userId}>, you are now level **${user.level}**`,
+            });
+          }
+        } catch {
+          message.channel.send({
+            content: `**GG** <@!${userId}>, you are now level **${user.level}**`,
+          });
         }
       }
+
+      levelRewards
+        .findOne({ Guild: guildId, Level: user.level })
+        .lean()
+        .cache("60 seconds")
+        .exec()
+        .then(async (data) => {
+          if (data) {
+            message.guild.members.cache.get(userId).roles.add(data.Role).catch(() => {});
+          }
+        });
     }
-  });
+  }
 
   // Message tracker system
-  messagesSchema.findOne(
-    { Guild: message.guild.id, User: message.author.id },
-    async (err, data) => {
-      if (data) {
-        data.Messages += 1;
-        data.save();
+  const messageCounter = await messagesSchema
+    .findOne({ Guild: guildId, User: userId })
+    .exec();
 
-        messageRewards.findOne(
-          { Guild: message.guild.id, Messages: data.Messages },
-          async (err, data) => {
-            if (data) {
-              try {
-                message.guild.members.cache
-                  .get(message.author.id)
-                  .roles.add(data.Role);
-              } catch { }
-            }
-          }
-        );
-      } else {
-        new messagesSchema({
-          Guild: message.guild.id,
-          User: message.author.id,
-          Messages: 1,
-        }).save();
-      }
-    }
-  );
+  const updatedMessageCounter = messageCounter
+    ? await messagesSchema
+        .findOneAndUpdate(
+          { Guild: guildId, User: userId },
+          { $inc: { Messages: 1 } },
+          { new: true },
+        )
+        .exec()
+    : await messagesSchema.create({
+        Guild: guildId,
+        User: userId,
+        Messages: 1,
+      });
+
+  if (updatedMessageCounter) {
+    messageRewards
+      .findOne({ Guild: guildId, Messages: updatedMessageCounter.Messages })
+      .lean()
+      .cache("60 seconds")
+      .exec()
+      .then(async (reward) => {
+        if (reward) {
+          try {
+            message.guild.members.cache.get(userId).roles.add(reward.Role);
+          } catch {}
+        }
+      });
+  }
 
   // AFK system
-  afk.findOne(
-    { Guild: message.guild.id, User: message.author.id },
-    async (err, data) => {
-      if (data) {
-        await afk.deleteOne({
-          Guild: message.guild.id,
-          User: message.author.id,
+  afk.findOneAndDelete({ Guild: guildId, User: userId }).then(async (data) => {
+    if (data) {
+      client
+        .simpleEmbed(
+          {
+            desc: `${message.author} is no longer afk!`,
+          },
+          message.channel,
+        )
+        .then(async (m) => {
+          setTimeout(() => {
+            m.delete();
+          }, 5000);
         });
 
-        client
-          .simpleEmbed(
-            {
-              desc: `${message.author} is no longer afk!`,
-            },
-            message.channel
-          )
-          .then(async (m) => {
-            setTimeout(() => {
-              m.delete();
-            }, 5000);
-          });
-
-        if (message.member.displayName.startsWith(`[AFK] `)) {
-          let name = message.member.displayName.replace(`[AFK] `, ``);
-          message.member.setNickname(name).catch((e) => { });
-        }
+      if (message.member.displayName.startsWith(`[AFK] `)) {
+        let name = message.member.displayName.replace(`[AFK] `, ``);
+        message.member.setNickname(name).catch(() => {});
       }
     }
-  );
-
-  message.mentions.users.forEach(async (u) => {
-    if (
-      !message.content.includes("@here") &&
-      !message.content.includes("@everyone")
-    ) {
-      afk.findOne(
-        { Guild: message.guild.id, User: u.id },
-        async (err, data) => {
-          if (data) {
-            client.simpleEmbed(
-              { desc: `${u} is currently afk! **Reason:** ${data.Message}` },
-              message.channel
-            );
-          }
-        }
-      );
-    }
   });
+
+  if (
+    !message.content.includes("@here") &&
+    !message.content.includes("@everyone") &&
+    message.mentions.users.size > 0
+  ) {
+    const mentionedUserIds = [...message.mentions.users.keys()];
+
+    afk
+      .find({ Guild: guildId, User: { $in: mentionedUserIds } })
+      .lean()
+      .exec()
+      .then((afkUsers) => {
+        if (!afkUsers?.length) return;
+
+        for (const afkUser of afkUsers) {
+          const user = message.mentions.users.get(afkUser.User);
+          if (!user) continue;
+
+          client.simpleEmbed(
+            { desc: `${user} is currently afk! **Reason:** ${afkUser.Message}` },
+            message.channel,
+          );
+        }
+      });
+  }
 
   // Chat bot
-  chatBotSchema.findOne({ Guild: message.guild.id }, async (err, data) => {
-    if (!data) return;
-    if (message.channel.id !== data.Channel) return;
-    if (process.env.OPENAI) {
-      fetch(
-        `https://api.openai.com/v1/chat/completions`,
-        {
-          method: 'POST',
+  chatBotSchema
+    .findOne({ Guild: message.guild.id })
+    .lean()
+    .cache("60 seconds")
+    .exec()
+    .then(async (data) => {
+      if (!data) return;
+      if (message.channel.id !== data.Channel) return;
+      if (process.env.OPENAI) {
+        fetch(`https://api.openai.com/v1/chat/completions`, {
+          method: "POST",
           headers: {
-            'Content-Type': 'application/json',
-            'Authorization': 'Bearer ' + process.env.OPENAI,
+            "Content-Type": "application/json",
+            Authorization: "Bearer " + process.env.OPENAI,
           },
           body: JSON.stringify({
-            'model': 'gpt-3.5-turbo',
-            'messages': [{
-              'role': 'user',
-              'content': message.content
-            }]
-          })
-        }
-      )
-        .catch(() => {
+            model: "gpt-3.5-turbo",
+            messages: [
+              {
+                role: "user",
+                content: message.content,
+              },
+            ],
+          }),
         })
-        .then((res) => {
-          res.json().then((data) => {
-            if(data.error) return;
-            message.reply({ content: data.choices[0].message.content });
+          .catch(() => {})
+          .then((res) => {
+            res.json().then((data) => {
+              if (data.error) return;
+              message.reply({ content: data.choices[0].message.content });
+            });
           });
-        });
-    } else {
-      try {
-        const input = message;
-        try {
-          fetch(
-            `https://api.coreware.nl/fun/chat?msg=${encodeURIComponent(input)}&uid=${message.author.id}`,
-          )
-            .catch(() => { console.log })
-            .then((res) => res.json())
-            .catch(() => { console.log})
-            .then(async (json) => {
-              console.log(json);
-              if (json) {
-                if (
-                  json.response !== " " ||
-                  json.response !== undefined ||
-                  json.response !== "" ||
-                  json.response !== null
-                ) {
-                  try {
-                    return message
-                      .reply({ content: json.response })
-                      .catch(() => { });
-                  } catch { }
-                }
-              }
-            })
-            .catch(() => { });
-        } catch { }
-      } catch { }
-    }
-  });
+      }
+    });
 
   // Sticky messages
   try {
-    Schema.findOne(
-      { Guild: message.guild.id, Channel: message.channel.id },
-      async (err, data) => {
-        if (!data) return;
-
-        const lastStickyMessage = await message.channel.messages
-          .fetch(data.LastMessage)
-          .catch(() => { });
-        if (!lastStickyMessage) return;
-        await lastStickyMessage.delete({ timeout: 1000 });
-
-        const newMessage = await client.simpleEmbed(
-          { desc: `${data.Content}` },
-          message.channel
-        );
-
-        data.LastMessage = newMessage.id;
-        data.save();
-      }
-    );
-  } catch { }
-
-  // Prefix
-  var guildSettings = await Functions.findOne({ Guild: message.guild.id });
-  if (!guildSettings) {
-    new Functions({
+    Schema.findOne({
       Guild: message.guild.id,
-      Prefix: client.config.discord.prefix,
-    }).save();
+      Channel: message.channel.id,
+    }).then(async (data) => {
+      if (!data) return;
 
-    guildSettings = await Functions.findOne({ Guild: message.guild.id });
-  }
+      const lastStickyMessage = await message.channel.messages
+        .fetch(data.LastMessage)
+        .catch(() => {});
+      if (!lastStickyMessage) return;
+      await lastStickyMessage.delete({ timeout: 1000 });
 
-  if (!guildSettings || !guildSettings.Prefix) {
-    Functions.findOne({ Guild: message.guild.id }, async (err, data) => {
-      data.Prefix = client.config.discord.prefix;
+      const newMessage = await client.simpleEmbed(
+        { desc: `${data.Content}` },
+        message.channel,
+      );
+
+      data.LastMessage = newMessage.id;
       data.save();
     });
+  } catch {}
 
-    guildSettings = await Functions.findOne({ Guild: message.guild.id });
-  }
-
-  if (!guildSettings || !guildSettings.Prefix) {
-    var prefix = client.config.Discord.prefix;
-  } else {
-    var prefix = guildSettings.Prefix;
-  }
-
+  // Prefix
   const escapeRegex = (str) => str.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
   const prefixRegex = new RegExp(
-    `^(<@!?${client.user.id}>|${escapeRegex(prefix)})\\s*`
+    `^(<@!?${client.user.id}>|${escapeRegex(prefix)})\\s*`,
   );
 
   if (!prefixRegex.test(message.content.toLowerCase())) return;
@@ -355,15 +319,13 @@ module.exports = async (client, message) => {
     let row = new Discord.ActionRowBuilder().addComponents(
       new Discord.ButtonBuilder()
         .setLabel("Invite")
-        .setURL(
-          client.config.discord.botInvite
-        )
+        .setURL(client.config.discord.botInvite)
         .setStyle(Discord.ButtonStyle.Link),
 
       new Discord.ButtonBuilder()
         .setLabel("Support server")
         .setURL(client.config.discord.serverInvite)
-        .setStyle(Discord.ButtonStyle.Link)
+        .setStyle(Discord.ButtonStyle.Link),
     );
 
     client
@@ -392,23 +354,29 @@ module.exports = async (client, message) => {
           ],
           components: [row],
         },
-        message.channel
+        message.channel,
       )
-      .catch(() => { });
+      .catch(() => {});
   }
 
   const cmd = await Commands.findOne({
     Guild: message.guild.id,
     Name: command,
-  });
+  })
+    .lean()
+    .cache("60 seconds")
+    .exec();
   if (cmd) {
-    return message.channel.send({ content: cmdx.Responce });
+    return message.channel.send({ content: cmd.Responce });
   }
 
   const cmdx = await CommandsSchema.findOne({
     Guild: message.guild.id,
     Name: command,
-  });
+  })
+    .lean()
+    .cache("60 seconds")
+    .exec();
   if (cmdx) {
     if (cmdx.Action == "Normal") {
       return message.channel.send({ content: cmdx.Responce });
@@ -417,7 +385,7 @@ module.exports = async (client, message) => {
         {
           desc: `${cmdx.Responce}`,
         },
-        message.channel
+        message.channel,
       );
     } else if (cmdx.Action == "DM") {
       return message.author.send({ content: cmdx.Responce }).catch((e) => {
@@ -425,11 +393,9 @@ module.exports = async (client, message) => {
           {
             error: "I can't DM you, maybe you have DM turned off!",
           },
-          message.channel
+          message.channel,
         );
       });
     }
   }
 };
-
-

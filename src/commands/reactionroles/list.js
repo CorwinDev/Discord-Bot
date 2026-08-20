@@ -1,25 +1,33 @@
-const Discord = require('discord.js');
+const Discord = require("discord.js");
 
 const Schema = require("../../database/models/reactionRoles");
 
+/**
+ * @type {import("../../typings.d").Command}
+ */
 module.exports = async (client, interaction, args) => {
-    const reactions = await Schema.find({ Guild: interaction.guild.id });
-    if (!reactions) return client.errNormal({ 
+  const reactions = await Schema.find({ Guild: interaction.guild.id });
+  if (!reactions)
+    return client.errNormal(
+      {
         error: `No data found!`,
-        type: 'editreply'
-    }, interaction);
-    
-    let list = ``;
+        type: "editreply",
+      },
+      interaction,
+    );
 
-    for (var i = 0; i < reactions.length; i++) {
-        list += `**${i + 1}** - Category: ${reactions[i].Category} \n`;
-    }
+  let list = ``;
 
-    await client.embed({
-        title: "📃・Reaction roles",
-        desc: list,
-        type: 'editreply'
-    }, interaction)
-}
+  for (var i = 0; i < reactions.length; i++) {
+    list += `**${i + 1}** - Category: ${reactions[i].Category} \n`;
+  }
 
- 
+  await client.embed(
+    {
+      title: "📃・Reaction roles",
+      desc: list,
+      type: "editreply",
+    },
+    interaction,
+  );
+};

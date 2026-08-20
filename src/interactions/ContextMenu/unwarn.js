@@ -32,7 +32,7 @@ module.exports = {
       );
       return;
     }
-    await interaction.deferReply({ ephemeral: true });
+    await interaction.deferReply({ flags: Discord.MessageFlags.Ephemeral });
 
     const member = interaction.guild.members.cache.get(interaction.targetId);
 

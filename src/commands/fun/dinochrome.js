@@ -4,7 +4,7 @@
 module.exports = async (client, interaction, args) => {
   let msg = await interaction.editReply({
     content: `---------------🦖`,
-    fetchReply: true,
+    withResponse: true,
   });
   let time = 1 * 1000;
   setTimeout(function () {

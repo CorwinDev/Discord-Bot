@@ -262,7 +262,7 @@ module.exports = (client) => {
                 embeds: embeds,
                 content: content,
                 components: components,
-                fetchReply: true
+                withResponse: true
             }).catch(e => { });
         }
         else if (type && type.toLowerCase() == "editreply") {
@@ -270,7 +270,7 @@ module.exports = (client) => {
                 embeds: embeds,
                 content: content,
                 components: components,
-                fetchReply: true
+                withResponse: true
             }).catch(e => { });
         }
         else if (type && type.toLowerCase() == "reply") {
@@ -278,7 +278,7 @@ module.exports = (client) => {
                 embeds: embeds,
                 content: content,
                 components: components,
-                fetchReply: true
+                withResponse: true
             }).catch(e => { });
         }
         else if (type && type.toLowerCase() == "update") {
@@ -286,7 +286,7 @@ module.exports = (client) => {
                 embeds: embeds,
                 content: content,
                 components: components,
-                fetchReply: true
+                withResponse: true
             }).catch(e => { });
         }
         else if (type && type.toLowerCase() == "ephemeraledit") {
@@ -294,8 +294,8 @@ module.exports = (client) => {
                 embeds: embeds,
                 content: content,
                 components: components,
-                fetchReply: true,
-                ephemeral: true
+                withResponse: true,
+                flags: Discord.MessageFlags.Ephemeral
             }).catch(e => { });
         }
         else if (type && type.toLowerCase() == "ephemeral") {
@@ -303,8 +303,8 @@ module.exports = (client) => {
                 embeds: embeds,
                 content: content,
                 components: components,
-                fetchReply: true,
-                ephemeral: true
+                withResponse: true,
+                flags: Discord.MessageFlags.Ephemeral
             }).catch(e => { });
         }
         else {
@@ -312,7 +312,7 @@ module.exports = (client) => {
                 embeds: embeds,
                 content: content,
                 components: components,
-                fetchReply: true
+                withResponse: true
             }).catch(e => { });
         }
     }

@@ -6,6 +6,12 @@ const banSchema = require("../../database/models/userBans");
 const verify = require("../../database/models/verify");
 const Commands = require("../../database/models/customCommand");
 const CommandsSchema = require("../../database/models/customCommandAdvanced");
+/**
+ * 
+ * @param {import('../../typings.d').Client} client 
+ * @param {Discord.Interaction} interaction
+ * @returns 
+ */
 module.exports = async (client, interaction) => {
   // Commands
   if (interaction.isCommand() || interaction.isUserContextMenuCommand()) {
@@ -52,7 +58,7 @@ module.exports = async (client, interaction) => {
                 interaction,
               );
             } else if (cmdx.Action == "DM") {
-              await interaction.deferReply({ ephemeral: true });
+              await interaction.deferReply({ flags: Discord.MessageFlags.Ephemeral });
               interaction.editReply({
                 content: "I have sent you something in your DMs",
               });
@@ -121,7 +127,7 @@ module.exports = async (client, interaction) => {
         });
 
         interaction
-          .reply({ files: [image], fetchReply: true })
+          .reply({ files: [image], withResponse: true })
           .then(function (msg) {
             const filter = (s) => s.author.id == interaction.user.id;
 
@@ -201,7 +207,7 @@ module.exports = async (client, interaction) => {
 
             interaction.reply({
               content: `<@&${roleid}> was removed!`,
-              ephemeral: true,
+              flags: Discord.MessageFlags.Ephemeral,
             });
           } else {
             interaction.guild.members.cache
@@ -211,7 +217,7 @@ module.exports = async (client, interaction) => {
 
             interaction.reply({
               content: `<@&${roleid}> was added!`,
-              ephemeral: true,
+              flags: Discord.MessageFlags.Ephemeral,
             });
           }
         });
@@ -249,7 +255,7 @@ module.exports = async (client, interaction) => {
             if (i + 1 === interaction.values.length) {
               interaction.reply({
                 content: `I have updated the following roles for you: ${roles}`,
-                ephemeral: true,
+                flags: Discord.MessageFlags.Ephemeral,
               });
             }
           }

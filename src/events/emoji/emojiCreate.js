@@ -1,5 +1,11 @@
 const discord = require('discord.js');
 
+/**
+ * 
+ * @param {import('../../typings.d').Client} client 
+ * @param {discord.GuildEmoji} emoji
+ * @returns 
+ */
 module.exports = async (client, emoji) => {
     const logsChannel = await client.getLogs(emoji.guild.id);
     if (!logsChannel) return;
@@ -22,7 +28,7 @@ module.exports = async (client, emoji) => {
             },
             {
                 name: `> Url`,
-                value: `- ${emoji.url}`
+                value: `- ${emoji.imageURL({ dynamic: true })}`
             }
         ]
     }, logsChannel).catch(() => { })

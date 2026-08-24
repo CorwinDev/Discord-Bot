@@ -56,7 +56,7 @@
     "jsdom": "^21.1.0",
     "kazagumo": "^3.4.3",
     "kazagumo-spotify": "^2.1.1",
-    "libsodium-wrappers": "^0.7.10",
+    "libsodium-wrappers": "^0.8.4",
     "lyrics-finder": "^21.7.0",
     "mathjs": "^11.5.0",
     "moment": "^2.29.4",

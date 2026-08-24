@@ -61,7 +61,7 @@
     "mathjs": "^11.5.0",
     "moment": "^2.29.4",
     "moment-duration-format": "^2.3.2",
-    "moment-timezone": "^0.5.39",
+    "moment-timezone": "^0.6.3",
     "mongoose": "^7.8.0",
     "ms": "^2.1.3",
     "node-fetch": "^2.6.6",

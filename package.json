@@ -42,7 +42,7 @@
     "deepmerge-ts": "^8.0.1",
     "discord-image-generation": "^1.4.23",
     "discord.js": "^14.8.0",
-    "dompurify": "^3.0.1",
+    "dompurify": "^3.4.14",
     "dotenv": "^16.0.3",
     "ffmpeg-static": "^5.3.0",
     "figlet": "^1.5.2",

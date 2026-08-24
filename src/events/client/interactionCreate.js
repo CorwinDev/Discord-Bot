@@ -136,7 +136,7 @@ module.exports = async (client, interaction) => {
               .then((response) => {
                 if (response.first().content === captcha.value) {
                   response.first().delete();
-                  msg.response.resource.message.delete();
+                  msg.resource.message.delete();
 
                   client
                     .succNormal(
@@ -153,7 +153,7 @@ module.exports = async (client, interaction) => {
                   verifyUser.roles.add(data.Role);
                 } else {
                   response.first().delete();
-                  msg.response.resource.message.delete();
+                  msg.resource.message.delete();
 
                   client
                     .errNormal(

@@ -1,5 +1,6 @@
 const Discord = require("discord.js");
-const chalk = require("chalk");
+const { Chalk } = require("chalk");
+const chalk = new Chalk();
 const { random } = require("mathjs");
 
 module.exports = async (client) => {

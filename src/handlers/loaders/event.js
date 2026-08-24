@@ -1,4 +1,6 @@
-const chalk = require("chalk");
+const { Chalk } = require("chalk");
+const chalk = new Chalk();
+
 const fs = require("fs");
 const Discord = require("discord.js");
 

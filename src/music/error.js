@@ -1,4 +1,5 @@
-const chalk = require("chalk");
+const { Chalk } = require("chalk");
+const chalk = new Chalk();
 
 module.exports = (client, node, error) => {
   const errorMessage =

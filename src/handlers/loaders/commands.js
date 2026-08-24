@@ -1,7 +1,9 @@
 const Discord = require('discord.js');
 const { REST } = require('discord.js');
 const { Routes } = require('discord.js');
-const chalk = require('chalk');
+const { Chalk } = require('chalk');
+const chalk = new Chalk();
+
 const fs = require('fs');
 
 module.exports = (client) => {

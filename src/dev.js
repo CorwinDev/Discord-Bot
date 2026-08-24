@@ -5,7 +5,9 @@
  *
  * @string member - The member you want to add the badge to
  */
-const chalk = require("chalk");
+const { Chalk } = require("chalk");
+const chalk = new Chalk();
+
 if (!process.argv[2]) {
   console.log(
     chalk.red(`[ERROR]`),

@@ -1,5 +1,7 @@
 const Discord = require("discord.js");
-const chalk = require("chalk");
+const { Chalk } = require("chalk");
+const chalk = new Chalk();
+
 require("dotenv").config();
 const axios = require("axios");
 const Topgg = require("@top-gg/sdk");
@@ -9,12 +11,43 @@ axios
     .get("https://api.github.com/repos/CorwinDev/Discord-Bot/releases/latest")
     .then((res) => {
         if (res.data.tag_name !== version) {
-            console.log(
-                chalk.red.bgYellow(
-                    `Your bot is not up to date! Please update to the latest version!`,
-                    version + " -> " + res.data.tag_name,
-                ),
-            );
+            // Verify if the GitHub release is newer than the local package version
+            const currentVersion = version
+                .replace(/^v/, "")
+                .split(".")
+                .map(Number);
+            const latestVersion = res.data.tag_name
+                .replace(/^v/, "")
+                .split(".")
+                .map(Number);
+            let isNewer = false;
+
+            for (
+                let i = 0;
+                i < Math.max(currentVersion.length, latestVersion.length);
+                i++
+            ) {
+                const current = currentVersion[i] || 0;
+                const latest = latestVersion[i] || 0;
+
+                if (latest > current) {
+                    isNewer = true;
+                    break;
+                }
+
+                if (latest < current) {
+                    break;
+                }
+            }
+
+            if (isNewer) {
+                console.log(
+                    chalk.red.bgYellow(
+                        `Your bot is not up to date! Please update to the latest version!`,
+                        version + " -> " + res.data.tag_name,
+                    ),
+                );
+            }
         }
     })
     .catch((err) => {
@@ -84,11 +117,14 @@ if (process.env.TOPGG_TOKEN) {
 
     setTimeout(async () => {
         // Post commands
-        const commands = await manager.broadcastEval(async (client) => {
-            return (await client.application.commands.fetch()).map((command) =>
-                command.toJSON(),
-            );
-        }, { shard: 0 });
+        const commands = await manager.broadcastEval(
+            async (client) => {
+                return (await client.application.commands.fetch()).map(
+                    (command) => command.toJSON(),
+                );
+            },
+            { shard: 0 },
+        );
 
         await client.postCommands(commands);
 

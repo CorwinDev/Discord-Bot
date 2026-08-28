@@ -68,10 +68,12 @@ module.exports = async (client, interaction, args) => {
             let times = result + 1;
             let timer = 2000 * times;
 
-            setInterval(() => {
+            const crashInterval = setInterval(() => {
               if (index === result + 1) {
+                clearInterval(crashInterval);
                 return;
               } else if (index === result) {
+                clearInterval(crashInterval);
                 Schema.findOne({
                   Guild: interaction.guild.id,
                   User: user.id,
@@ -132,6 +134,7 @@ module.exports = async (client, interaction, args) => {
               .awaitMessageComponent({ filter, max: 1, time: timer })
               .then(async (i) => {
                 if (i.customId == "crash_stop") {
+                  clearInterval(crashInterval);
                   i.deferUpdate();
 
                   index = result + 1;
@@ -165,6 +168,7 @@ module.exports = async (client, interaction, args) => {
                 }
               })
               .catch(async () => {
+                clearInterval(crashInterval);
                 index = result + 1;
 
                 Schema.findOne({

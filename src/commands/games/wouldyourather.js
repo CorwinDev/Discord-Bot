@@ -1,7 +1,10 @@
 const Discord = require("discord.js");
 const { decode } = require("html-entities");
 const axios = require("axios");
-const cheerio = require("cheerio");
+
+let pageOffset = 0;
+
+
 
 /**
  * @type {import("../../typings.d").Command}
@@ -16,18 +19,6 @@ module.exports = async (client, interaction, args) => {
       );
     }
     return result;
-  };
-
-  const fetchhtml = async (url) => {
-    const options = {
-      header: {
-        "user-agent":
-          "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/74.0.3729.169 Safari/537.36",
-        referer: "https://www.google.com/",
-      },
-    };
-    const html = await axios.get(url, options);
-    return cheerio.load(html.data);
   };
 
   client
@@ -56,17 +47,23 @@ module.exports = async (client, interaction, args) => {
         "-" +
         getRandomString(20);
 
-      const $ = await fetchhtml("http://either.io");
-
-      const blue = $("div.result.result-1").children();
-      const red = $("div.result.result-2").children();
+      const response = await axios.get(
+        `https://io.wyr.app/api/v1/statements/en/daily?pageOffset=${pageOffset}&pageSize=1`,
+      );
+      const statements = response.data.statements;
+      const statement = statements[0];
+      pageOffset =
+        (pageOffset + 1) % (response.data.pageCount || pageOffset + 2);
+      const totalVotes = statement.phrase.reduce(
+        (total, option) => total + option.count,
+        0,
+      );
 
       const res = {
-        questions: [blue.eq(3).text(), red.eq(3).text()],
-        percentage: {
-          1: blue.eq(1).text(),
-          2: red.eq(1).text(),
-        },
+        questions: statement.phrase.map((option) => option.text),
+        percentage: statement.phrase.map(
+          (option) => `${Math.round((option.count / totalVotes) * 100)}%`,
+        ),
       };
 
       let btn = new Discord.ButtonBuilder()
@@ -102,12 +99,12 @@ module.exports = async (client, interaction, args) => {
             if (btn.customId === id1) {
               btn = new Discord.ButtonBuilder()
                 .setStyle(Discord.ButtonStyle.Primary)
-                .setLabel(`Option A (${res.percentage["1"]})`)
+                .setLabel(`Option A (${res.percentage[0]})`)
                 .setCustomId(id1)
                 .setDisabled(true);
               btn2 = new Discord.ButtonBuilder()
                 .setStyle(Discord.ButtonStyle.Secondary)
-                .setLabel(`Option B (${res.percentage["2"]})`)
+                .setLabel(`Option B (${res.percentage[1]})`)
                 .setCustomId(id2)
                 .setDisabled(true);
               collector.stop();
@@ -115,7 +112,7 @@ module.exports = async (client, interaction, args) => {
               client.embed(
                 {
                   title: `🤔・Would you rather...`,
-                  desc: `**A) ${decode(res.questions[0])} (${res.percentage["1"]})** \nB) ${decode(res.questions[1])} (${res.percentage["2"]})`,
+                  desc: `**A) ${decode(res.questions[0])} (${res.percentage[0]})** \nB) ${decode(res.questions[1])} (${res.percentage[1]})`,
                   components: [{ type: 1, components: [btn, btn2] }],
                   type: "editreply",
                 },
@@ -124,12 +121,12 @@ module.exports = async (client, interaction, args) => {
             } else if (btn.customId === id2) {
               btn = new Discord.ButtonBuilder()
                 .setStyle(Discord.ButtonStyle.Secondary)
-                .setLabel(`Option A (${res.percentage["1"]})`)
+                .setLabel(`Option A (${res.percentage[0]})`)
                 .setCustomId(id1)
                 .setDisabled(true);
               btn2 = new Discord.ButtonBuilder()
                 .setStyle(Discord.ButtonStyle.Primary)
-                .setLabel(`Option B (${res.percentage["2"]})`)
+                .setLabel(`Option B (${res.percentage[1]})`)
                 .setCustomId(id2)
                 .setDisabled(true);
               collector.stop();
@@ -137,7 +134,7 @@ module.exports = async (client, interaction, args) => {
               client.embed(
                 {
                   title: `🤔・Would you rather...`,
-                  desc: `A) ${decode(res.questions[0])} (${res.percentage["1"]}) \n**B) ${decode(res.questions[1])} (${res.percentage["2"]})**`,
+                  desc: `A) ${decode(res.questions[0])} (${res.percentage[0]}) \n**B) ${decode(res.questions[1])} (${res.percentage[1]})**`,
                   components: [{ type: 1, components: [btn, btn2] }],
                   type: "editreply",
                 },

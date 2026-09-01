@@ -13,7 +13,7 @@ module.exports = (client) => {
 
     client.startStream = async function (url) {
         const resource = Voice.createAudioResource(url, {
-            inputType: Voice.StreamType.Arbitrary,
+            inputType: Voice.StreamType.Opus,
         });
 
         player.play(resource);

@@ -32,7 +32,7 @@ module.exports = (client) => {
     client.play = async function (connection, interaction, guild, player) {
         var server = servers[guild];
 
-        const resource = createAudioResource(server.queue[0], { inputType: StreamType.Arbitrary });
+        const resource = createAudioResource(server.queue[0], { inputType: StreamType.Opus });
         player.play(resource);
 
         server.queue.shift();

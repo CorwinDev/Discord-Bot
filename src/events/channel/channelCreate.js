@@ -16,7 +16,6 @@ module.exports = async (client, channel) => {
     const logsChannel = await client.getLogs(channel.guild.id);
     if (!logsChannel) return;
 
-    console.log(channel.type)
     client.embed({
         title: `🔧・Channel created`,
         desc: `A channel has been created`,

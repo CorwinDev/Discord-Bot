@@ -37,7 +37,7 @@
     "@iamtraction/google-translate": "^3.0.0",
     "@top-gg/sdk": "^4.0.0",
     "axios": "^1.2.2",
-    "canvacord": "^5.4.10",
+    "canvacord": "^6.0.4",
     "chalk": "^6.0.0",
     "deepmerge-ts": "^8.0.1",
     "discord-image-generation": "^1.4.23",

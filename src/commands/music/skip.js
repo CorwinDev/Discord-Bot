@@ -34,7 +34,7 @@ module.exports = async (client, interaction, args) => {
       interaction,
     );
 
-  player.stop();
+  player.skip();
 
   client.succNormal(
     {

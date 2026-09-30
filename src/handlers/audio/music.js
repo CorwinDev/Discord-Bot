@@ -122,7 +122,7 @@ module.exports = (client) => {
         const player = client.player.players.get(interaction.guild.id);
         if (!player) return;
 
-        player.stop();
+        player.skip();
 
         const track = player.queue.current;
 

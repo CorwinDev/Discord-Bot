@@ -59,7 +59,7 @@
     "libsodium-wrappers": "^0.8.4",
     "lyrics-finder": "^21.7.0",
     "mathjs": "^11.5.0",
-    "moment": "^2.29.4",
+    "moment": "^2.31.0",
     "moment-duration-format": "^2.3.2",
     "moment-timezone": "^0.6.3",
     "mongoose": "^7.8.0",

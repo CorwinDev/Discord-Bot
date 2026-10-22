@@ -1,46 +1,18 @@
-const Discord = require("discord.js");
+const { SlashCommandBuilder } = require('discord.js');
+const { useQueue } = require('discord-player');
 
-/**
- * @type {import("../../typings.d").Command}
- */
-module.exports = async (client, interaction, args) => {
-  const player = client.player.players.get(interaction.guild.id);
+module.exports = {
+  group: 'Nhạc',
+  cooldown: 3,
+  data: new SlashCommandBuilder().setName('pause').setDescription('Tạm dừng / tiếp tục phát nhạc').setDMPermission(false),
 
-  const channel = interaction.member.voice.channel;
-  if (!channel)
-    return client.errNormal(
-      {
-        error: `You're not in a voice channel!`,
-        type: "editreply",
-      },
-      interaction,
-    );
-
-  if (player && channel.id !== player?.voiceId)
-    return client.errNormal(
-      {
-        error: `You're not in the same voice channel!`,
-        type: "editreply",
-      },
-      interaction,
-    );
-
-  if (!player || !player.queue.current)
-    return client.errNormal(
-      {
-        error: "There are no songs playing in this server",
-        type: "editreply",
-      },
-      interaction,
-    );
-
-  player.pause(true);
-
-  client.succNormal(
-    {
-      text: `Paused the music!`,
-      type: "editreply",
-    },
-    interaction,
-  );
+  async execute(interaction) {
+    const queue = useQueue(interaction.guild.id);
+    if (!queue || !queue.currentTrack) {
+      return interaction.reply({ content: '❌ Không có bài nào đang phát.', ephemeral: true });
+    }
+    const paused = queue.node.isPaused();
+    queue.node.setPaused(!paused);
+    await interaction.reply(paused ? '▶️ Đã tiếp tục phát.' : '⏸️ Đã tạm dừng.');
+  }
 };

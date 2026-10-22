@@ -1,46 +1,17 @@
-const Discord = require("discord.js");
+const { SlashCommandBuilder } = require('discord.js');
+const { useQueue } = require('discord-player');
 
-/**
- * @type {import("../../typings.d").Command}
- */
-module.exports = async (client, interaction, args) => {
-  const player = client.player.players.get(interaction.guild.id);
+module.exports = {
+  group: 'Nhạc',
+  cooldown: 3,
+  data: new SlashCommandBuilder().setName('stop').setDescription('Dừng phát và xoá hàng chờ').setDMPermission(false),
 
-  const channel = interaction.member.voice.channel;
-  if (!channel)
-    return client.errNormal(
-      {
-        error: `You're not in a voice channel!`,
-        type: "editreply",
-      },
-      interaction,
-    );
-
-  if (player && channel.id !== player?.voiceId)
-    return client.errNormal(
-      {
-        error: `You're not in the same voice channel!`,
-        type: "editreply",
-      },
-      interaction,
-    );
-
-  if (!player || !player.queue.current)
-    return client.errNormal(
-      {
-        error: "There are no songs playing in this server",
-        type: "editreply",
-      },
-      interaction,
-    );
-
-  player.destroy();
-
-  client.succNormal(
-    {
-      text: `Stopped the music!`,
-      type: "editreply",
-    },
-    interaction,
-  );
+  async execute(interaction) {
+    const queue = useQueue(interaction.guild.id);
+    if (!queue) {
+      return interaction.reply({ content: '❌ Bot không đang phát nhạc.', ephemeral: true });
+    }
+    queue.delete();
+    await interaction.reply('⏹️ Đã dừng phát và rời kênh voice.');
+  }
 };

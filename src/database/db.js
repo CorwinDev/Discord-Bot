@@ -34,6 +34,25 @@ db.exec(`
     autoRoleId TEXT
   );
 
+  CREATE TABLE IF NOT EXISTS noitu_channels (
+    channelId TEXT PRIMARY KEY,
+    guildId TEXT NOT NULL,
+    mode TEXT NOT NULL DEFAULT 'bot' CHECK (mode IN ('bot', 'pvp')),
+    word TEXT,
+    history TEXT NOT NULL DEFAULT '[]',
+    lastPlayerId TEXT,
+    updatedAt INTEGER NOT NULL
+  );
+
+  CREATE TABLE IF NOT EXISTS noitu_stats (
+    guildId TEXT NOT NULL,
+    userId TEXT NOT NULL,
+    totalWords INTEGER NOT NULL DEFAULT 0,
+    currentStreak INTEGER NOT NULL DEFAULT 0,
+    bestStreak INTEGER NOT NULL DEFAULT 0,
+    PRIMARY KEY (guildId, userId)
+  );
+
   -- ===== GZW CORE =====
   CREATE TABLE IF NOT EXISTS wallets (
     guildId TEXT NOT NULL,
@@ -87,6 +106,11 @@ db.exec(`
     PRIMARY KEY (guildId, userId, achievementId)
   );
 `);
+
+const noituStatsCols = db.prepare('PRAGMA table_info(noitu_stats)').all().map((column) => column.name);
+if (!noituStatsCols.includes('currentStreak')) {
+  db.exec('ALTER TABLE noitu_stats ADD COLUMN currentStreak INTEGER NOT NULL DEFAULT 0');
+}
 
 const guildSettingsCols = db.prepare('PRAGMA table_info(guild_settings)').all().map((column) => column.name);
 if (!guildSettingsCols.includes('welcomeMessage')) {

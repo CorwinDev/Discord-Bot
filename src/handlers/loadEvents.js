@@ -18,12 +18,21 @@ function loadEvents(client) {
       continue;
     }
 
-    if (event.once) {
-      client.once(event.name, (...args) => event.execute(...args, client));
-    } else {
-      client.on(event.name, (...args) => event.execute(...args, client));
-    }
+    const listener = (...args) => {
+      try {
+        Promise.resolve(event.execute(...args, client)).catch((error) => {
+          console.error(`❌ Lỗi event ${event.name}:`, error);
+        });
+      } catch (error) {
+        console.error(`❌ Lỗi event ${event.name}:`, error);
+      }
+    };
+
+    if (event.once) client.once(event.name, listener);
+    else client.on(event.name, listener);
   }
+
+  client.on('error', (error) => console.error('❌ Discord client error:', error));
 
   console.log(`✅ Đã nạp ${files.length} event`);
 }

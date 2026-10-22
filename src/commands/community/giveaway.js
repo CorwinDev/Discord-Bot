@@ -44,7 +44,8 @@ module.exports = {
         .run(gid, interaction.channelId, interaction.options.getString('phan-thuong'), interaction.options.getInteger('so-nguoi-thang') ?? 1,
           interaction.user.id, Date.now() + ms, Date.now());
       const g = db.prepare('SELECT * FROM giveaways WHERE id = ?').get(info.lastInsertRowid);
-      const msg = await interaction.reply({ ...gw.buildMessage(g), fetchReply: true });
+      await interaction.reply(gw.buildMessage(g));
+      const msg = await interaction.fetchReply();
       db.prepare('UPDATE giveaways SET messageId = ? WHERE id = ?').run(msg.id, g.id);
       safety.audit(gid, interaction.user.id, 'giveaway.start', String(g.id), g.prize);
       return;

@@ -4,7 +4,7 @@ const gzw = require('../config/gzw');
 /* ============ Audit log (chỉ thêm, không sửa/xoá) ============ */
 function audit(guildId, actorId, action, targetId = null, detail = null) {
   db.prepare('INSERT INTO audit_logs (guildId, actorId, action, targetId, detail, createdAt) VALUES (?, ?, ?, ?, ?, ?)')
-    .run(guildId, actorId, action, targetId, detail ? String(detail).slice(0, 500) : null, Date.now());
+    .run(guildId, actorId ?? 'system', action, targetId, detail ? String(detail).slice(0, 500) : null, Date.now());
 }
 function recentAudit(guildId, limit = 10) {
   return db.prepare('SELECT * FROM audit_logs WHERE guildId = ? ORDER BY id DESC LIMIT ?').all(guildId, limit);

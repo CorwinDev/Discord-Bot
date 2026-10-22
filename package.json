@@ -13,14 +13,9 @@
     "node": ">=20.0.0"
   },
   "dependencies": {
-    "@discord-player/extractor": "^7.2.0",
-    "@discordjs/voice": "^0.19.2",
     "better-sqlite3": "^12.11.1",
-    "discord-player": "^7.2.0",
     "discord.js": "^14.27.0",
-    "dotenv": "^16.4.5",
-    "ffmpeg-static": "^5.2.0",
-    "libsodium-wrappers": "^0.7.15"
+    "dotenv": "^16.4.5"
   },
   "allowScripts": {
     "better-sqlite3@12.11.1": true

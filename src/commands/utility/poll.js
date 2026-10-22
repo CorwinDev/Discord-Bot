@@ -20,7 +20,8 @@ module.exports = {
 
     if (!optionsRaw) {
       embed.setDescription('Bình chọn bằng cách react 👍 hoặc 👎');
-      const msg = await interaction.reply({ embeds: [embed], fetchReply: true });
+      await interaction.reply({ embeds: [embed] });
+      const msg = await interaction.fetchReply();
       await msg.react('👍');
       await msg.react('👎');
       return;
@@ -32,7 +33,8 @@ module.exports = {
     }
 
     embed.setDescription(options.map((opt, i) => `${NUMBER_EMOJIS[i]} ${opt}`).join('\n'));
-    const msg = await interaction.reply({ embeds: [embed], fetchReply: true });
+    await interaction.reply({ embeds: [embed] });
+    const msg = await interaction.fetchReply();
     for (let i = 0; i < options.length; i++) await msg.react(NUMBER_EMOJIS[i]);
   }
 };

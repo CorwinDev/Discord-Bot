@@ -8,7 +8,8 @@ module.exports = {
     .setDescription('Kiểm tra độ trễ của bot'),
 
   async execute(interaction) {
-    const sent = await interaction.reply({ content: '🏓 Đang đo...', fetchReply: true });
+    await interaction.reply({ content: '🏓 Đang đo...' });
+    const sent = await interaction.fetchReply();
     const latency = sent.createdTimestamp - interaction.createdTimestamp;
 
     const embed = new EmbedBuilder()

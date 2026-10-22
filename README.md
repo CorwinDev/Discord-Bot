@@ -37,7 +37,16 @@ Nếu có `GUILD_ID` trong `.env`, lệnh được đăng ký riêng cho server 
 - **Level/XP**: cộng XP khi chat (có cooldown chống spam farm), `/rank`, `/leaderboard`
 - **Tiện ích**: `/ping`, `/help`, `/userinfo`, `/serverinfo`, `/poll`, `/remind`, hệ thống ticket hỗ trợ (`/ticket-setup` + nút bấm tạo/đóng kênh riêng)
 - **Thông báo sự kiện**: `/announce-event` — embed + nút bấm liên kết đến kênh voice, dùng cho sự kiện/stream hợp lệ của server (họp mặt, buổi nói chuyện, stream của chính server...)
-- **Nhạc**: `/play`, `/pause`, `/skip`, `/stop`, `/queue` — phát âm thanh trong kênh voice bằng `discord-player`. Chỉ dùng cho nhạc/âm thanh mà server có quyền sử dụng (nhạc không bản quyền, nhạc tự sản xuất, nguồn radio hợp pháp...).
+- **Nối Từ**: game từ điển tiếng Việt offline, chế độ chơi với bot hoặc PvP, gợi ý và thống kê riêng theo server.
+
+### Nối Từ
+
+1. Quản trị viên bật game trong kênh hiện tại bằng `/noitu-add mode:bot` hoặc `/noitu-add mode:pvp`.
+2. Dùng `/noitu-new`, rồi gửi cụm đúng 2 tiếng bắt đầu bằng tiếng cuối của từ hiện tại.
+3. Dùng `/noitu-hint`, `/noitu-stats` và `/noitu-leaderboard` khi cần.
+4. Dùng `/noitu-mode` để đổi chế độ hoặc `/noitu-remove` để tắt game trong kênh.
+
+Game chỉ xử lý tin nhắn trong các kênh đã bật; các kênh khác không bị ảnh hưởng.
 
 ### Welcome theo từng server
 
@@ -54,7 +63,7 @@ Placeholder hỗ trợ: `{mention}`, `{user}`, `{server}`, `{count}`, `{id}`. C�
 
 ## GZW CORE (giai đoạn 02: coin, nhiệm vụ, shop, thành tích)
 
-Lệnh mới (nhóm `GZW CORE`): `/balance`, `/daily`, `/hunt`, `/quests`, `/shop`, `/inventory`, `/profile`, `/achievements`, `/coin-history`, `/booster`, `/leaderboard loai:coin`. (Mini-game đổi tên từ `/play` thành `/hunt` vì trùng với lệnh nhạc.)
+Lệnh mới (nhóm `GZW CORE`): `/balance`, `/daily`, `/hunt`, `/quests`, `/shop`, `/inventory`, `/profile`, `/achievements`, `/coin-history`, `/booster`, `/leaderboard loai:coin`.
 Lệnh quản trị (cần quyền Manage Server): `/coin-admin`, `/achievement-grant`.
 
 Cách hoạt động:
@@ -97,7 +106,7 @@ Sau khi cập nhật code: `npm install` (nếu chưa), `npm run deploy` để �
 ## Gộp từ nhiều bản (v5)
 
 Bản này hợp nhất các nhánh trước đó: **v4/v4_1** (Booster, giải đấu) và **v2_1** (Upgrade Center, Game Hub, tặng quà, nhật ký/tạm dừng module).
-- Mini-game săn mồi là **`/hunt`** (không phải `/play`, vì `/play` là lệnh nhạc).
+- Mini-game săn mồi dùng lệnh **`/hunt`**.
 - Tặng coin/vật phẩm dùng hệ thống `/coin donate`, `/gift`, `/transaction` (có hạn mức, chống chuyển qua lại, mã giao dịch `TX-xxxx`). Lệnh `/coin-donate` của nhánh v4 được thay bằng hệ thống này để không có hai sổ chuyển coin song song.
 - `/gzw-admin` gồm: `economy`, `audit`, `pause`, `resume`, `status` (kinh tế & an toàn) và nhóm `tournament …` (giải đấu).
 - Quyền lợi Booster theo bản v4_1: role `perkRoleName` được gán khi đang boost và gỡ khi hết boost; huy hiệu `server_booster` và coin được giữ.
@@ -119,9 +128,9 @@ Bot này **không** và **sẽ không** bao gồm chức năng phát/stream phim
 
 ```
 src/
-  commands/{admin,utility,fun,music,leveling}/  — mỗi file 1 slash command
+  commands/{admin,utility,fun,leveling}/        — mỗi file 1 slash command
   events/                                        — mỗi file 1 Discord event
-  handlers/                                      — loadCommands, loadEvents, initPlayer
+  handlers/                                      — loadCommands, loadEvents
   config/config.js                               — cấu hình chung (màu, welcome, automod, leveling)
   database/                                      — SQLite (better-sqlite3): levels, warnings
   deploy-commands.js                             — script đăng ký slash command

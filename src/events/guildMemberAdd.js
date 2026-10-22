@@ -1,5 +1,7 @@
 const { EmbedBuilder } = require('discord.js');
 const config = require('../config/config');
+const db = require('../database/db');
+const { createWelcomePayload } = require('../services/welcome');
 
 module.exports = {
   name: 'guildMemberAdd',
@@ -7,24 +9,17 @@ module.exports = {
     try { require('../database/management').logMember(member.guild.id, member.id, 'join'); } catch {}
     if (!config.welcome.enabled) return;
 
-    // Auto-role
-    if (config.welcome.autoRoleName) {
-      const role = member.guild.roles.cache.find(r => r.name === config.welcome.autoRoleName);
-      if (role) await member.roles.add(role).catch(() => {});
+    const settings = db.prepare('SELECT welcomeChannelId, autoRoleId, welcomeMessage, welcomeTitle FROM guild_settings WHERE guildId = ?').get(member.guild.id);
+    if (settings?.autoRoleId) {
+      const role = member.guild.roles.cache.get(settings.autoRoleId);
+      if (role) await member.roles.add(role, 'Welcome auto-role').catch(() => {});
     }
 
-    const channel = member.guild.channels.cache.find(
-      c => c.name === config.welcome.channelName && c.isTextBased()
-    );
-    if (!channel) return;
+    const channel = settings?.welcomeChannelId && member.guild.channels.cache.get(settings.welcomeChannelId);
+    if (!channel?.isTextBased()) return;
 
-    const embed = new EmbedBuilder()
-      .setColor(config.colors.success)
-      .setTitle('👋 Chào mừng thành viên mới!')
-      .setDescription(`Chào mừng ${member} đến với **${member.guild.name}**!\nHiện server có **${member.guild.memberCount}** thành viên.`)
-      .setThumbnail(member.user.displayAvatarURL({ size: 256 }))
-      .setTimestamp();
-
-    channel.send({ embeds: [embed] }).catch(() => {});
+    channel.send(createWelcomePayload(member, settings.welcomeMessage)).catch((error) => {
+      console.warn(`⚠️ Không gửi được welcome trong guild ${member.guild.id}: ${error.message}`);
+    });
   }
 };

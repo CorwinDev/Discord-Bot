@@ -33,11 +33,24 @@ Nếu có `GUILD_ID` trong `.env`, lệnh được đăng ký riêng cho server 
 ## Tính năng
 
 - **Quản trị**: `/kick`, `/ban`, `/unban`, `/timeout`, `/clear`, `/warn`, `/warnings`, auto-mod (chặn spam tin nhắn, mention hàng loạt, từ cấm tuỳ chỉnh trong `src/config/config.js`)
-- **Chào mừng & vai trò**: embed chào mừng/tạm biệt tự động khi vào kênh tên `welcome` (đổi tên kênh trong config), auto-role tuỳ chọn
+- **Chào mừng & vai trò**: cấu hình riêng từng server bằng `/welcome channel`, `/welcome title`, `/welcome message`, `/welcome preview`, `/welcome autorole`; không cần đặt tên kênh cố định
 - **Level/XP**: cộng XP khi chat (có cooldown chống spam farm), `/rank`, `/leaderboard`
 - **Tiện ích**: `/ping`, `/help`, `/userinfo`, `/serverinfo`, `/poll`, `/remind`, hệ thống ticket hỗ trợ (`/ticket-setup` + nút bấm tạo/đóng kênh riêng)
 - **Thông báo sự kiện**: `/announce-event` — embed + nút bấm liên kết đến kênh voice, dùng cho sự kiện/stream hợp lệ của server (họp mặt, buổi nói chuyện, stream của chính server...)
 - **Nhạc**: `/play`, `/pause`, `/skip`, `/stop`, `/queue` — phát âm thanh trong kênh voice bằng `discord-player`. Chỉ dùng cho nhạc/âm thanh mà server có quyền sử dụng (nhạc không bản quyền, nhạc tự sản xuất, nguồn radio hợp pháp...).
+
+### Welcome theo từng server
+
+Sau khi bot ở trong server và đã chạy `npm run deploy`, quản trị viên cấu hình:
+
+```text
+/welcome channel channel:#kenh-chao-mung
+/welcome title text:✉️ Chào mừng {user} đến với {server}
+/welcome message text:Rất vui vì bạn đã tham gia! Hãy bắt đầu trò chuyện nhé.
+/welcome preview
+```
+
+Placeholder hỗ trợ: `{mention}`, `{user}`, `{server}`, `{count}`, `{id}`. Có thể đặt role thành viên mới bằng `/welcome autorole role:@Member`, hoặc tắt bằng `/welcome clear-autorole`. Role tự động không được là role quản trị/nhân sự và phải thấp hơn role cao nhất của bot. Kênh welcome, role auto và các kênh log/sự kiện đều là tùy chọn; chưa cấu hình thì tính năng tương ứng tự bỏ qua. Role nhân sự có thể tạo theo tên trong `src/config/management.js`, sau đó dùng `/staff assign` để cấp/gỡ cho thành viên.
 
 ## GZW CORE (giai đoạn 02: coin, nhiệm vụ, shop, thành tích)
 

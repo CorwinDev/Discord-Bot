@@ -16,8 +16,7 @@ module.exports = {
 
   welcome: {
     enabled: true,
-    channelName: 'welcome',
-    autoRoleName: null // đặt tên role muốn tự gán khi có thành viên mới, null = tắt
+    defaultMessage: 'Rất vui vì bạn đã gia nhập! Hãy bắt đầu trò chuyện và làm quen với mọi người nhé. 🐺'
   },
 
   leveling: {

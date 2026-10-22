@@ -1,16 +1,13 @@
 const { EmbedBuilder } = require('discord.js');
-const config = require('../config/config');
+const db = require('../database/db');
 
 module.exports = {
   name: 'guildMemberRemove',
   async execute(member) {
     try { require('../database/management').logMember(member.guild.id, member.id, 'leave'); } catch {}
-    if (!config.welcome.enabled) return;
-
-    const channel = member.guild.channels.cache.find(
-      c => c.name === config.welcome.channelName && c.isTextBased()
-    );
-    if (!channel) return;
+    const settings = db.prepare('SELECT welcomeChannelId FROM guild_settings WHERE guildId = ?').get(member.guild.id);
+    const channel = settings?.welcomeChannelId && member.guild.channels.cache.get(settings.welcomeChannelId);
+    if (!channel?.isTextBased()) return;
 
     const embed = new EmbedBuilder()
       .setColor(config.colors.danger)

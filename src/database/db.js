@@ -88,6 +88,14 @@ db.exec(`
   );
 `);
 
+const guildSettingsCols = db.prepare('PRAGMA table_info(guild_settings)').all().map((column) => column.name);
+if (!guildSettingsCols.includes('welcomeMessage')) {
+  db.exec('ALTER TABLE guild_settings ADD COLUMN welcomeMessage TEXT');
+}
+if (!guildSettingsCols.includes('welcomeTitle')) {
+  db.exec('ALTER TABLE guild_settings ADD COLUMN welcomeTitle TEXT');
+}
+
 // ===== Migration: idempotency cho sổ cái (refId) =====
 const ledgerCols = db.prepare("PRAGMA table_info(coin_ledger)").all().map((c) => c.name);
 if (!ledgerCols.includes('refId')) db.exec('ALTER TABLE coin_ledger ADD COLUMN refId TEXT');

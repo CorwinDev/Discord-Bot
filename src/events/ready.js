@@ -17,7 +17,7 @@ module.exports = {
     // Kiểm tra cấu hình khi khởi động (không chặn bot nếu lỗi)
     for (const guild of client.guilds.cache.values()) {
       try {
-        const issues = runChecks(guild).filter((x) => x.level !== 'ok');
+        const issues = runChecks(guild).filter((x) => x.level === 'error');
         if (issues.length) {
           console.log(`⚠️  [${guild.name}] cấu hình cần chú ý:\n${format(issues)}`);
           logToStaff(guild, { content: `🛡️ **Kiểm tra cấu hình khi khởi động**\n${format(issues)}` });

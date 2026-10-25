@@ -4,8 +4,8 @@ const loadCommands = require('./handlers/loadCommands');
 const loadEvents = require('./handlers/loadEvents');
 
 if (!config.token) {
-  console.error('❌ Thiếu DISCORD_TOKEN trong file .env. Hãy copy .env.example thành .env và điền token bot.');
-  process.exit(1);
+  console.error('❌ Thiếu biến môi trường DISCORD_TOKEN. Hãy đặt biến này ở nơi chạy bot (Secrets/Variables của hosting, Docker -e...). Không cần tạo file .env, xem README.');
+  process.exit(78);
 }
 
 const client = new Client({
@@ -29,4 +29,9 @@ process.on('unhandledRejection', err => {
   console.error('⚠️  Unhandled promise rejection:', err);
 });
 
-client.login(config.token);
+try {
+  require('./monitor').start(client, config.token);
+} catch (err) {
+  console.error('⚠️  Không bật được phần giám sát, bot chạy ở chế độ thường:', err);
+  client.login(config.token);
+}

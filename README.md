@@ -30,6 +30,49 @@ npm start        # khởi động bot
 
 Nếu có `GUILD_ID` trong `.env`, lệnh được đăng ký riêng cho server đó (áp dụng ngay). Nếu để trống, lệnh đăng ký toàn cục (có thể mất tới 1 giờ để Discord cập nhật).
 
+## Cấu hình bằng biến môi trường (không cần file `.env`)
+
+Bot đọc cấu hình trực tiếp từ **biến môi trường** của nơi chạy bot, nên token không phải nằm trong file nào của dự án:
+
+| Nơi chạy | Cách đặt biến |
+| --- | --- |
+| Hosting (Replit, Railway, Render, Fly, Pterodactyl...) | Mục **Secrets / Variables / Environment** trên giao diện của hosting |
+| Docker | `docker run -e DISCORD_TOKEN=... -p 3000:3000 ...` hoặc `environment:` trong docker-compose |
+| Docker/Kubernetes secrets | `DISCORD_TOKEN_FILE=/run/secrets/discord_token` (bot đọc nội dung file) |
+| Linux/macOS | `export DISCORD_TOKEN=...` |
+| Windows | `setx DISCORD_TOKEN "..."` rồi mở lại terminal |
+
+File `.env` vẫn dùng được khi chạy trên máy cá nhân, nhưng biến môi trường thật luôn được ưu tiên và không còn bắt buộc.
+
+| Biến | Bắt buộc | Ý nghĩa |
+| --- | --- | --- |
+| `DISCORD_TOKEN` | Có | Token bot |
+| `CLIENT_ID`, `GUILD_ID` | Khi deploy lệnh | Như hướng dẫn ở trên |
+| `CASH_PRIZE_APPROVER_IDS` | Không | Như cũ |
+| `ERROR_WEBHOOK_URL` | Không | Webhook Discord nhận thông báo lỗi/ngắt kết nối |
+| `ALERT_MENTION_USER_ID` | Không | ID người được ping khi sự cố nghiêm trọng |
+| `DASHBOARD_TOKEN` | Không | Mật khẩu xem web trạng thái (không đặt = trang công khai, chỉ hiện thông tin tổng quát) |
+| `PORT` | Không | Cổng web trạng thái (mặc định 3000) |
+| `AUTO_FIX` | Không | `true` (mặc định) hoặc `false` để tắt tự khắc phục |
+| `RECOVERY_GRACE_SECONDS`, `RECOVERY_MAX_ATTEMPTS` | Không | Sau bao lâu mất kết nối thì chủ động đăng nhập lại (120s), số lần thử tối đa trước khi thoát (5) |
+| `MAX_MEMORY_MB` | Không | Vượt ngưỡng RAM này thì tự khởi động lại (0 = tắt) |
+| `HIGH_PING_MS`, `CAPTURE_CONSOLE_ERRORS`, `DASHBOARD_ENABLED`, `HOST` | Không | Ngưỡng cảnh báo ping (1500), gửi `console.error` lên webhook (`true`), bật/tắt web, địa chỉ bind |
+
+## Giám sát, thông báo lỗi và tự khắc phục (`src/monitor/`)
+
+**Thông báo qua webhook.** Tạo webhook ở *Cài đặt kênh → Tích hợp → Webhook*, đặt URL vào `ERROR_WEBHOOK_URL`, rồi chạy `npm run webhook:test` để thử. Bot sẽ báo: khởi động / khởi động lại, mất kết nối và đã kết nối lại, lỗi WebSocket, ping cao, rate limit toàn cục, database lỗi, lỗi nghiêm trọng, và mọi `console.error` của bot (lỗi lệnh, lỗi event, unhandled rejection). Thông báo trùng được gộp, token và URL webhook luôn bị che.
+
+**Tự khắc phục.**
+1. discord.js tự reconnect/resume như bình thường.
+2. Mất kết nối quá 20 giây: báo webhook. Quá `RECOVERY_GRACE_SECONDS`: bot tự đóng và đăng nhập lại (chờ lâu dần giữa các lần).
+3. Đăng nhập thất bại do mạng: tự thử lại với thời gian chờ tăng dần.
+4. Không hồi phục sau `RECOVERY_MAX_ATTEMPTS` lần, bị Discord vô hiệu phiên, hoặc có ≥3 lỗi nghiêm trọng trong 5 phút: bot báo rồi thoát để được chạy lại sạch.
+5. Lỗi chỉ sửa được bằng cấu hình (token sai, chưa bật Privileged Intents): báo rõ cách sửa và thoát mã 78, không lặp vô hạn.
+
+Để bước 4 thực sự "tự chạy lại", chạy bot bằng một trong hai cách: `npm run start:safe` (supervisor có sẵn, tự chạy lại và báo webhook khi tiến trình chết, kể cả bị OOM-kill), hoặc để Docker (`--restart unless-stopped`) / PM2 / hosting lo.
+
+**Web báo tình hình.** Mở `http://<địa-chỉ-bot>:3000/` (hoặc URL do hosting cấp): trạng thái, ping (có đường theo dõi), thời gian chạy, số server/thành viên/lệnh, RAM, shard, số lần tự khắc phục và danh sách sự cố gần đây, tự làm mới mỗi 5 giây. `GET /api/status` trả JSON, `GET /health` trả 200/503 cho UptimeRobot hay health check của hosting. **Nên đặt `DASHBOARD_TOKEN`**: khi đó cần mật khẩu và mới thấy chi tiết lỗi; nếu không, trang công khai chỉ hiện sự cố kết nối.
+
 ## Tính năng
 
 - **Quản trị**: `/kick`, `/ban`, `/unban`, `/timeout`, `/clear`, `/warn`, `/warnings`, auto-mod (chặn spam tin nhắn, mention hàng loạt, từ cấm tuỳ chỉnh trong `src/config/config.js`)

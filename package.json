@@ -6,6 +6,8 @@
   "type": "commonjs",
   "scripts": {
     "start": "node src/index.js",
+    "start:safe": "node src/supervisor.js",
+    "webhook:test": "node src/monitor/webhookNotifier.js",
     "deploy": "node src/deploy-commands.js",
     "dev": "node --watch src/index.js"
   },

@@ -36,7 +36,7 @@ function exitAfterFlush(exitCode) {
 
 (async () => {
   if (!config.token || !config.clientId) {
-    console.error('❌ Thiếu DISCORD_TOKEN hoặc CLIENT_ID trong .env');
+    console.error('❌ Thiếu biến môi trường DISCORD_TOKEN hoặc CLIENT_ID (đặt ở Secrets/Variables của nơi chạy bot, hoặc .env khi chạy local)');
     process.exit(1);
   }
 

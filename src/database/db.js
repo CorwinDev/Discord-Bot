@@ -2,10 +2,12 @@ const path = require('path');
 const fs = require('fs');
 const Database = require('better-sqlite3');
 
-const DB_DIR = path.join(__dirname, '..', '..', 'data');
+const DB_FILE = process.env.GZW_DB_PATH || path.join(__dirname, '..', '..', 'data', 'bot.sqlite');
+const DB_DIR = path.dirname(DB_FILE);
 if (!fs.existsSync(DB_DIR)) fs.mkdirSync(DB_DIR, { recursive: true });
 
-const db = new Database(path.join(DB_DIR, 'bot.sqlite'));
+const db = new Database(DB_FILE);
+
 db.pragma('journal_mode = WAL');
 
 db.exec(`
@@ -552,4 +554,5 @@ for (const t of ['payment_events', 'payment_orders']) {
   else console.warn(`⚠️  Bảng ${t} còn ${n} dòng dữ liệu cũ (tính năng thanh toán đã bị gỡ). Hãy sao lưu rồi xoá: DROP TABLE ${t};`);
 }
 
+db.filePath = DB_FILE;
 module.exports = db;

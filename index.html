@@ -3,41 +3,188 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Discord Bot</title>
+  <meta name="robots" content="noindex">
+  <title>Tình hình bot</title>
   <style>
+    :root {
+      color-scheme: dark;
+      --bg: #0e141b;
+      --panel: #151d27;
+      --line: #243040;
+      --text: #e8edf3;
+      --muted: #8a99ab;
+      --ok: #6fe3c1;
+      --warn: #f2b84b;
+      --bad: #ff7070;
+      --info: #8fb4ff;
+      --state: var(--muted);
+      --sans: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", sans-serif;
+    }
+    body[data-status="online"]       { --state: var(--ok); }
+    body[data-status="degraded"],
+    body[data-status="reconnecting"],
+    body[data-status="starting"]     { --state: var(--warn); }
+    body[data-status="offline"]      { --state: var(--bad); }
+
+    * { box-sizing: border-box; }
     body {
       margin: 0;
-      min-height: 100vh;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      background: #1e2327;
-      color: #e8eaed;
-      font-family: system-ui, -apple-system, "Segoe UI", sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      font: 16px/1.55 var(--sans);
+      -webkit-font-smoothing: antialiased;
     }
-    .card {
-      text-align: center;
-      padding: 40px 48px;
-      background: #2b3137;
-      border-radius: 12px;
-      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.35);
+    main { max-width: 940px; margin: 0 auto; padding: 28px 20px 64px; }
+    .num { font-variant-numeric: tabular-nums; }
+    [hidden] { display: none !important; }
+
+    /* Đầu trang: trạng thái + tên bot */
+    .top { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 8px 24px; }
+    .state { display: flex; align-items: center; gap: 10px; font-size: 17px; }
+    .dot { width: 12px; height: 12px; border-radius: 50%; background: var(--state); flex: none; }
+    body[data-status="online"] .dot { animation: pulse 2.6s ease-out infinite; }
+    @keyframes pulse {
+      0%   { box-shadow: 0 0 0 0 rgba(111, 227, 193, .5); }
+      70%  { box-shadow: 0 0 0 11px rgba(111, 227, 193, 0); }
+      100% { box-shadow: 0 0 0 0 rgba(111, 227, 193, 0); }
     }
-    h1 { margin: 0 0 8px; font-size: 28px; }
-    p  { margin: 0; color: #9aa4ad; }
-    .dot {
-      display: inline-block;
-      width: 10px;
-      height: 10px;
-      margin-right: 8px;
-      border-radius: 50%;
-      background: #22c55e;
+    .who { color: var(--muted); }
+
+    /* Phần nổi bật: số giờ online */
+    .hero { padding: 40px 0 8px; }
+    .hero h1 { margin: 0; font-size: 18px; font-weight: 500; color: var(--muted); }
+    .clock {
+      margin: 6px 0 0;
+      font-size: clamp(44px, 11vw, 96px);
+      line-height: 1.02;
+      font-weight: 250;
+      letter-spacing: -0.035em;
+      color: var(--text);
     }
+    .clock small { font-size: .34em; font-weight: 400; letter-spacing: 0; color: var(--muted); margin: 0 .5em 0 .12em; }
+    body[data-status="offline"] .clock { color: var(--muted); }
+    .hero-sub { margin: 14px 0 0; color: var(--muted); max-width: 62ch; }
+    .hero-sub b { color: var(--text); font-weight: 600; }
+
+    /* Đường ping: nhịp tim của bot */
+    .trace { margin: 28px 0 6px; }
+    .trace svg { display: block; width: 100%; height: 110px; }
+    .trace path.line { fill: none; stroke: var(--state); stroke-width: 2; stroke-linejoin: round; stroke-linecap: round; vector-effect: non-scaling-stroke; }
+    .trace path.area { fill: var(--state); opacity: .09; stroke: none; }
+    .trace line { stroke: var(--line); stroke-width: 1; stroke-dasharray: 2 6; vector-effect: non-scaling-stroke; }
+    .trace-note { margin: 0; color: var(--muted); font-size: 14px; }
+
+    /* Số liệu nhanh */
+    dl.stats { display: grid; grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); gap: 0; margin: 30px 0 0; border-top: 1px solid var(--line); }
+    dl.stats div { padding: 14px 16px 14px 0; border-bottom: 1px solid var(--line); }
+    dl.stats dt { color: var(--muted); font-size: 14px; }
+    dl.stats dd { margin: 2px 0 0; font-size: 24px; font-weight: 600; }
+
+    h2 { margin: 40px 0 10px; font-size: 18px; font-weight: 600; }
+    .cols { display: grid; gap: 0 48px; grid-template-columns: 1fr; }
+    @media (min-width: 800px) { .cols { grid-template-columns: 1fr 1.25fr; } }
+
+    ul.plain { list-style: none; margin: 0; padding: 0; }
+    .rows li { display: flex; justify-content: space-between; gap: 16px; padding: 9px 0; border-bottom: 1px solid var(--line); }
+    .rows .val { text-align: right; color: var(--text); }
+    .rows .val.muted, .empty { color: var(--muted); }
+    .rows .val.ok { color: var(--ok); }
+    .rows .val.warn { color: var(--warn); }
+    .rows .val.bad { color: var(--bad); }
+
+    .report { padding: 14px 16px; border: 1px solid var(--line); border-left: 4px solid var(--line); border-radius: 6px; background: var(--panel); margin-bottom: 8px; }
+    .report[data-level="success"] { border-left-color: var(--ok); }
+    .report[data-level="warn"]    { border-left-color: var(--warn); }
+    .report[data-level="error"]   { border-left-color: var(--bad); }
+    .report p { margin: 0; }
+    .report .when { color: var(--muted); font-size: 14px; }
+
+    .incidents li { padding: 10px 0 10px 14px; border-bottom: 1px solid var(--line); border-left: 3px solid var(--line); }
+    .incidents li[data-level="error"]     { border-left-color: var(--bad); }
+    .incidents li[data-level="warn"]      { border-left-color: var(--warn); }
+    .incidents li[data-level="recovered"] { border-left-color: var(--ok); }
+    .incidents li[data-level="info"]      { border-left-color: var(--info); }
+    .incidents time { display: block; color: var(--muted); font-size: 13px; }
+    .incidents p { margin: 2px 0 0; overflow-wrap: anywhere; }
+
+    form#login { margin-top: 28px; max-width: 360px; }
+    form#login label { display: block; margin-bottom: 6px; }
+    form#login .row { display: flex; gap: 8px; }
+    input, button { font: inherit; color: inherit; }
+    input { flex: 1; min-width: 0; padding: 9px 12px; background: var(--panel); border: 1px solid var(--line); border-radius: 6px; }
+    button { padding: 9px 16px; background: var(--text); color: var(--bg); border: 0; border-radius: 6px; font-weight: 600; cursor: pointer; }
+    :focus-visible { outline: 2px solid var(--info); outline-offset: 2px; }
+    #loginError { color: var(--bad); margin: 8px 0 0; min-height: 1.5em; }
+
+    footer { margin-top: 44px; color: var(--muted); font-size: 14px; }
+    @media (prefers-reduced-motion: reduce) { body[data-status="online"] .dot { animation: none; } }
   </style>
 </head>
-<body>
-  <div class="card">
-    <h1>Discord Bot</h1>
-    <p><span class="dot"></span>Trang trạng thái dự án</p>
-  </div>
+<body data-status="starting">
+  <main>
+    <div class="top">
+      <div class="state" role="status" aria-live="polite">
+        <span class="dot" aria-hidden="true"></span>
+        <span id="statusText">Đang tải</span>
+      </div>
+      <span class="who" id="botName">Bot Discord</span>
+    </div>
+
+    <form id="login" hidden>
+      <label for="token">Trang này cần mật khẩu để xem</label>
+      <div class="row">
+        <input id="token" type="password" autocomplete="current-password" required>
+        <button type="submit">Xem tình hình</button>
+      </div>
+      <p id="loginError" role="alert"></p>
+    </form>
+
+    <div id="content" hidden>
+      <section class="hero" aria-label="Thời gian online">
+        <h1>Bot đã online</h1>
+        <p class="clock num" id="clock" aria-live="off">–</p>
+        <p class="hero-sub" id="heroSub"></p>
+      </section>
+
+      <div class="trace">
+        <svg id="traceSvg" viewBox="0 0 600 110" preserveAspectRatio="none" role="img" aria-label="Biểu đồ ping trong 10 phút gần đây">
+          <line x1="0" y1="55" x2="600" y2="55"></line>
+          <path class="area" id="traceArea" d=""></path>
+          <path class="line" id="tracePath" d=""></path>
+        </svg>
+      </div>
+      <p class="trace-note" id="traceNote">Đang chờ số liệu ping.</p>
+
+      <dl class="stats">
+        <div><dt>Ping</dt><dd class="num" id="sPing">–</dd></div>
+        <div><dt>Kết nối liên tục</dt><dd class="num" id="sConnected">–</dd></div>
+        <div><dt>Server</dt><dd class="num" id="sGuilds">–</dd></div>
+        <div><dt>Thành viên</dt><dd class="num" id="sMembers">–</dd></div>
+        <div><dt>Lệnh</dt><dd class="num" id="sCommands">–</dd></div>
+        <div><dt>RAM</dt><dd class="num" id="sMem">–</dd></div>
+        <div><dt>Đã tự khắc phục</dt><dd class="num" id="sRecoveries">–</dd></div>
+      </dl>
+
+      <div class="cols">
+        <section>
+          <h2>Hệ thống</h2>
+          <ul class="plain rows" id="system"></ul>
+        </section>
+        <section>
+          <h2>Báo cáo gần nhất</h2>
+          <div class="report" id="report" hidden>
+            <p id="reportTitle"></p>
+            <p class="when" id="reportWhen"></p>
+          </div>
+          <p class="empty" id="reportEmpty">Báo cáo đầu tiên sẽ có sau vài phút kể từ lúc bot khởi động.</p>
+          <h2>Sự cố gần đây</h2>
+          <ul class="plain incidents" id="incidents"></ul>
+        </section>
+      </div>
+    </div>
+
+    <footer id="updated"></footer>
+  </main>
+  <script src="/app.js"></script>
 </body>
 </html>

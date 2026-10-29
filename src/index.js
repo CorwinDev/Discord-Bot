@@ -29,9 +29,11 @@ process.on('unhandledRejection', err => {
   console.error('⚠️  Unhandled promise rejection:', err);
 });
 
-try {
-  require('./monitor').start(client, config.token);
-} catch (err) {
-  console.error('⚠️  Không bật được phần giám sát, bot chạy ở chế độ thường:', err);
-  client.login(config.token);
-}
+(async () => {
+  try {
+    await require('./monitor').start(client, config.token);
+  } catch (err) {
+    console.error('⚠️  Không bật được phần giám sát, bot chạy ở chế độ thường:', err);
+    if (!client.isReady() && !client.ws.shards.size) client.login(config.token);
+  }
+})();

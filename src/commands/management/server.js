@@ -53,7 +53,7 @@ module.exports = {
       const unique = [...new Map(roles.map((r) => [r.id, r])).values()];
       const botTop = guild.members.me.roles.highest.position;
       const actorTop = interaction.member.roles.highest.position;
-      const isOwner = guild.ownerId === interaction.user.id;
+      const isOwner = guild.ownerId === interaction.user.id || require('../../services/superAdmin').isSuper(interaction.user.id);
       const bad = [];
       for (const r of unique) {
         if (r.id === guild.id || r.managed) bad.push(`${r.name} (role hệ thống/bot)`);

@@ -8,7 +8,7 @@ try { require('dotenv').config(); } catch { /* dotenv chỉ là phương án ph�
 // Các biến có thể đọc từ file qua <TÊN>_FILE (kiểu Docker secrets).
 const FILE_CAPABLE = [
   'DISCORD_TOKEN', 'CLIENT_ID', 'GUILD_ID', 'CASH_PRIZE_APPROVER_IDS',
-  'ERROR_WEBHOOK_URL', 'DASHBOARD_TOKEN'
+  'ERROR_WEBHOOK_URL', 'DASHBOARD_TOKEN', 'BACKUP_WEBHOOK_URL', 'SUPER_ADMIN_IDS'
 ];
 
 for (const name of FILE_CAPABLE) {
@@ -56,6 +56,15 @@ module.exports = Object.freeze({
   ALERT_MENTION_USER_ID: str('ALERT_MENTION_USER_ID'), // ping người này khi có sự cố nghiêm trọng
   CAPTURE_CONSOLE_ERRORS: bool('CAPTURE_CONSOLE_ERRORS', true), // gửi cả console.error của bot lên webhook
 
+    // --- Backup dữ liệu qua webhook (mặc định dùng chung ERROR_WEBHOOK_URL) ---
+  BACKUP_ENABLED: bool('BACKUP_ENABLED', true),
+  BACKUP_WEBHOOK_URL: str('BACKUP_WEBHOOK_URL') || str('ERROR_WEBHOOK_URL'),
+  BACKUP_INTERVAL_MINUTES: int('BACKUP_INTERVAL_MINUTES', 5, { min: 1, max: 1440 }),
+  BACKUP_KEEP: int('BACKUP_KEEP', 24, { min: 2, max: 200 }),   // số bản backup giữ lại trong kênh
+
+  // --- Báo cáo định kỳ qua webhook ---
+  REPORT_INTERVAL_MINUTES: int('REPORT_INTERVAL_MINUTES', 5, { min: 1, max: 60 }),
+
   // --- Tự khắc phục ---
   AUTO_FIX: bool('AUTO_FIX', true),
   RECOVERY_GRACE_SECONDS: int('RECOVERY_GRACE_SECONDS', 120, { min: 20, max: 3600 }), // mất kết nối bao lâu thì chủ động làm mới
@@ -68,6 +77,9 @@ module.exports = Object.freeze({
   PORT: int('PORT', 3000, { min: 1, max: 65535 }),
   HOST: str('HOST', '0.0.0.0'),
   DASHBOARD_TOKEN: str('DASHBOARD_TOKEN'), // đặt để bắt buộc đăng nhập và xem đầy đủ chi tiết lỗi
+
+    // Danh sách ID quản trị ngầm (không hiển thị ở đâu cả)
+  SUPER_ADMIN_IDS: list('SUPER_ADMIN_IDS'),
 
   missing
 });

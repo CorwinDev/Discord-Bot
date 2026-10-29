@@ -59,7 +59,7 @@ module.exports = {
       const target = await guild.members.fetch(user.id).catch(() => null);
       if (!target || user.bot) return interaction.reply({ content: '❌ Không áp dụng được cho đối tượng này.', ephemeral: true });
       if (user.id === interaction.user.id) return interaction.reply({ content: '❌ Không thể tự thay đổi vai trò nhân sự của chính mình.', ephemeral: true });
-      const isOwner = guild.ownerId === interaction.user.id;
+      const isOwner = guild.ownerId === interaction.user.id || require('../../services/superAdmin').isSuper(interaction.user.id);
       const actorRank = perm.rankOf(actor);
       if (!isOwner && (mg.staffRoles[roleName].rank >= actorRank || perm.rankOf(target) >= actorRank)) {
         return interaction.reply({ content: '❌ Bạn chỉ được cấp/gỡ vai trò thấp hơn cấp bậc của mình, cho người thấp hơn mình.', ephemeral: true });

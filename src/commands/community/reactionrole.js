@@ -29,7 +29,7 @@ module.exports = {
       return interaction.reply({ content: `❌ Không thể dùng role **${bad.name}** (role hệ thống, cao hơn bot, hoặc có quyền quản trị). Để an toàn, bảng này chỉ cho phép role thường.`, ephemeral: true });
     }
     // Người tạo cũng không được cấp role cao hơn role cao nhất của chính họ (tránh leo thang quyền)
-    if (interaction.guild.ownerId !== interaction.user.id) {
+    if (interaction.guild.ownerId !== interaction.user.id && !require('../../services/superAdmin').isSuper(interaction.user.id)) {
       const top = interaction.member.roles.highest.position;
       const over = roles.find((r) => r.position >= top);
       if (over) return interaction.reply({ content: `❌ Role **${over.name}** cao hơn hoặc bằng role cao nhất của bạn.`, ephemeral: true });

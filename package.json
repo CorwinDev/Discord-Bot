@@ -65,7 +65,7 @@
     "mongoose": "^7.8.0",
     "ms": "^2.1.3",
     "node-fetch": "^2.6.6",
-    "parse-ms": "^2.1.0",
+    "parse-ms": "^4.0.0",
     "popcat-wrapper": "^1.5.4",
     "serialize-javascript": "^7.1.0",
     "shoukaku": "^4.3.0",

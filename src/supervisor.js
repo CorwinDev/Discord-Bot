@@ -49,11 +49,23 @@ function run() {
     restarts++;
 
     const reason = signal ? `tín hiệu ${signal}` : `mã thoát ${code}`;
+    const ranFor = Math.round((Date.now() - startedAt) / 1000);
+    const hint = signal === 'SIGKILL'
+      ? 'Bị tắt cưỡng bức, thường do **hết RAM (OOM)** hoặc nền tảng hosting dừng tiến trình.'
+      : code === 1
+        ? 'Bot tự thoát để khởi động lại sạch (lỗi nghiêm trọng, mất kết nối không phục hồi hoặc vượt ngưỡng RAM). Chi tiết ở các tin báo ngay trước đó.'
+        : 'Xem log của bot để biết chi tiết.';
     log(`Bot dừng bất thường (${reason}). Chạy lại sau ${Math.round(wait / 1000)} giây (lần ${restarts}).`);
     notifier.notify({
       level: 'error',
       title: '💀 Tiến trình bot đã dừng bất thường',
-      description: `Nguyên nhân: **${reason}**.\nSupervisor sẽ chạy lại sau **${Math.round(wait / 1000)} giây** (lần khởi động lại thứ ${restarts}).`,
+      description: `Nguyên nhân: **${reason}**.\n${hint}\nSupervisor sẽ chạy lại sau **${Math.round(wait / 1000)} giây**.`,
+      fields: [
+        { name: 'Đã chạy được', value: ranFor >= 120 ? `${Math.round(ranFor / 60)} phút` : `${ranFor} giây`, inline: true },
+        { name: 'Lần khởi động lại', value: String(restarts), inline: true },
+        { name: 'Sập liên tiếp (2 phút)', value: String(crashTimes.length), inline: true },
+        { name: 'Thời điểm sập', value: `<t:${Math.floor(Date.now() / 1000)}:T>`, inline: true }
+      ],
       dedupeMs: 0,
       ping: true
     });

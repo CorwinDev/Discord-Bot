@@ -12,12 +12,17 @@ let clientRef = null;
 
 const metaStore = () => require('../database/meta').meta;
 
+let inited = false;
+
+/** Chạy đúng 1 lần mỗi tiến trình (gọi lại là bỏ qua), nên có thể gọi từ lệnh /uptime mà không đếm trùng lần khởi động. */
 function init() {
+  if (inited) return;
   const meta = metaStore();
   bootAt = Date.now();
   if (!meta.get('firstOnlineAt')) meta.set('firstOnlineAt', bootAt);
   meta.set('bootCount', meta.getNum('bootCount', 0) + 1);
   meta.set('lastBootAt', bootAt);
+  inited = true;
 }
 
 function tick() {
@@ -32,9 +37,9 @@ function tick() {
 }
 
 function start(client) {
-  clientRef = client;
-  lastTick = Date.now();
+  if (client) clientRef = client;
   if (timer) return;
+  lastTick = Date.now();
   timer = setInterval(tick, TICK_MS);
   timer.unref();
 }
@@ -43,10 +48,13 @@ function start(client) {
 function flush() { try { tick(); } catch { /* bỏ qua */ } }
 
 function info(client = clientRef) {
+  // Phòng khi phần giám sát chưa kịp khởi động: tự khởi tạo để số liệu luôn đúng.
+  init();
+  start(client);
   const meta = metaStore();
   const now = Date.now();
   const ready = Boolean(client && client.isReady());
-  const sinceLast = ready ? Math.min(now - lastTick, 5 * TICK_MS) : 0; // phần chưa kịp ghi
+  const sinceLast = ready && lastTick ? Math.min(now - lastTick, 5 * TICK_MS) : 0; // phần chưa kịp ghi
   return {
     processMs: Math.floor(process.uptime() * 1000),
     connectedMs: ready ? Math.floor(client.uptime || 0) : 0,

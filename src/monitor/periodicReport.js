@@ -48,6 +48,12 @@ function build(client) {
   else if (warns || netFail || !state.dbOk) { level = 'warn'; verdict = `🟡 Có ${warns + netFail} cảnh báo`; }
 
   const windowMin = Math.max(1, Math.round(m.windowMs / 60_000));
+  const to = Date.now();
+  const from = to - m.windowMs;
+  const sec = (ts) => Math.floor(ts / 1000);
+  const lastDown = state.lastDisconnectAt && state.lastDisconnectAt >= from
+    ? `Mất kết nối lúc <t:${sec(state.lastDisconnectAt)}:T>${state.lastDisconnectReason ? `\nLý do: ${clip(state.lastDisconnectReason, 150)}` : ''}`
+    : null;
 
   const issueText = groups.length
     ? groups.slice(0, 8).map((g) => `${g.level === 'error' ? '🔴' : '🟡'} **×${g.count}** ${clip(g.message, 150)} _(${hhmm(g.first)}${g.count > 1 ? `–${hhmm(g.last)}` : ''})_`).join('\n')
@@ -83,8 +89,9 @@ function build(client) {
     title: `📊 Báo cáo ${windowMin} phút · ${verdict}`,
     description: issueText,
     fields: [
-      { name: 'Kết nối Discord', value: `${ready ? '🟢 Đang online' : '🔴 Mất kết nối'}\nMất kết nối: ${disconnects} · Tự phục hồi: ${recovered}`, inline: true },
-      { name: 'Mạng', value: netLines, inline: false },
+      { name: 'Kết nối Discord', value: [`${ready ? '🟢 Đang online' : '🔴 Mất kết nối'}`, `Mất kết nối: ${disconnects} · Tự phục hồi: ${recovered}`, lastDown].filter(Boolean).join('\n'), inline: true },
+      { name: 'Thời gian', value: `Báo cáo lúc <t:${sec(to)}:T> · <t:${sec(to)}:d>\nKhoảng đo: <t:${sec(from)}:t> → <t:${sec(to)}:t>\nBáo cáo kế tiếp: <t:${sec(to + env.REPORT_INTERVAL_MINUTES * 60_000)}:R>`, inline: true },
+      { name: 'Mạng', value: netLines || '–', inline: false },
       { name: 'Tốc độ bot', value: speed, inline: false },
       { name: 'Tài nguyên', value: `CPU TB ${m.cpuAvg ?? '–'}% (cao ${m.cpuMax ?? '–'}%)\nRAM ${Math.round(mem.rss / 1048576)} MB · heap ${Math.round(mem.heapUsed / 1048576)} MB\nHệ thống: tải ${os.loadavg()[0].toFixed(2)} · trống ${Math.round(os.freemem() / 1048576)} MB`, inline: true },
       { name: 'Cơ sở dữ liệu', value: state.dbOk ? '🟢 Bình thường' : '🔴 Lỗi truy vấn', inline: true },
@@ -96,7 +103,9 @@ function build(client) {
   lastReport = {
     at: Date.now(), windowMin, level, verdict, errors, warnings: warns + netFail, disconnects, recovered,
     ping: m.ping, issues: groups.slice(0, 8).map((g) => ({ level: g.level, count: g.count, message: g.message, first: g.first, last: g.last })),
-    commands: cmd
+    commands: cmd,
+    network: Object.values(m.probes).map((p) => ({ label: p.label, avg: p.avg, max: p.max, fail: p.fail })),
+    lastDisconnectReason: lastDown ? state.lastDisconnectReason : null
   };
   return embed;
 }

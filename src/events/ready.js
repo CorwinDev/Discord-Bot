@@ -10,6 +10,10 @@ module.exports = {
   once: true,
   execute(client) {
     console.log(`✅ Bot đã đăng nhập thành công: ${client.user.tag}`);
+    // Đồng bộ slash command (chỉ gọi Discord khi danh sách lệnh đã đổi). Lỗi được báo lên webhook qua console.error.
+    require('../services/commandSync').syncCommands(client).catch((err) => {
+      console.error(`⚠️  Không tự đăng ký được slash command (lệnh mới có thể chưa hiện trên Discord): ${err.message}. Bạn có thể chạy "npm run deploy" thủ công.`);
+    });
     const aborted = abortStaleMatches();
     if (aborted) console.log(`ℹ️  Đã huỷ ${aborted} trận dang dở từ lần chạy trước (không thưởng).`);
     giveaways.startScheduler(client);

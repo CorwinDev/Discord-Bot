@@ -56,6 +56,10 @@ File `.env` vẫn dùng được khi chạy trên máy cá nhân, nhưng biến 
 | `AUTO_FIX` | Không | `true` (mặc định) hoặc `false` để tắt tự khắc phục |
 | `RECOVERY_GRACE_SECONDS`, `RECOVERY_MAX_ATTEMPTS` | Không | Sau bao lâu mất kết nối thì chủ động đăng nhập lại (120s), số lần thử tối đa trước khi thoát (5) |
 | `MAX_MEMORY_MB` | Không | Vượt ngưỡng RAM này thì tự khởi động lại (0 = tắt) |
+
+ Nếu mất mạng, tin được giữ lại và gửi bù khi có mạng trở lại (ghi chú "gửi trễ"). URL webhook dán thừa dấu nháy hoặc dấu `/` cuối vẫn được chấp nhận.
+
+**Báo cáo định kỳ (mặc định 5 phút/lần).** Dù không có lỗi, bot vẫn gửi một báo cáo gồm: kết luận (✅/🟡/🔴), các lỗi/cảnh báo đã gộp kèm lý do và giờ xảy ra, lý do và giờ mất kết nối gần nhất, độ trễ mạng tới Discord API và Internet (trung bình/cao nhất/số lần lỗi), tốc độ bot (ping gateway thấp/TB/cao, thời gian xử lý lệnh, độ trễ vòng lặp), CPU/RAM, tình trạng database, tổng giờ online, backup, và mốc thời gian báo cáo (khoảng đo, lần báo kế tiếp). Khi mất kết nối quá 20 giây, bot đo mạng ngay và báo luôn là do **mất Internet**, **Discord API không tới được**, hay **lỗi WebSocket/gateway**.
 | `HIGH_PING_MS`, `CAPTURE_CONSOLE_ERRORS`, `DASHBOARD_ENABLED`, `HOST` | Không | Ngưỡng cảnh báo ping (1500), gửi `console.error` lên webhook (`true`), bật/tắt web, địa chỉ bind |
 
 ## Giám sát, thông báo lỗi và tự khắc phục (`src/monitor/`)
@@ -69,9 +73,9 @@ File `.env` vẫn dùng được khi chạy trên máy cá nhân, nhưng biến 
 4. Không hồi phục sau `RECOVERY_MAX_ATTEMPTS` lần, bị Discord vô hiệu phiên, hoặc có ≥3 lỗi nghiêm trọng trong 5 phút: bot báo rồi thoát để được chạy lại sạch.
 5. Lỗi chỉ sửa được bằng cấu hình (token sai, chưa bật Privileged Intents): báo rõ cách sửa và thoát mã 78, không lặp vô hạn.
 
-Để bước 4 thực sự "tự chạy lại", chạy bot bằng một trong hai cách: `npm run start:safe` (supervisor có sẵn, tự chạy lại và báo webhook khi tiến trình chết, kể cả bị OOM-kill), hoặc để Docker (`--restart unless-stopped`) / PM2 / hosting lo.
+Để bước 4 thực sự "tự chạy lại", `npm start` / `node .` mặc định đã chạy bot dưới supervisor (`src/supervisor.js`): tiến trình chết, kể cả bị OOM-kill, sẽ được bật lại (chờ 2s, 4s, 8s... tối đa 60s nếu sập liên tục) và báo lên webhook kèm nguyên nhân. Nếu đã có Docker (`--restart unless-stopped`) / PM2 / hosting lo việc này, đặt `AUTO_SUPERVISE=false`.chạy lại và báo webhook khi tiến trình chết, kể cả bị OOM-kill), hoặc để Docker (`--restart unless-stopped`) / PM2 / hosting lo.
 
-**Web báo tình hình.** Mở `http://<địa-chỉ-bot>:3000/` (hoặc URL do hosting cấp): trạng thái, ping (có đường theo dõi), thời gian chạy, số server/thành viên/lệnh, RAM, shard, số lần tự khắc phục và danh sách sự cố gần đây, tự làm mới mỗi 5 giây. `GET /api/status` trả JSON, `GET /health` trả 200/503 cho UptimeRobot hay health check của hosting. **Nên đặt `DASHBOARD_TOKEN`**: khi đó cần mật khẩu và mới thấy chi tiết lỗi; nếu không, trang công khai chỉ hiện sự cố kết nối.
+**Web báo tình hình.** Mở `http://<địa-chỉ-bot>:3000/` (hoặc URL do hosting cấp): trạng thái, ping (có đường theo dõi), thời gian chạy, số server/thành viên/lệnh, RAM, shard, số lần tự khắc phục và danh sách sự cố gần đây, tự làm mới mỗi 5 giây. `GET /api/status` trả JSON, `GET /health` trả 200/503 cho UptimeRobot hay health check của hosting. **Nên đặt `DASHBOARD_TOKEN`**: khi đó cần mật khẩu và mới thấy chi tiết lỗi; nếu không, trang công khai chỉ hiện sự cố kết nối.  Web được bật đầu tiên khi khởi động nên vẫn mở được kể cả khi webhook hoặc backup đang lỗi; cổng bị chiếm thì tự thử lại mỗi 15 giây. Có hiển thị tình trạng webhook (đang lỗi, số tin chờ gửi) và lý do trong báo cáo gần nhất.
 
 ## Tính năng
 

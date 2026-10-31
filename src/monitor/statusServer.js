@@ -34,6 +34,14 @@ const SECURITY_HEADERS = {
 const log = (msg) => process.stderr.write(`[dashboard] ${msg}\n`);
 const fileCache = new Map();
 
+// Một phần số liệu lỗi thì chỉ phần đó trống, không được làm cả trang không tải được.
+const safe = (fn, fallback) => {
+  try { return fn(); } catch (err) { log(`Bỏ qua một phần số liệu: ${err.message}`); return fallback; }
+};
+
+const FALLBACK_PAGE = '<!doctype html><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Tình hình bot</title>'
+  + '<body style="font-family:system-ui;padding:24px"><h1>Tình hình bot</h1><p>Không tìm thấy giao diện web (index.html). Dữ liệu vẫn có ở <a href="/api/status">/api/status</a> và <a href="/health">/health</a>.</p></body>';
+
 function readPublic(file) {
   if (!fileCache.has(file)) fileCache.set(file, fs.readFileSync(file));
   return fileCache.get(file);
@@ -100,7 +108,7 @@ function snapshot(client, full) {
     status: computeStatus(client),
     bot: client.user ? { tag: client.user.tag } : null,
     ping,
-    uptime: (() => {
+    uptime: safe(() => {
       const u = uptime.info(client);
       return {
         processSec: Math.floor(u.processMs / 1000),
@@ -109,10 +117,20 @@ function snapshot(client, full) {
         firstOnlineAt: u.firstOnlineAt,
         bootCount: u.bootCount
       };
-    })(),
-    network: metrics.snapshotLatest(),
-    pingHistory: metrics.getHistory().slice(-60),
-    lastReport: (() => { const r = periodicReport.getLastReport(); return r ? { at: r.at, windowMin: r.windowMin, level: r.level, errors: r.errors, warnings: r.warnings, disconnects: r.disconnects } : null; })(),
+    }, { processSec: Math.floor(process.uptime()), connectedSec: 0, totalOnlineSec: 0, firstOnlineAt: Date.now(), bootCount: 1 }),
+    network: safe(() => metrics.snapshotLatest(), {}),
+    pingHistory: safe(() => metrics.getHistory().slice(-60), []),
+    lastReport: safe(() => {
+      const r = periodicReport.getLastReport();
+      if (!r) return null;
+      return {
+        at: r.at, windowMin: r.windowMin, level: r.level, errors: r.errors, warnings: r.warnings, disconnects: r.disconnects,
+        // Chi tiết lý do chỉ cho người đã đăng nhập (DASHBOARD_TOKEN), trang công khai chỉ thấy số lượng.
+        issues: full ? r.issues.slice(0, 5).map(({ level, count, message }) => ({ level, count, message })) : [],
+        lastDisconnectReason: full ? r.lastDisconnectReason : null,
+        ping: r.ping ? { avg: r.ping.avg, max: r.ping.max } : null
+      };
+    }, null),
     backup: {
       enabled: state.backup.enabled,
       lastBackupAt: state.backup.lastBackupAt,
@@ -135,7 +153,15 @@ function snapshot(client, full) {
       attempts: state.recoveryAttempts,
       lastRecoveryAt: state.lastRecoveryAt
     },
-    alerts: { webhookConfigured: notifier.isConfigured(), sent: state.webhook.sent, failed: state.webhook.failed },
+    alerts: safe(() => ({
+      webhookConfigured: notifier.isConfigured(),
+      sent: state.webhook.sent,
+      failed: state.webhook.failed,
+      queued: notifier.stats().queued,
+      lastSentAt: state.webhook.lastSentAt,
+      failing: Boolean(state.webhook.lastError),
+      lastError: full ? state.webhook.lastError : null
+    }), { webhookConfigured: false, sent: 0, failed: 0, queued: 0, lastSentAt: null, failing: false, lastError: null }),
     counters: { errors: state.errorCount, warnings: state.warnCount },
     incidents: state.incidents
       .filter((i) => full || i.isPublic)
@@ -166,7 +192,12 @@ function start(client) {
 
       if (ROUTES[pathname]) {
         const [file, type] = ROUTES[pathname];
-        return send(req, res, 200, readPublic(file), type);
+        let body;
+        try { body = readPublic(file); } catch (err) {
+          log(`Không đọc được ${path.basename(file)}: ${err.message}`);
+          return pathname === '/app.js' ? send(req, res, 404, '', type) : send(req, res, 200, FALLBACK_PAGE, 'text/html; charset=utf-8');
+        }
+        return send(req, res, 200, body, type);
       }
 
       if (pathname === '/health') {
@@ -192,12 +223,22 @@ function start(client) {
 
   server.requestTimeout = 10_000;
   server.headersTimeout = 10_000;
+
+  // Cổng đang bận (bot cũ chưa tắt hẳn, hosting chưa nhả cổng...): thử mở lại thay vì bỏ cuộc,
+  // bot vẫn chạy bình thường trong lúc chờ.
+  let retryTimer = null;
+  const listen = () => server.listen(env.PORT, env.HOST);
   server.on('error', (err) => {
-    log(`Không mở được web trạng thái trên cổng ${env.PORT}: ${err.code || err.message} (bot vẫn chạy bình thường).`);
+    if (server.listening) { log(`Lỗi web: ${err.code || err.message}`); return; }
+    log(`Không mở được web trên cổng ${env.PORT}: ${err.code || err.message}. Thử lại sau 15 giây (bot vẫn chạy bình thường).`);
+    clearTimeout(retryTimer);
+    retryTimer = setTimeout(listen, 15_000);
+    retryTimer.unref();
   });
-  server.listen(env.PORT, env.HOST, () => {
+  server.on('listening', () => {
     log(`Web trạng thái đang chạy tại cổng ${env.PORT}${env.DASHBOARD_TOKEN ? ' (có mật khẩu)' : ' (công khai, nên đặt DASHBOARD_TOKEN)'}.`);
   });
+  listen();
 
   setInterval(() => {
     const now = Date.now();

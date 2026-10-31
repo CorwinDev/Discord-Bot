@@ -33,6 +33,24 @@ function explainFatal(err) {
   return /intents/i.test(String((err && err.message) || err)) ? FATAL_CLOSE[4014] : FATAL_CLOSE[4004];
 }
 
+const sec = (ts) => Math.floor(ts / 1000);
+
+/** Đo mạng ngay lúc này (tối đa ~9 giây) để biết sập do mạng hay do Discord, rồi trả về tóm tắt + chẩn đoán. */
+async function diagnoseNetwork() {
+  const metrics = require('./metrics');
+  try { await Promise.race([metrics.probeAll(), sleep(9000)]); } catch { /* dùng số đo gần nhất */ }
+  const latest = metrics.snapshotLatest();
+  const line = (p, label) => (!p ? `⚪ ${label}: chưa đo được` : p.ok ? `🟢 ${label}: thông · ${p.ms}ms` : `🔴 ${label}: ${p.error || `lỗi HTTP ${p.status}`}`);
+  const text = `${line(latest.discord, 'Discord API')}\n${line(latest.internet, 'Internet')}`;
+
+  let verdict;
+  if (latest.internet && !latest.internet.ok) verdict = 'Máy chủ chạy bot đang **mất kết nối Internet** (hoặc DNS lỗi). Bot sẽ tự kết nối lại khi có mạng.';
+  else if (latest.discord && !latest.discord.ok) verdict = 'Internet bình thường nhưng **không tới được Discord API** (Discord đang sự cố hoặc bị chặn).';
+  else if (latest.discord && latest.internet) verdict = 'Mạng bình thường, lỗi nằm ở kết nối WebSocket/gateway tới Discord. Bot đang tự kết nối lại.';
+  else verdict = 'Chưa đủ số liệu mạng để kết luận.';
+  return { text, verdict };
+}
+
 const fmtDuration = (sec) => {
   const s = Math.max(0, Math.round(sec));
   if (s < 60) return `${s} giây`;
@@ -71,6 +89,7 @@ function attach(client, token) {
     ctl.downSince = Date.now();
     ctl.downNotified = false;
     state.lastDisconnectAt = ctl.downSince;
+    state.lastDisconnectReason = why;
     addIncident({ level: 'warn', type: 'connection', message: `Mất kết nối Discord: ${why}` });
   }
 
@@ -90,6 +109,13 @@ function attach(client, token) {
           level: 'success',
           title: '✅ Bot đã kết nối lại',
           description: `Gián đoạn khoảng **${fmtDuration(secs)}**. Bot đã hoạt động bình thường trở lại.`,
+          fields: [
+            { name: 'Lý do gián đoạn', value: state.lastDisconnectReason || 'Không rõ', inline: false },
+            { name: 'Mất kết nối lúc', value: `<t:${sec(ctl.downSince)}:T>`, inline: true },
+            { name: 'Kết nối lại lúc', value: `<t:${sec(now)}:T> (${source})`, inline: true },
+            { name: 'Ping hiện tại', value: Number.isFinite(client.ws && client.ws.ping) && client.ws.ping >= 0 ? `${Math.round(client.ws.ping)}ms` : '–', inline: true },
+            { name: 'Số lần phải tự khắc phục', value: String(ctl.attempts), inline: true }
+          ],
           dedupeMs: 0
         });
       }
@@ -161,6 +187,12 @@ function attach(client, token) {
     });
   });
 
+  // Không có listener 'error' thì EventEmitter ném lỗi và làm sập tiến trình.
+  client.on('error', (error) => {
+    if (ctl.exiting) return;
+    reportError('Lỗi từ discord.js client', error, { key: `clientError|${firstLine(error && error.message)}` });
+  });
+
   client.on('warn', (message) => {
     addIncident({ level: 'warn', type: 'discord', isPublic: false, message: String(message) });
   });
@@ -221,6 +253,11 @@ function attach(client, token) {
       level: 'warn',
       title: `🔧 Tự khắc phục (lần ${ctl.attempts}/${env.RECOVERY_MAX_ATTEMPTS})`,
       description: 'Kết nối không tự phục hồi, bot đang đóng và đăng nhập lại.',
+      fields: [
+        { name: 'Lý do mất kết nối', value: state.lastDisconnectReason || 'Không rõ', inline: false },
+        { name: 'Đã mất kết nối', value: ctl.downSince ? fmtDuration((Date.now() - ctl.downSince) / 1000) : '–', inline: true },
+        { name: 'Lần kế tiếp (nếu vẫn lỗi)', value: `<t:${sec(ctl.nextAttemptAt)}:R>`, inline: true }
+      ],
       dedupeMs: 0
     });
 
@@ -311,13 +348,26 @@ function attach(client, token) {
       const down = now - ctl.downSince;
       if (!ctl.downNotified && down > 20_000) {
         ctl.downNotified = true;
-        notifier.notify({
-          level: 'warn',
-          title: '⚠️ Bot mất kết nối Discord',
-          description: env.AUTO_FIX
-            ? 'Bot đang tự kết nối lại. Nếu quá lâu, bot sẽ tự làm mới kết nối.'
-            : 'Tự sửa lỗi đang tắt (AUTO_FIX=false), cần kiểm tra thủ công nếu kéo dài.',
-          dedupeMs: 0
+        const since = ctl.downSince;
+        const reason = state.lastDisconnectReason || 'Không rõ';
+        // Đo mạng rồi mới báo, để tin nhắn có luôn lý do (mạng hay Discord).
+        diagnoseNetwork().then((net) => {
+          notifier.notify({
+            level: 'warn',
+            title: '⚠️ Bot mất kết nối Discord',
+            description: `${net.verdict}\n\n${env.AUTO_FIX
+              ? `Bot đang tự kết nối lại; nếu quá ${Math.round(env.RECOVERY_GRACE_SECONDS / 60 * 10) / 10} phút chưa được, bot sẽ tự làm mới kết nối.`
+              : 'Tự sửa lỗi đang tắt (AUTO_FIX=false), cần kiểm tra thủ công nếu kéo dài.'}`,
+            fields: [
+              { name: 'Lý do', value: reason, inline: false },
+              { name: 'Mạng', value: net.text, inline: false },
+              { name: 'Mất kết nối lúc', value: `<t:${sec(since)}:T> (<t:${sec(since)}:R>)`, inline: true },
+              { name: 'Tự sửa lỗi', value: env.AUTO_FIX ? 'Bật' : 'Tắt', inline: true }
+            ],
+            dedupeMs: 0
+          });
+        }).catch(() => {
+          notifier.notify({ level: 'warn', title: '⚠️ Bot mất kết nối Discord', description: `Lý do: ${reason}`, dedupeMs: 0 });
         });
       }
       if (env.AUTO_FIX && down > graceMs && now >= ctl.nextAttemptAt) hardRecover();

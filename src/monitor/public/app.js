@@ -140,7 +140,14 @@
     if (b.lastRestoreAt) row(system, 'Lần khôi phục gần nhất', fmtTime(b.lastRestoreAt), 'muted');
 
     row(system, 'Tự sửa lỗi', data.recovery.autoFix ? 'Bật' : 'Tắt', 'muted');
-    row(system, 'Thông báo webhook', data.alerts.webhookConfigured ? `Bật · ${data.alerts.sent} đã gửi` : 'Chưa cấu hình', data.alerts.webhookConfigured ? '' : 'warn');
+    const w = data.alerts;
+    if (!w.webhookConfigured) {
+      row(system, 'Thông báo webhook', 'Chưa cấu hình (đặt ERROR_WEBHOOK_URL)', 'warn');
+    } else if (w.failing) {
+      row(system, 'Thông báo webhook', `Đang lỗi${w.queued ? ` · ${w.queued} tin chờ gửi` : ''}${w.lastError ? ` · ${w.lastError}` : ''}`, 'bad');
+    } else {
+      row(system, 'Thông báo webhook', `Bật · ${w.sent} đã gửi${w.lastSentAt ? ` · gần nhất ${fmtTime(w.lastSentAt)}` : ''}`, 'ok');
+    }
     row(system, 'Node.js', data.node, 'muted');
 
     const report = $('report');
@@ -151,6 +158,20 @@
       report.dataset.level = r.level;
       setText('reportTitle', `${REPORT_TEXT[r.level] || ''} trong ${r.windowMin} phút qua`);
       setText('reportWhen', `${fmtTime(r.at)} · ${r.errors} lỗi, ${r.warnings} cảnh báo, ${r.disconnects} lần mất kết nối`);
+      setText('reportNet', [
+        r.ping && r.ping.avg !== null ? `Ping trung bình ${r.ping.avg}ms, cao nhất ${r.ping.max}ms.` : '',
+        r.lastDisconnectReason ? `Lý do mất kết nối: ${r.lastDisconnectReason}` : ''
+      ].filter(Boolean).join(' '));
+      const issues = $('reportIssues');
+      issues.replaceChildren();
+      for (const item of r.issues || []) {
+        const li = document.createElement('li');
+        li.dataset.level = item.level;
+        const p = document.createElement('p');
+        p.textContent = `${item.count > 1 ? `×${item.count} ` : ''}${item.message}`;
+        li.append(p);
+        issues.appendChild(li);
+      }
     } else {
       report.hidden = true;
       $('reportEmpty').hidden = false;

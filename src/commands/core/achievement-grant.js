@@ -1,7 +1,7 @@
 const { SlashCommandBuilder, PermissionFlagsBits, EmbedBuilder } = require('discord.js');
-const { awardAchievement } = require('../../services/gzwCore');
+const { awardAchievement } = require('../../services/coreLogic');
 const perm = require('../../services/perm');
-const gzw = require('../../config/gzw');
+const gzw = require('../../config/core');
 const safety = require('../../database/safety');
 
 module.exports = {

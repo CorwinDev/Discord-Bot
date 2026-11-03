@@ -4,7 +4,7 @@ const eco = require('../../database/economy');
 const { audit } = require('../../database/safety');
 const { getUser } = require('../../database/levels');
 const perm = require('../../services/perm');
-const { coin } = require('../../services/gzwUi');
+const { coin } = require('../../services/coreUi');
 const mg = require('../../config/management');
 
 const staffOnly = (i) => (perm.has(i.member, 'mod') || perm.has(i.member, 'support')) ? null : '❌ Lệnh này dành cho nhân sự (mod/support).';

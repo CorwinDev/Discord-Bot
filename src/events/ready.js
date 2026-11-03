@@ -4,6 +4,7 @@ const giveaways = require('../services/giveaways');
 const { startBirthdayScheduler } = require('../services/birthdays');
 const { runChecks, format } = require('../services/serverCheck');
 const { logToStaff } = require('../services/modTools');
+const { startVoiceHeartbeat } = require('../database/activity');
 
 module.exports = {
   name: 'clientReady',
@@ -18,6 +19,7 @@ module.exports = {
     if (aborted) console.log(`ℹ️  Đã huỷ ${aborted} trận dang dở từ lần chạy trước (không thưởng).`);
     giveaways.startScheduler(client);
     startBirthdayScheduler(client);
+    startVoiceHeartbeat(client);
     // Kiểm tra cấu hình khi khởi động (không chặn bot nếu lỗi)
     for (const guild of client.guilds.cache.values()) {
       try {

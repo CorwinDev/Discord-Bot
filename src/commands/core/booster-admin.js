@@ -1,8 +1,8 @@
 const { SlashCommandBuilder, EmbedBuilder } = require('discord.js');
 const boosters = require('../../database/boosters');
 const boosterPerks = require('../../services/boosterPerks');
-const { fmt, coin } = require('../../services/gzwUi');
-const gzw = require('../../config/gzw');
+const { fmt, coin } = require('../../services/coreUi');
+const gzw = require('../../config/core');
 const safety = require('../../database/safety');
 const perm = require('../../services/perm');
 

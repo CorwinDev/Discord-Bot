@@ -20,6 +20,84 @@ db.exec(`
     PRIMARY KEY (guildId, userId)
   );
 
+  CREATE TABLE IF NOT EXISTS chat_activity (
+    guildId TEXT NOT NULL,
+    userId TEXT NOT NULL,
+    messageCount INTEGER NOT NULL DEFAULT 0,
+    PRIMARY KEY (guildId, userId)
+  );
+  CREATE TABLE IF NOT EXISTS chat_activity_periods (
+    guildId TEXT NOT NULL,
+    userId TEXT NOT NULL,
+    periodType TEXT NOT NULL CHECK (periodType IN ('day', 'week')),
+    periodKey TEXT NOT NULL,
+    messageCount INTEGER NOT NULL DEFAULT 0,
+    PRIMARY KEY (guildId, userId, periodType, periodKey)
+  );
+  CREATE TABLE IF NOT EXISTS voice_totals (
+    guildId TEXT NOT NULL,
+    userId TEXT NOT NULL,
+    totalMs INTEGER NOT NULL DEFAULT 0,
+    PRIMARY KEY (guildId, userId)
+  );
+  CREATE TABLE IF NOT EXISTS voice_activity_periods (
+    guildId TEXT NOT NULL,
+    userId TEXT NOT NULL,
+    periodType TEXT NOT NULL CHECK (periodType IN ('day', 'week')),
+    periodKey TEXT NOT NULL,
+    totalMs INTEGER NOT NULL DEFAULT 0,
+    PRIMARY KEY (guildId, userId, periodType, periodKey)
+  );
+  CREATE TABLE IF NOT EXISTS voice_sessions (
+    guildId TEXT NOT NULL,
+    userId TEXT NOT NULL,
+    channelId TEXT NOT NULL,
+    joinedAt INTEGER NOT NULL,
+    lastHeartbeatAt INTEGER NOT NULL,
+    periodizedAt INTEGER NOT NULL,
+    PRIMARY KEY (guildId, userId)
+  );
+
+  CREATE TABLE IF NOT EXISTS werewolf_games (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    guildId TEXT NOT NULL,
+    channelId TEXT NOT NULL,
+    hostId TEXT NOT NULL,
+    lobbyMessageId TEXT,
+    phase TEXT NOT NULL DEFAULT 'lobby' CHECK (phase IN ('lobby', 'night', 'day', 'finished')),
+    status TEXT NOT NULL DEFAULT 'lobby' CHECK (status IN ('lobby', 'active', 'finished', 'cancelled')),
+    round INTEGER NOT NULL DEFAULT 0,
+    createdAt INTEGER NOT NULL,
+    startedAt INTEGER,
+    updatedAt INTEGER NOT NULL
+  );
+  CREATE UNIQUE INDEX IF NOT EXISTS idx_werewolf_active_channel
+    ON werewolf_games (guildId, channelId) WHERE status IN ('lobby', 'active');
+  CREATE TABLE IF NOT EXISTS werewolf_players (
+    gameId INTEGER NOT NULL,
+    userId TEXT NOT NULL,
+    role TEXT NOT NULL DEFAULT 'pending',
+    alive INTEGER NOT NULL DEFAULT 1,
+    joinedAt INTEGER NOT NULL,
+    PRIMARY KEY (gameId, userId)
+  );
+  CREATE TABLE IF NOT EXISTS werewolf_actions (
+    gameId INTEGER NOT NULL,
+    round INTEGER NOT NULL,
+    phase TEXT NOT NULL CHECK (phase IN ('night', 'day')),
+    userId TEXT NOT NULL,
+    action TEXT NOT NULL CHECK (action IN ('kill', 'inspect', 'protect', 'vote')),
+    targetId TEXT NOT NULL,
+    createdAt INTEGER NOT NULL,
+    PRIMARY KEY (gameId, round, phase, userId)
+  );
+  CREATE TABLE IF NOT EXISTS werewolf_settings (
+    guildId TEXT PRIMARY KEY,
+    channelId TEXT NOT NULL,
+    panelMessageId TEXT,
+    updatedAt INTEGER NOT NULL
+  );
+
   CREATE TABLE IF NOT EXISTS warnings (
     id INTEGER PRIMARY KEY AUTOINCREMENT,
     guildId TEXT NOT NULL,
@@ -120,6 +198,71 @@ if (!guildSettingsCols.includes('welcomeMessage')) {
 }
 if (!guildSettingsCols.includes('welcomeTitle')) {
   db.exec('ALTER TABLE guild_settings ADD COLUMN welcomeTitle TEXT');
+}
+
+db.exec(`
+  CREATE TABLE IF NOT EXISTS social_settings (
+    guildId TEXT PRIMARY KEY,
+    confessionChannelId TEXT NOT NULL,
+    tinderChannelId TEXT NOT NULL,
+    feedbackChannelId TEXT,
+    updatedAt INTEGER NOT NULL
+  );
+
+  CREATE TABLE IF NOT EXISTS dating_profiles (
+    guildId TEXT NOT NULL,
+    userId TEXT NOT NULL,
+    age INTEGER NOT NULL CHECK (age >= 18),
+    bio TEXT NOT NULL,
+    lookingFor TEXT NOT NULL CHECK (lookingFor IN ('friendship', 'dating', 'both')),
+    enabled INTEGER NOT NULL DEFAULT 1,
+    consentedAt INTEGER NOT NULL,
+    updatedAt INTEGER NOT NULL,
+    PRIMARY KEY (guildId, userId)
+  );
+
+  CREATE TABLE IF NOT EXISTS dating_swipes (
+    guildId TEXT NOT NULL,
+    fromUserId TEXT NOT NULL,
+    toUserId TEXT NOT NULL,
+    action TEXT NOT NULL CHECK (action IN ('like', 'pass')),
+    createdAt INTEGER NOT NULL,
+    PRIMARY KEY (guildId, fromUserId, toUserId),
+    CHECK (fromUserId != toUserId)
+  );
+
+  CREATE TABLE IF NOT EXISTS dating_matches (
+    guildId TEXT NOT NULL,
+    userA TEXT NOT NULL,
+    userB TEXT NOT NULL,
+    createdAt INTEGER NOT NULL,
+    PRIMARY KEY (guildId, userA, userB),
+    CHECK (userA < userB)
+  );
+  CREATE TABLE IF NOT EXISTS dating_match_queue (
+    guildId TEXT NOT NULL,
+    userId TEXT NOT NULL,
+    queuedAt INTEGER NOT NULL,
+    PRIMARY KEY (guildId, userId)
+  );
+  CREATE TABLE IF NOT EXISTS dating_match_chats (
+    guildId TEXT NOT NULL,
+    userA TEXT NOT NULL,
+    userB TEXT NOT NULL,
+    threadId TEXT,
+    status TEXT NOT NULL DEFAULT 'creating' CHECK (status IN ('creating', 'active', 'failed', 'ended')),
+    createdAt INTEGER NOT NULL,
+    updatedAt INTEGER NOT NULL,
+    PRIMARY KEY (guildId, userA, userB),
+    CHECK (userA < userB)
+  );
+  CREATE INDEX IF NOT EXISTS idx_dating_profiles_enabled ON dating_profiles (guildId, enabled, updatedAt);
+  CREATE INDEX IF NOT EXISTS idx_dating_swipes_target ON dating_swipes (guildId, toUserId, action);
+
+`);
+
+for (const table of ['donation_transactions', 'donation_orders', 'donation_settings', 'payment_events', 'payment_orders']) {
+  db.exec(`DROP TABLE IF EXISTS ${table}`);
 }
 
 // ===== Migration: idempotency cho sổ cái (refId) =====
@@ -426,7 +569,7 @@ db.exec(`
     kind TEXT NOT NULL,          -- coin | item
     amount INTEGER NOT NULL DEFAULT 0,
     itemId TEXT,
-    context TEXT,                -- donate | gift | spectator
+    context TEXT,                -- gift | transfer | spectator
     note TEXT,
     createdAt INTEGER NOT NULL
   );
@@ -544,15 +687,8 @@ if (!boostCols.includes('source')) db.exec("ALTER TABLE boost_events ADD COLUMN 
 if (!boostCols.includes('linkedTo')) db.exec('ALTER TABLE boost_events ADD COLUMN linkedTo INTEGER');
 db.exec("UPDATE boost_events SET status = 'PENDING' WHERE status = 'REVIEW'");
 
-// ===== Migration: gỡ bảng thanh toán QR cũ (tính năng đã bị loại bỏ) =====
-// Chỉ xoá khi bảng trống. Nếu còn dữ liệu đơn hàng cũ, GIỮ LẠI để bạn xuất/lưu trữ rồi tự xoá.
-for (const t of ['payment_events', 'payment_orders']) {
-  const exists = db.prepare("SELECT 1 FROM sqlite_master WHERE type = 'table' AND name = ?").get(t);
-  if (!exists) continue;
-  const n = db.prepare(`SELECT COUNT(*) AS n FROM ${t}`).get().n;
-  if (n === 0) db.exec(`DROP TABLE ${t}`);
-  else console.warn(`⚠️  Bảng ${t} còn ${n} dòng dữ liệu cũ (tính năng thanh toán đã bị gỡ). Hãy sao lưu rồi xoá: DROP TABLE ${t};`);
+for (const table of ['donation_transactions', 'donation_orders', 'donation_settings', 'payment_events', 'payment_orders']) {
+  db.exec(`DROP TABLE IF EXISTS ${table}`);
 }
-
 db.filePath = DB_FILE;
 module.exports = db;

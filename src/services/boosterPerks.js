@@ -1,6 +1,6 @@
-const gzw = require('../config/gzw');
+const gzw = require('../config/core');
 const boosters = require('../database/boosters');
-const { awardAchievement } = require('./gzwCore');
+const { awardAchievement } = require('./coreLogic');
 
 const perkRole = (guild) => (gzw.booster.perkRoleName ? guild.roles.cache.find((r) => r.name === gzw.booster.perkRoleName) : null);
 

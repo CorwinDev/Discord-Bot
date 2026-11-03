@@ -1,4 +1,4 @@
-const gzw = require('../config/gzw');
+const gzw = require('../config/core');
 const eco = require('../database/economy');
 
 const fmt = (n) => Number(n).toLocaleString('vi-VN');

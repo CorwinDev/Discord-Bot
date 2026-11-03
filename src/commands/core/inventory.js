@@ -2,7 +2,7 @@ const {
   SlashCommandBuilder, EmbedBuilder, ActionRowBuilder, ButtonBuilder, ButtonStyle, StringSelectMenuBuilder, ComponentType
 } = require('discord.js');
 const eco = require('../../database/economy');
-const { colorFor } = require('../../services/gzwUi');
+const { colorFor } = require('../../services/coreUi');
 
 function buildView(gid, uid) {
   const wallet = eco.getWallet(gid, uid);

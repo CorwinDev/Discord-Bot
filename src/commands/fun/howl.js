@@ -1,5 +1,5 @@
 const { SlashCommandBuilder, EmbedBuilder } = require('discord.js');
-const gzw = require('../../config/gzw');
+const gzw = require('../../config/core');
 
 const HOWLS = [
   'Đàn sói mạnh nhờ từng con sói biết giữ nhịp cho cả bầy.',

@@ -3,7 +3,7 @@ const mgdb = require('../../database/management');
 const { audit } = require('../../database/safety');
 const perm = require('../../services/perm');
 const ui = require('../../services/eventsUi');
-const gzw = require('../../config/gzw');
+const gzw = require('../../config/core');
 
 /** "YYYY-MM-DD HH:mm" theo múi giờ của server (gzw.utcOffsetHours) -> timestamp UTC */
 function parseTime(s) {

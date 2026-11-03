@@ -1,7 +1,7 @@
-const gzw = require('../config/gzw');
+const gzw = require('../config/core');
 const db = require('../database/db');
 const T = require('../database/tournaments');
-const { fmt, coin } = require('./gzwUi');
+const { fmt, coin } = require('./coreUi');
 
 const STATUS = {
   DRAFT: '📝 Nháp (chưa công bố)', OPEN: '🟢 Đang mở đăng ký', RUNNING: '⚔️ Đang diễn ra',

@@ -1,5 +1,5 @@
 const db = require('./db');
-const gzw = require('../config/gzw');
+const gzw = require('../config/core');
 
 /* ============ Audit log (chỉ thêm, không sửa/xoá) ============ */
 function audit(guildId, actorId, action, targetId = null, detail = null) {

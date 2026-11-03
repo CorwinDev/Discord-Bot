@@ -1,5 +1,5 @@
 const db = require('./db');
-const gzw = require('../config/gzw');
+const gzw = require('../config/core');
 
 /* ============ Thời gian: chia ngày/tuần theo múi giờ cấu hình ============ */
 const DAY_MS = 86400000;

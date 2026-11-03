@@ -1,6 +1,6 @@
 const { PermissionFlagsBits } = require('discord.js');
 const mg = require('../config/management');
-const gzw = require('../config/gzw');
+const gzw = require('../config/core');
 
 const NEED_PERMS = ['ManageRoles', 'ModerateMembers', 'KickMembers', 'BanMembers', 'ManageChannels', 'ManageMessages', 'ViewChannel', 'SendMessages', 'EmbedLinks'];
 

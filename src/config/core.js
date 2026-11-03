@@ -3,8 +3,6 @@
  * Mọi con số ở đây là GIÁ TRỊ KHỞI ĐẦU để thử nghiệm, hãy chỉnh sau khi quan sát
  * dữ liệu thật (coin kiếm ra / tiêu đi mỗi ngày) để tránh lạm phát.
  */
-require('dotenv').config();
-
 module.exports = {
   brandColor: 0x8b5cf6, // tím GZW
   currency: { name: 'GZW Coin', emoji: '🪙' },
@@ -130,15 +128,11 @@ module.exports = {
     }
   ],
 
-  // Hạn mức an toàn cho tặng coin / vật phẩm (mọi con số có thể chỉnh)
+  // Hạn mức an toàn cho tặng vật phẩm.
   transfer: {
-    minAmount: 10,
-    maxPerTx: 2000,
-    dailySentCap: 5000,      // tổng coin gửi tối đa mỗi ngày
-    dailyTxCap: 10,          // số giao dịch tặng (coin + vật phẩm) tối đa mỗi ngày
+    dailyTxCap: 10,          // số giao dịch tặng vật phẩm tối đa mỗi ngày
     minSenderLevel: 1,       // cấp chat tối thiểu để gửi (chống tài khoản phụ mới tạo)
-    reciprocalWindowHours: 24, // chặn A gửi B nếu B đã gửi A trong khoảng này (chống farm qua lại)
-    spectatorGift: 20        // số coin của nút "Tặng" khi xem trận
+    reciprocalWindowHours: 24 // chặn A gửi B nếu B đã gửi A trong khoảng này (chống farm qua lại)
   },
 
   // Module có thể bị admin tạm dừng bằng /gzw-admin pause
@@ -171,6 +165,7 @@ module.exports = {
   community: {
     suggestionChannelName: 'goi-y',
     birthdayChannelName: 'sinh-nhat',
+    confessionChannelName: 'confession',
     maxWinners: 10,
     maxGiveawayDays: 30
   },

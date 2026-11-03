@@ -1,6 +1,6 @@
 const { SlashCommandBuilder, PermissionFlagsBits } = require('discord.js');
 const db = require('../../database/db');
-const gzw = require('../../config/gzw');
+const gzw = require('../../config/core');
 const gw = require('../../services/giveaways');
 const safety = require('../../database/safety');
 

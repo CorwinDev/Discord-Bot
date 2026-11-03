@@ -3,7 +3,7 @@ const perm = require('../../services/perm');
 const { audit } = require('../../database/safety');
 const { runChecks, format } = require('../../services/serverCheck');
 const mg = require('../../config/management');
-const gzw = require('../../config/gzw');
+const gzw = require('../../config/core');
 
 const roleOpts = (s, n = 5) => { for (let i = 1; i <= n; i++) s.addRoleOption((o) => o.setName(`role${i}`).setDescription(`Role ${i}`).setRequired(i === 1)); return s; };
 

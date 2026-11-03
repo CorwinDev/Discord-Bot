@@ -1,6 +1,6 @@
 const { EmbedBuilder, ActionRowBuilder, ButtonBuilder, ButtonStyle } = require('discord.js');
 const db = require('../database/db');
-const gzw = require('../config/gzw');
+const gzw = require('../config/core');
 
 const ts = (ms) => `<t:${Math.floor(ms / 1000)}:R>`;
 const entryCount = (id) => db.prepare('SELECT COUNT(*) AS n FROM giveaway_entries WHERE giveawayId = ?').get(id).n;

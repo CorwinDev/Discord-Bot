@@ -3,10 +3,9 @@ const {
 } = require('discord.js');
 const gm = require('../../database/games');
 const safety = require('../../database/safety');
-const { confirmTransfer } = require('../../services/transferUi');
-const { checkAutoAchievements, flashNotice } = require('../../services/gzwCore');
-const { coin, fmt } = require('../../services/gzwUi');
-const gzw = require('../../config/gzw');
+const { checkAutoAchievements, flashNotice } = require('../../services/coreLogic');
+const { coin, fmt } = require('../../services/coreUi');
+const gzw = require('../../config/core');
 
 const G = gzw.games;
 const LETTERS = ['A', 'B', 'C', 'D'];
@@ -78,7 +77,6 @@ function matchEmbed(state, extra = {}) {
   return e;
 }
 function matchComponents(state, disabled = false) {
-  const { m } = state;
   const rows = [answerRow(disabled, 'd_ans')];
   rows.push(new ActionRowBuilder().addComponents(
     new ButtonBuilder().setCustomId('d_pred_1').setLabel('Dự đoán P1').setEmoji('🔮').setStyle(ButtonStyle.Secondary).setDisabled(disabled || state.roundsDone > 0),
@@ -86,14 +84,10 @@ function matchComponents(state, disabled = false) {
     new ButtonBuilder().setCustomId('d_cheer_fire').setEmoji('🔥').setStyle(ButtonStyle.Secondary).setDisabled(disabled),
     new ButtonBuilder().setCustomId('d_cheer_clap').setEmoji('👏').setStyle(ButtonStyle.Secondary).setDisabled(disabled)
   ));
-  rows.push(new ActionRowBuilder().addComponents(
-    new ButtonBuilder().setCustomId('d_gift_1').setLabel(`Tặng P1 ${gzw.transfer.spectatorGift}🪙`).setStyle(ButtonStyle.Success).setDisabled(disabled),
-    new ButtonBuilder().setCustomId('d_gift_2').setLabel(`Tặng P2 ${gzw.transfer.spectatorGift}🪙`).setStyle(ButtonStyle.Success).setDisabled(disabled)
-  ));
   return rows;
 }
 
-async function runDuel(interaction, message, m, usersById) {
+async function runDuel(interaction, message, m) {
   const gid = m.guildId;
   const questions = pickQuestions(G.duel.rounds);
   const state = { m, scores: [0, 0], round: 0, question: null, deadline: null, roundsDone: 0, locked: new Set(), open: false, roundResolve: null };
@@ -140,12 +134,6 @@ async function runDuel(interaction, message, m, usersById) {
         return btn.reply({ content: r.ok ? '📣 Đã cổ vũ!' : '⏳ Chờ vài giây rồi cổ vũ tiếp nhé.', ephemeral: true });
       }
 
-      if (id === 'd_gift_1' || id === 'd_gift_2') {
-        const toId = id === 'd_gift_1' ? m.p1 : m.p2;
-        return confirmTransfer(btn, {
-          toUser: usersById[toId], kind: 'coin', amount: gzw.transfer.spectatorGift, context: 'spectator', announce: false
-        });
-      }
     } catch (err) {
       console.error('⚠️  Lỗi duel button:', err);
     }
@@ -241,7 +229,6 @@ async function duel(interaction) {
       return btn.update({ content: btn.user.id === challenger.id ? '🚫 Người thách đấu đã huỷ.' : '🚫 Lời thách đấu bị từ chối.', embeds: [], components: [] });
     }
     if (btn.customId !== 'duel_accept' || started) return;
-    // kiểm tra lại ngay trước khi bắt đầu
     if (safety.gate(gid, challenger.id, 'games', true) || safety.gate(gid, target.id, 'games', true) ||
         gm.isInActiveMatch(gid, challenger.id) || gm.isInActiveMatch(gid, target.id)) {
       collector.stop('invalid');
@@ -253,7 +240,7 @@ async function duel(interaction) {
     await btn.update({ content: '', embeds: [new EmbedBuilder().setColor(gzw.brandColor).setDescription('⚔️ Chuẩn bị…')], components: [] });
     gm.setMatchMessage(matchId, message.id);
     const m = gm.getMatch(matchId);
-    runDuel(interaction, message, m, { [challenger.id]: challenger, [target.id]: target })
+    runDuel(interaction, message, m)
       .catch((err) => { console.error('❌ runDuel:', err); gm.abortMatch(matchId); });
   });
   collector.on('end', (_c, reason) => {

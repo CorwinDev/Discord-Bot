@@ -2,8 +2,8 @@ const { SlashCommandBuilder, EmbedBuilder, AttachmentBuilder } = require('discor
 const mgdb = require('../../database/management');
 const { audit, economyStats } = require('../../database/safety');
 const perm = require('../../services/perm');
-const gzw = require('../../config/gzw');
-const { fmt } = require('../../services/gzwUi');
+const gzw = require('../../config/core');
+const { fmt } = require('../../services/coreUi');
 
 module.exports = {
   group: 'GZW Management',

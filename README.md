@@ -1,6 +1,6 @@
 # Discord Bot
 
-Bot Discord đa chức năng: quản trị, chào mừng/vai trò, tiện ích, nhạc, hệ thống level.
+Bot Discord đa chức năng: quản trị, chào mừng/vai trò, tiện ích, cộng đồng, kinh tế và level.
 
 ## Cài đặt
 
@@ -19,7 +19,7 @@ GUILD_ID=id_server_dùng_để_test  # có thể để trống nếu deploy glob
 Lấy token & application ID tại: https://discord.com/developers/applications
 Khi tạo bot, bật 3 **Privileged Gateway Intents**: `SERVER MEMBERS INTENT`, `MESSAGE CONTENT INTENT`, (và `PRESENCE INTENT` nếu cần sau này).
 
-Mời bot vào server với quyền tối thiểu: `applications.commands` + `bot` scope, permissions gồm: Manage Roles, Kick Members, Ban Members, Moderate Members, Manage Messages, Manage Channels, Connect, Speak.
+Mời bot vào server với quyền tối thiểu: `applications.commands` + `bot` scope, permissions gồm: Manage Roles, Kick Members, Ban Members, Moderate Members, Manage Messages, Manage Channels.
 
 ## Chạy
 
@@ -38,6 +38,7 @@ Nếu có `GUILD_ID` trong `.env`, lệnh được đăng ký riêng cho server 
 - **Tiện ích**: `/ping`, `/help`, `/userinfo`, `/serverinfo`, `/poll`, `/remind`, hệ thống ticket hỗ trợ (`/ticket-setup` + nút bấm tạo/đóng kênh riêng)
 - **Thông báo sự kiện**: `/announce-event` — embed + nút bấm liên kết đến kênh voice, dùng cho sự kiện/stream hợp lệ của server (họp mặt, buổi nói chuyện, stream của chính server...)
 - **Nối Từ**: game từ điển tiếng Việt offline, chế độ chơi với bot hoặc PvP, gợi ý và thống kê riêng theo server.
+- **Cộng đồng**: `/social` cho hồ sơ tự nguyện, confession và feedback.
 
 ### Nối Từ
 
@@ -61,6 +62,10 @@ Sau khi bot ở trong server và đã chạy `npm run deploy`, quản trị viê
 
 Placeholder hỗ trợ: `{mention}`, `{user}`, `{server}`, `{count}`, `{id}`. Có thể đặt role thành viên mới bằng `/welcome autorole role:@Member`, hoặc tắt bằng `/welcome clear-autorole`. Role tự động không được là role quản trị/nhân sự và phải thấp hơn role cao nhất của bot. Kênh welcome, role auto và các kênh log/sự kiện đều là tùy chọn; chưa cấu hình thì tính năng tương ứng tự bỏ qua. Role nhân sự có thể tạo theo tên trong `src/config/management.js`, sau đó dùng `/staff assign` để cấp/gỡ cho thành viên.
 
+### Social
+
+Quản trị viên chạy `/setup social` để chọn kênh confession và Tinder. Thành viên dùng `/social profile` để tự nguyện tạo hồ sơ (18+ tự xác nhận), `/social discover` để xem hồ sơ riêng tư trong kênh đã chọn, `/social pause` để ẩn, hoặc `/social erase` để xóa hồ sơ/lượt tương tác/kết nối. Chỉ khi hai bên cùng thích, bot mới gửi DM cho cả hai. Confession không lưu Discord ID người gửi; feedback có tên người gửi.
+
 ## GZW CORE (giai đoạn 02: coin, nhiệm vụ, shop, thành tích)
 
 Lệnh mới (nhóm `GZW CORE`): `/balance`, `/daily`, `/hunt`, `/quests`, `/shop`, `/inventory`, `/profile`, `/achievements`, `/coin-history`, `/booster`, `/leaderboard loai:coin`.
@@ -72,7 +77,7 @@ Cách hoạt động:
 - **Ngày/tuần** tính theo UTC+7 (đổi ở `utcOffsetHours`).
 - **Thành tích** lưu vĩnh viễn và gán role cùng tên nếu role tồn tại (tạo role đúng tên trong `src/config/gzw.js`, và đặt role của bot **cao hơn** các role đó). Thành tích thủ công (giải đấu, vinh danh) do admin trao bằng `/achievement-grant`, không bán trong shop.
 - **Shop** chỉ bán vật phẩm trang trí (danh hiệu, khung hồ sơ, huy hiệu sưu tầm).
-- Toàn bộ con số (thưởng, trần, giá, nhiệm vụ) nằm trong `src/config/gzw.js` — là giá trị khởi đầu, cần chỉnh theo dữ liệu thật.
+- Toàn bộ con số (thưởng, trần, giá, nhiệm vụ) nằm trong `src/config/core.js` — là giá trị khởi đầu, cần chỉnh theo dữ liệu thật.
 
 ## 🐺 GZW Booster Appreciation
 
@@ -107,7 +112,7 @@ Sau khi cập nhật code: `npm install` (nếu chưa), `npm run deploy` để �
 
 Bản này hợp nhất các nhánh trước đó: **v4/v4_1** (Booster, giải đấu) và **v2_1** (Upgrade Center, Game Hub, tặng quà, nhật ký/tạm dừng module).
 - Mini-game săn mồi dùng lệnh **`/hunt`**.
-- Tặng coin/vật phẩm dùng hệ thống `/coin donate`, `/gift`, `/transaction` (có hạn mức, chống chuyển qua lại, mã giao dịch `TX-xxxx`). Lệnh `/coin-donate` của nhánh v4 được thay bằng hệ thống này để không có hai sổ chuyển coin song song.
+- Tặng coin/vật phẩm dùng hệ thống `/gift`, `/transaction` (có hạn mức, chống chuyển qua lại, mã giao dịch `TX-xxxx`).
 - `/gzw-admin` gồm: `economy`, `audit`, `pause`, `resume`, `status` (kinh tế & an toàn) và nhóm `tournament …` (giải đấu).
 - Quyền lợi Booster theo bản v4_1: role `perkRoleName` được gán khi đang boost và gỡ khi hết boost; huy hiệu `server_booster` và coin được giữ.
 
@@ -142,9 +147,8 @@ src/
 Thêm lệnh mới: tạo file trong `src/commands/<nhóm>/`, export `{ data: SlashCommandBuilder, execute(interaction, client) }`, rồi chạy lại `npm run deploy`.
 Thêm event mới: tạo file trong `src/events/`, export `{ name, once?, execute(...args, client) }`.
 
-## Thay đổi v10: gỡ thanh toán QR, chỉnh Booster
+## Thay đổi v10: gỡ module mua coin cũ, chỉnh Booster
 
-- **Đã loại bỏ**: QR mua coin, các gói mua coin bằng tiền Việt, `/coin-shop`, `/payment-status`, `/payment-admin`, `database/payments.js`, cấu hình `payment` và các biến `PAYMENT_*` trong `.env`.
-- **Bảng cũ**: `payment_orders`, `payment_events` không còn được tạo. Khi khởi động, nếu hai bảng này **trống** thì bot tự xoá; nếu **còn dữ liệu đơn cũ** bot giữ lại và in cảnh báo để bạn sao lưu rồi tự `DROP TABLE`. Các bút toán `purchase` cũ trong `coin_ledger` vẫn được giữ (sổ cái bất biến) và hiển thị là "Nạp coin (cũ)".
+- **Đã loại bỏ**: giao diện mua coin cũ, các gói mua coin theo QR/tiền Việt, cấu hình thanh toán cũ và các biến môi trường không còn dùng.
 - **Vẫn giữ nguyên**: ví coin, shop, nhiệm vụ, mini-game, sự kiện, giải đấu, quản trị server.
-- Chạy lại `npm run deploy` để gỡ các lệnh thanh toán khỏi Discord.
+- Chạy lại `npm run deploy` để đồng bộ lệnh đã cập nhật trên Discord.

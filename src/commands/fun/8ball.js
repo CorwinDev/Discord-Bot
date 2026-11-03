@@ -1,5 +1,5 @@
 const { SlashCommandBuilder, EmbedBuilder } = require('discord.js');
-const gzw = require('../../config/gzw');
+const gzw = require('../../config/core');
 
 const ANSWERS = [
   'Chắc chắn rồi.', 'Có vẻ ổn đấy.', 'Mọi dấu hiệu đều nói là có.', 'Cứ làm đi, đừng ngần ngại.',

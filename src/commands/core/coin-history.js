@@ -1,11 +1,17 @@
 const { SlashCommandBuilder, EmbedBuilder } = require('discord.js');
 const eco = require('../../database/economy');
-const { coin, colorFor, fmt } = require('../../services/gzwUi');
+const { coin, colorFor, fmt } = require('../../services/coreUi');
 
 const SOURCE_LABEL = {
   daily: 'Daily', play: 'Mini-game', quest: 'Nhiệm vụ', achievement: 'Thành tích', shop: 'Shop', admin: 'Quản trị',
   purchase: 'Nạp coin (cũ)', booster: 'Booster', tournament: 'Giải đấu', duel: 'Duel', quiz: 'Quiz',
-  upgrade: 'Nâng cấp', donate_in: 'Nhận coin', donate_out: 'Tặng coin', gift_shop: 'Tặng quà'
+  upgrade: 'Nâng cấp', transfer_in: 'Nhận coin', transfer_out: 'Tặng coin', gift_shop: 'Tặng quà'
+};
+
+const resolveSource = (source) => {
+  if (source === 'donate_in') return 'Nhận coin';
+  if (source === 'donate_out') return 'Tặng coin';
+  return SOURCE_LABEL[source] || source;
 };
 
 module.exports = {
@@ -21,7 +27,8 @@ module.exports = {
     const lines = rows.map((r) => {
       const sign = r.amount > 0 ? '＋' : '－';
       const ts = Math.floor(r.createdAt / 1000);
-      return `${sign} **${fmt(Math.abs(r.amount))}** · ${SOURCE_LABEL[r.source] || r.source}${r.reason && r.source !== 'admin' ? ` (${r.reason})` : ''} · <t:${ts}:R>`;
+      const sourceLabel = resolveSource(r.source);
+      return `${sign} **${fmt(Math.abs(r.amount))}** · ${sourceLabel}${r.reason && r.source !== 'admin' ? ` (${r.reason})` : ''} · <t:${ts}:R>`;
     });
     const embed = new EmbedBuilder()
       .setColor(colorFor(eco.getWallet(gid, uid)))

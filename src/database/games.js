@@ -1,5 +1,5 @@
 const db = require('./db');
-const gzw = require('../config/gzw');
+const gzw = require('../config/core');
 const eco = require('./economy');
 
 const G = gzw.games;

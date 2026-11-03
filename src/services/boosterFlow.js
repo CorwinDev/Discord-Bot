@@ -1,9 +1,9 @@
 const { EmbedBuilder } = require('discord.js');
 const boosters = require('../database/boosters');
 const boosterPerks = require('./boosterPerks');
-const { coin } = require('./gzwUi');
+const { coin } = require('./coreUi');
 const { notifyStaffLog } = require('./boosterNotify');
-const gzw = require('../config/gzw');
+const gzw = require('../config/core');
 
 /**
  * Luồng chung cho mọi sự kiện Boost đã được Discord xác nhận:

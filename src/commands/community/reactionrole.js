@@ -2,7 +2,7 @@ const {
   SlashCommandBuilder, PermissionFlagsBits, EmbedBuilder, ActionRowBuilder, ButtonBuilder, ButtonStyle
 } = require('discord.js');
 const db = require('../../database/db');
-const gzw = require('../../config/gzw');
+const gzw = require('../../config/core');
 const safety = require('../../database/safety');
 
 module.exports = {

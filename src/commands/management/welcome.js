@@ -1,6 +1,6 @@
 const { SlashCommandBuilder, EmbedBuilder, ChannelType, PermissionFlagsBits } = require('discord.js');
 const db = require('../../database/db');
-const gzw = require('../../config/gzw');
+const gzw = require('../../config/core');
 const mg = require('../../config/management');
 const perm = require('../../services/perm');
 const { DEFAULT_TITLE, createWelcomePayload } = require('../../services/welcome');

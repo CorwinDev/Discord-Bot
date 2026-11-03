@@ -1,5 +1,5 @@
 const { SlashCommandBuilder, EmbedBuilder } = require('discord.js');
-const gzw = require('../../config/gzw');
+const gzw = require('../../config/core');
 
 module.exports = {
   group: 'Giải trí',

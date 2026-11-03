@@ -1,6 +1,6 @@
 const { EmbedBuilder, ActionRowBuilder, ButtonBuilder, ButtonStyle } = require('discord.js');
 const mgdb = require('../database/management');
-const gzw = require('../config/gzw');
+const gzw = require('../config/core');
 
 function eventEmbed(e) {
   const st = mgdb.eventStats(e.id);

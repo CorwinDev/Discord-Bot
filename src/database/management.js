@@ -1,6 +1,6 @@
 const db = require('./db');
 const eco = require('./economy');
-const gzw = require('../config/gzw');
+const gzw = require('../config/core');
 const mg = require('../config/management');
 const { audit } = require('./safety');
 

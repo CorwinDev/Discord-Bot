@@ -1,6 +1,6 @@
 const { SlashCommandBuilder, EmbedBuilder } = require('discord.js');
 const T = require('../../database/tournaments');
-const gzw = require('../../config/gzw');
+const gzw = require('../../config/core');
 const ui = require('../../services/tournamentUi');
 
 const eph = (content) => ({ content, ephemeral: true });

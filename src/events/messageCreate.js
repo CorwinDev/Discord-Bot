@@ -1,11 +1,11 @@
-const { EmbedBuilder } = require('discord.js');
 const config = require('../config/config');
 const { addXp, canGainXp, xpForNextLevel } = require('../database/levels');
 const eco = require('../database/economy');
-const { checkAutoAchievements, flashNotice } = require('../services/gzwCore');
-const gzw = require('../config/gzw');
+const { checkAutoAchievements, flashNotice } = require('../services/coreLogic');
+const gzw = require('../config/core');
 const guard = require('../services/guard');
 const { isInviteLink } = require('../services/guardRules');
+const { recordChat } = require('../database/activity');
 
 // Theo dõi spam đơn giản trong bộ nhớ: Map<userId, number[]> (timestamps)
 const messageLog = new Map();
@@ -38,18 +38,13 @@ module.exports = {
       }
     }
 
+    recordChat(message.guild.id, message.author.id);
+
     // ---- Leveling / XP ----
     if (config.leveling.enabled && canGainXp(message.guild.id, message.author.id, config.leveling.cooldownSeconds)) {
       const [min, max] = config.leveling.xpPerMessage;
       const amount = Math.floor(Math.random() * (max - min + 1)) + min;
-      const { leveledUp, newLevel } = addXp(message.guild.id, message.author.id, amount);
-
-      if (leveledUp) {
-        const embed = new EmbedBuilder()
-          .setColor(config.colors.success)
-          .setDescription(`🎉 ${message.author} đã lên **cấp ${newLevel}**!`);
-        message.channel.send({ embeds: [embed] }).catch(() => {});
-      }
+      const { newLevel } = addXp(message.guild.id, message.author.id, amount);
 
       // ---- GZW CORE: nhiệm vụ chat + thành tích ----
       // Chỉ đếm khi được cộng XP (tối đa 1 lượt/cooldown) để chat spam không farm được nhiệm vụ.

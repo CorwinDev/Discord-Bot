@@ -5,9 +5,13 @@ const gw = require('../services/giveaways');
 /** Nút tham gia giveaway (gw_join_<id>) và nút nhận role (rr_<roleId>). */
 module.exports = {
   name: 'interactionCreate',
-  async execute(interaction) {
+  async execute(interaction, client) {
     if (!interaction.isButton() || !interaction.guild) return;
     const id = interaction.customId;
+
+    if (id.startsWith('dating:')) {
+      return require('../commands/community/social').handleButton(interaction, client);
+    }
 
     if (id.startsWith('gw_join_')) {
       const gid = Number(id.slice(8));

@@ -1,7 +1,7 @@
 const { SlashCommandBuilder, EmbedBuilder } = require('discord.js');
 const eco = require('../../database/economy');
 const { getUser, xpForNextLevel, getRank } = require('../../database/levels');
-const { coin, colorFor } = require('../../services/gzwUi');
+const { coin, colorFor } = require('../../services/coreUi');
 
 module.exports = {
   group: 'GZW CORE',

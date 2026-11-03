@@ -1,5 +1,5 @@
 const db = require('../database/db');
-const gzw = require('../config/gzw');
+const gzw = require('../config/core');
 
 /** Chúc mừng sinh nhật mỗi ngày (UTC+7), mỗi người chỉ một lần/năm. Quét mỗi 30 phút nên bot tắt/mở lại không bỏ sót. */
 function startBirthdayScheduler(client) {

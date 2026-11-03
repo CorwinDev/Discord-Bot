@@ -1,9 +1,9 @@
 const { SlashCommandBuilder, EmbedBuilder, PermissionFlagsBits } = require('discord.js');
 const T = require('../../database/tournaments');
 const db = require('../../database/db');
-const gzw = require('../../config/gzw');
-const { fmt, coin } = require('../../services/gzwUi');
-const { awardAchievement } = require('../../services/gzwCore');
+const gzw = require('../../config/core');
+const { fmt, coin } = require('../../services/coreUi');
+const { awardAchievement } = require('../../services/coreLogic');
 const ui = require('../../services/tournamentUi');
 const safety = require('../../database/safety');
 

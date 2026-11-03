@@ -1,6 +1,6 @@
 const { SlashCommandBuilder, EmbedBuilder } = require('discord.js');
 const db = require('../../database/db');
-const gzw = require('../../config/gzw');
+const gzw = require('../../config/core');
 
 const STATUS = { OPEN: '🟡 Đang xem xét', APPROVED: '🟢 Được chấp nhận', DENIED: '🔴 Bị từ chối' };
 

@@ -1,6 +1,6 @@
 const { SlashCommandBuilder } = require('discord.js');
 const { confirmTransfer } = require('../../services/transferUi');
-const gzw = require('../../config/gzw');
+const gzw = require('../../config/core');
 
 const tradable = gzw.shop.filter((i) => i.tradable);
 

@@ -3,8 +3,8 @@ const {
 } = require('discord.js');
 const eco = require('../../database/economy');
 const safety = require('../../database/safety');
-const { coin, colorFor, fmt } = require('../../services/gzwUi');
-const gzw = require('../../config/gzw');
+const { coin, colorFor, fmt } = require('../../services/coreUi');
+const gzw = require('../../config/core');
 
 function view(gid, uid) {
   const wallet = eco.getWallet(gid, uid);

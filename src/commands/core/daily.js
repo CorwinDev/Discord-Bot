@@ -1,8 +1,8 @@
 const { SlashCommandBuilder, EmbedBuilder } = require('discord.js');
 const eco = require('../../database/economy');
-const { coin, colorFor, fmt } = require('../../services/gzwUi');
-const { checkAutoAchievements } = require('../../services/gzwCore');
-const gzw = require('../../config/gzw');
+const { coin, colorFor, fmt } = require('../../services/coreUi');
+const { checkAutoAchievements } = require('../../services/coreLogic');
+const gzw = require('../../config/core');
 
 module.exports = {
   group: 'GZW CORE',

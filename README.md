@@ -37,6 +37,15 @@ npm start       # chạy bot
 
 Khi phát triển, dùng `npm run dev` để chạy chế độ theo dõi file. Command đăng ký theo server thường cập nhật ngay; command toàn cục có thể cần thời gian để Discord đồng bộ.
 
+## Cập nhật gần đây
+
+- **Tinder và ghép đôi:** thêm hồ sơ tự nguyện 18+, khám phá hồ sơ, hàng chờ ghép ngẫu nhiên và private chat sau khi hai người được ghép. Có thể tạm ẩn hoặc xóa hồ sơ.
+- **Confession và feedback:** gửi confession ẩn danh tới kênh đã cấu hình hoặc gửi feedback cho đội ngũ server.
+- **Thống kê chat/voice:** lưu số lượng tin nhắn và thời lượng tham gia voice theo tổng/ngày/tuần; thêm lựa chọn Chat và Voice cho `/leaderboard`. Không lưu nội dung tin nhắn.
+- **Ma Sói:** thêm lobby 5–16 người, chia vai trò qua DM, hành động ban đêm và bỏ phiếu ban ngày.
+- **Bỏ thanh toán cũ:** loại bỏ luồng donate/SePay; vẫn giữ ví GZW Coin và sổ cái giao dịch.
+- **Các file chính:** `src/commands/community/social.js`, `src/commands/community/setup.js`, `src/database/activity.js`, `src/events/voiceStateUpdate.js`, `src/events/werewolfInteractions.js`, `src/services/werewolf.js`.
+
 ## Tính năng
 
 ### Quản trị và tiện ích

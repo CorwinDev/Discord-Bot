@@ -58,7 +58,7 @@
     "kazagumo-spotify": "^2.1.1",
     "libsodium-wrappers": "^0.8.4",
     "lyrics-finder": "^21.7.0",
-    "mathjs": "^11.5.0",
+    "mathjs": "^15.2.0",
     "moment": "^2.29.4",
     "moment-duration-format": "^2.3.2",
     "moment-timezone": "^0.6.3",
